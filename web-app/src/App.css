@@ -1,3 +1,43 @@
+@import './content/Landing/Landing.css';
+
+@import './components/Header/Header.css';
+@import './components/Nav/Nav.css';
+
+.app {
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+}
+
+/* SIDE NAV LAYOUT */
+.app {
+	grid-template-areas: "header header"
+	"nav main";
+	grid-template-columns: 5rem 1fr;
+	grid-template-rows: 4rem 1fr;
+}
+
+/* TOP NAV LAYOUT */
+/*
+.app {
+	grid-template-areas: "header header"
+											 "nav main";
+	grid-template-columns: 5rem 1fr;
+	grid-template-rows: 4rem 1fr;
+}
+*/
+
+/* FORCE TOP NAV IF SMALL SCREEN */
+@media (max-width: 900px) { /*SVGA*/
+	.app {
+		grid-template-areas: "header"
+												 "nav"
+												 "main";
+		grid-template-columns: 1fr;
+		grid-template-rows: 4rem 2rem 1fr;
+	}
+}
+
 .App {
   text-align: center;
 }
@@ -5,12 +45,6 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -24,8 +58,10 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 @keyframes App-logo-spin {
