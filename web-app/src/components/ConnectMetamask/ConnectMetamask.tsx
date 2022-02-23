@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import Button from '../Button/Button';
 import MetaMask from '../../utils/MetaMask';
 
-import { State } from '../../state';
+import { RootState } from '../../state';
 import { useEffect } from 'react';
 
 interface ConnectMetamaskProps {
 	account: string;
-	network: string;
-	correctNetwork: boolean;
+	network: {
+		connected: string,
+		isPermitted: boolean
+	};
 }
 
-function ConnectMetamask({account, network, correctNetwork}: ConnectMetamaskProps) {
+function ConnectMetamask({account, network}: ConnectMetamaskProps) {
 
 	const connectToBlockchain = () => {
 		MetaMask.connect();
@@ -27,15 +29,15 @@ function ConnectMetamask({account, network, correctNetwork}: ConnectMetamaskProp
 	useEffect(() => {
 		console.log("ACCOUNT OR NETWORK CHANGED")
 		console.log(`account: ${account}`)
-		console.log(`network: ${network}`)
+		console.log(`network: ${network.connected}`)
 	}, [account, network])
 
-	if(correctNetwork && (account !== "")) {
+	if(network.isPermitted && (account !== "")) {
 		// if correct network connected and account retrieved
 		return (
 			<div className="connect-metamask">
 				<p>{minifyAddress(account)}</p>
-				<p>{network}</p>
+				<p>{network.connected}</p>
 			</div>			
 		);
 	} else {
@@ -47,12 +49,11 @@ function ConnectMetamask({account, network, correctNetwork}: ConnectMetamaskProp
 	}
 }
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: RootState) => {
 	return {
 		account: state.account,
 		network: state.network,
-		correctNetwork: state.correctNetwork
 	};
-}
+};
 
 export default connect(mapStateToProps)(ConnectMetamask);

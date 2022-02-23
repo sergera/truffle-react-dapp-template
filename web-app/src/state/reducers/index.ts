@@ -1,20 +1,16 @@
 import { combineReducers } from "redux";
 
-import netReducer from './netReducer';
-import permittedNetsReducer from './permittedNetsReducer';
-import correctNetworkReducer from './correctNetworkReducer';
-import accountReducer from './accountsReducer';
-import toggleModalReducer from './toggleModalReducer';
+import { networkReducer } from '../wallet/network/networkSlice';
+import { accountReducer } from '../wallet/account/accountSlice';
+import { modalReducer } from '../modal/modalSlice';
 
-const reducers = combineReducers({
-	network: netReducer,
-	permittedNetworks: permittedNetsReducer,
-	correctNetwork: correctNetworkReducer,
+const rootReducer = combineReducers({
+	network: networkReducer,
 	account: accountReducer,
-	toggleModal: toggleModalReducer
+	openModal: modalReducer
 });
 
-export default reducers;
+export default rootReducer;
 
 // store state type to use in "connect" HOF or "useSelector" hook
-export type State = ReturnType<typeof reducers>;
+export type RootState = ReturnType<typeof rootReducer>;

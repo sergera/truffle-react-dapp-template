@@ -27,20 +27,24 @@ const netIds:netIdsMap = {
 	"Rinkeby": 4,
 	"Goerli": 5,
 	"Kovan": 42,
-	// For Development!
+	// For Development
 	"Truffle": 1337,
 	"Ganache": 5777,
 };
 
 const supportedNets = process.env.REACT_APP_SUPPORTED_NETS;
 
-export const checkSupportedNets = function(currentNet: number) {
-	let netsArray: string[] = supportedNets!.split(",");
+export const getSupportedNetsArray = function() {
+	return supportedNets!.split(",");
+};
+
+export const isNetSupported = function(netId: number) {
+	let netsArray: string[] = getSupportedNetsArray();
 	let supportedNetIds: number[] = netsArray.map((netName: string) => {
 		return netIds[netName];
 	})
-	let isCurrentNetSupported:boolean = supportedNetIds.includes(currentNet);
-	return isCurrentNetSupported;
+	let isNetSupported:boolean = supportedNetIds.includes(netId);
+	return isNetSupported;
 };
 
 export const getNetName = function(netId: number) {
@@ -51,3 +55,7 @@ export const getNetName = function(netId: number) {
 		return "Network Not Found";
 	}
 };
+
+export const getNetId = function(netName: string) {
+	return netIds[netName];
+}

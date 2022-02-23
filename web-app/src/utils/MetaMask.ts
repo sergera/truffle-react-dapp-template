@@ -1,8 +1,7 @@
 import Web3 from 'web3';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-import { store, changeNet, changeAccount, correctNet } from '../state';
-import { checkSupportedNets, getNetName } from './ethereumNetworks';
+import { store, accountChanged, networkChanged } from '../state';
 import getErrorMessage from './getErrorMessage';
 
 // stop typescript from trying to predict injected window.ethereum methods
@@ -47,9 +46,8 @@ class MetaMask {
 	}
 
 	disconnect() {
-		store.dispatch(changeAccount(""));
-		store.dispatch(changeNet(""));
-		store.dispatch(correctNet(false));
+		store.dispatch(accountChanged(""));
+		store.dispatch(networkChanged(-1));
 	}
 
 	async connectProvider() {
@@ -71,16 +69,13 @@ class MetaMask {
 
 	async connectNetwork() {
 		this.netId = await this.web3.eth.net.getId();
-		let netName = getNetName(this.netId);
-		store.dispatch(changeNet(netName));
-		let netIsSupported = checkSupportedNets(this.netId);
-		store.dispatch(correctNet(netIsSupported));
+		store.dispatch(networkChanged(this.netId));
 	}
 
 	async connectAccounts() {
 		this.accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
 		this.activeAccount = this.accounts[0];
-		store.dispatch(changeAccount(this.activeAccount));
+		store.dispatch(accountChanged(this.activeAccount));
 	}
 
 	async requestNetSwitch(netId: number) {		
