@@ -1,0 +1,12 @@
+WEB-APP:
+
+	16/02/2022
+	"react-scripts": "4.0.3"
+	react-scripts 4.0.3 is required because react-scripts 5.0.0 upgrated the webpack 5
+	webpack 5 removed node polyfills (which are needed to run blockchain/crypto related libs)
+
+	17/02/2022
+	"react-error-overlay": "6.0.9"
+	this package is required since this (earlier) version allows for use of the process variable
+	this is needed in order to use enviromental variables (.env file)
+	not sure why this is necessary as of yet
