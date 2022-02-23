@@ -1,7 +1,11 @@
 @import './content/Landing/Landing.css';
 
 @import './components/Header/Header.css';
+@import './components/ConnectMetamask/ConnectMetamask.css';
 @import './components/Nav/Nav.css';
+@import './components/Button/Button.css';
+@import './components/ModalWrapper/ModalWrapper.css';
+@import './components/ModalOk/ModalOk.css';
 
 .app {
 	height: 100vh;
@@ -10,22 +14,22 @@
 }
 
 /* SIDE NAV LAYOUT */
-.app {
-	grid-template-areas: "header header"
-	"nav main";
-	grid-template-columns: 5rem 1fr;
-	grid-template-rows: 4rem 1fr;
-}
-
-/* TOP NAV LAYOUT */
-/*
-.app {
+/* .app {
 	grid-template-areas: "header header"
 											 "nav main";
 	grid-template-columns: 5rem 1fr;
 	grid-template-rows: 4rem 1fr;
+} */
+
+/* TOP NAV LAYOUT */
+.app {
+	grid-template-areas: "header"
+											 "nav"
+									 		 "main";
+	grid-template-columns: 1fr;
+	grid-template-rows: 4rem 2rem 1fr;
 }
-*/
+
 
 /* FORCE TOP NAV IF SMALL SCREEN */
 @media (max-width: 900px) { /*SVGA*/
