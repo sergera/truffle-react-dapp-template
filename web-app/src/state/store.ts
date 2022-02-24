@@ -1,10 +1,17 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit'
 
-import reducers from './reducers';
+import networkReducer from './wallet/network/networkSlice';
+import accountReducer from './wallet/account/accountSlice';
+import modalReducer from './modal/modalSlice';
 
-export const store = createStore(
-	reducers,
-	{}, // initial value
-	applyMiddleware(thunk)
-);
+const store = configureStore({
+	reducer: {
+		network: networkReducer,
+		account: accountReducer,
+		openModal: modalReducer
+	}
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export default store;

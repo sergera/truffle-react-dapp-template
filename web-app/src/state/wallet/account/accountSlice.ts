@@ -1,25 +1,22 @@
-// Actions
-const CHANGED = "wallet/account/changed";
+import { createSlice } from '@reduxjs/toolkit';
 
-// Reducer
-export const accountReducer = (connectedAccount: string = "", action: Action) => {
-	switch (action.type) {
-		default:
-			return connectedAccount;
-		case CHANGED:
-			return action.payload;
-	};
-};
+const initialState:string = "";
 
 interface Action {
 	type: string,
 	payload: string
 };
 
-// Action Creators
-export const accountChanged = (newAccount: string) => {
-	return {
-		type: CHANGED,
-		payload: newAccount
-	};
-};
+const accountSlice = createSlice({
+	name: "account",
+	initialState,
+	reducers: {
+		accountChanged(state, action:Action) {
+			return action.payload;
+		}
+	}
+});
+
+export const { accountChanged } = accountSlice.actions;
+
+export default accountSlice.reducer;

@@ -1,32 +1,15 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 import { isNetSupported, getNetName } from '../../../utils/ethereumNetworks';
-
-// Actions
-const CHANGED = "wallet/network/changed";
-
-// Reducer
-export const networkReducer = (state: Slice = InitialState, action: Action) => {
-	switch (action.type) {
-		default:
-			return {
-				connected: state.connected,
-				isPermitted: state.isPermitted
-			};
-		case CHANGED:
-			return {
-				connected: getNetName(action.payload),
-				isPermitted: isNetSupported(action.payload)
-			};
-	};
-};
-
-const InitialState = {
-	connected: "",
-	isPermitted: false
-}
 
 interface Slice {
 	connected: string,
 	isPermitted: boolean
+};
+
+const initialState:Slice = {
+	connected: "",
+	isPermitted: false
 };
 
 interface Action {
@@ -34,10 +17,17 @@ interface Action {
 	payload: number
 };
 
-// Action Creators
-export const networkChanged = (newNetwork: number) => {
-	return {
-		type: CHANGED,
-		payload: newNetwork
-	};
-};
+const networkSlice = createSlice({
+	name: "network",
+	initialState,
+	reducers: {
+		networkChanged(state, action:Action) {
+			state.connected = getNetName(action.payload);
+			state.isPermitted = isNetSupported(action.payload);
+		}
+	}
+});
+
+export const { networkChanged } = networkSlice.actions;
+
+export default networkSlice.reducer;

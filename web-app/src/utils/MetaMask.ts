@@ -1,7 +1,8 @@
 import Web3 from 'web3';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-import { store, accountChanged, networkChanged } from '../state';
+import { accountChanged, networkChanged } from '../state';
+import store from '../state/store';
 import getErrorMessage from './getErrorMessage';
 
 // stop typescript from trying to predict injected window.ethereum methods
@@ -75,6 +76,10 @@ class MetaMask {
 	async connectAccounts() {
 		this.accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
 		this.activeAccount = this.accounts[0];
+		console.log("THIS ACTIVE ACCOUNT")
+		console.log(this.activeAccount)
+		console.log("THIS ACCOUNTS")
+		console.log(this.accounts)
 		store.dispatch(accountChanged(this.activeAccount));
 	}
 
