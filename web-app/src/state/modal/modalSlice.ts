@@ -1,27 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState:boolean = false;
+import { ModalSlice } from './types';
 
-interface Action {
-	type: string,
+const initialState: ModalSlice = {
+	open: false,
+	type: "",
 };
 
 const modalSlice = createSlice({
 	name: "openModal",
 	initialState,
 	reducers: {
-		toggleModal(state, action:Action) {
-			return !state;
+		openModal(state, action:PayloadAction<string>) {
+			state.type = action.payload;
+			state.open = true;
 		},
-		openModal(state, action:Action) {
-			return true;
+		closeModal(state) {
+			state.open = false;
 		},
-		closeModal(state, action:Action) {
-			return false;
-		}
-	}
+	},
 });
 
-export const { toggleModal, openModal, closeModal } = modalSlice.actions;
+export const { 
+	openModal, 
+	closeModal, 
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

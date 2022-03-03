@@ -1,22 +1,30 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState:string = "";
+import { connectAccount, setAccountListeners } from './thunks';
 
-interface Action {
-	type: string,
-	payload: string
-};
+import { AccountSlice } from './types';
+
+const initialState: AccountSlice = {
+	address: "",
+	listenersSet: false,
+}
 
 const accountSlice = createSlice({
 	name: "account",
 	initialState,
-	reducers: {
-		accountChanged(state, action:Action) {
-			return action.payload;
-		}
-	}
+	reducers: {},
+	extraReducers: (builder) => {
+		builder.addCase(connectAccount.fulfilled, (state, action: PayloadAction<string>) => {
+			let address = action.payload;
+      state.address = address;
+    });
+		builder.addCase(connectAccount.rejected, (state) => {
+      state.address = "";
+    });
+		builder.addCase(setAccountListeners.fulfilled, (state) => {
+			state.listenersSet = true;
+    });
+  }
 });
-
-export const { accountChanged } = accountSlice.actions;
 
 export default accountSlice.reducer;

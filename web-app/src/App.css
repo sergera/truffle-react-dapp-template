@@ -4,8 +4,9 @@
 @import './components/ConnectMetamask/ConnectMetamask.css';
 @import './components/Nav/Nav.css';
 @import './components/Button/Button.css';
-@import './components/ModalWrapper/ModalWrapper.css';
-@import './components/ModalOk/ModalOk.css';
+@import './components/Modal/ModalContainer.css';
+@import './components/Modal/generic/ModalOk/ModalOk.css';
+@import './components/Modal/generic/ModalSelect/ModalSelect.css';
 
 .app {
 	height: 100vh;
