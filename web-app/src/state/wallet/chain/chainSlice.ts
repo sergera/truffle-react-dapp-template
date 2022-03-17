@@ -4,8 +4,9 @@ import { connectChain, setChainListeners } from './thunks';
 
 import { ChainSlice, ConnectChainPayload } from './types';
 
-const initialState: ChainSlice = {
+export const initialState: ChainSlice = {
 	name: "",
+	id: "",
 	isPermitted: false,
 	listenersSet: false,
 };
@@ -16,8 +17,9 @@ const chainSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(connectChain.fulfilled, (state, action: PayloadAction<ConnectChainPayload>) => {
-			let { name, supported } = action.payload;
+			let { name, id, supported } = action.payload;
 			state.name = name;
+			state.id = id;
 			state.isPermitted = supported;
 		});
 		builder.addCase(connectChain.rejected, (state) => {

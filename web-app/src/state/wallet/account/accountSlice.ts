@@ -4,7 +4,7 @@ import { connectAccount, setAccountListeners } from './thunks';
 
 import { AccountSlice } from './types';
 
-const initialState: AccountSlice = {
+export const initialState: AccountSlice = {
 	address: "",
 	listenersSet: false,
 }

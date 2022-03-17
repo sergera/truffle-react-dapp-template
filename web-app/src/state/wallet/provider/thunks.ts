@@ -16,19 +16,27 @@ export const connectProvider = createAsyncThunk<
 >(
   'wallet/provider/connect',
   async (_,thunkAPI) => {
+		let { dispatch } = thunkAPI;
 		const provider = await detectEthereumProvider({
 			mustBeMetaMask: true
 		});
 
 		let metamaskInstalled = !!provider;
-		metamaskInstalled || thunkAPI.dispatch(openModal("NOT_INSTALLED"));
+		if(!metamaskInstalled) {
+			dispatch(openModal("NOT_INSTALLED")); 
+			return false;
+		}
 		let thereIsOnlyMetamask = provider === window.ethereum;
-		thereIsOnlyMetamask || thunkAPI.dispatch(openModal("MULTIPLE_PROVIDERS"));
+		if(!thereIsOnlyMetamask) {
+			dispatch(openModal("MULTIPLE_PROVIDERS"));
+			return false;
+		}
 		let metamaskIsConnected = window.ethereum.isConnected();
-		metamaskIsConnected || thunkAPI.dispatch(openModal("NOT_CONNECTED"));
-
-		let statusOk = metamaskInstalled && thereIsOnlyMetamask && metamaskIsConnected;
-		return statusOk;
+		if(!metamaskIsConnected) {
+			dispatch(openModal("NOT_CONNECTED"));
+			return false;
+		}
+		return true;
   }
 );
 
@@ -39,7 +47,8 @@ export const providerDisconnected = createAsyncThunk<
 >(
   'wallet/provider/disconnected',
   async (_,thunkAPI) => {
-		thunkAPI.dispatch(openModal("DISCONNECTED"));
+		let { dispatch } = thunkAPI;
+		dispatch(openModal("DISCONNECTED"));
   }
 );
 
@@ -50,13 +59,13 @@ export const setProviderListeners = createAsyncThunk<
 >(
 'wallet/provider/setListeners',
 	async (_,thunkAPI) => {
-
+		let { dispatch } = thunkAPI;
 		window.ethereum.on('connect', (connectInfo: { chainId: string }) => {
 			console.log(`connected to chain ${connectInfo.chainId}`)
 		});
 
 		window.ethereum.on('disconnect', (error: ProviderRpcError) => {
-			thunkAPI.dispatch(providerDisconnected());
+			dispatch(providerDisconnected());
 		});
 	}
 );

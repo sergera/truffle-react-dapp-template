@@ -1,26 +1,21 @@
-@import './content/Landing/Landing.css';
+@import './pages/Landing/Landing.css';
+@import './pages/NotFoundError/NotFoundError.css';
 
+@import './components/UI/Button/Button.css';
+@import './components/UI/Input/Input.css';
 @import './components/Header/Header.css';
-@import './components/ConnectMetamask/ConnectMetamask.css';
+@import './components/Header/ConnectMetamask/ConnectMetamask.css';
 @import './components/Nav/Nav.css';
-@import './components/Button/Button.css';
-@import './components/Modal/ModalContainer.css';
-@import './components/Modal/generic/ModalOk/ModalOk.css';
-@import './components/Modal/generic/ModalSelect/ModalSelect.css';
+@import './components/ModalContainer/ModalContainer.css';
+@import './components/ModalContainer/generic/ModalOk/ModalOk.css';
+@import './components/ModalContainer/generic/ModalSelect/ModalSelect.css';
+@import './components/ErrorNotification/ErrorNotification.css';
 
 .app {
 	height: 100vh;
 	width: 100vw;
 	display: grid;
 }
-
-/* SIDE NAV LAYOUT */
-/* .app {
-	grid-template-areas: "header header"
-											 "nav main";
-	grid-template-columns: 5rem 1fr;
-	grid-template-rows: 4rem 1fr;
-} */
 
 /* TOP NAV LAYOUT */
 .app {
@@ -29,18 +24,6 @@
 									 		 "main";
 	grid-template-columns: 1fr;
 	grid-template-rows: 4rem 2rem 1fr;
-}
-
-
-/* FORCE TOP NAV IF SMALL SCREEN */
-@media (max-width: 900px) { /*SVGA*/
-	.app {
-		grid-template-areas: "header"
-												 "nav"
-												 "main";
-		grid-template-columns: 1fr;
-		grid-template-rows: 4rem 2rem 1fr;
-	}
 }
 
 .App {

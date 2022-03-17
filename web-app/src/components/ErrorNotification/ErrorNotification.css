@@ -1,0 +1,9 @@
+.error-notification {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 20%;
+	right: 0;
+	height: 10rem;
+	width: 20rem;
+}

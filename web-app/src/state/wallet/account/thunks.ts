@@ -24,8 +24,9 @@ export const setAccountListeners = createAsyncThunk<
 >(
 'wallet/account/setListeners',
 	async (_,thunkAPI) => {
+		let { dispatch } = thunkAPI;
 		window.ethereum.on('accountsChanged', function (accounts: string[]) {
-			thunkAPI.dispatch(connectAccount());
+			dispatch(connectAccount());
 		});
 	}
 );

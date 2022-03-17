@@ -1,4 +1,4 @@
-import ConnectMetamask from "../ConnectMetamask/ConnectMetamask";
+import ConnectMetamask from "./ConnectMetamask/ConnectMetamask";
 
 function Header() {
 
@@ -7,6 +7,6 @@ function Header() {
 			<ConnectMetamask/>
     </div>
   );
-}
+};
 
 export default Header;

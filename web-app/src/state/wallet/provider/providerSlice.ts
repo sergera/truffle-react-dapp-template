@@ -4,7 +4,7 @@ import { connectProvider, setProviderListeners, providerDisconnected } from './t
 
 import { ProviderSlice } from './types';
 
-const initialState: ProviderSlice = {
+export const initialState: ProviderSlice = {
 	statusOk: false,
 	listenersSet: false,
 };

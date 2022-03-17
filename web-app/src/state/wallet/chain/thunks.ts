@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { RootState } from '../../store';
 import { openModal } from '../../modal/modalSlice';
-import { isChainSupported, getChainName } from '../../../utils/ethereumChains';
-import getErrorMessage from '../../../utils/getErrorMessage';
+import { isChainSupported, getChainName } from '../../../utils/provider/chainData';
+import { getErrorMessage } from '../../../utils/error/errorMessage';
 
 import { ConnectChainPayload } from './types';
 import { ProviderRpcError } from '../types';
@@ -32,9 +32,10 @@ export const connectChain = createAsyncThunk<
 		let chainSupported = isChainSupported(chainIdInt);
 
 		chainSupported || dispatch(openModal("SELECT_CHAIN"));
-		
+
 		return {
 			name: chainName,
+			id: chainIdInt.toString(),
 			supported: chainSupported,
 		};
 	}
@@ -89,12 +90,13 @@ export const setChainListeners = createAsyncThunk<
 >(
 'wallet/chain/setListeners',
 	async (_,thunkAPI) => {
+		let { dispatch } = thunkAPI;
 		window.ethereum.on('chainChanged', (chainId: number) => {
 			// Handle the new chain.
 			// Correctly handling chain changes can be complicated.
 			// We recommend reloading the page unless you have good reason not to.
 			// window.location.reload();
-			thunkAPI.dispatch(connectChain());
+			dispatch(connectChain());
 		});
 	}
 );
