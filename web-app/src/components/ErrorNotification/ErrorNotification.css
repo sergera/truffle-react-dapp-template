@@ -4,6 +4,52 @@
 	position: fixed;
 	top: 20%;
 	right: 0;
-	height: 10rem;
-	width: 20rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	background-color: var(--error-notification);
+	color: var(--error-notification-text);
+	font-size: 1.2rem;
+}
+
+.error-notification__message {
+	max-width: 20vw;
+	margin-bottom: 2rem;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.error-notification {
+		font-size: 12px;
+	}
+
+	.error-notification__message {
+		min-width: 100px;
+	}
+}
+
+/* animate entrance */
+
+@media (prefers-reduced-motion: no-preference) {
+  .error-notification {
+		animation-name: slide-from-right;
+		animation-timing-function: ease-in;
+		animation-duration: 0.3s;
+		animation-delay: 0s;
+		animation-iteration-count: 1;
+		animation-fill-mode: none;
+  }
+}
+
+@keyframes slide-from-right {
+	from   {
+		transform: translate(50vw,0);
+	}
+	to  {
+			transform: translate(0,0);
+	}
 }

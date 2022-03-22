@@ -1,4 +1,24 @@
 .header {
-	grid-area: header;
-	background-color: green;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	border-bottom: 1px solid;
+	border-color: var(--header-detail);
+	background-color: var(--header);
+	color: var(--header-text);
+}
+
+.header__title {
+	font-size: 2.5rem;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.header__title { font-size: 16px; }
 }

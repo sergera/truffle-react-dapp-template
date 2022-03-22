@@ -1,32 +1,36 @@
-:root { /*DONT EVEN EXIST YET*/
-  font-size: 26px;
+/* modulate root font size to use rem in layout */
+@media (max-width: 7680px) { /*8k*/
+	:root { font-size: 32px; }
 }
 @media (max-width: 3840px) { /*4K UHD*/
-  :root { font-size: 24px; }
+  :root { font-size: 26px; }
 }
 @media (max-width: 2560px) { /*QHD*/
   :root { font-size: 22px; }
 }
 @media (max-width: 1920px) { /*FHD*/
-  :root { font-size: 20px; }
+  :root { font-size: 19px; }
 }
 @media (max-width: 1600px) { /*HD+*/
-  :root { font-size: 18px; }
-}
-@media (max-width: 1366px) { /*HD*/
   :root { font-size: 16px; }
 }
-@media (max-width: 900px) { /*SVGA*/
-  :root { font-size: 12px; }
+@media (max-width: 1366px) { /*HD*/
+  :root { font-size: 14px; }
 }
-@media (max-width: 400px) {
+@media (max-width: 900px) { /*SVGA*/
   :root { font-size: 10px; }
 }
-@media (max-width: 350px) {
-  :root { font-size: 9px; }
+@media (max-width: 420px) { /*Mobile*/
+  :root { font-size: 8px; }
+}
+@media (max-width: 390px) {
+  :root { font-size: 7px; }
+}
+@media (max-width: 360px) {
+  :root { font-size: 6px; }
 }
 @media (max-width: 270px) {
-  :root { font-size: 8px; }
+  :root { font-size: 5px; }
 }
 @media (max-width: 130px) {
   :root { font-size: 4px; }
@@ -36,14 +40,54 @@
 }
 
 :root {
+	/* abstract hues and values */
 	--black: #000000;
 	--white: #ffffff;
-	--dark: #111111;
-	--light: #eeeeee;
-	--blue: #3366ff;
-	--red: #dc2339;
-	--green: #27d838;
-	--gold: #e5ca1a;
+	--light: #f1f1f1;
+	--dark: #0e0e0e;
+	--light-blue: #116ffc;
+	--dark-blue: #04214d;
+	--light-red: #e40f28;
+	--dark-red: #4e0911;
+	--light-green: #1adb2d;
+	--dark-green: #032506;
+	--light-gold: #e5ca1a;
+	--dark-gold: #5a4f09;
+
+	/* ad hoc app hues and values */
+	--background: var(--black);
+	--background-text: var(--light);
+	--foreground: var(--dark);
+	--foreground-text: var(--light);
+
+	/* abstract input hues and values */
+	--input-border: var(--background-text);
+	--input-background: var(--background);
+	--input-text: var(--background-text);
+
+	/* abstract button hues and values */
+	--btn--primary: var(--light-blue);
+	--btn--secondary: var(--light-green);
+	--btn--warning: var(--light-red);
+	--btn--special: var(--light-gold);
+	--btn-text: var(--background);
+
+	/* ad hoc component hues and values */
+	--header: var(--foreground);
+	--header-text: var(--foreground-text);
+	--header-detail: var(--background);
+	--nav: var(--foreground);
+	--nav-link: var(--foreground-text);
+	--footer: var(--foreground);
+	--footer-text: var(--foreground-text);
+	--modal: var(--foreground);
+	--modal-text: var(--foreground-text);
+	--notification: var(--foreground);
+	--notification-text: var(--foreground-text);
+	--error-notification: var(--light-red);
+	--error-notification-text: var(--white);
+	--error-notification-btn: var(--black);
+	--error-notification-btn-text: var(--error-notification);
 }
 
 body {
@@ -56,6 +100,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
   max-width: 100%;
+	background-color: var(--background);
+	color: var(--background-text);
 }
 
 code {

@@ -1,0 +1,10 @@
+.connect-metamask {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1.2rem;
+}
+
+@media (max-width: 420px) {
+	.connect-metamask { font-size: 12px; }
+}

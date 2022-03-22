@@ -7,7 +7,12 @@ function Nav() {
     <div className="nav">
 			<nav>
 				<div className="nav__link">
-					<Link to="/">Landing</Link>
+					<Link 
+						to="/" 
+						style={{ color: 'inherit', textDecoration: 'inherit'}}
+					>
+						Landing
+					</Link>
 				</div>
 			</nav>
     </div>

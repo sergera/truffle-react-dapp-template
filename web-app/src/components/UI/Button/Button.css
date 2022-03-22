@@ -1,4 +1,255 @@
-/* .button {
-	width: 2rem;
-	height: 20rem;
-} */
+.button {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	padding: 8px;
+	min-width: 60px;
+	font-size: 1.2rem;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.button { 
+		font-size: 12px;
+		max-width: 80vw;
+	}
+}
+
+/* animate click */
+
+@media (prefers-reduced-motion: no-preference) {
+  .button:active {
+		animation-name: btn-click;
+		animation-timing-function: ease-in;
+		animation-duration: 0.05s;
+		animation-delay: 0s;
+		animation-iteration-count: 1;
+		animation-fill-mode: none;
+  }
+}
+
+@keyframes btn-click {
+	0%   {
+		transform: scale(1.0);
+	}
+	50%  {
+			transform: scale(0.9);
+	}
+	100%{
+			transform: scale(1.0);
+	}
+}
+
+/* by function */
+
+.btn-primary-filled {
+	background-color: var(--btn--primary);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-primary-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--primary);
+	color: var(--btn--primary);
+}
+
+.btn-secondary-filled {
+	background-color: var(--btn--secondary);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-secondary-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--secondary);
+	color: var(--btn--secondary);
+}
+
+.btn-warning-filled {
+	background-color: var(--btn--warning);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-warning-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--warning);
+	color: var(--btn--warning);
+}
+
+.btn-special-filled {
+	background-color: var(--btn--special);
+ 	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-special-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--special);
+	color: var(--btn--special);
+}
+
+.btn-primary-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--primary);
+	color: var(--btn--primary);
+}
+
+.btn-primary-outline:hover {
+	background-color: var(--btn--primary);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-secondary-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--secondary);
+	color: var(--btn--secondary);
+}
+
+.btn-secondary-outline:hover {
+	background-color: var(--btn--secondary);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-warning-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--warning);
+	color: var(--btn--warning);
+}
+
+.btn-warning-outline:hover {
+	background-color: var(--btn--warning);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+.btn-special-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--btn--special);
+	color: var(--btn--special);
+}
+
+.btn-special-outline:hover {
+	background-color: var(--btn--special);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--btn-text);
+}
+
+/* by value */
+
+.btn-white-filled {
+	background-color: var(--white);
+ 	border: 1px solid rgba(0,0,0,0);
+	color: var(--black);
+}
+
+.btn-white-filled:hover {
+	background-color: rgba(0,0,0,0);
+ 	border: 1px solid var(--white);
+	color: var(--white);
+}
+
+.btn-white-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--white);
+	color: var(--white);
+}
+
+.btn-white-outline:hover {
+	background-color: var(--white);
+ 	border: 1px solid rgba(0,0,0,0);
+	color: var(--black);
+}
+
+.btn-black-filled {
+	background-color: var(--black);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--white);
+}
+
+.btn-black-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--black);
+	color: var(--black);
+}
+
+.btn-black-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--black);
+	color: var(--black);
+}
+
+.btn-black-outline:hover {
+	background-color: var(--black);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--white);
+}
+
+/* by background and foreground hues */
+
+.btn-background-filled {
+	background-color: var(--background-text);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--background);
+}
+
+.btn-background-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--background-text);
+	color: var(--background-text);
+}
+
+.btn-background-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--background-text);
+	color: var(--background-text);
+}
+
+.btn-background-outline:hover {
+	background-color: var(--background-text);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--background);
+}
+
+.btn-foreground-filled {
+	background-color: var(--foreground-text);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--foreground);
+}
+
+.btn-foreground-filled:hover {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--foreground-text);
+	color: var(--foreground-text);
+}
+
+.btn-foreground-outline {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--foreground-text);
+	color: var(--foreground-text);
+}
+
+.btn-foreground-outline:hover {
+	background-color: var(--foreground-text);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--foreground);
+}
+
+/* by ad hoc use case */
+
+.btn-error-notification {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--error-notification-btn);
+	color: var(--error-notification-btn);
+}
+
+.btn-error-notification:hover {
+	background-color: var(--error-notification-btn);
+	border: 1px solid rgba(0,0,0,0);
+	color: var(--error-notification-btn-text);
+}

@@ -1,0 +1,24 @@
+.input__label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--input-text);
+	font-size: 1.2rem;
+}
+
+.input {
+	border-radius: 6px;
+	border: 1px solid var(--input-border);
+	background-color: var(--input-background);
+	color: var(--input-text);
+	font-size: 1.2rem;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.input__label { font-size: 12px; }
+	.input { 
+		font-size: 12px;
+		max-width: 80vw;
+	}
+}

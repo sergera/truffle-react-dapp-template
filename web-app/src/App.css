@@ -1,62 +1,21 @@
 @import './pages/Landing/Landing.css';
 @import './pages/NotFoundError/NotFoundError.css';
 
-@import './components/UI/Button/Button.css';
-@import './components/UI/Input/Input.css';
 @import './components/Header/Header.css';
 @import './components/Header/ConnectMetamask/ConnectMetamask.css';
 @import './components/Nav/Nav.css';
+@import './components/Footer/Footer.css';
+@import './components/UI/Button/Button.css';
+@import './components/UI/Input/Input.css';
 @import './components/ModalContainer/ModalContainer.css';
 @import './components/ModalContainer/generic/ModalOk/ModalOk.css';
 @import './components/ModalContainer/generic/ModalSelect/ModalSelect.css';
 @import './components/ErrorNotification/ErrorNotification.css';
 
 .app {
+	display:flex;
+	flex-direction: column;
 	height: 100vh;
 	width: 100vw;
-	display: grid;
-}
-
-/* TOP NAV LAYOUT */
-.app {
-	grid-template-areas: "header"
-											 "nav"
-									 		 "main";
-	grid-template-columns: 1fr;
-	grid-template-rows: 4rem 2rem 1fr;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	background: var(--background);
 }

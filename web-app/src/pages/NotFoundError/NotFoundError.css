@@ -1,8 +1,25 @@
-.error-page-not-found {
+.error-page-404 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+}
+
+.error-page-404__text {
 	display: flex;
 	flex-direction: column;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	align-items: center;
+	font-size: 1.2rem;
+}
+
+.error-page-404___img {
+	height: 20rem;
+	max-height: 200px;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.error-page-404__text { font-size: 12px; }
 }
