@@ -14,9 +14,11 @@ function ModalOk({close, title, content}:ModalOkProps) {
 
   return (
     <div className="modal modal-ok" onBlur={closeModal}>
-			<p>{title}</p>
-			<p>{content}</p>
-			<Button name={"ok"} callback={closeModal}/>
+			<div className="modal-ok__content">
+				<h1 className="modal-ok__text">{title}</h1>
+				<p className="modal-ok__text">{content}</p>
+			</div>
+			<Button styleClass="btn-foreground-outline" name={"ok"} callback={closeModal}/>
     </div>
   );
 };

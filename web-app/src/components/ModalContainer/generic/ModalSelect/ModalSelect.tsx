@@ -17,9 +17,20 @@ function ModalSelect({close, title, content, list}:ModalSelectProps) {
     <div className="modal modal-select" onBlur={closeModal}>
 			<p>{title}</p>
 			<p>{content}</p>
-			{list.map((item) => {
-				return (<Button name={item.name} callback={() => selectItem(item.callback)} key={item.name} />)
-			})}
+			<div className="modal-select__options">
+				{list.map((item) => {
+					return (
+						<div className="modal-select__item"> 
+							<Button 
+								styleClass="btn-foreground-outline" 
+								name={item.name} 
+								callback={() => selectItem(item.callback)} 
+								key={item.name} 
+							/>				
+						</div>
+					);
+				})}
+			</div>
     </div>
   );
 };

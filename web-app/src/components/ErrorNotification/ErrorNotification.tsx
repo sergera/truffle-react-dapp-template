@@ -19,9 +19,9 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 				id="error-notification"
 				className="error-notification"
 			>
-				<span>{"Error:"}</span>
-				<span>{message}</span>
-				<Button name={"Close"} callback={handleClose} />
+				<h1>{"Error:"}</h1>
+				<p className="error-notification__message">{message}</p>
+				<Button styleClass="btn-error-notification" name={"Close"} callback={handleClose} />
 			</div>
 		}
 		</>

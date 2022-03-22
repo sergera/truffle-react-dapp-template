@@ -15,19 +15,21 @@ function Input({callback, value, formId, name, placeholder, styleClass=""}: Inpu
 	};
 
   return (
-		<label>
+		<>
+		<label className="input__label">
 			{name}
-			<input 
-				type="text"
-				onChange={getValue} 
-				role={"input"}
-				name={name}
-				form={formId}
-				value={value}
-				className={"input " + styleClass} 
-				placeholder={placeholder}
-			/>
 		</label>
+		<input 
+			type="text"
+			onChange={getValue} 
+			role={"input"}
+			name={name}
+			form={formId}
+			value={value}
+			className={"input " + styleClass} 
+			placeholder={placeholder}
+		/>
+		</>
   );
 };
 
