@@ -1,4 +1,4 @@
-import { isChainSupported, getChainName } from '../../../utils/provider/chainData';
+import { isChainSupported, getChainName } from '../../../utils/provider/chains';
 import getNewStore from '../../../utils/test/getNewStore';
 
 import { initialState } from './chainSlice';
@@ -8,7 +8,7 @@ declare var window: any;
 
 let store = getNewStore();
 
-jest.mock('../../../utils/provider/chainData', () => ({
+jest.mock('../../../utils/provider/chains', () => ({
 	__esModule: true,
 	isChainSupported: jest.fn(),
 	getChainName: jest.fn(),
