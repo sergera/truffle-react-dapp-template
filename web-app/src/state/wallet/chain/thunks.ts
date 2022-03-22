@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { RootState } from '../../store';
 import { openModal } from '../../modal/modalSlice';
-import { isChainSupported, getChainName } from '../../../utils/provider/chainData';
+import { isChainSupported, getChainName } from '../../../utils/provider/chains';
 import { getErrorMessage } from '../../../utils/error/errorMessage';
 
 import { ConnectChainPayload } from './types';
