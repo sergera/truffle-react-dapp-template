@@ -24,7 +24,7 @@ export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMe
 		);
 	} else {
 		return (
-				<Button styleClass="btn-foreground-outline" callback={connectToBlockchain} name={"Connect MetaMask"} />
+				<Button styleClass="btn-lg btn-foreground-outline" callback={connectToBlockchain} name={"Connect MetaMask"} />
 		);
 	}
 };
