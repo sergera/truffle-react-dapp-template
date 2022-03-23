@@ -40,7 +40,7 @@
 }
 
 .footer__icon:hover {
-	filter: invert(20%);
+	filter: invert(30%);
 }
 
 /* limit minimum size */
