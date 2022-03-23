@@ -5,6 +5,8 @@
 	border-radius: 8px;
 	padding: 8px;
 	min-width: 60px;
+	transition-property: background-color, border, color;
+	transition-duration: 0.2s;
 }
 
 .btn-lg {

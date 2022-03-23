@@ -35,6 +35,8 @@
 	cursor: pointer;
   height: 4rem;
 	margin-right: 1.8rem;
+	transition-property: filter;
+	transition-duration: 0.2s;
 }
 
 .footer__icon:hover {
