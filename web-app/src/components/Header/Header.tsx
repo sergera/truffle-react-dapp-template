@@ -6,7 +6,11 @@ function Header() {
 
   return (
     <div className="header">
-			<h1 className="header__title">dApp by Sergio Joselli</h1>
+			<img 						
+					src={`${publicUrl}/logo/logo_white.png`}
+					className="header__logo"
+			/>
+			<h1 className="header__title">by Sergio Joselli</h1>
 			<ConnectMetamask/>
     </div>
   );
