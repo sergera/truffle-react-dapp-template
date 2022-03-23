@@ -1,42 +1,50 @@
 /* modulate root font size to use rem in layout */
+@media (max-width: 30720px) { /*32k*/
+	:root { font-size: 56px; }
+}
+@media (max-width: 15360px) { /*16k*/
+	:root { font-size: 48px; }
+}
 @media (max-width: 7680px) { /*8k*/
-	:root { font-size: 32px; }
+	:root { font-size: 40px; }
 }
 @media (max-width: 3840px) { /*4K UHD*/
-  :root { font-size: 26px; }
+  :root { font-size: 32px; }
 }
 @media (max-width: 2560px) { /*QHD*/
-  :root { font-size: 22px; }
+  :root { font-size: 28px; }
 }
 @media (max-width: 1920px) { /*FHD*/
-  :root { font-size: 19px; }
+  :root { font-size: 24px; }
 }
 @media (max-width: 1600px) { /*HD+*/
-  :root { font-size: 16px; }
+  :root { font-size: 20px; }
 }
 @media (max-width: 1366px) { /*HD*/
-  :root { font-size: 14px; }
+  :root { font-size: 18px; }
 }
 @media (max-width: 900px) { /*SVGA*/
-  :root { font-size: 10px; }
+  :root { font-size: 14px; }
 }
 @media (max-width: 420px) { /*Mobile*/
-  :root { font-size: 8px; }
+  :root { font-size: 10px; }
+	/* limit minimum size for reading */
+	* { font-size: 12px; }
 }
 @media (max-width: 390px) {
-  :root { font-size: 7px; }
+  :root { font-size: 8px; }
 }
 @media (max-width: 360px) {
-  :root { font-size: 6px; }
+  :root { font-size: 7px; }
 }
 @media (max-width: 270px) {
-  :root { font-size: 5px; }
+  :root { font-size: 6px; }
 }
 @media (max-width: 130px) {
-  :root { font-size: 4px; }
+  :root { font-size: 5px; }
 }
 @media (max-width: 65px) {
-  :root { font-size: 3px; }
+  :root { font-size: 4px; }
 }
 
 :root {

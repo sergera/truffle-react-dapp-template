@@ -18,11 +18,4 @@
 	text-align: center;
 	background: var(--modal);
 	color: var(--modal-text);
-	font-size: 1.2rem;
-}
-
-/* limit minimum size */
-
-@media (max-width: 420px) {
-	.modal { font-size: 12px; }
 }

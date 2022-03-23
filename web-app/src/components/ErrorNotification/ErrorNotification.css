@@ -12,7 +12,6 @@
 	border-bottom-left-radius: 8px;
 	background-color: var(--error-notification);
 	color: var(--error-notification-text);
-	font-size: 1.2rem;
 }
 
 .error-notification__message {
@@ -23,10 +22,6 @@
 /* limit minimum size */
 
 @media (max-width: 420px) {
-	.error-notification {
-		font-size: 12px;
-	}
-
 	.error-notification__message {
 		min-width: 100px;
 	}
