@@ -1,5 +1,9 @@
 .connect-metamask {
+	margin-left: auto;
+}
+
+.connect-metamask--info {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	margin-left: auto;
 }

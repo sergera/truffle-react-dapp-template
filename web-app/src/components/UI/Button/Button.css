@@ -10,11 +10,11 @@
 }
 
 .btn-lg {
-	padding: 1.5rem;
+	padding: 1rem;
 }
 
 .btn-xlg {
-	padding: 2rem;
+	padding: 1.5rem;
 }
 
 /* limit minimum size */
@@ -23,6 +23,14 @@
 	.button {
 		padding: 8px;
 		max-width: 80vw;
+	}
+
+	.btn-lg {
+		padding: 12px;
+	}
+
+	.btn-xlg {
+		padding: 16px;
 	}
 }
 

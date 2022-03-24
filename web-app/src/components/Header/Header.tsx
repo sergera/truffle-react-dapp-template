@@ -10,7 +10,7 @@ function Header() {
 					src={`${publicUrl}/logo/logo_white.png`}
 					className="header__logo"
 			/>
-			<h1 className="header__title">by Sergio Joselli</h1>
+			<p className="header__title">by Sergio Joselli</p>
 			<ConnectMetamask/>
     </div>
   );

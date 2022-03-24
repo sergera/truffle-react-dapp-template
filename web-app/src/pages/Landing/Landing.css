@@ -1,3 +1,7 @@
 .landing {
-	padding: 2rem;
+	padding: 1rem;
+}
+
+.landing > * {
+	margin: 1rem;
 }

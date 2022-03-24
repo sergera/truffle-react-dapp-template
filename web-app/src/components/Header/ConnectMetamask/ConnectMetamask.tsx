@@ -17,14 +17,16 @@ export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMe
 	if(providerOk && chain.isPermitted && (account !== "")) {
 		// if correct chain connected and account retrieved
 		return (
-			<div className="connect-metamask">
+			<div className="connect-metamask connect-metamask--info">
 				<p>{minify(toCheckSum(account))}</p>
 				<p>{chain.name}</p>
 			</div>			
 		);
 	} else {
 		return (
+			<div className="connect-metamask">
 				<Button styleClass="btn-lg btn-foreground-outline" callback={connectToBlockchain} name={"Connect MetaMask"} />
+			</div>
 		);
 	}
 };
