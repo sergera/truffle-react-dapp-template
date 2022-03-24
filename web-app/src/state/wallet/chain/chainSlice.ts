@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { connectChain, setChainListeners } from './thunks';
+import { providerDisconnected } from '../provider/thunks';
 
 import { ChainSlice, ConnectChainPayload } from './types';
 
@@ -24,10 +25,17 @@ const chainSlice = createSlice({
 		});
 		builder.addCase(connectChain.rejected, (state) => {
 			state.name = "";
+			state.id = "";
 			state.isPermitted = false;
 		});
 		builder.addCase(setChainListeners.fulfilled, (state) => {
 			state.listenersSet = true;
+    });
+		builder.addCase(providerDisconnected.fulfilled, (state) => {
+			state.name = "";
+			state.id = "";
+			state.isPermitted = false;
+			state.listenersSet = false;
     });
   }
 });

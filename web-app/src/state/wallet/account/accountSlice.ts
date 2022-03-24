@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { connectAccount, setAccountListeners } from './thunks';
+import { providerDisconnected } from '../provider/thunks';
 
 import { AccountSlice } from './types';
 
@@ -23,6 +24,10 @@ const accountSlice = createSlice({
     });
 		builder.addCase(setAccountListeners.fulfilled, (state) => {
 			state.listenersSet = true;
+    });
+		builder.addCase(providerDisconnected.fulfilled, (state) => {
+			state.address = "";
+			state.listenersSet = false;
     });
   }
 });

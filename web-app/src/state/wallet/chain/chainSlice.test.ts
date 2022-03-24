@@ -3,6 +3,7 @@ import getNewStore from '../../../utils/test/getNewStore';
 
 import { initialState } from './chainSlice';
 import { connectChain, requestChainSwitch, setChainListeners } from './thunks';
+import { providerDisconnected } from '../provider/thunks';
 
 declare var window: any;
 
@@ -22,7 +23,6 @@ const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
 
 afterEach(() => {
-	jest.clearAllMocks();
 	store = getNewStore();
 	delete window.ethereum;
 });
@@ -77,4 +77,19 @@ describe("setChainListeners", () => {
 		await store.dispatch(setChainListeners());
 		expect(store.getState().chain.listenersSet).toEqual(true);
 	});
+});
+
+test("should reset state if provider disconnected", async () => {
+	window.ethereum = { request: () => fakeChainIdHex	};
+
+	mockIsChainSupported.mockImplementation(() => true);
+	mockGetChainName.mockImplementation(() => fakeChainName);
+
+	await store.dispatch(connectChain());
+	expect(store.getState().chain.id).toEqual(fakeChainIdInt);
+	expect(store.getState().chain.name).toEqual(fakeChainName);
+	expect(store.getState().chain.isPermitted).toEqual(true);
+
+	await store.dispatch(providerDisconnected());
+	expect(store.getState().chain).toEqual(initialState);
 });

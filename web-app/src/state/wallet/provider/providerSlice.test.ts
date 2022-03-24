@@ -17,7 +17,6 @@ jest.mock('@metamask/detect-provider', () => ({
 const mockDetectProvider = detectProvider as jest.Mock;
 
 afterEach(() => {
-	jest.clearAllMocks();
 	store = getNewStore();
 	delete window.ethereum;
 });

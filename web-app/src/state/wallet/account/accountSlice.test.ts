@@ -2,6 +2,7 @@ import getNewStore from '../../../utils/test/getNewStore';
 
 import { initialState } from './accountSlice';
 import { connectAccount, setAccountListeners} from './thunks';
+import { providerDisconnected } from '../provider/thunks';
 
 declare var window: any;
 
@@ -11,7 +12,6 @@ const fakeAddress = "fake address";
 const fakeAccounts = [fakeAddress];
 
 afterEach(() => {
-	jest.clearAllMocks();
 	store = getNewStore();
 	delete window.ethereum;
 });
@@ -37,4 +37,14 @@ describe("setAccountListeners", () => {
 		await store.dispatch(setAccountListeners());
 		expect(store.getState().account.listenersSet).toEqual(true);
 	});
+});
+
+test("should reset state if provider disconnected", async () => {
+	window.ethereum = { request: () => fakeAccounts };
+
+	await store.dispatch(connectAccount());
+	expect(store.getState().account.address).toEqual(fakeAddress);
+
+	await store.dispatch(providerDisconnected());
+	expect(store.getState().account).toEqual(initialState);
 });
