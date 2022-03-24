@@ -83,6 +83,18 @@ export const requestChainSwitch = createAsyncThunk<
 	}
 );
 
+export const chainSwitched = createAsyncThunk<
+void, // return type
+void, // first argument type
+{ state: RootState }
+>(
+'wallet/chain/chainSwitched',
+async (_,thunkAPI) => {
+		let { dispatch } = thunkAPI;
+		await dispatch(connectChain());
+	}
+);
+
 export const setChainListeners = createAsyncThunk<
 	void, // return type
 	void, // first argument type
@@ -96,7 +108,7 @@ export const setChainListeners = createAsyncThunk<
 			// Correctly handling chain changes can be complicated.
 			// We recommend reloading the page unless you have good reason not to.
 			// window.location.reload();
-			dispatch(connectChain());
+			dispatch(chainSwitched());
 		});
 	}
 );
