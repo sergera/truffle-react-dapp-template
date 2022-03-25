@@ -1,5 +1,5 @@
 @import './pages/Landing/Landing.css';
-@import './pages/NotFoundError/NotFoundError.css';
+@import './pages/ErrorNotFound/ErrorNotFound.css';
 
 @import './components/Header/Header.css';
 @import './components/Header/ConnectMetamask/ConnectMetamask.css';
@@ -17,5 +17,4 @@
 	flex-direction: column;
 	height: 100vh;
 	width: 100vw;
-	background: var(--background);
 }

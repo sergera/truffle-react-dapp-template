@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Landing from './pages/Landing/Landing';
+import NotFoundError from './pages/ErrorNotFound/ErrorNotFound';
 
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Footer from "./components/Footer/Footer";
 
-import NotFoundError from './pages/NotFoundError/NotFoundError';
 import ModalContainer from './components/ModalContainer/ModalContainer';
 import ErrorNotification from './components/ErrorNotification/ErrorNotification';
 

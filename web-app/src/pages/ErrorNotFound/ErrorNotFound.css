@@ -13,6 +13,12 @@
 }
 
 .error-page-404___img {
-	height: 16rem;
-	max-height: 200px;
+	height: 18rem;
+	max-height: 300px;
+}
+
+@media(max-width: 420px) {
+	.error-page-404___img {
+		height: 120px;
+	}
 }
