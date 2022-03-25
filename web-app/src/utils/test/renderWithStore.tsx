@@ -3,10 +3,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import { combinedReducer } from "../../state/store";
 
-interface LooseObject {
-	[key: string]: any
-};
-
 const renderWithStore = (
   ui:JSX.Element,
   { ...renderOptions } = {}
