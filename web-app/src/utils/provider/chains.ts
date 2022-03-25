@@ -17,7 +17,7 @@
  * 
  */
 
-import chainIds from "../data/chains";
+import chainIds from "../constants/chains";
 
 const supportedNets = process.env.REACT_APP_SUPPORTED_CHAINS;
 
