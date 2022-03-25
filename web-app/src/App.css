@@ -1,5 +1,6 @@
 @import './pages/Landing/Landing.css';
 @import './pages/ErrorNotFound/ErrorNotFound.css';
+@import './pages/Error/Error.css';
 
 @import './components/Header/Header.css';
 @import './components/Header/ConnectMetamask/ConnectMetamask.css';

@@ -1,0 +1,26 @@
+.error-page {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+}
+
+.error-page__text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.error-page___img {
+	height: 18rem;
+	max-height: 450px;
+}
+
+/* limit minimum size */
+
+@media (max-width: 420px) {
+	.error-page__img {
+		height: 120px;
+	}
+}
