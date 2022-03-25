@@ -58,7 +58,8 @@ function Landing() {
 				<Input 
 					callback={getValue}
 					value={inputValue}
-					name={"input"}
+					name="input"
+					placeholder="this is an input"
 				/>
 				
 				<h1> Modals </h1>
