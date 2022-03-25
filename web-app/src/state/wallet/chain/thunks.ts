@@ -1,18 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../../store';
 import { openModal } from '../../modal/modalSlice';
+
 import { isChainSupported, getChainName } from '../../../utils/provider/chains';
 import { getErrorMessage } from '../../../utils/error/errorMessage';
 
-import { ConnectChainPayload } from './types';
-import { ProviderRpcError } from '../types';
+import { RootState } from '../../store';
+import { ProviderRpcError } from '../../../types';
+import { ConnectChainPayload } from './chainSlice.types';
 
 // user defined type guard
 function isProviderRpcError(object: unknown): object is ProviderRpcError {
 	return Object.prototype.hasOwnProperty.call(object, "message")
 			&& Object.prototype.hasOwnProperty.call(object, "code");
-}
+};
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;

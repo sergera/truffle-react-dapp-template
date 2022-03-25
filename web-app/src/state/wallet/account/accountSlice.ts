@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { connectAccount, setAccountListeners } from './thunks';
 import { providerDisconnected } from '../provider/thunks';
 
-import { AccountSlice } from './types';
+import { AccountSlice } from './accountSlice.types';
 
 export const initialState: AccountSlice = {
 	address: "",

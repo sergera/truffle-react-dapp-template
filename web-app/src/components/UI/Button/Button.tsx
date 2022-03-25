@@ -1,8 +1,4 @@
-interface ButtonProps {
-	callback: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	name: string;
-	styleClass?: string;
-};
+import { ButtonProps } from './Button.types';
 
 function Button({callback, name, styleClass=""}: ButtonProps) {
 

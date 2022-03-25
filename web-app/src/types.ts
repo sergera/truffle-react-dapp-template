@@ -1,3 +1,7 @@
+export interface LooseObject {
+	[key: string]: any;
+};
+
 // interface for MetaMask errors
 export interface ProviderRpcError extends Error {
 	message: string;

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { connectProvider, setProviderListeners, providerDisconnected } from './thunks';
 
-import { ProviderSlice } from './types';
+import { ProviderSlice } from './ProviderSlice.types';
 
 export const initialState: ProviderSlice = {
 	statusOk: false,

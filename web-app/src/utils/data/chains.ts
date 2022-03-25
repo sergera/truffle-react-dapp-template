@@ -7,9 +7,7 @@
  * 
  */
 
-interface ChainIdsMap {
-	[key: string]: number;
-};
+import { ChainIdsMap } from './chains.types';
 
 const chainIds:ChainIdsMap = {
 	"Mainnet": 1,

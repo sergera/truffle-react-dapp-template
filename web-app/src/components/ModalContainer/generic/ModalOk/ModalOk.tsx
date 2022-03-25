@@ -1,10 +1,6 @@
 import Button from '../../../UI/Button/Button';
 
-interface ModalOkProps {
-	close: Function;
-	content: String;
-	title?: string;
-};
+import { ModalOkProps } from './ModalOk.types';
 
 function ModalOk({close, title, content}:ModalOkProps) {
 

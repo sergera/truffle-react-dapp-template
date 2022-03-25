@@ -1,8 +1,6 @@
 import ModalOk from '../../generic/ModalOk/ModalOk';
 
-interface ModalDisconnectedProps {
-	close: Function;
-};
+import { ModalDisconnectedProps } from './ModalDisconnected.types';
 
 function ModalDisconnected({close}:ModalDisconnectedProps) {
 

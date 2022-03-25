@@ -1,6 +1,4 @@
-interface ContactsMap {
-	[key: string]: string;
-};
+import { ContactsMap } from './contacts.types';
 
 const contacts:ContactsMap = {
 	email: "sergio.joselli@gmail.com",

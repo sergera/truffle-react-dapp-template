@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ErrorNotificationSlice } from './types';
+import { ErrorNotificationSlice } from './errorNotificationSlice.types';
 
 export const initialState: ErrorNotificationSlice = {
 	message: "",

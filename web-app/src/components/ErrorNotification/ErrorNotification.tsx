@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 
 import Button from '../UI/Button/Button';
 
-import { ErrorNotificationProps } from './types';
 import { RootState, Dispatch } from '../../state/store';
 import { closeErrorNotification } from '../../state/errorNotification/errorNotificationSlice';
+import { ErrorNotificationProps } from './ErrorNotification.types';
 
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 

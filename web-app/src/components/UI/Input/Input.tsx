@@ -1,11 +1,4 @@
-interface InputProps {
-	callback: Function;
-	value: string;
-	name: string;
-	formId?: string;
-	placeholder?: string;
-	styleClass?: string;
-};
+import { InputProps } from './Input.types';
 
 function Input({callback, value, formId, name, placeholder, styleClass=""}: InputProps) {
 

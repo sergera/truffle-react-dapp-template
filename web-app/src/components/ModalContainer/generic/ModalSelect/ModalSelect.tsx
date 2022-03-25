@@ -1,6 +1,6 @@
 import Button from '../../../UI/Button/Button';
 
-import { ModalSelectProps } from './types';
+import { ModalSelectProps } from './ModalSelect.types';
 
 function ModalSelect({close, title, content, list}:ModalSelectProps) {
 

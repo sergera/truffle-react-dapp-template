@@ -4,7 +4,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { openModal } from '../../modal/modalSlice';
 
-import { ProviderRpcError } from '../types';
+
+import { RootState } from '../../store';
+import { ProviderRpcError } from '../../../types';
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;

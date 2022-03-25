@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { connectChain, setChainListeners } from './thunks';
 import { providerDisconnected } from '../provider/thunks';
 
-import { ChainSlice, ConnectChainPayload } from './types';
+import { ChainSlice, ConnectChainPayload } from './chainSlice.types';
 
 export const initialState: ChainSlice = {
 	name: "",

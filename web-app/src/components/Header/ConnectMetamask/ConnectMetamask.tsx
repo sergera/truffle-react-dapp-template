@@ -6,7 +6,7 @@ import { connectWallet } from '../../../state/wallet/thunks';
 import { minify, toCheckSum } from '../../../utils/format/ethAddress';
 
 import { RootState, Dispatch } from '../../../state/store';
-import { ConnectMetamaskProps } from './types';
+import { ConnectMetamaskProps } from './ConnectMetamask.types';
 
 export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMetamaskProps) {
 

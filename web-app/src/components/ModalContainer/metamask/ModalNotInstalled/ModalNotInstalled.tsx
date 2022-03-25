@@ -1,8 +1,6 @@
 import ModalOk from '../../generic/ModalOk/ModalOk';
 
-interface ModalNotInstalledProps {
-	close: Function;
-};
+import { ModalNotInstalledProps } from './ModalNotInstalled.types';
 
 function ModalNotInstalled({close}:ModalNotInstalledProps) {
 

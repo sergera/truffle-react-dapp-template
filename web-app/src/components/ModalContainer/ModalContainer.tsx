@@ -9,8 +9,7 @@ import ModalSelectChain from './metamask/ModalSelectChain/ModalSelectChain';
 import { closeModal } from '../../state/modal/modalSlice';
 
 import { RootState, Dispatch } from '../../state/store';
-import { ModalContainerProps, ModalComponentsMap } from './types';
-import { isTemplateMiddleOrTemplateTail } from 'typescript';
+import { ModalContainerProps, ModalComponentsMap } from './ModalContainer.types';
 
 export const MODAL_COMPONENTS: ModalComponentsMap = {
 	"NOT_INSTALLED": ModalNotInstalled,
