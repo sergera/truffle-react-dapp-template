@@ -1,7 +1,7 @@
 import ModalOk from '../../generic/ModalOk/ModalOk';
 
 interface ModalNotInstalledProps {
-	close: Function,
+	close: Function;
 };
 
 function ModalNotInstalled({close}:ModalNotInstalledProps) {

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import thunk from 'redux-thunk';
 
 interface LooseObject {
-	[key: string]: any
+	[key: string]: any;
 };
 
 const mockStore = configureMockStore([thunk]);

@@ -5,7 +5,7 @@ import { getSupportedChainsArray, getChainIdHex } from '../../../../utils/provid
 import { requestChainSwitch } from '../../../../state/wallet/chain/thunks';
 
 interface ModalSelectChainProps {
-	close: Function,
+	close: Function;
 };
 
 const supportedChains = getSupportedChainsArray();

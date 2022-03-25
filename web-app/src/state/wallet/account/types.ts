@@ -1,4 +1,4 @@
 export interface AccountSlice {
-	address: string,
-	listenersSet: boolean,
+	address: string;
+	listenersSet: boolean;
 };

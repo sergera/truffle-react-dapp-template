@@ -1,9 +1,9 @@
 export interface ConnectMetamaskProps {
-	connect: Function,
-	providerOk: boolean,
+	connect: Function;
+	providerOk: boolean;
 	chain: {
-		name: string,
-		isPermitted: boolean
+		name: string;
+		isPermitted: boolean;
 	},
-	account: string,
+	account: string;
 };

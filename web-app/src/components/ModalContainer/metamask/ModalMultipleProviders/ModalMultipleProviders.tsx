@@ -1,7 +1,7 @@
 import ModalOk from '../../generic/ModalOk/ModalOk';
 
 interface ModalMultipleProvidersProps {
-	close: Function,
+	close: Function;
 };
 
 function ModalMultipleProviders({close}:ModalMultipleProvidersProps) {

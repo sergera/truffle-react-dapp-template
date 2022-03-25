@@ -1,9 +1,9 @@
 import Button from '../../../UI/Button/Button';
 
 interface ModalOkProps {
-	close: Function,
-	content: String,
-	title?: string,
+	close: Function;
+	content: String;
+	title?: string;
 };
 
 function ModalOk({close, title, content}:ModalOkProps) {

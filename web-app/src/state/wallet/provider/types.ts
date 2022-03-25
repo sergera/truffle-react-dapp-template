@@ -1,4 +1,4 @@
 export interface ProviderSlice {
-	statusOk: boolean,
-	listenersSet: boolean,
+	statusOk: boolean;
+	listenersSet: boolean;
 };

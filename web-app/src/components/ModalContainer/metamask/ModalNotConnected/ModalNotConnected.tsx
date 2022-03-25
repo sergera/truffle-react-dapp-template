@@ -1,7 +1,7 @@
 import ModalOk from '../../generic/ModalOk/ModalOk';
 
 interface ModalNotConnectedProps {
-	close: Function,
+	close: Function;
 };
 
 function ModalNotConnected({close}:ModalNotConnectedProps) {
