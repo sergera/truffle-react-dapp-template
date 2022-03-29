@@ -1,4 +1,6 @@
-const publicUrl = process.env.PUBLIC_URL;
+import { getPublicUrl } from "../../utils/env";
+
+const publicUrl = getPublicUrl();
 
 function NotFoundError() {
   return (

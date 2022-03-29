@@ -23,6 +23,10 @@
  * 
  */
 
+export function getPublicUrl() {
+	return process.env.PUBLIC_URL;
+};
+
 export function getEnv(varName: string) {
 	const environmentVariable = process.env[`REACT_APP_${varName}`];
 	if (environmentVariable === undefined) {

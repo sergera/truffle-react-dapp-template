@@ -1,7 +1,9 @@
+import { getPublicUrl } from "../../../utils/env";
 import openNewTab from "../../../utils/browser/openNewTab";
+
 import contacts from "./Contacts.constants";
 
-const publicUrl = process.env.PUBLIC_URL;
+const publicUrl = getPublicUrl();
 
 function Contacts() {
 

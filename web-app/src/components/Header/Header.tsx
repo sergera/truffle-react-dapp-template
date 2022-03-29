@@ -1,6 +1,8 @@
 import ConnectMetamask from "./ConnectMetamask/ConnectMetamask";
 
-const publicUrl = process.env.PUBLIC_URL;
+import { getPublicUrl } from "../../utils/env";
+
+const publicUrl = getPublicUrl();
 
 function Header() {
 
