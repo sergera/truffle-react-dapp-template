@@ -1,12 +1,14 @@
 import ModalSelect from '../../generic/ModalSelect/ModalSelect';
 
+import { getChainIdHex } from '../../../../blockchain/chains';
+import { getSupportedChains } from '../../../../utils/env';
+
 import store from '../../../../state/store';
-import { getSupportedChainsArray, getChainIdHex } from '../../../../utils/provider/chains';
 import { requestChainSwitch } from '../../../../state/wallet/chain/thunks';
 
 import { ModalSelectChainProps } from './ModalSelectChain.types';
 
-const supportedChains = getSupportedChainsArray();
+const supportedChains = getSupportedChains();
 const chainsArray = supportedChains.map((chainName) => {
 	return {
 		name: chainName,

@@ -1,7 +1,6 @@
 import detectEthereumProvider from '@metamask/detect-provider';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../../store';
 import { openModal } from '../../modal/modalSlice';
 
 

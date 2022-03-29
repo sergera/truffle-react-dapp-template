@@ -1,6 +1,7 @@
 import detectProvider from '@metamask/detect-provider';
 
 import getNewStore from '../../../utils/test/getNewStore';
+import * as contracts from '../../../blockchain/contracts';
 
 import { initialState } from './providerSlice';
 import { connectProvider, providerDisconnected, setProviderListeners } from './thunks';

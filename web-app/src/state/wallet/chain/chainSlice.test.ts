@@ -1,5 +1,5 @@
-import { isChainSupported, getChainName } from '../../../utils/provider/chains';
 import getNewStore from '../../../utils/test/getNewStore';
+import { isChainSupported, getChainName } from '../../../blockchain/chains';
 
 import { initialState } from './chainSlice';
 import { connectChain, requestChainSwitch, setChainListeners } from './thunks';

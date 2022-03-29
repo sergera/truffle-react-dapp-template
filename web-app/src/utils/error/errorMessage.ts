@@ -1,4 +1,4 @@
-import { isObject } from "../dataStructures/object"
+import { isObject } from "../validation/dataStructures"
 
 export function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;

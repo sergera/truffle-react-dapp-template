@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { openModal } from '../../modal/modalSlice';
 
-import { isChainSupported, getChainName } from '../../../utils/provider/chains';
+import { isChainSupported, getChainName } from '../../../blockchain/chains';
 import { getErrorMessage } from '../../../utils/error/errorMessage';
 
 import { RootState } from '../../store';
@@ -32,11 +32,13 @@ export const connectChain = createAsyncThunk<
 		let chainName = getChainName(chainIdInt);
 		let chainSupported = isChainSupported(chainIdInt);
 
+		const chainIdString = chainIdInt.toString();
+
 		chainSupported || dispatch(openModal("SELECT_CHAIN"));
 
 		return {
 			name: chainName,
-			id: chainIdInt.toString(),
+			id: chainIdString,
 			supported: chainSupported,
 		};
 	}

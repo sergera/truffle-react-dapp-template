@@ -1,5 +1,5 @@
 import openNewTab from "../../utils/browser/openNewTab";
-import contacts from "../../utils/constants/contacts";
+import contacts from "../../constants/contacts";
 
 const publicUrl = process.env.PUBLIC_URL;
 
