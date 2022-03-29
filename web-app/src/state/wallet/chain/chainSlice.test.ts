@@ -1,8 +1,9 @@
 import getNewStore from '../../../utils/test/getNewStore';
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
+import * as contracts from '../../../blockchain/contracts';
 
 import { initialState } from './chainSlice';
-import { connectChain, requestChainSwitch, setChainListeners } from './thunks';
+import { connectChain, requestChainSwitch, chainSwitched, setChainListeners } from './thunks';
 import { providerDisconnected } from '../provider/thunks';
 
 declare var window: any;
@@ -42,14 +43,42 @@ describe("connectChain", () => {
 		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
+
+	test("should not call setContracts if chain is not supported", async () => {
+		window.ethereum = { request: () => fakeChainIdHex };
+
+		mockIsChainSupported.mockImplementation(() => false);
+
+		const setContractsSpy = jest.spyOn(contracts, "setContracts");
+
+		await store.dispatch(chainSwitched());
+		expect(setContractsSpy).not.toBeCalled();
+		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
+		expect(store.getState().chain.isPermitted).toEqual(false);
+	});
 	
-	test("should set chain name, id, and isPermitted if chain is supported", async () => {
+	test("should set chain ok if chain is supported", async () => {
 		window.ethereum = { request: () => fakeChainIdHex	};
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 
 		await store.dispatch(connectChain());
+		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
+		expect(store.getState().chain.name).toEqual(fakeChainName);
+		expect(store.getState().chain.isPermitted).toEqual(true);
+	});
+
+	test("should call setContracts if chain is supported", async () => {
+		window.ethereum = { request: () => fakeChainIdHex	};
+
+		mockIsChainSupported.mockImplementation(() => true);
+		mockGetChainName.mockImplementation(() => fakeChainName);
+
+		const setContractsSpy = jest.spyOn(contracts, "setContracts");
+
+		await store.dispatch(chainSwitched());
+		expect(setContractsSpy).toBeCalled();
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
 		expect(store.getState().chain.isPermitted).toEqual(true);
@@ -67,6 +96,23 @@ describe("requestChainSwitch", () => {
 			method: 'wallet_switchEthereumChain',
 			params: [{ chainId: fakeChainIdHex }],
 		});
+	});
+});
+
+describe("chainSwitched", () => {
+	test("should call deleteContracts and set new chain info", async () => {
+		window.ethereum = { request: () => fakeChainIdHex	};
+
+		mockIsChainSupported.mockImplementation(() => true);
+		mockGetChainName.mockImplementation(() => fakeChainName);
+
+		const deleteContractsSpy = jest.spyOn(contracts, "deleteContracts");
+
+		await store.dispatch(chainSwitched());
+		expect(deleteContractsSpy).toBeCalled();
+		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
+		expect(store.getState().chain.name).toEqual(fakeChainName);
+		expect(store.getState().chain.isPermitted).toEqual(true);
 	});
 });
 

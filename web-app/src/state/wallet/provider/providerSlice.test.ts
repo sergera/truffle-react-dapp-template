@@ -71,8 +71,11 @@ describe("connectProvider", () => {
 });
 
 describe("providerDisconnected", () => {
-	test("should call open modal", async () => { 
+	test("should open modal, set state to initial, and call delete contracts", async () => { 
+		const deleteContractsSpy = jest.spyOn(contracts, "deleteContracts");
+
 		await store.dispatch(providerDisconnected());
+		expect(deleteContractsSpy).toBeCalled();
 		expect(store.getState().modal.type).toEqual("DISCONNECTED");
 		expect(store.getState().provider.statusOk).toEqual(false);
 		expect(store.getState().provider.listenersSet).toEqual(false);

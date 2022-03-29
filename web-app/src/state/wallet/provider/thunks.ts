@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { openModal } from '../../modal/modalSlice';
 
+import { deleteContracts } from '../../../blockchain/contracts';
 
 import { RootState } from '../../store';
 import { ProviderRpcError } from '../../../types';
@@ -49,6 +50,7 @@ export const providerDisconnected = createAsyncThunk<
   'wallet/provider/disconnected',
   async (_,thunkAPI) => {
 		let { dispatch } = thunkAPI;
+		deleteContracts();
 		dispatch(openModal("DISCONNECTED"));
   }
 );

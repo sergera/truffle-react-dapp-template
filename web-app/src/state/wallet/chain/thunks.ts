@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { openModal } from '../../modal/modalSlice';
 
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
+import { setContracts, deleteContracts } from '../../../blockchain/contracts';
 import { getErrorMessage } from '../../../utils/error/errorMessage';
 
 import { RootState } from '../../store';
@@ -35,6 +36,7 @@ export const connectChain = createAsyncThunk<
 		const chainIdString = chainIdInt.toString();
 
 		chainSupported || dispatch(openModal("SELECT_CHAIN"));
+		chainSupported && setContracts(chainIdString);
 
 		return {
 			name: chainName,
@@ -87,13 +89,14 @@ export const requestChainSwitch = createAsyncThunk<
 );
 
 export const chainSwitched = createAsyncThunk<
-void, // return type
-void, // first argument type
+	void, // return type
+	void, // first argument type
 { state: RootState }
 >(
 'wallet/chain/chainSwitched',
 async (_,thunkAPI) => {
 		let { dispatch } = thunkAPI;
+		deleteContracts();
 		await dispatch(connectChain());
 	}
 );
