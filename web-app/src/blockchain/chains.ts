@@ -6,7 +6,7 @@
  */
 
 import { getSupportedChains } from "../utils/env";
-import chainIds from "../constants/chains";
+import chainIds from "./chains.constants";
 
 const supportedChains = getSupportedChains();
 

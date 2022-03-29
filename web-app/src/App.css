@@ -6,6 +6,7 @@
 @import './components/Header/ConnectMetamask/ConnectMetamask.css';
 @import './components/Nav/Nav.css';
 @import './components/Footer/Footer.css';
+@import './components/Footer/Contacts/Contacts.css';
 @import './components/UI/Button/Button.css';
 @import './components/UI/Input/Input.css';
 @import './components/ModalContainer/ModalContainer.css';
