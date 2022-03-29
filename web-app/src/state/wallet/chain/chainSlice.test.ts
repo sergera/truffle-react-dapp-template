@@ -10,7 +10,7 @@ declare var window: any;
 
 let store = getNewStore();
 
-jest.mock('../../../utils/provider/chains', () => ({
+jest.mock('../../../blockchain/chains', () => ({
 	__esModule: true,
 	isChainSupported: jest.fn(),
 	getChainName: jest.fn(),
