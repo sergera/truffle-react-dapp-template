@@ -11,11 +11,9 @@ import { LooseObject } from '../types';
 
 var contracts: LooseObject = {};
 
-const contractNames = getContractNames();
-
 async function getArtifact (name: string) {
 	try {
-		const artifact = await import(`../../../../build/contracts/${name}`);
+		const artifact = await import(`../../../build/contracts/${name}.json`);
 		return artifact;
 	} catch(err) {
 		throw new Error("Contract doesn't exist");
@@ -45,7 +43,7 @@ async function getContract (name: string, chainId: string) {
 };
 
 export async function setContracts(chainId: string) {
-	console.log(contractNames)
+	const contractNames = getContractNames();
 	try {
 		for(const name of contractNames) {
 			contracts[name] = await getContract(name, chainId);
@@ -60,4 +58,6 @@ export function deleteContracts() {
 	contracts = {};
 };
 
-export default contracts;
+export function getContracts() {
+	return contracts;
+}
