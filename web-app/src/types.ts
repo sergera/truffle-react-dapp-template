@@ -1,3 +1,4 @@
+// interface for a dynamic object
 export interface LooseObject {
 	[key: string]: any;
 };
@@ -8,3 +9,7 @@ export interface ProviderRpcError extends Error {
 	code: number;
 	data?: unknown;
 };
+
+export type AbstractClass<T> = Function & {prototype: T};
+
+export type ConstructorClass<T> = new (...args: any[]) => T;
