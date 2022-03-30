@@ -4,7 +4,7 @@ import { openModal } from '../../modal/modalSlice';
 
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
 import { setContracts, deleteContracts } from '../../../blockchain/contracts';
-import { getErrorMessage } from '../../../utils/error/errorMessage';
+import getErrorMessage from '../../../utils/error/getErrorMessage';
 
 import { RootState } from '../../store';
 import { ProviderRpcError } from '../../../types';

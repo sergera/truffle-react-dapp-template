@@ -1,4 +1,4 @@
-import { getErrorMessage } from './errorMessage';
+import getErrorMessage from './getErrorMessage';
 
 class TestError extends Error {
 	constructor(message: string) {
