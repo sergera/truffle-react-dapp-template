@@ -1,4 +1,4 @@
-import getNewStore from '../../../utils/test/getNewStore';
+import getNewStore from '../../../test/getNewStore';
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
 import * as contracts from '../../../blockchain/contracts';
 

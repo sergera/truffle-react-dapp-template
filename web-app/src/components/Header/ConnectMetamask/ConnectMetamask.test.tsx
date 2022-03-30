@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { ConnectMetamask } from './ConnectMetamask';
 
-import * as ethAddress from '../../../utils/format/ethAddress';
+import * as ethAddress from '../../../format/ethAddress';
 
 const chainOk = {isPermitted: true,	name: "test chain"};
 const chainNotOk = {isPermitted: false,	name: "test chain"};

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Button from '../../UI/Button/Button';
 
 import { connectWallet } from '../../../state/wallet/thunks';
-import { minify, toCheckSum } from '../../../utils/format/ethAddress';
+import { minify, toCheckSum } from '../../../format/ethAddress';
 
 import { RootState, Dispatch } from '../../../state/store';
 import { ConnectMetamaskProps } from './ConnectMetamask.types';

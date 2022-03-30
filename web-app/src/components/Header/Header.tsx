@@ -1,6 +1,6 @@
 import ConnectMetamask from "./ConnectMetamask/ConnectMetamask";
 
-import { getPublicUrl } from "../../utils/env";
+import { getPublicUrl } from "../../env";
 
 const publicUrl = getPublicUrl();
 

@@ -5,7 +5,7 @@
 
 import web3 from './web3';
 
-import { getContractNames } from '../utils/env';
+import { getContractNames } from '../env';
 
 import { LooseObject } from '../types';
 

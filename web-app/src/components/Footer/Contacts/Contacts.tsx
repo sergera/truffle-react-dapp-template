@@ -1,5 +1,5 @@
-import { getPublicUrl } from "../../../utils/env";
-import openNewTab from "../../../utils/browser/openNewTab";
+import { getPublicUrl } from "../../../env";
+import { openNewTab } from "../../../browser";
 
 import contacts from "./Contacts.constants";
 

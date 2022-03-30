@@ -1,7 +1,7 @@
 import ModalSelect from '../../generic/ModalSelect/ModalSelect';
 
 import { getChainIdHex } from '../../../../blockchain/chains';
-import { getSupportedChains } from '../../../../utils/env';
+import { getSupportedChains } from '../../../../env';
 
 import store from '../../../../state/store';
 import { requestChainSwitch } from '../../../../state/wallet/chain/thunks';

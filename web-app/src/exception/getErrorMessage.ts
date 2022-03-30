@@ -4,7 +4,7 @@
  * 
  */
 
-import { isObject } from "../validation/dataStructures"
+import { isObject } from "../validation/dataStructures";
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;

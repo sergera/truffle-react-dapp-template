@@ -1,14 +1,14 @@
 import { getContracts, deleteContracts, setContracts } from './contracts';
-import { getContractNames } from '../utils/env';
+import { getContractNames } from '../env';
 
 import web3 from './web3';
 
 /* mock web3 contract constructor dependency */
-jest.mock("./web3.ts", () => ({eth: {Contract: jest.fn()}}));
+jest.mock("./web3", () => ({eth: {Contract: jest.fn()}}));
 let mockContractConstructor = web3.eth.Contract as jest.Mock;
 
 /* mock env variable getter dependency */
-jest.mock("../utils/env", () => ({
+jest.mock("../env", () => ({
 	__esModule: true,
 	getContractNames: jest.fn(),
 }));
