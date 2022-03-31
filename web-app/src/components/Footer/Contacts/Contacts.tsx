@@ -1,11 +1,11 @@
 import { getPublicUrl } from "../../../env";
-import { openNewTab } from "../../../browser";
+import { newTab } from "../../../browser/open";
 
-import contacts from "./Contacts.constants";
+import { contacts } from "./Contacts.constants";
 
 const publicUrl = getPublicUrl();
 
-function Contacts() {
+export function Contacts() {
 
   return (
     <div className="contacts">
@@ -14,22 +14,22 @@ function Contacts() {
 				<div className="contacts__icons">
 					<img
 						src={`${publicUrl}/social/github_white_150x150.png`}
-						onClick={() => openNewTab(contacts.github)}
+						onClick={() => newTab(contacts.github)}
 						className="contacts__icon"
 					/>
 					<img
 						src={`${publicUrl}/social/linkedin_white_150x150.png`}
-						onClick={() => openNewTab(contacts.linkedin)}
+						onClick={() => newTab(contacts.linkedin)}
 						className="contacts__icon"
 					/>
 					<img
 						src={`${publicUrl}/social/instagram_white_150x150.png`}
-						onClick={() => openNewTab(contacts.instagram)}
+						onClick={() => newTab(contacts.instagram)}
 						className="contacts__icon"
 					/>
 					<img
 						src={`${publicUrl}/social/twitter_white_150x150.png`}
-						onClick={() => openNewTab(contacts.twitter)}
+						onClick={() => newTab(contacts.twitter)}
 						className="contacts__icon"
 					/>
 				</div>
@@ -53,5 +53,3 @@ function Contacts() {
     </div>
   );
 };
-
-export default Contacts;

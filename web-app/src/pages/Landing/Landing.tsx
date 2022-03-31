@@ -1,13 +1,13 @@
-import Button from "../../components/UI/Button/Button";
-import Input from "../../components/UI/Input/Input";
+import { Button } from "../../components/UI/Button";
+import { Input } from "../../components/UI/Input";
 
-import store from '../../state/store';
-import { openErrorNotification } from '../../state/errorNotification/errorNotificationSlice';
-import { openModal } from "../../state/modal/modalSlice";
+import { store } from '../../state';
+import { openErrorNotification } from '../../state/errorNotification';
+import { openModal } from "../../state/modal";
 
 import { useState } from "react";
 
-function Landing() {
+export function Landing() {
 
 	let [inputValue, setInputValue] = useState("");
 
@@ -173,6 +173,4 @@ function Landing() {
 				/>
     </div>
   );
-}
-
-export default Landing;
+};

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { connectAccount, setAccountListeners } from './thunks';
-import { providerDisconnected } from '../provider/thunks';
+import { connectAccount, setAccountListeners } from '.';
+import { providerDisconnected } from '../provider';
 
 import { AccountSlice } from './accountSlice.types';
 
@@ -32,4 +32,4 @@ const accountSlice = createSlice({
   }
 });
 
-export default accountSlice.reducer;
+export const accountReducer = accountSlice.reducer;

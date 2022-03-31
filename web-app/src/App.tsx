@@ -1,20 +1,20 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Landing from './pages/Landing/Landing';
-import ErrorNotFound from './pages/ErrorNotFound/ErrorNotFound';
+import { Landing } from './pages/Landing';
+import { ErrorNotFound } from './pages/ErrorNotFound';
 
-import Header from './components/Header/Header';
-import Nav from './components/Nav/Nav';
-import Footer from "./components/Footer/Footer";
+import { Header } from './components/Header';
+import { Nav } from './components/Nav';
+import { Footer } from "./components/Footer";
 
-import ModalContainer from './components/ModalContainer/ModalContainer';
-import ErrorNotification from './components/ErrorNotification/ErrorNotification';
+import { ConnectedModalContainer as ModalContainer } from './components/ModalContainer';
+import { ConnectedErrorNotification as ErrorNotification } from './components/ErrorNotification';
 
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 import './App.css';
 
-function App() {
+export function App() {
 
   return (
 		<div className="app">
@@ -33,5 +33,3 @@ function App() {
 		</div>
   );
 };
-
-export default App;

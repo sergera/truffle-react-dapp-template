@@ -2,7 +2,7 @@ import { getPublicUrl } from "../../env";
 
 const publicUrl = getPublicUrl();
 
-function NotFoundError() {
+export function ErrorNotFound() {
   return (
     <div className="error-page-404">
 			<img
@@ -16,5 +16,3 @@ function NotFoundError() {
     </div>
   );
 };
-
-export default NotFoundError;

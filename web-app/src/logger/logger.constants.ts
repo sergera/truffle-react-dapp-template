@@ -1,4 +1,4 @@
-import { SeveritiesMap, StylesMap } from "./log.types";
+import { SeveritiesMap, StylesMap } from "./logger.types";
 
 export const severities:SeveritiesMap = {
 	"1": "FATAL",

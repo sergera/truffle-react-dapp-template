@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { ConnectMetamask } from './ConnectMetamask';
+import { ConnectMetamask } from '.';
 
-import * as ethAddress from '../../../format/ethAddress';
+import * as ethAddress from '../../../format/eth/address/address';
 
 const chainOk = {isPermitted: true,	name: "test chain"};
 const chainNotOk = {isPermitted: false,	name: "test chain"};

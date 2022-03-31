@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { connectProvider, setProviderListeners } from './provider/thunks';
-import { connectChain, setChainListeners } from './chain/thunks';
-import { connectAccount, setAccountListeners } from './account/thunks';
+import { connectProvider, setProviderListeners } from './provider';
+import { connectChain, setChainListeners } from './chain';
+import { connectAccount, setAccountListeners } from './account';
 
-import { RootState } from '../store';
+import { RootState } from '..';
 
 export const connectWallet = createAsyncThunk<
 	void, // return type

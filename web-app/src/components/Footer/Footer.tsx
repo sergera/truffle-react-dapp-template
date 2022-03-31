@@ -1,6 +1,6 @@
-import Contacts from "./Contacts/Contacts";
+import { Contacts } from "./Contacts";
 
-function Footer() {
+export function Footer() {
 
   return (
 		<div className="footer">
@@ -8,5 +8,3 @@ function Footer() {
 		</div>
   );
 };
-
-export default Footer;

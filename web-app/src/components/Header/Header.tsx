@@ -1,10 +1,10 @@
-import ConnectMetamask from "./ConnectMetamask/ConnectMetamask";
+import { ConnectedConnectMetamask as ConnectMetamask } from "./ConnectMetamask";
 
 import { getPublicUrl } from "../../env";
 
 const publicUrl = getPublicUrl();
 
-function Header() {
+export function Header() {
 
   return (
     <div className="header">
@@ -13,9 +13,7 @@ function Header() {
 					className="header__logo"
 			/>
 			<p className="header__title">by Sergio Joselli</p>
-			<ConnectMetamask/>
+			<ConnectMetamask />
     </div>
   );
 };
-
-export default Header;

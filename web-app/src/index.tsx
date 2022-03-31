@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from './state/store';
+import { store } from './state';
 import reportWebVitals from './reportWebVitals';
-import App from './App';
+import { App } from './App';
 
 import './normalize.css';
 import './index.css';

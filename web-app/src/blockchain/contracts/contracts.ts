@@ -3,17 +3,17 @@
  * 
  */
 
-import web3 from './web3';
+import { getWeb3 } from '../web3';
 
-import { getContractNames } from '../env';
+import { getContractNames } from '../../env';
 
-import { LooseObject } from '../types';
+import { LooseObject } from '../../types';
 
 var contracts: LooseObject = {};
 
 async function getArtifact (name: string) {
 	try {
-		const artifact = await import(`../../../build/contracts/${name}.json`);
+		const artifact = await import(`../../../../build/contracts/${name}.json`);
 		return artifact;
 	} catch(err) {
 		throw new Error("Contract doesn't exist");
@@ -32,6 +32,7 @@ function getContractAddress (artifact: LooseObject, chainId: string) {
 async function getContract (name: string, chainId: string) {
 	let artifact = await getArtifact(name);
 	let contractAddress = getContractAddress(artifact, chainId);
+	let web3 = getWeb3();
 	try {
 		return new web3.eth.Contract(
 			artifact.abi,
@@ -60,4 +61,4 @@ export function deleteContracts() {
 
 export function getContracts() {
 	return contracts;
-}
+};

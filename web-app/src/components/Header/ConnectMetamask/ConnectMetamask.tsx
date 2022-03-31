@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import Button from '../../UI/Button/Button';
+import { Button } from '../../UI/Button';
 
-import { connectWallet } from '../../../state/wallet/thunks';
-import { minify, toCheckSum } from '../../../format/ethAddress';
+import { connectWallet } from '../../../state/wallet';
+import { minify, toCheckSum } from '../../../format/eth/address';
 
-import { RootState, Dispatch } from '../../../state/store';
+import { RootState, Dispatch } from '../../../state';
 import { ConnectMetamaskProps } from './ConnectMetamask.types';
 
 export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMetamaskProps) {
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ConnectMetamask);
+export const ConnectedConnectMetamask = connect(mapStateToProps,mapDispatchToProps)(ConnectMetamask);

@@ -1,10 +1,10 @@
-import ModalSelect from '../../generic/ModalSelect/ModalSelect';
+import { ModalSelect } from '../../generic/ModalSelect';
 
 import { getChainIdHex } from '../../../../blockchain/chains';
 import { getSupportedChains } from '../../../../env';
 
-import store from '../../../../state/store';
-import { requestChainSwitch } from '../../../../state/wallet/chain/thunks';
+import { store } from '../../../../state';
+import { requestChainSwitch } from '../../../../state/wallet/chain';
 
 import { ModalSelectChainProps } from './ModalSelectChain.types';
 
@@ -16,7 +16,7 @@ const chainsArray = supportedChains.map((chainName) => {
 	}
 });
 
-function ModalSelectChain({close}:ModalSelectChainProps) {
+export function ModalSelectChain({close}:ModalSelectChainProps) {
   return (
 		<ModalSelect 
 			title="Chain Not Supported"
@@ -26,5 +26,3 @@ function ModalSelectChain({close}:ModalSelectChainProps) {
 		/>
   );
 };
-
-export default ModalSelectChain;

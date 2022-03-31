@@ -1,4 +1,4 @@
-/**********
+/********
  * Map of chain ids by name
  * 
  *  For future reference, access:
@@ -9,7 +9,7 @@
 
  import { ChainIdsMap } from './chains.types';
 
- const chainIds:ChainIdsMap = {
+ export const chainIds:ChainIdsMap = {
 	 "Mainnet": 1,
 	 "Ropsten": 3,
 	 "Rinkeby": 4,
@@ -19,6 +19,4 @@
 	 "Truffle": 1337,
 	 "Ganache": 5777,
  };
- 
- export default chainIds;
  

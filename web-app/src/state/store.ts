@@ -1,11 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import providerReducer from './wallet/provider/providerSlice';
-import chainReducer from './wallet/chain/chainSlice';
-import accountReducer from './wallet/account/accountSlice';
-import modalReducer from './modal/modalSlice';
-import errorNotificationReducer from './errorNotification/errorNotificationSlice';
+import { providerReducer } from './wallet/provider';
+import { chainReducer } from './wallet/chain';
+import { accountReducer } from './wallet/account';
+import { modalReducer } from './modal';
+import { errorNotificationReducer } from './errorNotification';
 
 export const combinedReducer = combineReducers({
 	provider: providerReducer,
@@ -15,7 +15,7 @@ export const combinedReducer = combineReducers({
 	errorNotification: errorNotificationReducer,
 });
 
-const store = configureStore({
+export const store = configureStore({
 	reducer: combinedReducer
 });
 
@@ -23,5 +23,3 @@ export const useAppDispatch = () => useDispatch<Dispatch>();
 
 export type Dispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-
-export default store;

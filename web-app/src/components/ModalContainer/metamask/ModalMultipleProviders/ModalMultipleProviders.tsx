@@ -1,8 +1,8 @@
-import ModalOk from '../../generic/ModalOk/ModalOk';
+import { ModalOk } from '../../generic/ModalOk';
 
 import { ModalMultipleProvidersProps } from './ModalMultipleProviders.types';
 
-function ModalMultipleProviders({close}:ModalMultipleProvidersProps) {
+export function ModalMultipleProviders({close}:ModalMultipleProvidersProps) {
 
   return (
 		<ModalOk 
@@ -12,5 +12,3 @@ function ModalMultipleProviders({close}:ModalMultipleProvidersProps) {
 		/>
   );
 };
-
-export default ModalMultipleProviders;

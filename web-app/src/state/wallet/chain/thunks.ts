@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
 import { setContracts, deleteContracts } from '../../../blockchain/contracts';
-import getErrorMessage from '../../../exception/getErrorMessage';
+import { getErrorMessage } from '../../../exception';
 
-import { RootState } from '../../store';
-import { openModal } from '../../modal/modalSlice';
+import { RootState } from '../..';
+import { openModal } from '../../modal';
 import { ProviderRpcError } from '../../../types';
 import { ConnectChainPayload } from './chainSlice.types';
 

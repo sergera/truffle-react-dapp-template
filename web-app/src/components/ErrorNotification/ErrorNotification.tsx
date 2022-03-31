@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import Button from '../UI/Button/Button';
+import { Button } from '../UI/Button';
 
-import { RootState, Dispatch } from '../../state/store';
-import { closeErrorNotification } from '../../state/errorNotification/errorNotificationSlice';
+import { RootState, Dispatch } from '../../state';
+import { closeErrorNotification } from '../../state/errorNotification';
 import { ErrorNotificationProps } from './ErrorNotification.types';
 
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ErrorNotification);
+export const ConnectedErrorNotification = connect(mapStateToProps,mapDispatchToProps)(ErrorNotification);

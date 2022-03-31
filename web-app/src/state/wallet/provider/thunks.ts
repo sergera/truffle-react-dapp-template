@@ -1,11 +1,11 @@
 import detectEthereumProvider from '@metamask/detect-provider';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { openModal } from '../../modal/modalSlice';
+import { openModal } from '../../modal';
 
 import { deleteContracts } from '../../../blockchain/contracts';
 
-import { RootState } from '../../store';
+import { RootState } from '../..';
 import { ProviderRpcError } from '../../../types';
 
 // stop typescript from trying to predict injected window.ethereum methods

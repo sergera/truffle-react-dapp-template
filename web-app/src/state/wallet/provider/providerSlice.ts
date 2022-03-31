@@ -32,4 +32,4 @@ const providerSlice = createSlice({
   }
 });
 
-export default providerSlice.reducer;
+export const providerReducer = providerSlice.reducer;

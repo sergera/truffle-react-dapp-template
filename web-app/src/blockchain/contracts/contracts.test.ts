@@ -1,14 +1,19 @@
 import { getContracts, deleteContracts, setContracts } from './contracts';
-import { getContractNames } from '../env';
+import { getContractNames } from '../../env';
 
-import web3 from './web3';
+import { getWeb3 } from '../web3';
 
 /* mock web3 contract constructor dependency */
-jest.mock("./web3", () => ({eth: {Contract: jest.fn()}}));
-let mockContractConstructor = web3.eth.Contract as jest.Mock;
+jest.mock("../web3", () => ({
+	...jest.requireActual("../web3"),
+	getWeb3: jest.fn(),
+}));
+let mockGetWeb3 = getWeb3 as jest.Mock;
+let mockWeb3 = {eth: {Contract: jest.fn()}};
+let mockContractConstructor = mockWeb3.eth.Contract as jest.Mock;
 
 /* mock env variable getter dependency */
-jest.mock("../env", () => ({
+jest.mock("../../env", () => ({
 	__esModule: true,
 	getContractNames: jest.fn(),
 }));
@@ -28,7 +33,7 @@ const testAbiOne = { [testContractOneName]: "abi one" };
 const testAbiTwo = { [testContractTwoName]: "abi two" };
 
 /* mock contract files */
-jest.mock("../../../build/contracts/testContractOne.json", () => ({
+jest.mock("../../../../build/contracts/testContractOne.json", () => ({
 	name: testContractOneName,
 	networks: {
 		[testChainIdOne]: {address: testContractOneChainOneAddress},
@@ -37,7 +42,7 @@ jest.mock("../../../build/contracts/testContractOne.json", () => ({
 	abi: testAbiOne
 }), { virtual: true });
 
-jest.mock("../../../build/contracts/testContractTwo.json", () => ({
+jest.mock("../../../../build/contracts/testContractTwo.json", () => ({
 	name: testContractTwoName,
 	networks: {
 		[testChainIdOne]: {address: testContractTwoChainOneAddress},
@@ -45,6 +50,12 @@ jest.mock("../../../build/contracts/testContractTwo.json", () => ({
 	},
 	abi: testAbiTwo
 }), { virtual: true });
+
+beforeEach(() => {
+	/* set mock web3 object as return from getWeb3 */
+	/* necessary to mock constructor inside mockWeb3 */
+	mockGetWeb3.mockImplementation(() => mockWeb3);
+});
 
 describe("setContracts", () => {
 	afterEach(() => {

@@ -1,10 +1,10 @@
 import React, { ErrorInfo } from 'react';
 
-import Error from '../../pages/Error/Error';
+import { Error } from '../../pages/Error';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from './ErrorBoundary.types';
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -28,5 +28,3 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 		return this.props.children;
   }
 };
-
-export default ErrorBoundary;

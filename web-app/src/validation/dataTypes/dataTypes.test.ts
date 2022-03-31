@@ -1,4 +1,4 @@
-import { isString, isObject } from "./dataStructures";
+import { isString, isObject } from ".";
 
 describe("isString", () => {
 	test("should return true if arg is a string", () => {

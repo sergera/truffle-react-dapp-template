@@ -2,7 +2,7 @@ import { getPublicUrl } from "../../env";
 
 const publicUrl = getPublicUrl();
 
-function Error() {
+export function Error() {
   return (
     <div className="error-page">
 			<img
@@ -16,5 +16,3 @@ function Error() {
     </div>
   );
 };
-
-export default Error;

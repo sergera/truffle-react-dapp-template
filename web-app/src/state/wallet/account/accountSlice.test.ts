@@ -1,8 +1,8 @@
-import getNewStore from '../../../test/getNewStore';
+import { getNewStore } from '../../../test';
 
-import { initialState } from './accountSlice';
-import { connectAccount, setAccountListeners} from './thunks';
-import { providerDisconnected } from '../provider/thunks';
+import { initialState } from '.';
+import { connectAccount, setAccountListeners} from '.';
+import { providerDisconnected } from '../provider';
 
 declare var window: any;
 

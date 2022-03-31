@@ -1,4 +1,4 @@
-import getNewStore from '../../test/getNewStore';
+import { getNewStore } from '../../test';
 
 import { openErrorNotification, closeErrorNotification, initialState } from './errorNotificationSlice';
 

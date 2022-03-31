@@ -1,8 +1,8 @@
-import Button from '../../../UI/Button/Button';
+import { Button } from '../../../UI/Button';
 
 import { ModalOkProps } from './ModalOk.types';
 
-function ModalOk({close, title, content}:ModalOkProps) {
+export function ModalOk({close, title, content}:ModalOkProps) {
 
 	const closeModal = () => {
 		close();
@@ -18,5 +18,3 @@ function ModalOk({close, title, content}:ModalOkProps) {
     </div>
   );
 };
-
-export default ModalOk;

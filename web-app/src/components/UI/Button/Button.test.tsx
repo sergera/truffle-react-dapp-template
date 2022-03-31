@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Button from './Button';
+import { Button } from '.';
 
 test('calls callback on click', () => {
 	const mockCallback = jest.fn();

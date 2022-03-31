@@ -1,4 +1,4 @@
-import getNewStore from '../../test/getNewStore';
+import { getNewStore } from '../../test';
 
 import { openModal, closeModal, initialState } from './modalSlice';
 

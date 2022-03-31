@@ -1,6 +1,6 @@
 import { InputProps } from './Input.types';
 
-function Input({callback, value, formId, name, placeholder, styleClass=""}: InputProps) {
+export function Input({callback, value, formId, name, placeholder, styleClass=""}: InputProps) {
 
 	const getValue = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
@@ -25,5 +25,3 @@ function Input({callback, value, formId, name, placeholder, styleClass=""}: Inpu
 		</>
   );
 };
-
-export default Input;

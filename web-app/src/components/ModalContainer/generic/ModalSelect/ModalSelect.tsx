@@ -1,8 +1,8 @@
-import Button from '../../../UI/Button/Button';
+import { Button } from '../../../UI/Button';
 
 import { ModalSelectProps } from './ModalSelect.types';
 
-function ModalSelect({close, title, content, list}:ModalSelectProps) {
+export function ModalSelect({close, title, content, list}:ModalSelectProps) {
 
 	const closeModal = () => {
 		close();
@@ -34,5 +34,3 @@ function ModalSelect({close, title, content, list}:ModalSelectProps) {
     </div>
   );
 };
-
-export default ModalSelect;

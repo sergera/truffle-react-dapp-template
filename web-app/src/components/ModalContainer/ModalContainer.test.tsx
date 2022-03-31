@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { ModalContainer, MODAL_COMPONENTS } from './ModalContainer';
+import { ModalContainer, MODAL_COMPONENTS } from '.';
 
 const mockClose = jest.fn();
 

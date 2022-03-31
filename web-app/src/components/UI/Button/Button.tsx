@@ -1,6 +1,6 @@
 import { ButtonProps } from './Button.types';
 
-function Button({callback, name, styleClass=""}: ButtonProps) {
+export function Button({callback, name, styleClass=""}: ButtonProps) {
 
   return (
 		<button 
@@ -13,5 +13,3 @@ function Button({callback, name, styleClass=""}: ButtonProps) {
 		</button>
   );
 };
-
-export default Button;

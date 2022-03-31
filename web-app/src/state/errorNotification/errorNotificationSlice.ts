@@ -24,4 +24,4 @@ export const {
 	closeErrorNotification,
 } = errorNotificationSlice.actions;
 
-export default errorNotificationSlice.reducer;
+export const errorNotificationReducer = errorNotificationSlice.reducer;

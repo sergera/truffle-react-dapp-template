@@ -1,10 +1,10 @@
 import detectProvider from '@metamask/detect-provider';
 
-import getNewStore from '../../../test/getNewStore';
-import * as contracts from '../../../blockchain/contracts';
+import { getNewStore } from '../../../test';
+import * as contracts from '../../../blockchain/contracts/contracts';
 
 import { initialState } from './providerSlice';
-import { connectProvider, providerDisconnected, setProviderListeners } from './thunks';
+import { connectProvider, providerDisconnected, setProviderListeners } from '.';
 
 declare var window: any;
 

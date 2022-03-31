@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import Input from './Input';
+import { Input } from '.';
 
 test('gives value to callback', () => {
 	const TestComponent = () => {

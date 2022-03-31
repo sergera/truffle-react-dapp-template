@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../../store';
+import { RootState } from '../..';
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;

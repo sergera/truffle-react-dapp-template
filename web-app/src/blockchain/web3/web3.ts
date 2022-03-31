@@ -9,4 +9,6 @@ export function setMetamaskAsProvider() {
 	web3.setProvider(window.ethereum);
 };
 
-export default web3;
+export function getWeb3() {
+	return web3;
+};

@@ -1,4 +1,4 @@
-import { minify, toCheckSum } from './ethAddress';
+import { minify, toCheckSum } from '.';
 
 describe("minify", () => {
 	describe("returns first 6 chars + ... + last 4 chars", () => {

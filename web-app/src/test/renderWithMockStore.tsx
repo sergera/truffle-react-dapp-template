@@ -7,7 +7,7 @@ import { LooseObject } from "../types";
 
 const mockStore = configureMockStore([thunk]);
 
-const renderWithMockStore = (
+export const renderWithMockStore = (
   ui:JSX.Element,
   { mockState, ...renderOptions } : { mockState: LooseObject } = { mockState: {} }
 ) => {
@@ -18,5 +18,3 @@ const renderWithMockStore = (
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 };
-
-export default renderWithMockStore;

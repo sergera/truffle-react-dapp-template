@@ -1,10 +1,10 @@
-import getNewStore from '../../../test/getNewStore';
+import { getNewStore } from '../../../test';
 import { isChainSupported, getChainName } from '../../../blockchain/chains';
-import * as contracts from '../../../blockchain/contracts';
+import * as contracts from '../../../blockchain/contracts/contracts';
 
 import { initialState } from './chainSlice';
-import { connectChain, requestChainSwitch, chainSwitched, setChainListeners } from './thunks';
-import { providerDisconnected } from '../provider/thunks';
+import { connectChain, requestChainSwitch, chainSwitched, setChainListeners } from '.';
+import { providerDisconnected } from '../provider';
 
 declare var window: any;
 

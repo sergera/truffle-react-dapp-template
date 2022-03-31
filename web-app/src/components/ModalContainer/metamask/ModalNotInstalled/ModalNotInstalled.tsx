@@ -1,8 +1,8 @@
-import ModalOk from '../../generic/ModalOk/ModalOk';
+import { ModalOk } from '../../generic/ModalOk';
 
 import { ModalNotInstalledProps } from './ModalNotInstalled.types';
 
-function ModalNotInstalled({close}:ModalNotInstalledProps) {
+export function ModalNotInstalled({close}:ModalNotInstalledProps) {
 
   return (
 		<ModalOk 
@@ -12,5 +12,3 @@ function ModalNotInstalled({close}:ModalNotInstalledProps) {
 		/>
   );
 };
-
-export default ModalNotInstalled;
