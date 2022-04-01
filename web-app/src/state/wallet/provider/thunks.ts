@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { openModal } from '../../modal';
 
+import { setMetamaskAsProvider } from '../../../blockchain/web3';
 import { deleteContracts } from '../../../blockchain/contracts';
 
 import { RootState } from '../..';
@@ -38,6 +39,8 @@ export const connectProvider = createAsyncThunk<
 			dispatch(openModal("NOT_CONNECTED"));
 			return false;
 		}
+		
+		setMetamaskAsProvider();
 		return true;
   }
 );
