@@ -3,6 +3,7 @@ export interface ConnectMetamaskProps {
 	providerOk: boolean;
 	chain: {
 		name: string;
+		isConnected: boolean;
 		isPermitted: boolean;
 	},
 	account: string;

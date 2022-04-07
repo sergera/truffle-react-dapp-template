@@ -19,13 +19,21 @@ import {
 	providerDisconnected 
 } from '../provider';
 
+/* silence logger */
+jest.mock("../../../logger", () => ({
+	__esModule: true,
+	log: jest.fn(),
+}));
+
 jest.mock("../../../blockchain/metamask", () => ({
 	__esModule: true,
+	isConnected: jest.fn(),
 	requestChainId: jest.fn(),
 	requestChainSwitch: jest.fn(),
 	setChainSwitchCallback: jest.fn(),
 }));
 
+const mockIsConnected = metamask.isConnected as jest.Mock;
 const mockRequestChainId = metamask.requestChainId as jest.Mock;
 
 jest.mock('../../../blockchain/chains', () => ({
@@ -53,17 +61,32 @@ test("should set initial state", () => {
 });
 
 describe("connectChain", () => {
+	test("should open modal if chain is not connected", async () => {
+		mockIsConnected.mockImplementation(() => false);
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+
+		mockIsChainSupported.mockImplementation(() => true);
+
+		await store.dispatch(connectChain());
+		expect(store.getState().modal.type).toEqual("NOT_CONNECTED");
+		expect(store.getState().chain.isConnected).toEqual(false);	
+		expect(store.getState().chain.isPermitted).toEqual(true);	
+	});
+
 	test("should open modal if chain is not supported", async () => {
+		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => false);
 
 		await store.dispatch(connectChain());
 		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
+		expect(store.getState().chain.isConnected).toEqual(true);	
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
 
 	test("should not call setContracts if chain is not supported", async () => {
+		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => false);
@@ -73,10 +96,12 @@ describe("connectChain", () => {
 		await store.dispatch(chainSwitched());
 		expect(setContractsSpy).not.toBeCalled();
 		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
+		expect(store.getState().chain.isConnected).toEqual(true);	
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
 	
-	test("should set chain ok if chain is supported", async () => {
+	test("should set chain ok if chain is supported and connected", async () => {
+		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
@@ -85,10 +110,12 @@ describe("connectChain", () => {
 		await store.dispatch(connectChain());
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
+		expect(store.getState().chain.isConnected).toEqual(true);
 		expect(store.getState().chain.isPermitted).toEqual(true);
 	});
 
 	test("should call setContracts if chain is supported", async () => {
+		mockIsConnected.mockImplementation(() => false);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
@@ -100,6 +127,7 @@ describe("connectChain", () => {
 		expect(setContractsSpy).toBeCalled();
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
+		expect(store.getState().chain.isConnected).toEqual(false);
 		expect(store.getState().chain.isPermitted).toEqual(true);
 	});
 });
@@ -117,6 +145,7 @@ describe("switchChain", () => {
 
 describe("chainSwitched", () => {
 	test("should call deleteContracts and set new chain info", async () => {
+		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
@@ -128,6 +157,7 @@ describe("chainSwitched", () => {
 		expect(deleteContractsSpy).toBeCalled();
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
+		expect(store.getState().chain.isConnected).toEqual(true);
 		expect(store.getState().chain.isPermitted).toEqual(true);
 	});
 });
@@ -140,6 +170,7 @@ describe("setChainListeners", () => {
 });
 
 test("should reset state if provider disconnected", async () => {
+	mockIsConnected.mockImplementation(() => true);
 	mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 	mockIsChainSupported.mockImplementation(() => true);
@@ -148,6 +179,7 @@ test("should reset state if provider disconnected", async () => {
 	await store.dispatch(connectChain());
 	expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 	expect(store.getState().chain.name).toEqual(fakeChainName);
+	expect(store.getState().chain.isConnected).toEqual(true);
 	expect(store.getState().chain.isPermitted).toEqual(true);
 
 	await store.dispatch(providerDisconnected());

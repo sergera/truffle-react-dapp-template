@@ -8,8 +8,7 @@ import {
 
 import { 
 	setConnectCallback, 
-	setDisconnectCallback, 
-	isConnected, 
+	setDisconnectCallback,
 	detectMetamaskProvider 
 } from '../../../blockchain/metamask';
 import { 
@@ -43,12 +42,6 @@ export const connectProvider = createAsyncThunk<
 
 		if(!providerStatus.isSoleProvider) {
 			dispatch(openModal("MULTIPLE_PROVIDERS"));
-			return false;
-		}
-		
-		let metamaskIsConnected = isConnected();
-		if(!metamaskIsConnected) {
-			dispatch(openModal("NOT_CONNECTED"));
 			return false;
 		}
 		

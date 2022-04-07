@@ -5,8 +5,8 @@ import { ConnectMetamask } from '.';
 
 import * as ethAddress from '../../../format/eth/address/address';
 
-const chainOk = {isPermitted: true,	name: "test chain"};
-const chainNotOk = {isPermitted: false,	name: "test chain"};
+const chainOk = {isConnected: true, isPermitted: true,	name: "test chain"};
+const chainNotOk = {isConnected: false, isPermitted: false,	name: "test chain"};
 const accountOk = "test account";
 const accountNotOk = "";
 

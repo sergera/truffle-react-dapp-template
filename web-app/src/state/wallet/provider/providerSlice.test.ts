@@ -14,13 +14,11 @@ import {
 jest.mock("../../../blockchain/metamask", () => ({
 	__esModule: true,
 	detectMetamaskProvider: jest.fn(),
-	isConnected: jest.fn(),
 	setConnectCallback: jest.fn(),
 	setDisconnectCallback: jest.fn(),
 }));
 
 const mockDetectMetamaskProvider = metamask.detectMetamaskProvider as jest.Mock;
-const mockIsConnected = metamask.isConnected as jest.Mock;
 
 let store = getNewStore();
 
@@ -55,27 +53,12 @@ describe("connectProvider", () => {
 		expect(store.getState().modal.type).toEqual("MULTIPLE_PROVIDERS");
 		expect(store.getState().provider.statusOk).toEqual(false);
 	});
-	
-	test("should open modal if metamask is not connected", async () => {
+
+	test("should set statusOk if only metamask installed and is sole provider", async () => {
 		mockDetectMetamaskProvider.mockImplementation(() => ({
 			isInstalled: true,
 			isSoleProvider: true,
 		}));
-
-		mockIsConnected.mockImplementation(() => false);
-	
-		await store.dispatch(connectProvider());
-		expect(store.getState().modal.type).toEqual("NOT_CONNECTED");
-		expect(store.getState().provider.statusOk).toEqual(false);
-	});
-	
-	test("should set statusOk if only metamask installed and is connected", async () => {
-		mockDetectMetamaskProvider.mockImplementation(() => ({
-			isInstalled: true,
-			isSoleProvider: true,
-		}));
-
-		mockIsConnected.mockImplementation(() => true);
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("");

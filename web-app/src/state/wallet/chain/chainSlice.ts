@@ -8,6 +8,7 @@ import { ChainSlice, ConnectChainPayload } from './chainSlice.types';
 export const initialState: ChainSlice = {
 	name: "",
 	id: "",
+	isConnected: false,
 	isPermitted: false,
 	listenersSet: false,
 };
@@ -18,14 +19,16 @@ const chainSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(connectChain.fulfilled, (state, action: PayloadAction<ConnectChainPayload>) => {
-			let { name, id, supported } = action.payload;
+			let { name, id, connected, supported } = action.payload;
 			state.name = name;
 			state.id = id;
+			state.isConnected = connected;
 			state.isPermitted = supported;
 		});
 		builder.addCase(connectChain.rejected, (state) => {
 			state.name = "";
 			state.id = "";
+			state.isConnected = false;
 			state.isPermitted = false;
 		});
 		builder.addCase(setChainListeners.fulfilled, (state) => {
@@ -34,6 +37,7 @@ const chainSlice = createSlice({
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
 			state.name = "";
 			state.id = "";
+			state.isConnected = false;
 			state.isPermitted = false;
 			state.listenersSet = false;
     });

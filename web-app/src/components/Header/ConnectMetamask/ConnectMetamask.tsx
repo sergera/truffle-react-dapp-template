@@ -14,7 +14,7 @@ export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMe
 		connect();
 	}
 
-	if(providerOk && chain.isPermitted && (account !== "")) {
+	if(providerOk && chain.isConnected && chain.isPermitted && (account !== "")) {
 		// if correct chain connected and account retrieved
 		return (
 			<div className="connect-metamask connect-metamask--info">
