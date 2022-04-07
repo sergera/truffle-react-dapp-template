@@ -1,10 +1,26 @@
-import { getNewStore } from '../../../test';
+import { 
+	getNewStore 
+} from '../../../test';
 
-import { initialState } from '.';
-import { connectAccount, setAccountListeners} from '.';
-import { providerDisconnected } from '../provider';
+import {
+	requestAccounts,
+} from '../../../blockchain/metamask'
 
-declare var window: any;
+import { 
+	initialState,
+	connectAccount, 
+	setAccountListeners 
+} from '.';
+import { 
+	providerDisconnected 
+} from '../provider';
+
+jest.mock("../../../blockchain/metamask", () => ({
+	__esModule: true,
+	requestAccounts: jest.fn(),
+	setAccountSwitchCallback: jest.fn(),
+}));
+const mockRequestAccounts = requestAccounts as jest.Mock;
 
 let store = getNewStore();
 
@@ -13,7 +29,6 @@ const fakeAccounts = [fakeAddress];
 
 afterEach(() => {
 	store = getNewStore();
-	delete window.ethereum;
 });
 
 test("should set initial state", () => {
@@ -23,7 +38,7 @@ test("should set initial state", () => {
 
 describe("connectAccount", () => {
 	test("should set address", async () => {
-		window.ethereum = { request: () => fakeAccounts };
+		mockRequestAccounts.mockImplementation(() => fakeAccounts);
 
 		await store.dispatch(connectAccount());
 		expect(store.getState().account.address).toEqual(fakeAddress);
@@ -32,15 +47,13 @@ describe("connectAccount", () => {
 
 describe("setAccountListeners", () => {
 	test("should set listeners flag to true", async () => {
-		window.ethereum = {	on: () => null };
-		
 		await store.dispatch(setAccountListeners());
 		expect(store.getState().account.listenersSet).toEqual(true);
 	});
 });
 
 test("should reset state if provider disconnected", async () => {
-	window.ethereum = { request: () => fakeAccounts };
+	mockRequestAccounts.mockImplementation(() => fakeAccounts)
 
 	await store.dispatch(connectAccount());
 	expect(store.getState().account.address).toEqual(fakeAddress);

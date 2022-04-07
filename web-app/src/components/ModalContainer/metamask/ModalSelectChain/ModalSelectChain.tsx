@@ -4,7 +4,7 @@ import { getChainIdHex } from '../../../../blockchain/chains';
 import { getSupportedChains } from '../../../../env';
 
 import { store } from '../../../../state';
-import { requestChainSwitch } from '../../../../state/wallet/chain';
+import { switchChain } from '../../../../state/wallet/chain';
 
 import { ModalSelectChainProps } from './ModalSelectChain.types';
 
@@ -12,7 +12,7 @@ const supportedChains = getSupportedChains();
 const chainsArray = supportedChains.map((chainName) => {
 	return {
 		name: chainName,
-		callback: async () => await store.dispatch(requestChainSwitch(getChainIdHex(chainName))),
+		callback: async () => await store.dispatch(switchChain(getChainIdHex(chainName))),
 	}
 });
 

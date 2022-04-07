@@ -1,13 +1,27 @@
-import detectEthereumProvider from '@metamask/detect-provider';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { 
+	createAsyncThunk 
+} from '@reduxjs/toolkit';
 
-import { openModal } from '../../modal';
+import { 
+	openModal 
+} from '../../modal';
 
-import { setMetamaskAsProvider } from '../../../blockchain/web3';
-import { deleteContracts } from '../../../blockchain/contracts';
+import { 
+	setConnectCallback, 
+	setDisconnectCallback, 
+	isConnected, 
+	detectMetamaskProvider 
+} from '../../../blockchain/metamask';
+import { 
+	setMetamaskAsProvider 
+} from '../../../blockchain/web3';
+import { 
+	deleteContracts 
+} from '../../../blockchain/contracts';
 
-import { RootState } from '../..';
-import { ProviderRpcError } from '../../../types';
+import { 
+	RootState 
+} from '../..';
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;
@@ -20,21 +34,19 @@ export const connectProvider = createAsyncThunk<
   'wallet/provider/connect',
   async (_,thunkAPI) => {
 		let { dispatch } = thunkAPI;
-		const provider = await detectEthereumProvider({
-			mustBeMetaMask: true
-		});
+		const providerStatus = await detectMetamaskProvider();
 
-		let metamaskInstalled = !!provider;
-		if(!metamaskInstalled) {
+		if(!providerStatus.isInstalled) {
 			dispatch(openModal("NOT_INSTALLED")); 
 			return false;
 		}
-		let thereIsOnlyMetamask = provider === window.ethereum;
-		if(!thereIsOnlyMetamask) {
+
+		if(!providerStatus.isSoleProvider) {
 			dispatch(openModal("MULTIPLE_PROVIDERS"));
 			return false;
 		}
-		let metamaskIsConnected = window.ethereum.isConnected();
+		
+		let metamaskIsConnected = isConnected();
 		if(!metamaskIsConnected) {
 			dispatch(openModal("NOT_CONNECTED"));
 			return false;
@@ -66,11 +78,12 @@ export const setProviderListeners = createAsyncThunk<
 'wallet/provider/setListeners',
 	async (_,thunkAPI) => {
 		let { dispatch } = thunkAPI;
-		window.ethereum.on('connect', (connectInfo: { chainId: string }) => {
-			console.log(`connected to chain ${connectInfo.chainId}`)
+
+		setConnectCallback((connectInfo: { chainId: string }) => {
+			console.log(`connected to chain ${connectInfo.chainId}`);
 		});
 
-		window.ethereum.on('disconnect', (error: ProviderRpcError) => {
+		setDisconnectCallback(() => {
 			dispatch(providerDisconnected());
 		});
 	}

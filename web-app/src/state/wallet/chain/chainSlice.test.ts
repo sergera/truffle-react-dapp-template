@@ -1,14 +1,32 @@
-import { getNewStore } from '../../../test';
-import { isChainSupported, getChainName } from '../../../blockchain/chains';
+import * as metamask from '../../../blockchain/metamask'
 import * as contracts from '../../../blockchain/contracts/contracts';
+import { 
+	getNewStore 
+} from '../../../test';
+import { 
+	isChainSupported, 
+	getChainName 
+} from '../../../blockchain/chains';
 
-import { initialState } from './chainSlice';
-import { connectChain, requestChainSwitch, chainSwitched, setChainListeners } from '.';
-import { providerDisconnected } from '../provider';
+import { 
+	initialState, 
+	connectChain, 
+	switchChain, 
+	chainSwitched, 
+	setChainListeners 
+} from '.';
+import { 
+	providerDisconnected 
+} from '../provider';
 
-declare var window: any;
+jest.mock("../../../blockchain/metamask", () => ({
+	__esModule: true,
+	requestChainId: jest.fn(),
+	requestChainSwitch: jest.fn(),
+	setChainSwitchCallback: jest.fn(),
+}));
 
-let store = getNewStore();
+const mockRequestChainId = metamask.requestChainId as jest.Mock;
 
 jest.mock('../../../blockchain/chains', () => ({
 	__esModule: true,
@@ -19,13 +37,14 @@ jest.mock('../../../blockchain/chains', () => ({
 const mockIsChainSupported = isChainSupported as jest.Mock;
 const mockGetChainName = getChainName as jest.Mock;
 
+let store = getNewStore();
+
 const fakeChainIdInt = "0";
 const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
 
 afterEach(() => {
 	store = getNewStore();
-	delete window.ethereum;
 });
 
 test("should set initial state", () => {
@@ -35,7 +54,7 @@ test("should set initial state", () => {
 
 describe("connectChain", () => {
 	test("should open modal if chain is not supported", async () => {
-		window.ethereum = { request: () => fakeChainIdHex };
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => false);
 
@@ -45,7 +64,7 @@ describe("connectChain", () => {
 	});
 
 	test("should not call setContracts if chain is not supported", async () => {
-		window.ethereum = { request: () => fakeChainIdHex };
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => false);
 
@@ -58,7 +77,7 @@ describe("connectChain", () => {
 	});
 	
 	test("should set chain ok if chain is supported", async () => {
-		window.ethereum = { request: () => fakeChainIdHex	};
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -70,7 +89,7 @@ describe("connectChain", () => {
 	});
 
 	test("should call setContracts if chain is supported", async () => {
-		window.ethereum = { request: () => fakeChainIdHex	};
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -85,23 +104,20 @@ describe("connectChain", () => {
 	});
 });
 
-describe("requestChainSwitch", () => {
-	test("should request ethereum provider", async () => {
-		window.ethereum = { request: () => null	};
+describe("switchChain", () => {
+	test("should request metamask module", async () => {
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
-		const requestSpy = jest.spyOn(window.ethereum, "request");
+		const requestChainSwitchSpy = jest.spyOn(metamask, "requestChainSwitch");
 
-		await store.dispatch(requestChainSwitch(fakeChainIdHex));
-		expect(requestSpy).toBeCalledWith({
-			method: 'wallet_switchEthereumChain',
-			params: [{ chainId: fakeChainIdHex }],
-		});
+		await store.dispatch(switchChain(fakeChainIdHex));
+		expect(requestChainSwitchSpy).toBeCalledWith(fakeChainIdHex);
 	});
 });
 
 describe("chainSwitched", () => {
 	test("should call deleteContracts and set new chain info", async () => {
-		window.ethereum = { request: () => fakeChainIdHex	};
+		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -118,15 +134,13 @@ describe("chainSwitched", () => {
 
 describe("setChainListeners", () => {
 	test("should set listeners flag to true", async () => {
-		window.ethereum = {	on: () => null };
-		
 		await store.dispatch(setChainListeners());
 		expect(store.getState().chain.listenersSet).toEqual(true);
 	});
 });
 
 test("should reset state if provider disconnected", async () => {
-	window.ethereum = { request: () => fakeChainIdHex	};
+	mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 	mockIsChainSupported.mockImplementation(() => true);
 	mockGetChainName.mockImplementation(() => fakeChainName);

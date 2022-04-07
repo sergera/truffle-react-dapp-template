@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { RootState } from '../..';
+import { requestAccounts, setAccountSwitchCallback } from '../../../blockchain/metamask';
 
-// stop typescript from trying to predict injected window.ethereum methods
-declare var window: any;
+import { RootState } from '../..';
 
 export const connectAccount = createAsyncThunk<
 	string, // return type
@@ -12,7 +11,7 @@ export const connectAccount = createAsyncThunk<
 >(
   'wallet/account/connect',
   async (_,thunkAPI) => {
-		let accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+		let accounts = await requestAccounts();
 		return accounts[0];
   }
 );
@@ -25,7 +24,7 @@ export const setAccountListeners = createAsyncThunk<
 'wallet/account/setListeners',
 	async (_,thunkAPI) => {
 		let { dispatch } = thunkAPI;
-		window.ethereum.on('accountsChanged', function (accounts: string[]) {
+		setAccountSwitchCallback(() => {
 			dispatch(connectAccount());
 		});
 	}

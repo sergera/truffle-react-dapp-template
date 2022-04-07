@@ -1,25 +1,31 @@
-import detectProvider from '@metamask/detect-provider';
-
-import { getNewStore } from '../../../test';
+import * as metamask from '../../../blockchain/metamask';
 import * as contracts from '../../../blockchain/contracts/contracts';
+import { 
+	getNewStore 
+} from '../../../test';
 
-import { initialState } from './providerSlice';
-import { connectProvider, providerDisconnected, setProviderListeners } from '.';
+import { 
+	initialState, 
+	connectProvider, 
+	providerDisconnected, 
+	setProviderListeners 
+} from '.';
 
-declare var window: any;
+jest.mock("../../../blockchain/metamask", () => ({
+	__esModule: true,
+	detectMetamaskProvider: jest.fn(),
+	isConnected: jest.fn(),
+	setConnectCallback: jest.fn(),
+	setDisconnectCallback: jest.fn(),
+}));
+
+const mockDetectMetamaskProvider = metamask.detectMetamaskProvider as jest.Mock;
+const mockIsConnected = metamask.isConnected as jest.Mock;
 
 let store = getNewStore();
 
-jest.mock('@metamask/detect-provider', () => ({
-	__esModule: true,
-	default: jest.fn(),
-}));
-
-const mockDetectProvider = detectProvider as jest.Mock;
-
 afterEach(() => {
 	store = getNewStore();
-	delete window.ethereum;
 });
 
 test("should set initial state", () => {
@@ -29,9 +35,10 @@ test("should set initial state", () => {
 
 describe("connectProvider", () => {
 	test("should open modal if metamask is not installed", async () => {
-		window.ethereum = {};
-
-		mockDetectProvider.mockImplementation(() => null);
+		mockDetectMetamaskProvider.mockImplementation(() => ({
+			isInstalled: false,
+			isSoleProvider: false,
+		}));
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("NOT_INSTALLED");
@@ -39,10 +46,10 @@ describe("connectProvider", () => {
 	});
 	
 	test("should open modal if metamask is not the only provider", async () => {
-		window.ethereum = {	isConnected: () => true	};
-	
-		// provider must be !== than window.ethereum in case there are more than one installed
-		mockDetectProvider.mockImplementation(() => Object.assign({}, window.ethereum));
+		mockDetectMetamaskProvider.mockImplementation(() => ({
+			isInstalled: true,
+			isSoleProvider: false,
+		}));
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("MULTIPLE_PROVIDERS");
@@ -50,9 +57,12 @@ describe("connectProvider", () => {
 	});
 	
 	test("should open modal if metamask is not connected", async () => {
-		window.ethereum = {	isConnected: () => false	};
+		mockDetectMetamaskProvider.mockImplementation(() => ({
+			isInstalled: true,
+			isSoleProvider: true,
+		}));
 
-		mockDetectProvider.mockImplementation(() => window.ethereum);
+		mockIsConnected.mockImplementation(() => false);
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("NOT_CONNECTED");
@@ -60,9 +70,12 @@ describe("connectProvider", () => {
 	});
 	
 	test("should set statusOk if only metamask installed and is connected", async () => {
-		window.ethereum = {	isConnected: () => true };
+		mockDetectMetamaskProvider.mockImplementation(() => ({
+			isInstalled: true,
+			isSoleProvider: true,
+		}));
 
-		mockDetectProvider.mockImplementation(() => window.ethereum);
+		mockIsConnected.mockImplementation(() => true);
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("");
@@ -84,8 +97,6 @@ describe("providerDisconnected", () => {
 
 describe("setProviderListeners", () => {
 	test("should set listeners flag to true", async () => {
-		window.ethereum = {	on: () => null };
-		
 		await store.dispatch(setProviderListeners());
 		expect(store.getState().provider.listenersSet).toEqual(true);
 	});
