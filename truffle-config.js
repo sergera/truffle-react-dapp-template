@@ -18,11 +18,6 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
-
 require('dotenv').config();
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
@@ -47,32 +42,32 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
 
-	//truffle develop
-    // develop: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+		//truffle develop
+    truffle_develop: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
 
-	//ganache
-	// develop: {
-	// 	host: "127.0.0.1",     // Localhost (default: none)
-	// 	port: 7545,            // Standard Ethereum port (default: none)
-	// 	network_id: "1337",       // Any network (default: none)
-	// },
+		//ganache
+		ganache: {
+			host: "127.0.0.1",     // Localhost (default: none)
+			port: 7545,            // Standard Ethereum port (default: none)
+			network_id: "1337",       // Any network (default: none)
+		},
 
-	rinkeby: {
-		provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
-		network_id: 4,       // rinkeby's id
-		gas: 4500000,        // rinkeby has a lower block limit than mainnet
-		gasPrice: 10000000000
-	},
+		rinkeby: {
+			provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+			network_id: 4,       // rinkeby's id
+			gas: 4500000,        // rinkeby has a lower block limit than mainnet
+			gasPrice: 10000000000
+		},
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
