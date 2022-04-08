@@ -1,13 +1,4 @@
-import * as metamask from '../../../blockchain/metamask'
-import * as contracts from '../../../blockchain/contracts/contracts';
-import { 
-	getNewStore 
-} from '../../../test';
-import { 
-	isChainSupported, 
-	getChainName 
-} from '../../../blockchain/chains';
-
+import * as connectionThunks from '../../connection/thunks';
 import { 
 	initialState, 
 	connectChain, 
@@ -16,16 +7,36 @@ import {
 	setChainListeners 
 } from '.';
 import { 
-	providerDisconnected 
+	providerDisconnected,
 } from '../provider';
 
+import * as metamask from '../../../../blockchain/metamask'
+import * as contracts from '../../../../blockchain/contracts';
+import { 
+	getNewStore 
+} from '../../../../test';
+import { 
+	isChainSupported, 
+	getChainName 
+} from '../../../../blockchain/chains';
+
 /* silence logger */
-jest.mock("../../../logger", () => ({
+jest.mock("../../../../logger", () => ({
 	__esModule: true,
 	log: jest.fn(),
 }));
 
-jest.mock("../../../blockchain/metamask", () => ({
+/* mock non-redux modules that will be spied on for import consistency */
+jest.mock("../../../../blockchain/contracts", () => ({
+	__esModule: true,
+	setContracts: jest.fn(),
+	deleteContracts: jest.fn(),
+}));
+
+/* mock functions to be mocked */
+/* mock functions that use window.ethereum so that error isn't thrown on access */
+/* mock all used functions in mocked modules so that error isn't thrown on access */
+jest.mock("../../../../blockchain/metamask", () => ({
 	__esModule: true,
 	isConnected: jest.fn(),
 	requestChainId: jest.fn(),
@@ -36,7 +47,7 @@ jest.mock("../../../blockchain/metamask", () => ({
 const mockIsConnected = metamask.isConnected as jest.Mock;
 const mockRequestChainId = metamask.requestChainId as jest.Mock;
 
-jest.mock('../../../blockchain/chains', () => ({
+jest.mock("../../../../blockchain/chains", () => ({
 	__esModule: true,
 	isChainSupported: jest.fn(),
 	getChainName: jest.fn(),
@@ -45,11 +56,15 @@ jest.mock('../../../blockchain/chains', () => ({
 const mockIsChainSupported = isChainSupported as jest.Mock;
 const mockGetChainName = getChainName as jest.Mock;
 
-let store = getNewStore();
+/* declare mock return variables */
 
 const fakeChainIdInt = "0";
 const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
+
+/* test */
+
+let store = getNewStore();
 
 afterEach(() => {
 	store = getNewStore();
@@ -73,14 +88,13 @@ describe("connectChain", () => {
 		expect(store.getState().chain.isPermitted).toEqual(true);	
 	});
 
-	test("should open modal if chain is not supported", async () => {
+	test("should set isPermitted to false if chain is not supported", async () => {
 		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
 		mockIsChainSupported.mockImplementation(() => false);
 
 		await store.dispatch(connectChain());
-		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
 		expect(store.getState().chain.isConnected).toEqual(true);	
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
@@ -93,9 +107,8 @@ describe("connectChain", () => {
 
 		const setContractsSpy = jest.spyOn(contracts, "setContracts");
 
-		await store.dispatch(chainSwitched());
+		await store.dispatch(connectChain());
 		expect(setContractsSpy).not.toBeCalled();
-		expect(store.getState().modal.type).toEqual("SELECT_CHAIN");
 		expect(store.getState().chain.isConnected).toEqual(true);	
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
@@ -123,7 +136,7 @@ describe("connectChain", () => {
 
 		const setContractsSpy = jest.spyOn(contracts, "setContracts");
 
-		await store.dispatch(chainSwitched());
+		await store.dispatch(connectChain());
 		expect(setContractsSpy).toBeCalled();
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
@@ -144,7 +157,9 @@ describe("switchChain", () => {
 });
 
 describe("chainSwitched", () => {
-	test("should call deleteContracts and set new chain info", async () => {
+	test("should call deleteContracts, set new values and call checkConnection", async () => {
+		const checkConnectionSpy = jest.spyOn(connectionThunks, "checkConnection");
+
 		mockIsConnected.mockImplementation(() => true);
 		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
 
@@ -155,10 +170,13 @@ describe("chainSwitched", () => {
 
 		await store.dispatch(chainSwitched());
 		expect(deleteContractsSpy).toBeCalled();
-		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
-		expect(store.getState().chain.name).toEqual(fakeChainName);
-		expect(store.getState().chain.isConnected).toEqual(true);
-		expect(store.getState().chain.isPermitted).toEqual(true);
+		expect(checkConnectionSpy).toBeCalled();
+
+		let chain = store.getState().chain;
+		expect(chain.isConnected).toEqual(true);
+		expect(chain.isPermitted).toEqual(true);
+		expect(chain.id).toEqual(parseInt(fakeChainIdHex, 16).toString());
+		expect(chain.name).toEqual(fakeChainName);
 	});
 });
 

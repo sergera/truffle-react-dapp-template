@@ -48,10 +48,11 @@ export async function setContracts(chainId: string) {
 	try {
 		for(const name of contractNames) {
 			contracts[name] = await getContract(name, chainId);
-		}	
+		}
+		return true;
 	} catch(err) {
 		deleteContracts();
-		console.log(err);
+		return false;
 	}
 };
 

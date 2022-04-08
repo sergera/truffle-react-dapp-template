@@ -2,47 +2,100 @@ import { connect } from 'react-redux';
 
 import { Button } from '../../UI/Button';
 
-import { connectWallet } from '../../../state/wallet';
+import { connectWallet } from '../../../state/blockchain/wallet';
+import { openModal } from '../../../state/modal'
 import { minify, toCheckSum } from '../../../format/eth/address';
 
 import { RootState, Dispatch } from '../../../state';
 import { ConnectMetamaskProps } from './ConnectMetamask.types';
 
-export function ConnectMetamask({connect, providerOk, chain, account}: ConnectMetamaskProps) {
+export function ConnectMetamask({
+	connect,
+	selectChain,
+	connectionStatusOk, 
+	chainName, 
+	account,
+	/* props to check if only chain not permitted */
+	metamaskInstalled,
+	metamaskSoleProvider,
+	providerListenersSet,
+	chainConnected,
+	chainPermitted,
+	chainListenersSet,
+	accountListenersSet,
+}: ConnectMetamaskProps) {
 
 	const connectToBlockchain = () => {
 		connect();
 	}
 
-	if(providerOk && chain.isConnected && chain.isPermitted && (account !== "")) {
+	const openSelectChain = () => {
+		selectChain();
+	}
+
+	if(connectionStatusOk) {
 		// if correct chain connected and account retrieved
 		return (
 			<div className="connect-metamask connect-metamask--info">
 				<p>{minify(toCheckSum(account))}</p>
-				<p>{chain.name}</p>
+				<p>{chainName}</p>
 			</div>			
 		);
 	} else {
-		return (
-			<div className="connect-metamask">
-				<Button styleClass="btn-lg btn-foreground-outline" callback={connectToBlockchain} name={"Connect MetaMask"} />
-			</div>
+		const everythingButChainPermittedOk = (
+			metamaskInstalled && metamaskSoleProvider && providerListenersSet &&
+			chainConnected && !!chainName && chainListenersSet &&
+			!!account && accountListenersSet
 		);
+
+		if(everythingButChainPermittedOk && !chainPermitted) {
+			return (
+				<div className="connect-metamask">
+					<Button 
+						styleClass="btn-lg btn-warning-outline" 
+						callback={openSelectChain} 
+						name={"Wrong Chain"} 
+					/>
+				</div>
+			);
+		} else {
+			return (
+				<div className="connect-metamask">
+					<Button 
+						styleClass="btn-lg btn-foreground-outline" 
+						callback={connectToBlockchain} 
+						name={"Connect MetaMask"} 
+					/>
+				</div>
+			);
+		}
 	}
 };
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		providerOk: state.provider.statusOk,
-		chain: state.chain,
+		connectionStatusOk: state.connection.statusOk,
+		chainName: state.chain.name,
 		account: state.account.address,
+		/* props to check if only chain not permitted */
+		metamaskInstalled: state.provider.metamaskInstalled,
+		metamaskSoleProvider: state.provider.metamaskOnly,
+		providerListenersSet: state.provider.listenersSet,
+		chainConnected: state.chain.isConnected,
+		chainPermitted: state.chain.isPermitted,
+		chainListenersSet: state.chain.listenersSet,
+		accountListenersSet: state.account.listenersSet,
 	};
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
     connect: () => dispatch(connectWallet()),
+		selectChain: () => dispatch(openModal("SELECT_CHAIN")),
   };
 };
 
-export const ConnectedConnectMetamask = connect(mapStateToProps,mapDispatchToProps)(ConnectMetamask);
+export const ConnectedConnectMetamask = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(ConnectMetamask);

@@ -1,31 +1,40 @@
-import { 
-	getNewStore 
-} from '../../../test';
-
-import {
-	requestAccounts,
-} from '../../../blockchain/metamask'
-
+import * as connectionThunks from '../../connection/thunks';
 import { 
 	initialState,
 	connectAccount, 
+	accountSwitched,
 	setAccountListeners 
 } from '.';
 import { 
 	providerDisconnected 
 } from '../provider';
 
-jest.mock("../../../blockchain/metamask", () => ({
+import { 
+	getNewStore 
+} from '../../../../test';
+import {
+	requestAccounts,
+} from '../../../../blockchain/metamask'
+
+/* mock functions to be mocked */
+/* mock functions that use window.ethereum so that error isn't thrown on access */
+/* mock all used functions in mocked modules so that error isn't thrown on access */
+jest.mock("../../../../blockchain/metamask", () => ({
 	__esModule: true,
 	requestAccounts: jest.fn(),
 	setAccountSwitchCallback: jest.fn(),
 }));
+
 const mockRequestAccounts = requestAccounts as jest.Mock;
 
-let store = getNewStore();
+/* declare mock return variables */
 
 const fakeAddress = "fake address";
 const fakeAccounts = [fakeAddress];
+
+/* test */
+
+let store = getNewStore();
 
 afterEach(() => {
 	store = getNewStore();
@@ -44,6 +53,21 @@ describe("connectAccount", () => {
 		expect(store.getState().account.address).toEqual(fakeAddress);
 	});
 });
+
+describe("accountSwitched", () => {
+	test("should set new values and call checkConnection", async () => {
+		const checkConnectionSpy = jest.spyOn(connectionThunks, "checkConnection");
+
+		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+
+		await store.dispatch(accountSwitched());
+		expect(checkConnectionSpy).toBeCalled();
+
+		let account = store.getState().account;
+		expect(account.address).toEqual(fakeAccounts[0]);
+	});
+});
+
 
 describe("setAccountListeners", () => {
 	test("should set listeners flag to true", async () => {

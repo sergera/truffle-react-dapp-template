@@ -2,28 +2,34 @@ import {
 	createAsyncThunk 
 } from '@reduxjs/toolkit';
 
+import {
+	checkConnection
+} from '../../connection';
+import {
+	setContractAcquired
+} from '../../contract';
+import { 
+	openModal 
+} from '../../../modal';
+
 import { 
 	isConnected,
 	requestChainId, 
 	requestChainSwitch, 
 	setChainSwitchCallback 
-} from '../../../blockchain/metamask';
+} from '../../../../blockchain/metamask';
 import { 
 	isChainSupported, 
 	getChainName 
-} from '../../../blockchain/chains';
+} from '../../../../blockchain/chains';
 import { 
 	setContracts, 
 	deleteContracts 
-} from '../../../blockchain/contracts';
-
-import { 
-	openModal 
-} from '../../modal';
+} from '../../../../blockchain/contracts';
 
 import { 
 	RootState 
-} from '../..';
+} from '../../..';
 import { 
 	ConnectChainPayload 
 } from './chainSlice.types';
@@ -33,21 +39,23 @@ export const connectChain = createAsyncThunk<
 	void, // first argument type
 	{ state: RootState }
 >(
-	'wallet/chain/connect',
+	"blockchain/wallet/chain/connect",
 	async(_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
+		const { dispatch } = thunkAPI;
 
-		let chainIdHex = await requestChainId();
-		let chainIdInt = parseInt(chainIdHex, 16);
-		let chainName = getChainName(chainIdInt);
+		const chainIdHex = await requestChainId();
+		const chainIdInt = parseInt(chainIdHex, 16);
+		const chainName = getChainName(chainIdInt);
 		const chainIdString = chainIdInt.toString();
 
-		let chainConnected = isConnected();
+		const chainConnected = isConnected();
 		chainConnected ||	dispatch(openModal("NOT_CONNECTED"));
 
-		let chainSupported = isChainSupported(chainIdInt);
-		chainConnected && (chainSupported || dispatch(openModal("SELECT_CHAIN")));
-		chainSupported && setContracts(chainIdString);
+		const chainSupported = isChainSupported(chainIdInt);
+		if(chainSupported) {
+			const contractsSet = await setContracts(chainIdString);
+			await dispatch(setContractAcquired(contractsSet));
+		}
 
 		return {
 			name: chainName,
@@ -63,12 +71,12 @@ export const switchChain = createAsyncThunk<
 	string, // first argument type
 	{ state: RootState }
 >(
-'wallet/chain/requestSwitch',
+	"blockchain/wallet/chain/switch",
 	async(chainId,thunkAPI) => {
 		const { dispatch } = thunkAPI;
 		const status = await requestChainSwitch(chainId);
 		if(!status.chainInWallet) {
-			dispatch(openModal("CHAIN_NOT_ADDED"))
+			dispatch(openModal("CHAIN_NOT_ADDED"));
 		}
 	}
 );
@@ -78,11 +86,12 @@ export const chainSwitched = createAsyncThunk<
 	void, // first argument type
 { state: RootState }
 >(
-'wallet/chain/chainSwitched',
-async (_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
+	"blockchain/wallet/chain/switched",
+	async (_,thunkAPI) => {
+		const { dispatch } = thunkAPI;
 		deleteContracts();
 		await dispatch(connectChain());
+		await dispatch(checkConnection());
 	}
 );
 
@@ -91,9 +100,9 @@ export const setChainListeners = createAsyncThunk<
 	void, // first argument type
 	{ state: RootState }
 >(
-'wallet/chain/setListeners',
+	"blockchain/wallet/chain/setListeners",
 	async (_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
+		const { dispatch } = thunkAPI;
 		setChainSwitchCallback(() => {
 			dispatch(chainSwitched());
 		});

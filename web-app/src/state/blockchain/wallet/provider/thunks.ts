@@ -4,49 +4,58 @@ import {
 
 import { 
 	openModal 
-} from '../../modal';
+} from '../../../modal';
 
 import { 
 	setConnectCallback, 
 	setDisconnectCallback,
 	detectMetamaskProvider 
-} from '../../../blockchain/metamask';
+} from '../../../../blockchain/metamask';
 import { 
 	setMetamaskAsProvider 
-} from '../../../blockchain/web3';
+} from '../../../../blockchain/web3';
 import { 
 	deleteContracts 
-} from '../../../blockchain/contracts';
+} from '../../../../blockchain/contracts';
 
 import { 
 	RootState 
-} from '../..';
-
-// stop typescript from trying to predict injected window.ethereum methods
-declare var window: any;
+} from '../../..';
+import {
+	ConnectProviderPayload
+} from './providerSlice.types';
 
 export const connectProvider = createAsyncThunk<
-	boolean, // return type
+	ConnectProviderPayload, // return type
 	void, // first argument type
 	{ state: RootState }
 >(
-  'wallet/provider/connect',
+  'blockchain/wallet/provider/connect',
   async (_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
+		const { dispatch } = thunkAPI;
 		const providerStatus = await detectMetamaskProvider();
 
 		if(!providerStatus.isInstalled) {
 			dispatch(openModal("NOT_INSTALLED")); 
-			return false;
+			return {
+				metamaskInstalled: false,
+				metamaskOnly: false,
+			};
 		}
 
 		if(!providerStatus.isSoleProvider) {
 			dispatch(openModal("MULTIPLE_PROVIDERS"));
-			return false;
+			return {
+				metamaskInstalled: true,
+				metamaskOnly: false,
+			};
 		}
 		
 		setMetamaskAsProvider();
-		return true;
+		return {
+			metamaskInstalled: true,
+			metamaskOnly: true,
+		};
   }
 );
 
@@ -55,9 +64,9 @@ export const providerDisconnected = createAsyncThunk<
 	void, // first argument type
 	{ state: RootState }
 >(
-  'wallet/provider/disconnected',
+  'blockchain/wallet/provider/disconnected',
   async (_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
+		const { dispatch } = thunkAPI;
 		deleteContracts();
 		dispatch(openModal("DISCONNECTED"));
   }
@@ -68,14 +77,12 @@ export const setProviderListeners = createAsyncThunk<
 	void, // first argument type
 	{ state: RootState }
 >(
-'wallet/provider/setListeners',
+	"blockchain/wallet/provider/setListeners",
 	async (_,thunkAPI) => {
-		let { dispatch } = thunkAPI;
-
+		const { dispatch } = thunkAPI;
 		setConnectCallback((connectInfo: { chainId: string }) => {
 			console.log(`connected to chain ${connectInfo.chainId}`);
 		});
-
 		setDisconnectCallback(() => {
 			dispatch(providerDisconnected());
 		});

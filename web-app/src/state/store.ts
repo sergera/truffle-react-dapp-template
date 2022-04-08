@@ -1,13 +1,17 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import { providerReducer } from './wallet/provider';
-import { chainReducer } from './wallet/chain';
-import { accountReducer } from './wallet/account';
+import { connectionReducer } from './blockchain/connection';
+import { contractReducer } from './blockchain/contract';
+import { providerReducer } from './blockchain/wallet/provider';
+import { chainReducer } from './blockchain/wallet/chain';
+import { accountReducer } from './blockchain/wallet/account';
 import { modalReducer } from './modal';
 import { errorNotificationReducer } from './errorNotification';
 
 export const combinedReducer = combineReducers({
+	connection: connectionReducer,
+	contract: contractReducer,
 	provider: providerReducer,
 	chain: chainReducer,
 	account: accountReducer,

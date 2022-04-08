@@ -1,9 +1,3 @@
-import * as metamask from '../../../blockchain/metamask';
-import * as contracts from '../../../blockchain/contracts/contracts';
-import { 
-	getNewStore 
-} from '../../../test';
-
 import { 
 	initialState, 
 	connectProvider, 
@@ -11,7 +5,22 @@ import {
 	setProviderListeners 
 } from '.';
 
-jest.mock("../../../blockchain/metamask", () => ({
+import * as metamask from '../../../../blockchain/metamask';
+import * as contracts from '../../../../blockchain/contracts';
+import { 
+	getNewStore 
+} from '../../../../test';
+
+/* mock non-redux modules that will be spied on for import consistency */
+jest.mock("../../../../blockchain/contracts", () => ({
+	__esModule: true,
+	deleteContracts: jest.fn(),
+}));
+
+/* mock functions to be mocked */
+/* mock functions that use window.ethereum so that error isn't thrown on access */
+/* mock all used functions in mocked modules so that error isn't thrown on access */
+jest.mock("../../../../blockchain/metamask", () => ({
 	__esModule: true,
 	detectMetamaskProvider: jest.fn(),
 	setConnectCallback: jest.fn(),
@@ -19,6 +28,8 @@ jest.mock("../../../blockchain/metamask", () => ({
 }));
 
 const mockDetectMetamaskProvider = metamask.detectMetamaskProvider as jest.Mock;
+
+/* test */
 
 let store = getNewStore();
 
@@ -40,7 +51,8 @@ describe("connectProvider", () => {
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("NOT_INSTALLED");
-		expect(store.getState().provider.statusOk).toEqual(false);
+		expect(store.getState().provider.metamaskInstalled).toEqual(false);
+		expect(store.getState().provider.metamaskOnly).toEqual(false);
 	});
 	
 	test("should open modal if metamask is not the only provider", async () => {
@@ -51,7 +63,8 @@ describe("connectProvider", () => {
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("MULTIPLE_PROVIDERS");
-		expect(store.getState().provider.statusOk).toEqual(false);
+		expect(store.getState().provider.metamaskInstalled).toEqual(true);
+		expect(store.getState().provider.metamaskOnly).toEqual(false);
 	});
 
 	test("should set statusOk if only metamask installed and is sole provider", async () => {
@@ -62,7 +75,8 @@ describe("connectProvider", () => {
 	
 		await store.dispatch(connectProvider());
 		expect(store.getState().modal.type).toEqual("");
-		expect(store.getState().provider.statusOk).toEqual(true);
+		expect(store.getState().provider.metamaskInstalled).toEqual(true);
+		expect(store.getState().provider.metamaskOnly).toEqual(true);
 	});	
 });
 
@@ -73,7 +87,8 @@ describe("providerDisconnected", () => {
 		await store.dispatch(providerDisconnected());
 		expect(deleteContractsSpy).toBeCalled();
 		expect(store.getState().modal.type).toEqual("DISCONNECTED");
-		expect(store.getState().provider.statusOk).toEqual(false);
+		expect(store.getState().provider.metamaskInstalled).toEqual(false);
+		expect(store.getState().provider.metamaskOnly).toEqual(false);
 		expect(store.getState().provider.listenersSet).toEqual(false);
 	});
 });

@@ -1,9 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { 
+	createSlice, 
+	PayloadAction 
+} from '@reduxjs/toolkit';
 
-import { connectChain, setChainListeners } from '.';
-import { providerDisconnected } from '../provider';
+import { 
+	connectChain, 
+	setChainListeners 
+} from '.';
+import { 
+	providerDisconnected 
+} from '../provider';
 
-import { ChainSlice, ConnectChainPayload } from './chainSlice.types';
+import { 
+	ChainSlice, 
+	ConnectChainPayload 
+} from './chainSlice.types';
 
 export const initialState: ChainSlice = {
 	name: "",
@@ -14,7 +25,7 @@ export const initialState: ChainSlice = {
 };
 
 const chainSlice = createSlice({
-	name: "chain",
+	name: "blockchain/wallet/chain",
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {

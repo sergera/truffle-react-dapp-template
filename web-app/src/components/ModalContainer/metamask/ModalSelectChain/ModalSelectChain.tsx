@@ -4,7 +4,7 @@ import { getChainIdHex } from '../../../../blockchain/chains';
 import { getSupportedChains } from '../../../../env';
 
 import { store } from '../../../../state';
-import { switchChain } from '../../../../state/wallet/chain';
+import { switchChain } from '../../../../state/blockchain/wallet/chain';
 
 import { ModalSelectChainProps } from './ModalSelectChain.types';
 
