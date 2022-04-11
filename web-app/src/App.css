@@ -7,12 +7,15 @@
 @import './components/Nav/Nav.css';
 @import './components/Footer/Footer.css';
 @import './components/Footer/Contacts/Contacts.css';
-@import './components/UI/Button/Button.css';
-@import './components/UI/Input/Input.css';
+
 @import './components/ModalContainer/ModalContainer.css';
 @import './components/ModalContainer/generic/ModalOk/ModalOk.css';
 @import './components/ModalContainer/generic/ModalSelect/ModalSelect.css';
 @import './components/ErrorNotification/ErrorNotification.css';
+
+@import './components/UI/Button/Button.css';
+@import './components/UI/Input/Input.css';
+@import './components/UI/ValidationRules/ValidationRules.css';
 
 .app {
 	display:flex;

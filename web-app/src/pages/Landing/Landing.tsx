@@ -1,18 +1,63 @@
-import { Button } from "../../components/UI/Button";
-import { Input } from "../../components/UI/Input";
+import { 
+	useState 
+} from "react";
 
-import { store } from '../../state';
-import { openErrorNotification } from '../../state/errorNotification';
-import { openModal } from "../../state/modal";
+import { 
+	Button 
+} from '../../components/UI/Button';
+import { 
+	Input 
+} from '../../components/UI/Input';
 
-import { useState } from "react";
+import { 
+	isName, 
+	isLoginId, 
+	isEmail, 
+	inLengthRange 
+} from '../../validation/string';
+
+import { 
+	store 
+} from '../../state';
+import { 
+	openErrorNotification 
+} from '../../state/errorNotification';
+import { 
+	openModal 
+} from "../../state/modal";
 
 export function Landing() {
 
-	let [inputValue, setInputValue] = useState("");
+	let [nameInputValue, setNameInputValue] = useState("");
+	let [userNameInputValue, setUserNameInputValue] = useState("");
+	let [emailInputValue, setEmailInputValue] = useState("");
 
-	let getValue = (value: string) => {
-		setInputValue(value);
+	let [validName, setValidName] = useState(true);
+	let [validUserName, setValidUserName] = useState(true);
+	let [validEmail, setValidEmail] = useState(true);
+
+	let getNameValue = (value: string) => {
+		const lengthOk = inLengthRange(value,8,30);
+		const formatOk = isName(value);
+		const valid = lengthOk && formatOk;
+		setValidName(valid);
+		setNameInputValue(value);
+	}
+
+	let getUserNameValue = (value: string) => {
+		const lengthOk = inLengthRange(value,8,30);
+		const formatOk = isLoginId(value);
+		const valid = lengthOk && formatOk;
+		setValidUserName(valid);
+		setUserNameInputValue(value);
+	}
+
+	let getEmailValue = (value: string) => {
+		const lengthOk = inLengthRange(value,8,30);
+		const formatOk = isEmail(value);
+		const valid = lengthOk && formatOk;
+		setValidEmail(valid);
+		setEmailInputValue(value);
 	}
 
 	const errorNotification = () => {
@@ -56,12 +101,40 @@ export function Landing() {
 
 				<h1> Input </h1>
 				<Input 
-					callback={getValue}
-					value={inputValue}
-					name="input"
-					placeholder="this is an input"
+					callback={getNameValue}
+					value={nameInputValue}
+					name="name input"
+					placeholder="insert name here"
+					valid={validName}
+					rules={
+						["between 8 and 30 letters",
+						"non-consecutive spaces in between"]
+					}
 				/>
-				
+				<Input 
+					callback={getUserNameValue}
+					value={userNameInputValue}
+					name="username input"
+					placeholder="insert username here"
+					valid={validUserName}
+					rules={
+						["between 8 and 30 letters and numbers",
+						"non-consecutive dots, hifens and underscores in between"]
+					}
+				/>
+				<Input 
+					callback={getEmailValue}
+					value={emailInputValue}
+					name="email input"
+					placeholder="insert username here"
+					valid={validEmail}
+					rules={
+						["between 8 and 30 letters and numbers",
+						"non-consecutive dots, hifens and underscores in between",
+						"complete with '@' and domain"]
+					}
+				/>
+
 				<h1> Modals </h1>
 				<Button 
 					styleClass="btn-background-outline" 

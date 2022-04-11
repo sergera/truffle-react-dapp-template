@@ -1,0 +1,9 @@
+.validation-rules__list {
+	padding: 0;
+	margin: 0;
+	list-style-position: inside;
+}
+
+.validation-rules__list-item {
+	color: var(--validation-rules-text);
+}

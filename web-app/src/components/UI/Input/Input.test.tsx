@@ -13,7 +13,14 @@ test('gives value to callback', () => {
 		}
 
 		return (
-			<Input callback={testCallback} value={testText} name="test component" />
+			<Input 
+				callback={testCallback} 
+				value={testText} 
+				name="test component"
+				placeholder="test input"
+				valid={true}
+				rules={["validation rules array"]}
+			/>
 		);
 	}
 

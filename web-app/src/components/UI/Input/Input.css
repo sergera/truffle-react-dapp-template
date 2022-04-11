@@ -1,20 +1,23 @@
-.input__label {
-	display: block;
-	margin-bottom: 0.5rem;
-	color: var(--input-text);
+.input__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .input {
+	width: 100%;
 	border-radius: 6px;
 	border: 1px solid var(--input-border);
 	background-color: var(--input-background);
 	color: var(--input-text);
 }
 
-/* limit minimum size */
+.input__label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--input-text);
+}
 
-@media (max-width: 420px) {
-	.input { 
-		max-width: 80vw;
-	}
+.input--invalid {
+	border: 1px solid var(--input-invalid);
 }

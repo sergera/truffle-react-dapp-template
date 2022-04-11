@@ -48,7 +48,7 @@
 }
 
 :root {
-	/* abstract hues and values */
+	/* hues and values */
 	--black: #000000;
 	--white: #ffffff;
 	--light: #f1f1f1;
@@ -62,36 +62,46 @@
 	--light-gold: #e5ca1a;
 	--dark-gold: #5a4f09;
 
-	/* ad hoc app hues and values */
+	/* app */
 	--background: var(--black);
 	--background-text: var(--light);
 	--foreground: var(--dark);
 	--foreground-text: var(--light);
 
-	/* abstract input hues and values */
-	--input-border: var(--background-text);
-	--input-background: var(--background);
-	--input-text: var(--background-text);
-
-	/* abstract button hues and values */
+	/* button */
 	--btn--primary: var(--light-blue);
 	--btn--secondary: var(--light-green);
 	--btn--warning: var(--light-red);
 	--btn--special: var(--light-gold);
 	--btn-text: var(--background);
 
-	/* ad hoc component hues and values */
+	/* header */
 	--header: var(--foreground);
 	--header-text: var(--foreground-text);
 	--header-detail: var(--background);
+
+	/* nav */
 	--nav: var(--foreground);
 	--nav-link: var(--foreground-text);
+
+	/* footer */
 	--footer: var(--foreground);
 	--footer-text: var(--foreground-text);
+
+	/* modal */
 	--modal: var(--foreground);
 	--modal-text: var(--foreground-text);
-	--notification: var(--foreground);
-	--notification-text: var(--foreground-text);
+
+	/* input */
+	--input-border: var(--background-text);
+	--input-background: var(--background);
+	--input-text: var(--background-text);
+	--input-invalid: var(--light-red);
+
+	/* validation rules */
+	--validation-rules-text: var(--light-red);
+
+	/* error notification */
 	--error-notification: var(--light-red);
 	--error-notification-text: var(--white);
 	--error-notification-btn: var(--black);
