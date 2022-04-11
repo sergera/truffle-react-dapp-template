@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import { Button } from '../../UI/Button';
 
+import { minify, toCheckSum } from '../../../format/eth/address';
+
 import { connectWallet } from '../../../state/blockchain/wallet';
 import { openModal } from '../../../state/modal'
-import { minify, toCheckSum } from '../../../format/eth/address';
 
 import { RootState, Dispatch } from '../../../state';
 import { ConnectMetamaskProps } from './ConnectMetamask.types';
