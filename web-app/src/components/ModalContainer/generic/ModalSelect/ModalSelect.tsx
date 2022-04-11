@@ -15,8 +15,8 @@ export function ModalSelect({close, title, content, list}:ModalSelectProps) {
 
   return (
     <div className="modal modal-select" onBlur={closeModal}>
-			<p>{title}</p>
-			<p>{content}</p>
+			<h1 className="modal-select__text">{title}</h1>
+			<p className="modal-select__text">{content}</p>
 			<div className="modal-select__options">
 				{list.map((item) => {
 					return (
