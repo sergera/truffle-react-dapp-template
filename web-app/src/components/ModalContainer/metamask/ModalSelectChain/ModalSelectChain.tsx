@@ -20,7 +20,7 @@ export function ModalSelectChain({close}:ModalSelectChainProps) {
   return (
 		<ModalSelect 
 			title="Chain Not Supported"
-			content="Current connected chain is not supported, please select a supported chain below"
+			content="Current connected chain is not supported, please connect to a supported chain"
 			close={close}
 			list={chainsArray}
 		/>
