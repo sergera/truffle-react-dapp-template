@@ -76,7 +76,7 @@ const mockSetContracts = setContracts as jest.Mock;
 /* declare mock return variables */
 
 const fakeProviderDetection = {
-	isInstalled: true,
+	isEnabled: true,
 	isSoleProvider: true,
 };
 const fakeChainIdHex = "0x0";
@@ -119,7 +119,7 @@ describe("checkConnection", () => {
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
 		mockDetectProvider.mockImplementation(() => ({
-			isInstalled: false,
+			isEnabled: false,
 			isSoleProvider: true,
 		}));
 		mockIsConnected.mockImplementation(() => true);
@@ -138,7 +138,7 @@ describe("checkConnection", () => {
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
 		mockDetectProvider.mockImplementation(() => ({
-			isInstalled: true,
+			isEnabled: true,
 			isSoleProvider: false,
 		}));
 		mockIsConnected.mockImplementation(() => true);

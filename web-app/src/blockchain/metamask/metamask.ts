@@ -1,5 +1,3 @@
-import detectEthereumProvider from '@metamask/detect-provider';
-
 import { 
 	log 
 } from '../../logger';
@@ -10,6 +8,7 @@ import {
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;
+
 
 // user defined type guard
 function isProviderRpcError(object: unknown): object is ProviderRpcError {
@@ -23,17 +22,30 @@ export function isConnected() {
 
 export async function detectMetamaskProvider() {
 	let status = {
-		isInstalled: false,
+		isEnabled: false,
 		isSoleProvider: false,
 	}
 
-	const provider = await detectEthereumProvider({
-		mustBeMetaMask: true
-	});
+	const { ethereum } = window;
 
-	status.isInstalled = !!provider;
+	let provider = null;
+	
+	if(ethereum) {
+		provider = ethereum.isMetaMask ? ethereum : null;
 
-	if(status.isInstalled) {
+		const { providers } = ethereum as any;
+		if(providers) {
+			/* if there are multiple providers, window.ethereum could a mixed injected object */
+			provider = providers.find((provider: any) => provider.isMetaMask);
+		}
+	}
+
+	status.isEnabled = !!provider;
+
+	if(status.isEnabled) {
+		/* if metamask is enabled check if it is the current injected instance */
+		/* if its not enabled it could not be installed, not enabled or 
+		could have been enabled in browser but overwritten by another injected provider */
 		status.isSoleProvider = provider === window.ethereum;
 	}
 

@@ -1,5 +1,3 @@
-import detectEthereumProvider from '@metamask/detect-provider';
-
 import { 
 	isConnected,
 	detectMetamaskProvider,
@@ -21,13 +19,6 @@ declare var window: any;
 
 const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
-
-jest.mock('@metamask/detect-provider', () => ({
-	__esModule: true,
-	default: jest.fn(),
-}));
-
-const mockDetectProvider = detectEthereumProvider as jest.Mock;
 
 /* silence logger */
 jest.mock("../../logger", () => ({
@@ -56,35 +47,32 @@ describe("detectMetamaskProvider", () => {
 	});
 
 	test("should return success status if installed and equal to window.ethereum", async () => {
-		const fakeProviderObject = { fakeProvider: true };
-		mockDetectProvider.mockImplementation(() => (fakeProviderObject));
+		const fakeProviderObject = { fakeProvider: true, isMetaMask: true };
 		window.ethereum = fakeProviderObject;
 
 		const result = await detectMetamaskProvider();
 		expect(result).toEqual({
-			isInstalled: true, 
+			isEnabled: true, 
 			isSoleProvider: true
 		});
 	});
 
 	test("should return not installed if no detection", async () => {
 		window.ethereum = undefined;
-		mockDetectProvider.mockImplementation(() => null);
 
 		const result = await detectMetamaskProvider();
 		expect(result).toEqual({
-			isInstalled: false, 
+			isEnabled: false, 
 			isSoleProvider: false
 		});
 	});
 
 	test("should return not sole provider if not equal to window.ethereum", async () => {
-		mockDetectProvider.mockImplementation(() => ({ fakeProvider: true }));
-		window.ethereum = { anotherFakeProvider: true };
+		window.ethereum = { anotherFakeProvider: true, providers: [{fakeProvider: true, isMetaMask: true}] };
 
 		const result = await detectMetamaskProvider();
 		expect(result).toEqual({
-			isInstalled: true, 
+			isEnabled: true, 
 			isSoleProvider: false
 		});
 	});

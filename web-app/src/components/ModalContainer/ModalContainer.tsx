@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { ModalNotInstalled } from './metamask/ModalNotInstalled';
+import { ModalDisabled } from './metamask/ModalDisabled';
 import { ModalNotConnected } from './metamask/ModalNotConnected';
 import { ModalDisconnected } from './metamask/ModalDisconnected';
 import { ModalMultipleProviders } from './metamask/ModalMultipleProviders';
@@ -12,7 +12,7 @@ import { RootState, Dispatch } from '../../state';
 import { ModalContainerProps, ModalComponentsMap } from './ModalContainer.types';
 
 export const MODAL_COMPONENTS: ModalComponentsMap = {
-	"NOT_INSTALLED": ModalNotInstalled,
+	"DISABLED": ModalDisabled,
 	"NOT_CONNECTED": ModalNotConnected,
 	"DISCONNECTED": ModalDisconnected,
 	"MULTIPLE_PROVIDERS": ModalMultipleProviders,

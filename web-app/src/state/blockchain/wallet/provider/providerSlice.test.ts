@@ -43,21 +43,21 @@ test("should set initial state", () => {
 });
 
 describe("connectProvider", () => {
-	test("should open modal if metamask is not installed", async () => {
+	test("should open modal if metamask is not enabled", async () => {
 		mockDetectMetamaskProvider.mockImplementation(() => ({
-			isInstalled: false,
+			isEnabled: false,
 			isSoleProvider: false,
 		}));
 	
 		await store.dispatch(connectProvider());
-		expect(store.getState().modal.type).toEqual("NOT_INSTALLED");
+		expect(store.getState().modal.type).toEqual("DISABLED");
 		expect(store.getState().provider.metamaskInstalled).toEqual(false);
 		expect(store.getState().provider.metamaskOnly).toEqual(false);
 	});
 	
 	test("should open modal if metamask is not the only provider", async () => {
 		mockDetectMetamaskProvider.mockImplementation(() => ({
-			isInstalled: true,
+			isEnabled: true,
 			isSoleProvider: false,
 		}));
 	
@@ -69,7 +69,7 @@ describe("connectProvider", () => {
 
 	test("should set statusOk if only metamask installed and is sole provider", async () => {
 		mockDetectMetamaskProvider.mockImplementation(() => ({
-			isInstalled: true,
+			isEnabled: true,
 			isSoleProvider: true,
 		}));
 	

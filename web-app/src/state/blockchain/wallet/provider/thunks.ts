@@ -35,8 +35,8 @@ export const connectProvider = createAsyncThunk<
 		const { dispatch } = thunkAPI;
 		const providerStatus = await detectMetamaskProvider();
 
-		if(!providerStatus.isInstalled) {
-			dispatch(openModal("NOT_INSTALLED")); 
+		if(!providerStatus.isEnabled) {
+			dispatch(openModal("DISABLED")); 
 			return {
 				metamaskInstalled: false,
 				metamaskOnly: false,
