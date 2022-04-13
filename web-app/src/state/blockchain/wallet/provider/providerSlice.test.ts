@@ -11,6 +11,10 @@ import {
 	getNewStore 
 } from '../../../../test';
 
+import {
+	MODAL_TYPES
+} from '../../../modal';
+
 /* mock non-redux modules that will be spied on for import consistency */
 jest.mock("../../../../blockchain/contracts", () => ({
 	__esModule: true,
@@ -34,7 +38,7 @@ describe("connectProvider", () => {
 		metamask.acquireProvider = ()	=> null;
 	
 		await store.dispatch(connectProvider());
-		expect(store.getState().modal.type).toEqual("DISABLED");
+		expect(store.getState().modal.type).toEqual(MODAL_TYPES.disabled);
 		expect(store.getState().provider.isEnabled).toEqual(false);
 	});
 
@@ -53,7 +57,7 @@ describe("providerDisconnected", () => {
 
 		await store.dispatch(providerDisconnected());
 		expect(deleteContractsSpy).toBeCalled();
-		expect(store.getState().modal.type).toEqual("DISCONNECTED");
+		expect(store.getState().modal.type).toEqual(MODAL_TYPES.disconnected);
 		expect(store.getState().provider.isEnabled).toEqual(false);
 		expect(store.getState().provider.listenersSet).toEqual(false);
 	});

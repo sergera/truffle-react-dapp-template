@@ -20,6 +20,10 @@ import {
 	getChainName 
 } from '../../../../blockchain/chains';
 
+import {
+	MODAL_TYPES
+} from '../../../modal';
+
 /* silence logger */
 jest.mock("../../../../logger", () => ({
 	__esModule: true,
@@ -70,7 +74,7 @@ describe("connectChain", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 
 		await store.dispatch(connectChain());
-		expect(store.getState().modal.type).toEqual("NOT_CONNECTED");
+		expect(store.getState().modal.type).toEqual(MODAL_TYPES.notConnected);
 		expect(store.getState().chain.isConnected).toEqual(false);	
 		expect(store.getState().chain.isPermitted).toEqual(true);	
 	});
@@ -144,7 +148,7 @@ describe("switchChain", () => {
 		metamask.requestChainSwitch = async () => ({chainInWallet: false});
 
 		await store.dispatch(switchChain(fakeChainIdHex));
-		expect(store.getState().modal.type).toEqual("CHAIN_NOT_ADDED");
+		expect(store.getState().modal.type).toEqual(MODAL_TYPES.chainNotAdded);
 	});
 });
 

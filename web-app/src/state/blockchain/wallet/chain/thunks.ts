@@ -24,6 +24,10 @@ import {
 	deleteContracts 
 } from '../../../../blockchain/contracts';
 
+import {
+	MODAL_TYPES
+} from '../../../modal';
+
 import { 
 	RootState 
 } from '../../..';
@@ -46,7 +50,7 @@ export const connectChain = createAsyncThunk<
 		const chainIdString = chainIdInt.toString();
 
 		const chainConnected = metamask.isConnected();
-		chainConnected ||	dispatch(openModal("NOT_CONNECTED"));
+		chainConnected ||	dispatch(openModal(MODAL_TYPES.notConnected));
 
 		const chainSupported = isChainSupported(chainIdInt);
 		if(chainSupported) {
@@ -73,7 +77,7 @@ export const switchChain = createAsyncThunk<
 		const { dispatch } = thunkAPI;
 		const status = await metamask.requestChainSwitch(chainId);
 		if(!status.chainInWallet) {
-			dispatch(openModal("CHAIN_NOT_ADDED"));
+			dispatch(openModal(MODAL_TYPES.chainNotAdded));
 		}
 	}
 );

@@ -18,6 +18,10 @@ import {
 	openModal 
 } from '../../../state/modal'
 
+import {
+	MODAL_TYPES
+} from '../../../state/modal';
+
 import { 
 	RootState, 
 	Dispatch 
@@ -106,7 +110,7 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
     connect: () => dispatch(connectWallet()),
-		selectChain: () => dispatch(openModal("SELECT_CHAIN")),
+		selectChain: () => dispatch(openModal(MODAL_TYPES.selectChain)),
   };
 };
 

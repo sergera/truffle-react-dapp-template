@@ -16,6 +16,10 @@ import {
 	deleteContracts 
 } from '../../../../blockchain/contracts';
 
+import {
+	MODAL_TYPES
+} from '../../../modal';
+
 import { 
 	RootState 
 } from '../../..';
@@ -31,7 +35,7 @@ export const connectProvider = createAsyncThunk<
 		const provider = metamask.acquireProvider();
 
 		if(!provider) {
-			dispatch(openModal("DISABLED")); 
+			dispatch(openModal(MODAL_TYPES.disabled)); 
 			return false;
 		}
 		
@@ -49,7 +53,7 @@ export const providerDisconnected = createAsyncThunk<
   async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
 		deleteContracts();
-		dispatch(openModal("DISCONNECTED"));
+		dispatch(openModal(MODAL_TYPES.disconnected));
   }
 );
 

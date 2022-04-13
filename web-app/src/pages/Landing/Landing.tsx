@@ -26,6 +26,10 @@ import {
 	openModal 
 } from "../../state/modal";
 
+import {
+	MODAL_TYPES
+} from '../../state/modal';
+
 export function Landing() {
 
 	let [nameInputValue, setNameInputValue] = useState("");
@@ -69,23 +73,23 @@ export function Landing() {
 	};
 
 	const modalDisabled = () => {
-		store.dispatch(openModal("DISABLED"));
+		store.dispatch(openModal(MODAL_TYPES.disabled));
 	}
 
 	const modalNotConnected = () => {
-		store.dispatch(openModal("NOT_CONNECTED"));
+		store.dispatch(openModal(MODAL_TYPES.notConnected));
 	}
 
 	const modalDisconnected = () => {
-		store.dispatch(openModal("DISCONNECTED"));
+		store.dispatch(openModal(MODAL_TYPES.disconnected));
 	}
 
 	const modalSelectChain = () => {
-		store.dispatch(openModal("SELECT_CHAIN"));
+		store.dispatch(openModal(MODAL_TYPES.selectChain));
 	}
 
 	const modalChainNotAdded = () => {
-		store.dispatch(openModal("CHAIN_NOT_ADDED"));
+		store.dispatch(openModal(MODAL_TYPES.chainNotAdded));
 	}
 
 	const nothing = () => {};
