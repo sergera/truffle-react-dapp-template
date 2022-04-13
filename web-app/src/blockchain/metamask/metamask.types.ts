@@ -11,8 +11,8 @@ export interface IInjectedProviderApi {
 	isConnected(): boolean;
 	requestChainId(): Promise<string>;
 	requestAccounts(): Promise<string[]>;
-	requestChainSwitch(chainIdHex: string): Promise<{chainInWallet: boolean, successful: boolean}>;
-	requestChainAdd(chainIdHex: string, chainName: string, rpcUrls: string[]): Promise<{successful: boolean}>;
+	requestChainSwitch(chainIdHex: string): Promise<{chainInWallet: boolean}>;
+	requestChainAdd(chainIdHex: string, chainName: string, rpcUrls: string[]): void;
 	setConnectCallback(callback: Function): void;
 	setDisconnectCallback(callback: Function): void;
 	setAccountSwitchCallback(callback: Function): void;

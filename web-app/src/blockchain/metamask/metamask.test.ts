@@ -116,27 +116,25 @@ describe("requestChainSwitch", () => {
 		});
 	});
 
-	test("should return success status in case successful", async () => {
+	test("should return chainInWallet true in case successful", async () => {
 		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
-			successful: true,
 			chainInWallet: true,
 		})
 	});
 
-	test("should return failure status in case failure", async () => {
+	test("should return chainInWallet false in case failure", async () => {
 		window.ethereum = { ...fakeProvider, request: () => { throw new Error("") } };
 
 		metamask.acquireProvider();
 
 		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
-			successful: false,
 			chainInWallet: false,
 		})
 	});
 
-	test("should return failure status in case chain not added", async () => {
+	test("should return chainInWallet false in case chain not added", async () => {
 		class ChainNotAddedTestError implements ProviderRpcError {
 			public name: string;
 			public message: string;
@@ -154,7 +152,6 @@ describe("requestChainSwitch", () => {
 
 		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
-			successful: false,
 			chainInWallet: false,
 		})
 	});
@@ -179,24 +176,6 @@ describe("requestChainAdd", () => {
 				chainName: fakeChainName,
 				rpcUrls: fakeRpcUrls,
 			}],
-		});
-	});
-
-	test("should return success status in case successful", async () => {
-		const status = await metamask.requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
-		expect(status).toEqual({
-			successful: true,
-		});
-	});
-
-	test("should return failure status in case failure", async () => {
-		window.ethereum = { ...fakeProvider, request: () => { throw new Error("") } };
-
-		metamask.acquireProvider();
-
-		const status = await metamask.requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
-		expect(status).toEqual({
-			successful: false,
 		});
 	});
 });

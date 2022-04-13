@@ -60,7 +60,6 @@ class Metamask implements IInjectedProviderApi {
 	async requestChainSwitch(chainIdHex: string) {
 		let status = {
 			chainInWallet: false,
-			successful: false,
 		};
 
 		try {
@@ -68,7 +67,6 @@ class Metamask implements IInjectedProviderApi {
 				method: 'wallet_switchEthereumChain',
 				params: [{ chainId: chainIdHex }],
 			});
-			status.successful = true;
 			status.chainInWallet = true;
 		} catch (switchError) {
 			if(isProviderRpcError(switchError)) {
@@ -95,10 +93,6 @@ class Metamask implements IInjectedProviderApi {
 	};
 
 	async requestChainAdd(chainIdHex: string, chainName: string, rpcUrls: string[]) {
-		let chainAddRequestStatus = {
-			successful: true,
-		}
-
 		try {
 			await this.provider.request({
 				method: 'wallet_addEthereumChain',
@@ -111,7 +105,6 @@ class Metamask implements IInjectedProviderApi {
 				],
 			});
 		} catch (addError) {
-			chainAddRequestStatus.successful = false;
 			if(isProviderRpcError(addError)) {
 				log({
 					sev: 3,
@@ -119,8 +112,6 @@ class Metamask implements IInjectedProviderApi {
 					name: "Could not request chain add"
 				});
 			}
-		} finally {
-			return chainAddRequestStatus;
 		}
 	};
 
