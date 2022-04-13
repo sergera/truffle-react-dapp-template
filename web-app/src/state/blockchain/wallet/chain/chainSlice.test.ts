@@ -134,12 +134,17 @@ describe("connectChain", () => {
 
 describe("switchChain", () => {
 	test("should request metamask module", async () => {
-		metamask.requestChainId = async () => fakeChainIdHex;
-
 		const requestChainSwitchSpy = jest.spyOn(metamask, "requestChainSwitch");
 
 		await store.dispatch(switchChain(fakeChainIdHex));
 		expect(requestChainSwitchSpy).toBeCalledWith(fakeChainIdHex);
+	});
+
+	test("should open modal if chain not added to wallet", async () => {
+		metamask.requestChainSwitch = async () => ({chainInWallet: false});
+
+		await store.dispatch(switchChain(fakeChainIdHex));
+		expect(store.getState().modal.type).toEqual("CHAIN_NOT_ADDED");
 	});
 });
 
