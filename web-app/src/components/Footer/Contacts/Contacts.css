@@ -32,8 +32,10 @@
 	transition-duration: 0.2s;
 }
 
-.contacts__icon:hover {
-	filter: invert(30%);
+@media (hover: hover) {
+	.contacts__icon:hover {
+		filter: invert(30%);
+	}
 }
 
 /* limit minimum size */
