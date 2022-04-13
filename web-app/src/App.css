@@ -9,8 +9,12 @@
 @import './components/Footer/Contacts/Contacts.css';
 
 @import './components/ModalContainer/ModalContainer.css';
-@import './components/ModalContainer/generic/ModalOk/ModalOk.css';
-@import './components/ModalContainer/generic/ModalSelect/ModalSelect.css';
+@import './components/ModalContainer/provider/ModalChainNotAdded/ModalChainNotAdded.css';
+@import './components/ModalContainer/provider/ModalDisabled/ModalDisabled.css';
+@import './components/ModalContainer/provider/ModalDisconnected/ModalDisconnected.css';
+@import './components/ModalContainer/provider/ModalMultipleProviders/ModalMultipleProviders.css';
+@import './components/ModalContainer/provider/ModalNotConnected/ModalNotConnected.css';
+@import './components/ModalContainer/provider/ModalSelectChain/ModalSelectChain.css';
 @import './components/ErrorNotification/ErrorNotification.css';
 
 @import './components/UI/Button/Button.css';

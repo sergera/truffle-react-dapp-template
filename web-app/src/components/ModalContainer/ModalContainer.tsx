@@ -1,23 +1,22 @@
-import { connect } from 'react-redux';
+import { 
+	connect 
+} from 'react-redux';
 
-import { ModalDisabled } from './metamask/ModalDisabled';
-import { ModalNotConnected } from './metamask/ModalNotConnected';
-import { ModalDisconnected } from './metamask/ModalDisconnected';
-import { ModalMultipleProviders } from './metamask/ModalMultipleProviders';
-import { ModalSelectChain } from './metamask/ModalSelectChain';
+import { 
+	closeModal 
+} from '../../state/modal';
 
-import { closeModal } from '../../state/modal';
+import {
+	MODAL_COMPONENTS
+} from './ModalContainer.constants';
 
-import { RootState, Dispatch } from '../../state';
-import { ModalContainerProps, ModalComponentsMap } from './ModalContainer.types';
-
-export const MODAL_COMPONENTS: ModalComponentsMap = {
-	"DISABLED": ModalDisabled,
-	"NOT_CONNECTED": ModalNotConnected,
-	"DISCONNECTED": ModalDisconnected,
-	"MULTIPLE_PROVIDERS": ModalMultipleProviders,
-	"SELECT_CHAIN": ModalSelectChain
-};
+import { 
+	RootState, 
+	Dispatch 
+} from '../../state';
+import { 
+	ModalContainerProps
+} from './ModalContainer.types';
 
 export function ModalContainer({
 	type, 
@@ -51,4 +50,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export const ConnectedModalContainer = connect(mapStateToProps,mapDispatchToProps)(ModalContainer);
+export const ConnectedModalContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(ModalContainer);
