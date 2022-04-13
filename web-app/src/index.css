@@ -1,18 +1,18 @@
 /* modulate root font size to use rem in layout */
 @media (max-width: 30720px) { /*32k*/
-	:root { font-size: 56px; }
+	:root { font-size: 384px; }
 }
 @media (max-width: 15360px) { /*16k*/
-	:root { font-size: 48px; }
+	:root { font-size: 192px; }
 }
 @media (max-width: 7680px) { /*8k*/
-	:root { font-size: 40px; }
+	:root { font-size: 96px; }
 }
 @media (max-width: 3840px) { /*4K UHD*/
-  :root { font-size: 32px; }
+  :root { font-size: 48px; }
 }
 @media (max-width: 2560px) { /*QHD*/
-  :root { font-size: 28px; }
+  :root { font-size: 30px; }
 }
 @media (max-width: 1920px) { /*FHD*/
   :root { font-size: 24px; }

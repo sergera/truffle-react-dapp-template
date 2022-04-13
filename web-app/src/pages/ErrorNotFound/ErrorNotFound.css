@@ -4,6 +4,9 @@
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
+  /* make page fill entire screen */
+	/* will break if content overflows viewport height */
+	height: 100%;
 }
 
 .error-page-404__text {

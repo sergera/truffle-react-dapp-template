@@ -2,8 +2,8 @@
 	cursor: pointer;
 	border: none;
 	outline: none;
-	border-radius: 8px;
-	padding: 8px;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
 	min-width: 60px;
 	transition-property: background-color, border, color;
 	transition-duration: 0.2s;
@@ -52,7 +52,7 @@
 		transform: scale(1.0);
 	}
 	50%  {
-			transform: scale(0.9);
+			transform: scale(0.8);
 	}
 	100%{
 			transform: scale(1.0);
