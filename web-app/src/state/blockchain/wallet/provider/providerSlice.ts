@@ -11,12 +11,10 @@ import {
 
 import { 
 	ProviderSlice,
-	ConnectProviderPayload,
 } from './providerSlice.types';
 
 export const initialState: ProviderSlice = {
-	metamaskInstalled: false,
-	metamaskOnly: false,
+	isEnabled: false,
 	listenersSet: false,
 };
 
@@ -26,21 +24,18 @@ const providerSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(connectProvider.fulfilled, (state, action:PayloadAction<ConnectProviderPayload>) => {
-			const { metamaskInstalled, metamaskOnly } = action.payload;
-			state.metamaskInstalled = metamaskInstalled;
-			state.metamaskOnly = metamaskOnly;
+    builder.addCase(connectProvider.fulfilled, (state, action:PayloadAction<boolean>) => {
+			const isEnabled = action.payload;
+			state.isEnabled = isEnabled;
     });
 		builder.addCase(connectProvider.rejected, (state) => {
-			state.metamaskInstalled = false;
-			state.metamaskOnly = false;
+			state.isEnabled = false;
     });
 		builder.addCase(setProviderListeners.fulfilled, (state) => {
 			state.listenersSet = true;
     });
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
-			state.metamaskInstalled = false;
-			state.metamaskOnly = false;
+			state.isEnabled = false;
 			state.listenersSet = false;
     });
   }

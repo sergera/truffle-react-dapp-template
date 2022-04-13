@@ -32,10 +32,7 @@ export const connectWallet = createAsyncThunk<
 		let { getState, dispatch } = thunkAPI;
 
 		await dispatch(connectProvider());
-		const providerOk = ( 
-			getState().provider.metamaskInstalled && 
-			getState().provider.metamaskOnly
-		);
+		const providerOk = getState().provider.isEnabled;
 
 		providerOk && await dispatch(connectChain());
 		providerOk && await dispatch(connectAccount());

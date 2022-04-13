@@ -13,14 +13,7 @@ import {
 	getNewStore 
 } from '../../../test';
 import {
-	detectMetamaskProvider,
-	setConnectCallback,
-	setDisconnectCallback,
-	isConnected,
-	requestChainId,
-	setChainSwitchCallback,
-	requestAccounts,
-	setAccountSwitchCallback,
+	metamask
 } from '../../../blockchain/metamask';
 import { 
 	isChainSupported, 
@@ -33,29 +26,6 @@ import {
 /* mock functions to be mocked */
 /* mock functions that use window.ethereum so that error isn't thrown on access */
 /* mock all used functions in mocked modules so that error isn't thrown on access */
-jest.mock("../../../blockchain/metamask", () => ({
-	__esModule: true,
-	detectMetamaskProvider: jest.fn(),
-	setConnectCallback: jest.fn(),
-	setDisconnectCallback: jest.fn(),
-	isConnected: jest.fn(),
-	requestChainId: jest.fn(),
-	requestChainSwitch: jest.fn(),
-	setChainSwitchCallback: jest.fn(),
-	requestAccounts: jest.fn(),
-	setAccountSwitchCallback: jest.fn(),
-}));
-
-const mockDetectProvider = detectMetamaskProvider as jest.Mock;
-const mockIsConnected = isConnected as jest.Mock;
-const mockRequestChainId = requestChainId as jest.Mock;
-const mockRequestAccounts = requestAccounts as jest.Mock;
-
-const mockSetConnectCallback = setConnectCallback as jest.Mock;
-const mockSetDisconnectCallback = setDisconnectCallback as jest.Mock;
-const mockSetChainSwitchCallback = setChainSwitchCallback as jest.Mock;
-const mockSetAccountSwitchCallback = setAccountSwitchCallback as jest.Mock;
-
 jest.mock("../../../blockchain/chains", () => ({
 	__esModule: true,
 	isChainSupported: jest.fn(),
@@ -74,10 +44,8 @@ jest.mock("../../../blockchain/contracts", () => ({
 const mockSetContracts = setContracts as jest.Mock;
 
 /* declare mock return variables */
-
 const fakeProviderDetection = {
-	isEnabled: true,
-	isSoleProvider: true,
+	fakeProvider: true
 };
 const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
@@ -85,7 +53,6 @@ const fakeAddress = "fake address";
 const fakeAccounts = [fakeAddress];
 
 /* test */
-
 let store = getNewStore();
 
 afterEach(() => {
@@ -102,10 +69,14 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
 	
@@ -114,36 +85,18 @@ describe("checkConnection", () => {
 		expect(store.getState().connection.statusOk).toEqual(true);
 	});
 
-	test("should set statusOk false if metamask not installed", async () => {
+	test("should set statusOk false if metamask not enabled", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => ({
-			isEnabled: false,
-			isSoleProvider: true,
-		}));
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
-	
-		mockSetContracts.mockImplementation(() => true);
-	
-		await store.dispatch(connectWallet());
-		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
-	});
-
-	test("should set statusOk false if metamask not sole provider", async () => {
-		mockIsChainSupported.mockImplementation(() => true);
-		mockGetChainName.mockImplementation(() => fakeChainName);
-	
-		mockDetectProvider.mockImplementation(() => ({
-			isEnabled: true,
-			isSoleProvider: false,
-		}));
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => null;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
 	
@@ -156,15 +109,17 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
 	
-		mockSetConnectCallback.mockImplementation(() => {throw new Error("")});
-		mockSetDisconnectCallback.mockImplementation(() => {throw new Error("")});
+		metamask.setConnectCallback = () => {throw new Error("")};
+		metamask.setDisconnectCallback = () => () => {throw new Error("")};
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -175,10 +130,15 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => false);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => false;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
+	
 	
 		mockSetContracts.mockImplementation(() => true);
 	
@@ -191,10 +151,14 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => false);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};	
 	
 		mockSetContracts.mockImplementation(() => true);
 	
@@ -207,14 +171,17 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
 	
-		mockSetChainSwitchCallback.mockImplementation(() => {throw new Error("")});
+		metamask.setChainSwitchCallback = () => {throw new Error("")};
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -225,10 +192,14 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => [""]);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => [""];
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
 
@@ -241,14 +212,17 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => true);
-	
-		mockSetAccountSwitchCallback.mockImplementation(() => {throw new Error("")});
+
+		metamask.setAccountSwitchCallback = () => {throw new Error("")};
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -259,10 +233,14 @@ describe("checkConnection", () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
-		mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-		mockRequestAccounts.mockImplementation(() => fakeAccounts);
+		metamask.acquireProvider = () => fakeProviderDetection;
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		metamask.requestAccounts = async () => fakeAccounts;
+		metamask.setConnectCallback = () => {return null};
+		metamask.setDisconnectCallback = () => {return null};
+		metamask.setChainSwitchCallback = () => {return null};
+		metamask.setAccountSwitchCallback = () => {return null};
 	
 		mockSetContracts.mockImplementation(() => false);
 	
@@ -276,15 +254,20 @@ test("should reset state if provider disconnected", async () => {
 	mockIsChainSupported.mockImplementation(() => true);
 	mockGetChainName.mockImplementation(() => fakeChainName);
 
-	mockDetectProvider.mockImplementation(() => fakeProviderDetection);
-	mockIsConnected.mockImplementation(() => true);
-	mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-	mockRequestAccounts.mockImplementation(() => fakeAccounts);
+	metamask.acquireProvider = () => fakeProviderDetection;
+	metamask.isConnected = () => true;
+	metamask.requestChainId = async () => fakeChainIdHex;
+	metamask.requestAccounts = async () => fakeAccounts;
+	metamask.setConnectCallback = () => {return null};
+	metamask.setDisconnectCallback = () => {return null};
+	metamask.setChainSwitchCallback = () => {return null};
+	metamask.setAccountSwitchCallback = () => {return null};
 
 	mockSetContracts.mockImplementation(() => true);
 
 	await store.dispatch(connectWallet());
-	await store.dispatch(checkConnection);
+	await store.dispatch(checkConnection());
+
 	expect(store.getState().connection.statusOk).toEqual(true);
 
 	await store.dispatch(providerDisconnected());

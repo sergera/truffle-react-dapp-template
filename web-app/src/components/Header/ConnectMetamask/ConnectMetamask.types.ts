@@ -4,8 +4,7 @@ export interface ConnectMetamaskProps {
 	connectionStatusOk: boolean;
 	chainName: string;
 	account: string;
-	metamaskInstalled: boolean;
-	metamaskSoleProvider: boolean;
+	providerEnabled: boolean;
 	providerListenersSet: boolean;
 	chainConnected: boolean;
 	chainPermitted: boolean;

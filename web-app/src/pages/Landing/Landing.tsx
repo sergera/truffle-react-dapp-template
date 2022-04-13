@@ -68,12 +68,8 @@ export function Landing() {
 		));
 	};
 
-	const modalSelectChain = () => {
-		store.dispatch(openModal("SELECT_CHAIN"));
-	}
-
-	const modalNotInstalled = () => {
-		store.dispatch(openModal("NOT_INSTALLED"));
+	const modalDisabled = () => {
+		store.dispatch(openModal("DISABLED"));
 	}
 
 	const modalNotConnected = () => {
@@ -84,8 +80,12 @@ export function Landing() {
 		store.dispatch(openModal("DISCONNECTED"));
 	}
 
-	const modalMultipleProviders = () => {
-		store.dispatch(openModal("MULTIPLE_PROVIDERS"));
+	const modalSelectChain = () => {
+		store.dispatch(openModal("SELECT_CHAIN"));
+	}
+
+	const modalChainNotAdded = () => {
+		store.dispatch(openModal("CHAIN_NOT_ADDED"));
 	}
 
 	const nothing = () => {};
@@ -138,13 +138,8 @@ export function Landing() {
 				<h1> Modals </h1>
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalSelectChain} 
-					name={"Modal Select Chain"} 
-				/>			
-				<Button 
-					styleClass="btn-background-outline" 
-					callback={modalNotInstalled} 
-					name={"Modal Not Installed"} 
+					callback={modalDisabled} 
+					name={"Modal Disabled"} 
 				/>	
 				<Button 
 					styleClass="btn-background-outline" 
@@ -158,8 +153,13 @@ export function Landing() {
 				/>					
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalMultipleProviders} 
-					name={"Modal Multiple Providers"} 
+					callback={modalSelectChain} 
+					name={"Modal Select Chain"} 
+				/>			
+				<Button 
+					styleClass="btn-background-outline" 
+					callback={modalChainNotAdded} 
+					name={"Modal Chain Not Added"} 
 				/>	
 				
 				

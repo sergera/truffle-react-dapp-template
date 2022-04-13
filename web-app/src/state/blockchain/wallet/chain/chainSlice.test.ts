@@ -10,7 +10,7 @@ import {
 	providerDisconnected,
 } from '../provider';
 
-import * as metamask from '../../../../blockchain/metamask'
+import { metamask }from '../../../../blockchain/metamask'
 import * as contracts from '../../../../blockchain/contracts';
 import { 
 	getNewStore 
@@ -36,17 +36,6 @@ jest.mock("../../../../blockchain/contracts", () => ({
 /* mock functions to be mocked */
 /* mock functions that use window.ethereum so that error isn't thrown on access */
 /* mock all used functions in mocked modules so that error isn't thrown on access */
-jest.mock("../../../../blockchain/metamask", () => ({
-	__esModule: true,
-	isConnected: jest.fn(),
-	requestChainId: jest.fn(),
-	requestChainSwitch: jest.fn(),
-	setChainSwitchCallback: jest.fn(),
-}));
-
-const mockIsConnected = metamask.isConnected as jest.Mock;
-const mockRequestChainId = metamask.requestChainId as jest.Mock;
-
 jest.mock("../../../../blockchain/chains", () => ({
 	__esModule: true,
 	isChainSupported: jest.fn(),
@@ -57,13 +46,11 @@ const mockIsChainSupported = isChainSupported as jest.Mock;
 const mockGetChainName = getChainName as jest.Mock;
 
 /* declare mock return variables */
-
 const fakeChainIdInt = "0";
 const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
 
 /* test */
-
 let store = getNewStore();
 
 afterEach(() => {
@@ -77,9 +64,9 @@ test("should set initial state", () => {
 
 describe("connectChain", () => {
 	test("should open modal if chain is not connected", async () => {
-		mockIsConnected.mockImplementation(() => false);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
-
+		metamask.isConnected = () => false;
+		metamask.requestChainId = async () => fakeChainIdHex;
+		
 		mockIsChainSupported.mockImplementation(() => true);
 
 		await store.dispatch(connectChain());
@@ -89,8 +76,8 @@ describe("connectChain", () => {
 	});
 
 	test("should set isPermitted to false if chain is not supported", async () => {
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		mockIsChainSupported.mockImplementation(() => false);
 
@@ -100,8 +87,8 @@ describe("connectChain", () => {
 	});
 
 	test("should not call setContracts if chain is not supported", async () => {
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		mockIsChainSupported.mockImplementation(() => false);
 
@@ -114,8 +101,8 @@ describe("connectChain", () => {
 	});
 	
 	test("should set chain ok if chain is supported and connected", async () => {
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -128,8 +115,8 @@ describe("connectChain", () => {
 	});
 
 	test("should call setContracts if chain is supported", async () => {
-		mockIsConnected.mockImplementation(() => false);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.isConnected = () => false;
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -147,7 +134,7 @@ describe("connectChain", () => {
 
 describe("switchChain", () => {
 	test("should request metamask module", async () => {
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		const requestChainSwitchSpy = jest.spyOn(metamask, "requestChainSwitch");
 
@@ -160,8 +147,8 @@ describe("chainSwitched", () => {
 	test("should call deleteContracts, set new values and call checkConnection", async () => {
 		const checkConnectionSpy = jest.spyOn(connectionThunks, "checkConnection");
 
-		mockIsConnected.mockImplementation(() => true);
-		mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+		metamask.isConnected = () => true;
+		metamask.requestChainId = async () => fakeChainIdHex;
 
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
@@ -182,14 +169,16 @@ describe("chainSwitched", () => {
 
 describe("setChainListeners", () => {
 	test("should set listeners flag to true", async () => {
+		metamask.setChainSwitchCallback = () => null;
+
 		await store.dispatch(setChainListeners());
 		expect(store.getState().chain.listenersSet).toEqual(true);
 	});
 });
 
 test("should reset state if provider disconnected", async () => {
-	mockIsConnected.mockImplementation(() => true);
-	mockRequestChainId.mockImplementation(() => fakeChainIdHex);
+	metamask.isConnected = () => true;
+	metamask.requestChainId = async () => fakeChainIdHex;
 
 	mockIsChainSupported.mockImplementation(() => true);
 	mockGetChainName.mockImplementation(() => fakeChainName);

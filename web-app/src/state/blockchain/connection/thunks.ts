@@ -14,8 +14,7 @@ export const checkConnection = createAsyncThunk<
 		const state = getState();
 
 		const providerOk = ( 
-			state.provider.metamaskInstalled && 
-			state.provider.metamaskOnly && 
+			state.provider.isEnabled &&
 			state.provider.listenersSet
 		);
 

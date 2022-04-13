@@ -7,12 +7,10 @@ import {
 } from '../../../modal';
 
 import { 
-	setConnectCallback, 
-	setDisconnectCallback,
-	detectMetamaskProvider 
+	metamask
 } from '../../../../blockchain/metamask';
 import { 
-	setMetamaskAsProvider 
+	setWeb3Provider 
 } from '../../../../blockchain/web3';
 import { 
 	deleteContracts 
@@ -21,41 +19,24 @@ import {
 import { 
 	RootState 
 } from '../../..';
-import {
-	ConnectProviderPayload
-} from './providerSlice.types';
 
 export const connectProvider = createAsyncThunk<
-	ConnectProviderPayload, // return type
+	boolean, // return type
 	void, // first argument type
 	{ state: RootState }
 >(
   'blockchain/wallet/provider/connect',
   async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
-		const providerStatus = await detectMetamaskProvider();
+		const provider = metamask.acquireProvider();
 
-		if(!providerStatus.isEnabled) {
+		if(!provider) {
 			dispatch(openModal("DISABLED")); 
-			return {
-				metamaskInstalled: false,
-				metamaskOnly: false,
-			};
-		}
-
-		if(!providerStatus.isSoleProvider) {
-			dispatch(openModal("MULTIPLE_PROVIDERS"));
-			return {
-				metamaskInstalled: true,
-				metamaskOnly: false,
-			};
+			return false;
 		}
 		
-		setMetamaskAsProvider();
-		return {
-			metamaskInstalled: true,
-			metamaskOnly: true,
-		};
+		setWeb3Provider(provider);
+		return true;
   }
 );
 
@@ -80,10 +61,10 @@ export const setProviderListeners = createAsyncThunk<
 	"blockchain/wallet/provider/setListeners",
 	async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
-		setConnectCallback((connectInfo: { chainId: string }) => {
+		metamask.setConnectCallback((connectInfo: { chainId: string }) => {
 			console.log(`connected to chain ${connectInfo.chainId}`);
 		});
-		setDisconnectCallback(() => {
+		metamask.setDisconnectCallback(() => {
 			dispatch(providerDisconnected());
 		});
 	}

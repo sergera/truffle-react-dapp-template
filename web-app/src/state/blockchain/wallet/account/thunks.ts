@@ -7,8 +7,7 @@ import {
 } from '../../connection';
 
 import { 
-	requestAccounts, 
-	setAccountSwitchCallback 
+	metamask
 } from '../../../../blockchain/metamask';
 
 import { 
@@ -22,7 +21,7 @@ export const connectAccount = createAsyncThunk<
 >(
   "blockchain/wallet/account/connect",
   async (_,thunkAPI) => {
-		const accounts = await requestAccounts();
+		const accounts = await metamask.requestAccounts();
 		return accounts[0];
   }
 );
@@ -48,7 +47,7 @@ export const setAccountListeners = createAsyncThunk<
 	"blockchain/wallet/account/setListeners",
 	async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
-		setAccountSwitchCallback(() => {
+		metamask.setAccountSwitchCallback(() => {
 			dispatch(accountSwitched());
 		});
 	}

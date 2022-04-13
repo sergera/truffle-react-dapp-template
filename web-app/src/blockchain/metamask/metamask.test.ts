@@ -1,14 +1,5 @@
 import { 
-	isConnected,
-	detectMetamaskProvider,
-	requestAccounts,
-	requestChainId,
-	requestChainSwitch, 
-	requestChainAdd,
-	setConnectCallback,
-	setDisconnectCallback,
-	setChainSwitchCallback,
-	setAccountSwitchCallback,
+	metamask
 } from '.';
 
 import {
@@ -26,69 +17,67 @@ jest.mock("../../logger", () => ({
 	log: jest.fn(),
 }));
 
+/* mock metamask injected provider */
+const fakeProvider = {
+	on: () => null,
+	request: async () => null,
+	isConnected: () => null,
+	isMetaMask: true,
+}
+
 describe("isConnected", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
 
 	test("should call ethereum provider", () => {
-		window.ethereum = { isConnected: () => null	};
-
 		const isConnectedSpy = jest.spyOn(window.ethereum, "isConnected");
 
-		isConnected();
+		metamask.isConnected();
 		expect(isConnectedSpy).toBeCalled();
 	});
 });
 
-describe("detectMetamaskProvider", () => {
-	afterEach(() => {
+describe("acquireProvider", () => {
+	beforeEach(() => {
 		delete window.ethereum;
 	});
 
-	test("should return success status if installed and equal to window.ethereum", async () => {
-		const fakeProviderObject = { fakeProvider: true, isMetaMask: true };
-		window.ethereum = fakeProviderObject;
+	test("should return success status if enabled", () => {
+		window.ethereum = fakeProvider;
 
-		const result = await detectMetamaskProvider();
-		expect(result).toEqual({
-			isEnabled: true, 
-			isSoleProvider: true
-		});
+		const result = metamask.acquireProvider();
+		expect(result).toEqual(fakeProvider);
 	});
 
-	test("should return not installed if no detection", async () => {
+	test("should return not installed if no detection", () => {
 		window.ethereum = undefined;
 
-		const result = await detectMetamaskProvider();
-		expect(result).toEqual({
-			isEnabled: false, 
-			isSoleProvider: false
-		});
+		const result = metamask.acquireProvider();
+		expect(result).toEqual(null);
 	});
 
-	test("should return not sole provider if not equal to window.ethereum", async () => {
-		window.ethereum = { anotherFakeProvider: true, providers: [{fakeProvider: true, isMetaMask: true}] };
+	test("should return specific provider if multiple providers", () => {
+		const fakeMetamaskInProvidersArray = {isMetaMask: true, fakeProviderId: "thisismetamask"};
 
-		const result = await detectMetamaskProvider();
-		expect(result).toEqual({
-			isEnabled: true, 
-			isSoleProvider: false
-		});
+		window.ethereum = { ...fakeProvider, providers: [fakeMetamaskInProvidersArray, fakeProvider]};
+
+		const result = metamask.acquireProvider();
+		expect(result).toEqual(fakeMetamaskInProvidersArray);
 	});
 });
 
 describe("requestChainId", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
 
 	test("should request ethereum provider", async () => {
-		window.ethereum = { request: () => null	};
-
 		const requestSpy = jest.spyOn(window.ethereum, "request");
 
-		await requestChainId();
+		await metamask.requestChainId();
 		expect(requestSpy).toBeCalledWith({
 			method: 'eth_chainId',
 		});
@@ -96,16 +85,15 @@ describe("requestChainId", () => {
 });
 
 describe("requestAccounts", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
 
 	test("should request ethereum provider", async () => {
-		window.ethereum = { request: () => null	};
-
 		const requestSpy = jest.spyOn(window.ethereum, "request");
 
-		await requestAccounts();
+		await metamask.requestAccounts();
 		expect(requestSpy).toBeCalledWith({
 			method: 'eth_requestAccounts',
 		});
@@ -113,16 +101,15 @@ describe("requestAccounts", () => {
 });
 
 describe("requestChainSwitch", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
 
 	test("should request ethereum provider", async () => {
-		window.ethereum = { request: () => null	};
-
 		const requestSpy = jest.spyOn(window.ethereum, "request");
 
-		await requestChainSwitch(fakeChainIdHex);
+		await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(requestSpy).toBeCalledWith({
 			method: 'wallet_switchEthereumChain',
 			params: [{ chainId: fakeChainIdHex }],
@@ -130,9 +117,7 @@ describe("requestChainSwitch", () => {
 	});
 
 	test("should return success status in case successful", async () => {
-		window.ethereum = { request: () => null	};
-
-		const status = await requestChainSwitch(fakeChainIdHex);
+		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
 			successful: true,
 			chainInWallet: true,
@@ -140,9 +125,11 @@ describe("requestChainSwitch", () => {
 	});
 
 	test("should return failure status in case failure", async () => {
-		window.ethereum = { request: () => { throw new Error("") } };
+		window.ethereum = { ...fakeProvider, request: () => { throw new Error("") } };
 
-		const status = await requestChainSwitch(fakeChainIdHex);
+		metamask.acquireProvider();
+
+		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
 			successful: false,
 			chainInWallet: false,
@@ -161,9 +148,11 @@ describe("requestChainSwitch", () => {
 			}
 		};
 
-		window.ethereum = { request: () => { throw new ChainNotAddedTestError() } };
+		window.ethereum = { ...fakeProvider, request: () => { throw new ChainNotAddedTestError() } };
 
-		const status = await requestChainSwitch(fakeChainIdHex);
+		metamask.acquireProvider();
+
+		const status = await metamask.requestChainSwitch(fakeChainIdHex);
 		expect(status).toEqual({
 			successful: false,
 			chainInWallet: false,
@@ -172,18 +161,17 @@ describe("requestChainSwitch", () => {
 });
 
 describe("requestChainAdd", () => {
-	const fakeRpcUrls = ['https://fake1','https://fake2'];
-
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
 	
+	const fakeRpcUrls = ['https://fake1','https://fake2'];
+	
 	test("should request ethereum provider", async () => {
-		window.ethereum = { request: () => null	};
-
 		const requestSpy = jest.spyOn(window.ethereum, "request");
 
-		await requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
+		await metamask.requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
 		expect(requestSpy).toBeCalledWith({
 			method: 'wallet_addEthereumChain',
 			params: [{ 
@@ -195,18 +183,18 @@ describe("requestChainAdd", () => {
 	});
 
 	test("should return success status in case successful", async () => {
-		window.ethereum = { request: () => null	};
-
-		const status = await requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
+		const status = await metamask.requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
 		expect(status).toEqual({
 			successful: true,
 		});
 	});
 
 	test("should return failure status in case failure", async () => {
-		window.ethereum = { request: () => { throw new Error("") } };
+		window.ethereum = { ...fakeProvider, request: () => { throw new Error("") } };
 
-		const status = await requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
+		metamask.acquireProvider();
+
+		const status = await metamask.requestChainAdd(fakeChainIdHex, fakeChainName, fakeRpcUrls);
 		expect(status).toEqual({
 			successful: false,
 		});
@@ -214,16 +202,15 @@ describe("requestChainAdd", () => {
 });
 
 describe("setConnectCallback", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
-	
-	test("should call provider listener setter", async () => {
-		window.ethereum = { on: () => null	};
 
+	test("should call provider listener setter", async () => {
 		const onSpy = jest.spyOn(window.ethereum, "on");
 		const callback = () => {};
-		await setConnectCallback(callback);
+		await metamask.setConnectCallback(callback);
 		expect(onSpy).toBeCalledWith(
 			'connect', expect.any(Function)
 		);
@@ -231,16 +218,15 @@ describe("setConnectCallback", () => {
 });
 
 describe("setDisconnectCallback", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
-	
-	test("should call provider listener setter", async () => {
-		window.ethereum = { on: () => null	};
 
+	test("should call provider listener setter", async () => {
 		const onSpy = jest.spyOn(window.ethereum, "on");
 		const callback = () => {};
-		await setDisconnectCallback(callback);
+		await metamask.setDisconnectCallback(callback);
 		expect(onSpy).toBeCalledWith(
 			'disconnect', expect.any(Function)
 		);
@@ -248,33 +234,31 @@ describe("setDisconnectCallback", () => {
 });
 
 describe("setChainSwitchCallback", () => {
-	afterEach(() => {
-		delete window.ethereum;
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
-	
-	test("should call provider listener setter", async () => {
-		window.ethereum = { on: () => null	};
 
+	test("should call provider listener setter", async () => {
 		const onSpy = jest.spyOn(window.ethereum, "on");
 		const callback = () => {};
-		await setChainSwitchCallback(callback);
+		await metamask.setChainSwitchCallback(callback);
 		expect(onSpy).toBeCalledWith(
 			'chainChanged', expect.any(Function)
 		);
 	});
 });
 
-describe("setAccountSwitchCallback", () => {
-	afterEach(() => {
-		delete window.ethereum;
+describe("setAccountSwitchCallback", () => {	
+	beforeAll(() => {
+		window.ethereum = fakeProvider;
+		metamask.acquireProvider();
 	});
-	
-	test("should call provider listener setter", async () => {
-		window.ethereum = { on: () => null	};
 
+	test("should call provider listener setter", async () => {
 		const onSpy = jest.spyOn(window.ethereum, "on");
 		const callback = () => {};
-		await setAccountSwitchCallback(callback);
+		await metamask.setAccountSwitchCallback(callback);
 		expect(onSpy).toBeCalledWith(
 			'accountsChanged', expect.any(Function)
 		);

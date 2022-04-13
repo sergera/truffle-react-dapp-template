@@ -13,10 +13,7 @@ import {
 } from '../../../modal';
 
 import { 
-	isConnected,
-	requestChainId, 
-	requestChainSwitch, 
-	setChainSwitchCallback 
+	metamask
 } from '../../../../blockchain/metamask';
 import { 
 	isChainSupported, 
@@ -43,12 +40,12 @@ export const connectChain = createAsyncThunk<
 	async(_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
 
-		const chainIdHex = await requestChainId();
+		const chainIdHex = await metamask.requestChainId();
 		const chainIdInt = parseInt(chainIdHex, 16);
 		const chainName = getChainName(chainIdInt);
 		const chainIdString = chainIdInt.toString();
 
-		const chainConnected = isConnected();
+		const chainConnected = metamask.isConnected();
 		chainConnected ||	dispatch(openModal("NOT_CONNECTED"));
 
 		const chainSupported = isChainSupported(chainIdInt);
@@ -74,7 +71,7 @@ export const switchChain = createAsyncThunk<
 	"blockchain/wallet/chain/switch",
 	async(chainId,thunkAPI) => {
 		const { dispatch } = thunkAPI;
-		const status = await requestChainSwitch(chainId);
+		const status = await metamask.requestChainSwitch(chainId);
 		if(!status.chainInWallet) {
 			dispatch(openModal("CHAIN_NOT_ADDED"));
 		}
@@ -103,7 +100,7 @@ export const setChainListeners = createAsyncThunk<
 	"blockchain/wallet/chain/setListeners",
 	async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
-		setChainSwitchCallback(() => {
+		metamask.setChainSwitchCallback(() => {
 			dispatch(chainSwitched());
 		});
 	}

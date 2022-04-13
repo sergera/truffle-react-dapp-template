@@ -12,7 +12,6 @@
 @import './components/ModalContainer/provider/ModalChainNotAdded/ModalChainNotAdded.css';
 @import './components/ModalContainer/provider/ModalDisabled/ModalDisabled.css';
 @import './components/ModalContainer/provider/ModalDisconnected/ModalDisconnected.css';
-@import './components/ModalContainer/provider/ModalMultipleProviders/ModalMultipleProviders.css';
 @import './components/ModalContainer/provider/ModalNotConnected/ModalNotConnected.css';
 @import './components/ModalContainer/provider/ModalSelectChain/ModalSelectChain.css';
 @import './components/ErrorNotification/ErrorNotification.css';

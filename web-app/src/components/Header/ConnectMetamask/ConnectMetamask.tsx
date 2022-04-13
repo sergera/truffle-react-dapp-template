@@ -1,14 +1,30 @@
-import { connect } from 'react-redux';
+import { 
+	connect 
+} from 'react-redux';
 
-import { Button } from '../../UI/Button';
+import { 
+	Button 
+} from '../../UI/Button';
 
-import { minify, toCheckSum } from '../../../format/eth/address';
+import { 
+	minify, 
+	toCheckSum 
+} from '../../../format/eth/address';
 
-import { connectWallet } from '../../../state/blockchain/wallet';
-import { openModal } from '../../../state/modal'
+import { 
+	connectWallet 
+} from '../../../state/blockchain/wallet';
+import { 
+	openModal 
+} from '../../../state/modal'
 
-import { RootState, Dispatch } from '../../../state';
-import { ConnectMetamaskProps } from './ConnectMetamask.types';
+import { 
+	RootState, 
+	Dispatch 
+} from '../../../state';
+import { 
+	ConnectMetamaskProps 
+} from './ConnectMetamask.types';
 
 export function ConnectMetamask({
 	connect,
@@ -17,8 +33,7 @@ export function ConnectMetamask({
 	chainName, 
 	account,
 	/* props to check if only chain not permitted */
-	metamaskInstalled,
-	metamaskSoleProvider,
+	providerEnabled,
 	providerListenersSet,
 	chainConnected,
 	chainPermitted,
@@ -44,7 +59,7 @@ export function ConnectMetamask({
 		);
 	} else {
 		const everythingButChainPermittedOk = (
-			metamaskInstalled && metamaskSoleProvider && providerListenersSet &&
+			providerEnabled && providerListenersSet &&
 			chainConnected && !!chainName && chainListenersSet &&
 			!!account && accountListenersSet
 		);
@@ -79,8 +94,7 @@ const mapStateToProps = (state: RootState) => {
 		chainName: state.chain.name,
 		account: state.account.address,
 		/* props to check if only chain not permitted */
-		metamaskInstalled: state.provider.metamaskInstalled,
-		metamaskSoleProvider: state.provider.metamaskOnly,
+		providerEnabled: state.provider.isEnabled,
 		providerListenersSet: state.provider.listenersSet,
 		chainConnected: state.chain.isConnected,
 		chainPermitted: state.chain.isPermitted,

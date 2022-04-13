@@ -8,9 +8,6 @@ import {
 	ModalDisconnected 
 } from './provider/ModalDisconnected';
 import { 
-	ModalMultipleProviders 
-} from './provider/ModalMultipleProviders';
-import { 
 	ModalSelectChain 
 } from './provider/ModalSelectChain';
 import {
@@ -25,7 +22,6 @@ export const MODAL_COMPONENTS: ModalComponentsMap = {
 	"DISABLED": ModalDisabled,
 	"NOT_CONNECTED": ModalNotConnected,
 	"DISCONNECTED": ModalDisconnected,
-	"MULTIPLE_PROVIDERS": ModalMultipleProviders,
 	"SELECT_CHAIN": ModalSelectChain,
 	"CHAIN_NOT_ADDED": ModalChainNotAdded,
 };
