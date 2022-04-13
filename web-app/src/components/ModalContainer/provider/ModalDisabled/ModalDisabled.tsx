@@ -11,9 +11,9 @@ export function ModalDisabled({
 }:ModalDisabledProps) {
 
 	const title = "MetaMask Disabled";
-	const content1 = "MetaMask not enabled, or has been overwritten by other enabled providers."
-	const content2 = "Please make sure to have only MetaMask enabled and try again."
-	const content3 = "If you do not have metamask installed, please refer to their website:"
+	const content1 = "MetaMask is disabled, or has been overwritten by other enabled providers"
+	const content2 = "Please make sure to have only MetaMask enabled and try again"
+	const content3 = "If you do not have metamask installed, please refer to their website"
 
 	const closeModal = () => {
 		close();
