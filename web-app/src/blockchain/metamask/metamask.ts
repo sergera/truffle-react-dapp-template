@@ -1,5 +1,5 @@
 import { 
-	log 
+	Log 
 } from '../../logger';
 
 import { 
@@ -72,18 +72,16 @@ class Metamask implements IInjectedProviderApi {
 			if(isProviderRpcError(switchError)) {
 				if (switchError.code === 4902) {
 					// This error code indicates that the chain has not been added to MetaMask.
-					log({
-						sev: 4,
+					Log.info({
 						msg: switchError.message,
-						name: "Chain to switch doesn't exist in wallet"
+						description: "Chain to switch doesn't exist in wallet"
 					});
 				} else {
 					// handle other "switch" errors
 					status.chainInWallet = true;
-					log({
-						sev: 3,
+					Log.warn({
 						msg: switchError.message,
-						name: "Could not request chain switch"
+						description: "Could not request chain switch"
 					});	
 				}
 			}
@@ -106,10 +104,9 @@ class Metamask implements IInjectedProviderApi {
 			});
 		} catch (addError) {
 			if(isProviderRpcError(addError)) {
-				log({
-					sev: 3,
+				Log.warn({
 					msg: addError.message,
-					name: "Could not request chain add"
+					description: "Could not request chain add"
 				});
 			}
 		}

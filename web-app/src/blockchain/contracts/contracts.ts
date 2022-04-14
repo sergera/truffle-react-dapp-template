@@ -8,7 +8,7 @@ import {
 	Contract,
  } from '../web3';
 import {
-	log
+	Log
 } from '../../logger';
 import {
 	getErrorMessage
@@ -73,7 +73,7 @@ async function fetchContractArtifact (name: string): Promise<LooseObject> {
 	try {
 		return await import(`../../../../build/contracts/${name}.json`);
 	} catch(err) {
-		log({sev: 2, msg: getErrorMessage(err), name: "Contract artifact doesn't exist"});
+		Log.error({msg: getErrorMessage(err), description: "Contract artifact doesn't exist"});
 		throw err;
 	}
 };
@@ -82,7 +82,7 @@ function fetchContractAddressInChain (artifact: LooseObject, chainId: string): s
 	try {
 		return artifact.networks[chainId].address;
 	} catch(err) {
-		log({sev: 4, msg: getErrorMessage(err), name: "Contract doesn't exist on this chain"});
+		Log.error({msg: getErrorMessage(err), description: "Contract doesn't exist on this chain"});
 		throw err;
 	}
 };
@@ -92,7 +92,7 @@ function instanceContract(contractAbi: AbiItem, contractAddress: string): Contra
 	try {
 		return new web3.eth.Contract(contractAbi, contractAddress);
 	} catch(err) {
-		log({sev: 2, msg: getErrorMessage(err), name: "Contract ABI incorrect"});
+		Log.error({msg: getErrorMessage(err), description: "Contract ABI incorrect"});
 		throw err;
 	}
 };

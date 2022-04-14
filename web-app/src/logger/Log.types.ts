@@ -1,6 +1,5 @@
 export interface LogArguments {
-	sev: number;
-	name?: string;
+	description?: string;
 	msg: string;
 }
 

@@ -1,6 +1,6 @@
-import { SeveritiesMap, StylesMap } from "./logger.types";
+import { SeveritiesMap, StylesMap } from "./Log.types";
 
-export const severities:SeveritiesMap = {
+export const SEVERITIES: SeveritiesMap = {
 	"1": "FATAL",
 	"2": "ERROR",
 	"3": "WARN",
@@ -9,7 +9,7 @@ export const severities:SeveritiesMap = {
 	"6": "TRACE"
 };
 
-export const styles:StylesMap = {
+export const STYLES: StylesMap = {
 	FATAL: [
 		"color: #fff",
 		"background-color: #000",
