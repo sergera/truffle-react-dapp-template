@@ -9,14 +9,14 @@
 
  import { ChainIdsMap } from './chains.types';
 
- export const chainIds:ChainIdsMap = {
-	 "Mainnet": 1,
-	 "Ropsten": 3,
-	 "Rinkeby": 4,
-	 "Goerli": 5,
-	 "Kovan": 42,
+ export const CHAIN_IDS: ChainIdsMap = {
+	 "mainnet": 1,
+	 "ropsten": 3,
+	 "rinkeby": 4,
+	 "goerli": 5,
+	 "kovan": 42,
 	 // For Development
-	 "Truffle": 1337,
-	 "Ganache": 5777,
+	 "truffle": 1337,
+	 "ganache": 5777,
  };
  

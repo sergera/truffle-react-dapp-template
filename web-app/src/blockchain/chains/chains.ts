@@ -5,43 +5,48 @@
  * 
  */
 
-import { getSupportedChains } from "../../env";
-import { chainIds } from "./chains.constants";
+import { 
+	getSupportedChains 
+} from "../../env";
+
+import { 
+	CHAIN_IDS 
+} from "./chains.constants";
 
 const supportedChains = getSupportedChains();
 
 export const isChainSupported = function(chainId: number) {
-	let supportedNetIds: number[] = supportedChains.map((chainName: string) => {
-		return chainIds[chainName];
+	let supportedChainIds: number[] = supportedChains.map((chainName: string) => {
+		return CHAIN_IDS[chainName];
 	})
-	let isChainSupported:boolean = supportedNetIds.includes(chainId);
+	let isChainSupported:boolean = supportedChainIds.includes(chainId);
 	return isChainSupported;
 };
 
 export const getChainName = function(chainId: number) {
-	let chainName = Object.keys(chainIds).find(key => chainIds[key] === chainId);
+	let chainName = Object.keys(CHAIN_IDS).find(key => CHAIN_IDS[key] === chainId);
 	if(chainName) {
 		return chainName;
 	} else {
-		return "Not Found";
+		return "";
 	}
 };
 
 export const getChainId = function(chainName: string) {
-	let chainId = chainIds[chainName];
+	let chainId = CHAIN_IDS[chainName];
 	if(chainId) {
 		return chainId
 	} else {
-		return "Not Found";
+		return "";
 	}
 };
 
 export const getChainIdHex = function(chainName: string) {
-	let chainId = chainIds[chainName];
+	let chainId = CHAIN_IDS[chainName];
 	if(chainId) {
 		return intToHex(chainId);
 	} else {
-		return "Not Found";
+		return "";
 	}
 };
 

@@ -3,17 +3,17 @@
  * 
  * 	name: REACT_APP_SUPPORTED_CHAINS
  * 
- * 	value: string of supported chains, pascal cased, separated by commas
+ * 	value: string of supported chains, lower cased, separated by commas
  * 					
- * 		ex: "Mainnet,Goerli,Kovan"
+ * 		ex: "mainnet,goerli,kovan"
  * 		
  * 		if only one net is supported, there are no commas 
  * 		
- * 		ex: "Mainnet"
+ * 		ex: "mainnet"
  * 
  * 	name: REACT_APP_CONTRACTS
  * 
- * 	value: string of contract names, separated by commas
+ * 	value: string of contract names, cased exactly like .sol file name, separated by commas
  * 					
  * 		ex: "ContractOne,ContractTwo,ContractThree"
  * 		
