@@ -28,7 +28,7 @@ export const getChainName = function(chainId: number) {
 	if(chainName) {
 		return chainName;
 	} else {
-		return "";
+		return "unknown";
 	}
 };
 
@@ -37,7 +37,7 @@ export const getChainId = function(chainName: string) {
 	if(chainId) {
 		return chainId
 	} else {
-		return "";
+		return "unknown";
 	}
 };
 
@@ -46,7 +46,7 @@ export const getChainIdHex = function(chainName: string) {
 	if(chainId) {
 		return intToHex(chainId);
 	} else {
-		return "";
+		return "unknown";
 	}
 };
 
