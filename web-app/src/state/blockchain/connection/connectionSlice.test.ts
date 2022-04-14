@@ -20,7 +20,7 @@ import {
 	getChainName 
 } from '../../../blockchain/chains';
 import {
-	setContracts
+	checkAllContractsAcquired
 } from '../../../blockchain/contracts';
 
 /* mock functions to be mocked */
@@ -39,9 +39,10 @@ jest.mock("../../../blockchain/contracts", () => ({
 	__esModule: true,
 	setContracts: jest.fn(),
 	deleteContracts: jest.fn(),
+	checkAllContractsAcquired: jest.fn(),
 }));
 
-const mockSetContracts = setContracts as jest.Mock;
+const mockCheckAllContractsAcquired = checkAllContractsAcquired as jest.Mock;
 
 /* declare mock return variables */
 const fakeProviderDetection = {
@@ -78,7 +79,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -98,7 +99,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -116,7 +117,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		metamask.setConnectCallback = () => {throw new Error("")};
 		metamask.setDisconnectCallback = () => () => {throw new Error("")};
@@ -140,7 +141,7 @@ describe("checkConnection", () => {
 		metamask.setAccountSwitchCallback = () => {return null};
 	
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -160,7 +161,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};	
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -179,7 +180,7 @@ describe("checkConnection", () => {
 		metamask.setDisconnectCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 	
 		metamask.setChainSwitchCallback = () => {throw new Error("")};
 
@@ -201,7 +202,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -220,7 +221,7 @@ describe("checkConnection", () => {
 		metamask.setDisconnectCallback = () => {return null};
 		metamask.setChainSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => true);
+		mockCheckAllContractsAcquired.mockImplementation(() => true);
 
 		metamask.setAccountSwitchCallback = () => {throw new Error("")};
 
@@ -242,7 +243,7 @@ describe("checkConnection", () => {
 		metamask.setChainSwitchCallback = () => {return null};
 		metamask.setAccountSwitchCallback = () => {return null};
 	
-		mockSetContracts.mockImplementation(() => false);
+		mockCheckAllContractsAcquired.mockImplementation(() => false);
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
@@ -263,7 +264,7 @@ test("should reset state if provider disconnected", async () => {
 	metamask.setChainSwitchCallback = () => {return null};
 	metamask.setAccountSwitchCallback = () => {return null};
 
-	mockSetContracts.mockImplementation(() => true);
+	mockCheckAllContractsAcquired.mockImplementation(() => true);
 
 	await store.dispatch(connectWallet());
 	await store.dispatch(checkConnection());

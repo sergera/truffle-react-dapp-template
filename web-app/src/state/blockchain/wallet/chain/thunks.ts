@@ -21,7 +21,8 @@ import {
 } from '../../../../blockchain/chains';
 import { 
 	setContracts, 
-	deleteContracts 
+	deleteContracts,
+	checkAllContractsAcquired,
 } from '../../../../blockchain/contracts';
 
 import {
@@ -54,8 +55,9 @@ export const connectChain = createAsyncThunk<
 
 		const chainSupported = isChainSupported(chainIdInt);
 		if(chainSupported) {
-			const contractsSet = await setContracts(chainIdString);
-			await dispatch(setContractAcquired(contractsSet));
+			await setContracts(chainIdString);
+			const contractsAcquired = checkAllContractsAcquired();
+			await dispatch(setContractAcquired(contractsAcquired));
 		}
 
 		return {

@@ -2,64 +2,97 @@
  * This module provides contract artifacts for the currently connected chain
  * 
  */
+import { 
+	getWeb3,
+	AbiItem,
+	Contract,
+ } from '../web3';
+import {
+	log
+} from '../../logger';
+import {
+	getErrorMessage
+} from '../../error';
 
-import { getWeb3 } from '../web3';
+import { 
+	getContractNames 
+} from '../../env';
 
-import { getContractNames } from '../../env';
+import { 
+	LooseObject 
+} from '../../types';
+import {
+	ContractMap,
+} from './contracts.types';
 
-import { LooseObject } from '../../types';
 
-var contracts: LooseObject = {};
+var contracts: ContractMap = {};
 
-async function getArtifact (name: string) {
-	try {
-		const artifact = await import(`../../../../build/contracts/${name}.json`);
-		return artifact;
-	} catch(err) {
-		throw new Error("Contract doesn't exist");
-	}
+export function getContracts(): ContractMap {
+	return contracts;
 };
 
-function getContractAddress (artifact: LooseObject, chainId: string) {
-	try {
-		const deployedNetwork = artifact.networks[chainId];
-		return deployedNetwork.address;
-	} catch(err) {
-		throw new Error("Contract doesn't exist on this chain");
-	}
-};
-
-async function getContract (name: string, chainId: string) {
-	let artifact = await getArtifact(name);
-	let contractAddress = getContractAddress(artifact, chainId);
-	let web3 = getWeb3();
-	try {
-		return new web3.eth.Contract(
-			artifact.abi,
-			contractAddress,
-		);
-	} catch(err) {
-		throw new Error("Contract ABI incorrect");
-	}
-};
-
-export async function setContracts(chainId: string) {
-	const contractNames = getContractNames();
-	try {
-		for(const name of contractNames) {
-			contracts[name] = await getContract(name, chainId);
-		}
-		return true;
-	} catch(err) {
-		deleteContracts();
-		return false;
-	}
-};
-
-export function deleteContracts() {
+export function deleteContracts(): void {
 	contracts = {};
 };
 
-export function getContracts() {
-	return contracts;
+export function checkAllContractsAcquired(): boolean {
+	const contractNames: string[] = getContractNames();
+	return contractNames.length === Object.keys(contracts).length;
+};
+
+export async function setContracts(chainId: string): Promise<void> {
+	try {
+		contracts = await fetchContracts(chainId);
+	} catch(err) {
+		deleteContracts();
+	}
+};
+
+async function fetchContracts(chainId: string): Promise<ContractMap> {
+	let contractMap = {};
+	const contractNames: string[] = getContractNames();
+	const contracts: ContractMap[] = await Promise.all(
+		contractNames.map(async function (name: string): Promise<ContractMap> {		
+			let contract = await fetchContractWithNameInChain(name, chainId);
+			return {[name]: contract};
+		})
+	);
+
+	Object.assign(contractMap, ...contracts);
+	return contractMap;
+};
+
+async function fetchContractWithNameInChain(name: string, chainId: string): Promise<Contract> {
+	let artifact = await fetchContractArtifact(name);
+	let contractAddress = fetchContractAddressInChain(artifact, chainId);
+	return instanceContract(artifact.abi, contractAddress);
+};
+
+async function fetchContractArtifact (name: string): Promise<LooseObject> {
+	try {
+		return await import(`../../../../build/contracts/${name}.json`);
+	} catch(err) {
+		log({sev: 2, msg: getErrorMessage(err), name: "Contract artifact doesn't exist"});
+		throw err;
+	}
+};
+
+function fetchContractAddressInChain (artifact: LooseObject, chainId: string): string {
+	try {
+		return artifact.networks[chainId].address;
+	} catch(err) {
+		log({sev: 4, msg: getErrorMessage(err), name: "Contract doesn't exist on this chain"});
+		throw err;
+	}
+};
+
+function instanceContract(contractAbi: AbiItem, contractAddress: string): Contract  {
+	let web3 = getWeb3();
+	try {
+		return new web3.eth.Contract(contractAbi, contractAddress);
+	} catch(err) {
+		log({sev: 2, msg: getErrorMessage(err), name: "Contract ABI incorrect"});
+		throw err;
+	}
 };

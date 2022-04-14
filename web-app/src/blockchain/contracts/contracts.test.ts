@@ -20,6 +20,12 @@ jest.mock("../../env", () => ({
 
 let mockGetContractNames = getContractNames as jest.Mock;
 
+/* silence logger */
+jest.mock("../../logger", () => ({
+	__esModule: true,
+	log: jest.fn(),
+}));
+
 /* declare fake contract values */
 const testContractOneName = "testContractOne";
 const testContractTwoName = "testContractTwo";
@@ -64,38 +70,39 @@ describe("setContracts", () => {
 
 	test("should set contracts in exported contracts object", async () => {
 		mockGetContractNames.mockImplementation(() => ([testContractOneName,testContractTwoName]));
-		mockContractConstructor.mockImplementation((ABI, address) => ({address: address}));
+		mockContractConstructor.mockImplementation((ABI, address) => ({options: {address: address}}));
 
 		await setContracts(testChainIdOne);
 		const contractsAfter = getContracts();
+
 		expect(contractsAfter).toHaveProperty(testContractOneName);
 		expect(contractsAfter).toHaveProperty(testContractTwoName);
-		expect(contractsAfter[testContractOneName].address).toEqual(testContractOneChainOneAddress);
-		expect(contractsAfter[testContractTwoName].address).toEqual(testContractTwoChainOneAddress);
+		expect(contractsAfter[testContractOneName].options.address).toEqual(testContractOneChainOneAddress);
+		expect(contractsAfter[testContractTwoName].options.address).toEqual(testContractTwoChainOneAddress);
 	});
 
 	test("should replace contracts according to chain", async () => {
 		mockGetContractNames.mockImplementation(() => ([testContractOneName,testContractTwoName]));
-		mockContractConstructor.mockImplementation((ABI, address) => ({address: address}));
+		mockContractConstructor.mockImplementation((ABI, address) => ({options: {address: address}}));
 
 		await setContracts(testChainIdOne);
 		const contractsBefore = getContracts();
 		expect(contractsBefore).toHaveProperty(testContractOneName);
 		expect(contractsBefore).toHaveProperty(testContractTwoName);
-		expect(contractsBefore[testContractOneName].address).toEqual(testContractOneChainOneAddress);
-		expect(contractsBefore[testContractTwoName].address).toEqual(testContractTwoChainOneAddress);
+		expect(contractsBefore[testContractOneName].options.address).toEqual(testContractOneChainOneAddress);
+		expect(contractsBefore[testContractTwoName].options.address).toEqual(testContractTwoChainOneAddress);
 
 		await setContracts(testChainIdTwo);
 		const contractsAfter = getContracts();
 		expect(contractsAfter).toHaveProperty(testContractOneName);
 		expect(contractsAfter).toHaveProperty(testContractTwoName);
-		expect(contractsAfter[testContractOneName].address).toEqual(testContractOneChainTwoAddress);
-		expect(contractsAfter[testContractTwoName].address).toEqual(testContractTwoChainTwoAddress);
+		expect(contractsAfter[testContractOneName].options.address).toEqual(testContractOneChainTwoAddress);
+		expect(contractsAfter[testContractTwoName].options.address).toEqual(testContractTwoChainTwoAddress);
 	});
 
 	test("should keep contracts object empty if any contract doesn't exist", async () => {
 		mockGetContractNames.mockImplementation(() => (["notTestContractOneName","notTestContractTwoName"]));
-		mockContractConstructor.mockImplementation((ABI, address) => ({address: address}));
+		mockContractConstructor.mockImplementation((ABI, address) => ({options: {address: address}}));
 
 		await setContracts(testChainIdOne);
 		const contractsAfter = getContracts();
@@ -104,7 +111,7 @@ describe("setContracts", () => {
 
 	test("should keep contracts object empty if any contract doesn't exist on this chain", async () => {
 		mockGetContractNames.mockImplementation(() => ([testContractOneName,testContractTwoName]));
-		mockContractConstructor.mockImplementation((ABI, address) => ({address: address}));
+		mockContractConstructor.mockImplementation((ABI, address) => ({options: {address: address}}));
 
 		await setContracts("notTestChainIdOne");
 		const contractsAfter = getContracts();
@@ -114,7 +121,7 @@ describe("setContracts", () => {
 	test("should keep contracts object empty if any contract has the incorrect ABI", async () => {
 		mockGetContractNames.mockImplementation(() => ([testContractOneName,testContractTwoName]));
 		mockContractConstructor
-		.mockImplementationOnce((ABI, address) => ({address: address}))
+		.mockImplementationOnce((ABI, address) => ({options: {address: address}}))
 		.mockImplementationOnce((ABI, address) => { throw new Error("") });
 
 		await setContracts(testChainIdOne);
@@ -124,16 +131,16 @@ describe("setContracts", () => {
 });
 
 describe("deleteContracts", () => {
-	test("should set exported contracts object to empty", async () => {
+	test("should set contracts object to empty", async () => {
 		mockGetContractNames.mockImplementation(() => ([testContractOneName,testContractTwoName]));
-		mockContractConstructor.mockImplementation((ABI, address) => ({address: address}));
+		mockContractConstructor.mockImplementation((ABI, address) => ({options: {address: address}}));
 
 		await setContracts(testChainIdOne);
 		const contractsBefore = getContracts();
 		expect(contractsBefore).toHaveProperty(testContractOneName);
 		expect(contractsBefore).toHaveProperty(testContractTwoName);
-		expect(contractsBefore[testContractOneName].address).toEqual(testContractOneChainOneAddress);
-		expect(contractsBefore[testContractTwoName].address).toEqual(testContractTwoChainOneAddress);
+		expect(contractsBefore[testContractOneName].options.address).toEqual(testContractOneChainOneAddress);
+		expect(contractsBefore[testContractTwoName].options.address).toEqual(testContractTwoChainOneAddress);
 
 		deleteContracts();
 		const contractsAfter = getContracts();

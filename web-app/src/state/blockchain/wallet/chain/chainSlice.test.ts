@@ -35,6 +35,7 @@ jest.mock("../../../../blockchain/contracts", () => ({
 	__esModule: true,
 	setContracts: jest.fn(),
 	deleteContracts: jest.fn(),
+	checkAllContractsAcquired: jest.fn(),
 }));
 
 /* mock functions to be mocked */
@@ -97,9 +98,11 @@ describe("connectChain", () => {
 		mockIsChainSupported.mockImplementation(() => false);
 
 		const setContractsSpy = jest.spyOn(contracts, "setContracts");
+		const checkAllContractsAcquiredSpy = jest.spyOn(contracts, "checkAllContractsAcquired");
 
 		await store.dispatch(connectChain());
 		expect(setContractsSpy).not.toBeCalled();
+		expect(checkAllContractsAcquiredSpy).not.toBeCalled();
 		expect(store.getState().chain.isConnected).toEqual(true);	
 		expect(store.getState().chain.isPermitted).toEqual(false);
 	});
@@ -118,7 +121,7 @@ describe("connectChain", () => {
 		expect(store.getState().chain.isPermitted).toEqual(true);
 	});
 
-	test("should call setContracts if chain is supported", async () => {
+	test("should call setContracts and check contracts if chain is supported", async () => {
 		metamask.isConnected = () => false;
 		metamask.requestChainId = async () => fakeChainIdHex;
 
@@ -126,9 +129,11 @@ describe("connectChain", () => {
 		mockGetChainName.mockImplementation(() => fakeChainName);
 
 		const setContractsSpy = jest.spyOn(contracts, "setContracts");
+		const checkAllContractsAcquiredSpy = jest.spyOn(contracts, "checkAllContractsAcquired");
 
 		await store.dispatch(connectChain());
 		expect(setContractsSpy).toBeCalled();
+		expect(checkAllContractsAcquiredSpy).toBeCalled();
 		expect(store.getState().chain.id).toEqual(fakeChainIdInt);
 		expect(store.getState().chain.name).toEqual(fakeChainName);
 		expect(store.getState().chain.isConnected).toEqual(false);
