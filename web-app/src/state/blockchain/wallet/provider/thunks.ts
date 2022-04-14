@@ -15,6 +15,9 @@ import {
 import { 
 	deleteContracts 
 } from '../../../../blockchain/contracts';
+import {
+	Log
+} from '../../../../logger';
 
 import {
 	MODAL_TYPES
@@ -52,6 +55,9 @@ export const providerDisconnected = createAsyncThunk<
   'blockchain/wallet/provider/disconnected',
   async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
+		Log.info({
+			msg: `provider has disconnected`, 
+		});
 		deleteContracts();
 		dispatch(openModal(MODAL_TYPES.disconnected));
   }
@@ -66,7 +72,9 @@ export const setProviderListeners = createAsyncThunk<
 	async (_,thunkAPI) => {
 		const { dispatch } = thunkAPI;
 		metamask.setConnectCallback((connectInfo: { chainId: string }) => {
-			console.log(`connected to chain ${connectInfo.chainId}`);
+			Log.info({
+				msg: `provider connection successful`, 
+			});
 		});
 		metamask.setDisconnectCallback(() => {
 			dispatch(providerDisconnected());
