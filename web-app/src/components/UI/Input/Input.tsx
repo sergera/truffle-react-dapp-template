@@ -16,7 +16,7 @@ export function Input({
 	formId, 
 	name, 
 	placeholder, 
-	valid,
+	isValid,
 	rules,
 	styleClass=""
 }: InputProps) {
@@ -24,7 +24,7 @@ export function Input({
 	let [showRules, setShowRules] = useState(false);
 
 	const decideShowRules = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if(valid) {
+		if(isValid) {
 			setShowRules(false);
 		} else {
 			setShowRules(true);
@@ -36,7 +36,7 @@ export function Input({
 		callback(value);
 	};
 
-	if(!valid) styleClass = styleClass + " input--invalid";
+	if(!isValid) styleClass = styleClass + " input--invalid";
 
   return (
 		<>

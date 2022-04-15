@@ -18,7 +18,7 @@ test('gives value to callback', () => {
 				value={testText} 
 				name="test component"
 				placeholder="test input"
-				valid={true}
+				isValid={true}
 				rules={["validation rules array"]}
 			/>
 		);

@@ -36,31 +36,31 @@ export function Landing() {
 	let [userNameInputValue, setUserNameInputValue] = useState("");
 	let [emailInputValue, setEmailInputValue] = useState("");
 
-	let [validName, setValidName] = useState(true);
-	let [validUserName, setValidUserName] = useState(true);
-	let [validEmail, setValidEmail] = useState(true);
+	let [isValidName, setIsValidName] = useState(true);
+	let [isValidUserName, setIsValidUserName] = useState(true);
+	let [isValidEmail, setIsValidEmail] = useState(true);
 
 	let getNameValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
 		const formatOk = isName(value);
-		const valid = lengthOk && formatOk;
-		setValidName(valid);
+		const isValid = lengthOk && formatOk;
+		setIsValidName(isValid);
 		setNameInputValue(value);
 	}
 
 	let getUserNameValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
 		const formatOk = isLoginId(value);
-		const valid = lengthOk && formatOk;
-		setValidUserName(valid);
+		const isValid = lengthOk && formatOk;
+		setIsValidUserName(isValid);
 		setUserNameInputValue(value);
 	}
 
 	let getEmailValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
 		const formatOk = isEmail(value);
-		const valid = lengthOk && formatOk;
-		setValidEmail(valid);
+		const isValid = lengthOk && formatOk;
+		setIsValidEmail(isValid);
 		setEmailInputValue(value);
 	}
 
@@ -109,7 +109,7 @@ export function Landing() {
 					value={nameInputValue}
 					name="name input"
 					placeholder="insert name here"
-					valid={validName}
+					isValid={isValidName}
 					rules={
 						["between 8 and 30 letters",
 						"non-consecutive spaces in between"]
@@ -120,7 +120,7 @@ export function Landing() {
 					value={userNameInputValue}
 					name="username input"
 					placeholder="insert username here"
-					valid={validUserName}
+					isValid={isValidUserName}
 					rules={
 						["between 8 and 30 letters and numbers",
 						"non-consecutive dots, hifens and underscores in between"]
@@ -131,7 +131,7 @@ export function Landing() {
 					value={emailInputValue}
 					name="email input"
 					placeholder="insert username here"
-					valid={validEmail}
+					isValid={isValidEmail}
 					rules={
 						["between 8 and 30 letters and numbers",
 						"non-consecutive dots, hifens and underscores in between",
