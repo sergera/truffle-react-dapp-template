@@ -1,11 +1,6 @@
-import { 
-	setContractAcquired,
-	initialState,
-} from '.';
+import { setContractAcquired,	initialState } from '.';
 
-import { 
-	getNewStore 
-} from '../../../test';
+import { getNewStore } from '../../../test';
 
 let store = getNewStore();
 

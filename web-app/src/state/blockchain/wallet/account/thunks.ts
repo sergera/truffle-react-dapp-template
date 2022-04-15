@@ -1,18 +1,10 @@
-import { 
-	createAsyncThunk 
-} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-	checkConnection
-} from '../../connection';
+import { checkConnection } from '../../connection';
 
-import { 
-	metamask
-} from '../../../../blockchain/metamask';
+import { metamask } from '../../../../blockchain/metamask';
 
-import { 
-	RootState 
-} from '../../..';
+import { RootState } from '../../..';
 
 export const connectAccount = createAsyncThunk<
 	string, // return type

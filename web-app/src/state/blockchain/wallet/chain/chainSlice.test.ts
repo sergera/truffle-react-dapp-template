@@ -1,28 +1,13 @@
 import * as connectionThunks from '../../connection/thunks';
-import { 
-	initialState, 
-	connectChain, 
-	switchChain, 
-	chainSwitched, 
-	setChainListeners 
-} from '.';
-import { 
-	providerDisconnected,
-} from '../provider';
+import { initialState, connectChain, switchChain, chainSwitched, setChainListeners } from '.';
+import { providerDisconnected } from '../provider';
 
 import { metamask }from '../../../../blockchain/metamask'
 import * as contracts from '../../../../blockchain/contracts';
-import { 
-	getNewStore 
-} from '../../../../test';
-import { 
-	isChainSupported, 
-	getChainName 
-} from '../../../../blockchain/chains';
+import { getNewStore } from '../../../../test';
+import { isChainSupported, getChainName } from '../../../../blockchain/chains';
 
-import {
-	MODAL_TYPES
-} from '../../../modal';
+import { MODAL_TYPES } from '../../../modal';
 
 /* silence logger */
 jest.mock("../../../../logger");

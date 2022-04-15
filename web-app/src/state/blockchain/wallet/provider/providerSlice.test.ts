@@ -1,19 +1,10 @@
-import { 
-	initialState, 
-	connectProvider, 
-	providerDisconnected, 
-	setProviderListeners 
-} from '.';
+import { initialState, connectProvider, providerDisconnected, setProviderListeners } from '.';
 
 import { metamask } from '../../../../blockchain/metamask';
 import * as contracts from '../../../../blockchain/contracts';
-import { 
-	getNewStore 
-} from '../../../../test';
+import { getNewStore } from '../../../../test';
 
-import {
-	MODAL_TYPES
-} from '../../../modal';
+import { MODAL_TYPES } from '../../../modal';
 
 /* silence logger */
 jest.mock("../../../../logger");

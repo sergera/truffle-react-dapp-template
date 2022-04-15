@@ -1,10 +1,6 @@
-import { 
-	Button 
-} from '../../../UI/Button';
+import { Button } from '../../../UI/Button';
 
-import { 
-	ModalDisabledProps 
-} from './ModalDisabled.types';
+import { ModalDisabledProps } from './ModalDisabled.types';
 
 export function ModalDisabled({
 	close

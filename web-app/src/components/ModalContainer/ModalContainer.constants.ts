@@ -1,22 +1,10 @@
-import { 
-	ModalDisabled 
-} from './provider/ModalDisabled';
-import { 
-	ModalNotConnected 
-} from './provider/ModalNotConnected';
-import { 
-	ModalDisconnected 
-} from './provider/ModalDisconnected';
-import { 
-	ModalSelectChain 
-} from './provider/ModalSelectChain';
-import {
-	ModalChainNotAdded
-} from './provider/ModalChainNotAdded';
+import { ModalDisabled } from './provider/ModalDisabled';
+import { ModalNotConnected } from './provider/ModalNotConnected';
+import { ModalDisconnected } from './provider/ModalDisconnected';
+import { ModalSelectChain } from './provider/ModalSelectChain';
+import { ModalChainNotAdded } from './provider/ModalChainNotAdded';
 
-import { 
-	ModalComponentsMap 
-} from './ModalContainer.types';
+import { ModalComponentsMap } from './ModalContainer.types';
 
 export const MODAL_COMPONENTS: ModalComponentsMap = {
 	"DISABLED": ModalDisabled,

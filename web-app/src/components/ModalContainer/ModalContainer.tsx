@@ -1,22 +1,11 @@
-import { 
-	connect 
-} from 'react-redux';
+import { connect } from 'react-redux';
 
-import { 
-	closeModal 
-} from '../../state/modal';
+import { closeModal } from '../../state/modal';
 
-import {
-	MODAL_COMPONENTS
-} from './ModalContainer.constants';
+import { MODAL_COMPONENTS } from './ModalContainer.constants';
 
-import { 
-	RootState, 
-	Dispatch 
-} from '../../state';
-import { 
-	ModalContainerProps
-} from './ModalContainer.types';
+import { RootState, Dispatch } from '../../state';
+import { ModalContainerProps } from './ModalContainer.types';
 
 export function ModalContainer({
 	type, 

@@ -1,40 +1,17 @@
-import { 
-	createAsyncThunk 
-} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-	checkConnection
-} from '../../connection';
-import {
-	setContractAcquired
-} from '../../contract';
-import { 
-	openModal 
-} from '../../../modal';
+import { checkConnection } from '../../connection';
+import { setContractAcquired } from '../../contract';
+import { openModal } from '../../../modal';
 
-import { 
-	metamask
-} from '../../../../blockchain/metamask';
-import { 
-	isChainSupported, 
-	getChainName 
-} from '../../../../blockchain/chains';
-import { 
-	setContracts, 
-	deleteContracts,
-	checkAllContractsAcquired,
-} from '../../../../blockchain/contracts';
+import { metamask } from '../../../../blockchain/metamask';
+import { isChainSupported, getChainName } from '../../../../blockchain/chains';
+import { setContracts, deleteContracts,	checkAllContractsAcquired } from '../../../../blockchain/contracts';
 
-import {
-	MODAL_TYPES
-} from '../../../modal';
+import { MODAL_TYPES } from '../../../modal';
 
-import { 
-	RootState 
-} from '../../..';
-import { 
-	ConnectChainPayload 
-} from './chainSlice.types';
+import { RootState } from '../../..';
+import { ConnectChainPayload } from './chainSlice.types';
 
 export const connectChain = createAsyncThunk<
 	ConnectChainPayload, //return type

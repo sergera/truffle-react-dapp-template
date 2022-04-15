@@ -2,29 +2,14 @@
  * This module provides contract artifacts for the currently connected chain
  * 
  */
-import { 
-	getWeb3,
-	AbiItem,
-	Contract,
- } from '../web3';
-import {
-	Log
-} from '../../logger';
-import {
-	getErrorMessage
-} from '../../error';
+import { getWeb3,	AbiItem, Contract } from '../web3';
+import { Log } from '../../logger';
+import { getErrorMessage } from '../../error';
 
-import { 
-	getContractNames 
-} from '../../env';
+import { getContractNames } from '../../env';
 
-import { 
-	LooseObject 
-} from '../../types';
-import {
-	ContractMap,
-} from './contracts.types';
-
+import { LooseObject } from '../../types';
+import { ContractMap } from './contracts.types';
 
 var contracts: ContractMap = {};
 

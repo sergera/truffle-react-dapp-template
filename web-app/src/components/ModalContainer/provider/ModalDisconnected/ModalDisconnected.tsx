@@ -1,10 +1,6 @@
-import { 
-	Button 
-} from '../../../UI/Button';
+import { Button } from '../../../UI/Button';
 
-import { 
-	ModalDisconnectedProps 
-} from './ModalDisconnected.types';
+import { ModalDisconnectedProps } from './ModalDisconnected.types';
 
 export function ModalDisconnected({
 	close

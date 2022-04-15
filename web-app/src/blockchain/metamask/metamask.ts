@@ -1,11 +1,6 @@
-import { 
-	Log 
-} from '../../logger';
+import { Log } from '../../logger';
 
-import { 
-	IInjectedProviderApi,
-	ProviderRpcError 
-} from './metamask.types';
+import { IInjectedProviderApi, ProviderRpcError } from './metamask.types';
 
 // stop typescript from trying to predict injected window.ethereum methods
 declare var window: any;

@@ -1,24 +1,12 @@
-import { 
-	Button 
-} from '../../../UI/Button';
+import { Button } from '../../../UI/Button';
 
-import { 
-	getChainIdHex 
-} from '../../../../blockchain/chains';
-import { 
-	getSupportedChains 
-} from '../../../../env';
+import { getChainIdHex } from '../../../../blockchain/chains';
+import { getSupportedChains } from '../../../../env';
 
-import { 
-	store 
-} from '../../../../state';
-import { 
-	switchChain 
-} from '../../../../state/blockchain/wallet/chain';
+import { store } from '../../../../state';
+import { switchChain } from '../../../../state/blockchain/wallet/chain';
 
-import { 
-	ModalSelectChainProps 
-} from './ModalSelectChain.types';
+import { ModalSelectChainProps } from './ModalSelectChain.types';
 
 const supportedChains = getSupportedChains();
 const chainsArray = supportedChains.map((chainName) => {

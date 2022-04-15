@@ -1,19 +1,9 @@
-import { 
-	createSlice, 
-	PayloadAction 
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { 
-	connectAccount, 
-	setAccountListeners 
-} from '.';
-import { 
-	providerDisconnected 
-} from '../provider';
+import { connectAccount, setAccountListeners } from './thunks';
+import { providerDisconnected } from '../provider';
 
-import { 
-	AccountSlice 
-} from './accountSlice.types';
+import { AccountSlice } from './accountSlice.types';
 
 export const initialState: AccountSlice = {
 	address: "",

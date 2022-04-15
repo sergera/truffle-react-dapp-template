@@ -1,27 +1,11 @@
-import { 
-	checkConnection,
-	initialState,
-} from '.';
-import {
-	connectWallet
-} from '../wallet';
-import {
-	providerDisconnected
-} from '../wallet/provider';
+import { checkConnection,	initialState } from '.';
+import { connectWallet } from '../wallet';
+import { providerDisconnected } from '../wallet/provider';
 
-import { 
-	getNewStore 
-} from '../../../test';
-import {
-	metamask
-} from '../../../blockchain/metamask';
-import { 
-	isChainSupported, 
-	getChainName 
-} from '../../../blockchain/chains';
-import {
-	checkAllContractsAcquired
-} from '../../../blockchain/contracts';
+import { getNewStore } from '../../../test';
+import { metamask } from '../../../blockchain/metamask';
+import { isChainSupported, getChainName } from '../../../blockchain/chains';
+import { checkAllContractsAcquired } from '../../../blockchain/contracts';
 
 /* silence logger */
 jest.mock("../../../logger");

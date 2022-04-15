@@ -1,14 +1,8 @@
-import { 
-	useState 
-} from "react";
+import { useState } from "react";
 
-import { 
-	ValidationRules 
-} from "../ValidationRules";
+import { ValidationRules } from "../ValidationRules";
 
-import { 
-	InputProps 
-} from './Input.types';
+import { InputProps } from './Input.types';
 
 export function Input({
 	callback, 

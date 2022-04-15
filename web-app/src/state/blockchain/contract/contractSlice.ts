@@ -1,11 +1,6 @@
-import { 
-	createSlice, 
-	PayloadAction 
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { 
-	ContractSlice 
-} from './contractSlice.types';
+import { ContractSlice } from './contractSlice.types';
 
 export const initialState: ContractSlice = {
 	acquired: false,

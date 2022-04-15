@@ -1,18 +1,9 @@
-import { 
-	createSlice, 
-	PayloadAction 
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { 
-	checkConnection 
-} from '.';
-import { 
-	providerDisconnected 
-} from '../wallet/provider';
+import { checkConnection } from './thunks';
+import { providerDisconnected } from '../wallet/provider';
 
-import { 
-	ConnectionSlice 
-} from './connectionSlice.types';
+import { ConnectionSlice } from './connectionSlice.types';
 
 export const initialState: ConnectionSlice = {
 	statusOk: false,

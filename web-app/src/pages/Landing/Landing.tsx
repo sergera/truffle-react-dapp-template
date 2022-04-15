@@ -1,34 +1,15 @@
-import { 
-	useState 
-} from "react";
+import { useState } from "react";
 
-import { 
-	Button 
-} from '../../components/UI/Button';
-import { 
-	Input 
-} from '../../components/UI/Input';
+import { Button } from '../../components/UI/Button';
+import { Input } from '../../components/UI/Input';
 
-import { 
-	isName, 
-	isLoginId, 
-	isEmail, 
-	inLengthRange 
-} from '../../validation/string';
+import { isName, isLoginId, isEmail, inLengthRange } from '../../validation/string';
 
-import { 
-	store 
-} from '../../state';
-import { 
-	openErrorNotification 
-} from '../../state/errorNotification';
-import { 
-	openModal 
-} from "../../state/modal";
+import { store } from '../../state';
+import { openErrorNotification } from '../../state/errorNotification';
+import { openModal } from "../../state/modal";
 
-import {
-	MODAL_TYPES
-} from '../../state/modal';
+import { MODAL_TYPES } from '../../state/modal';
 
 export function Landing() {
 

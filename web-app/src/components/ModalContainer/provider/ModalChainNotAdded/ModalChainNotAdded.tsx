@@ -1,10 +1,6 @@
-import { 
-	Button 
-} from '../../../UI/Button';
+import { Button } from '../../../UI/Button';
 
-import { 
-	ModalChainNotAddedProps 
-} from './ModalChainNotAdded.types';
+import { ModalChainNotAddedProps } from './ModalChainNotAdded.types';
 
 export function ModalChainNotAdded({
 	close

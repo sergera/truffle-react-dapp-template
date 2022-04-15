@@ -1,20 +1,9 @@
-import { 
-	createSlice, 
-	PayloadAction 
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { 
-	connectChain, 
-	setChainListeners 
-} from '.';
-import { 
-	providerDisconnected 
-} from '../provider';
+import { connectChain, setChainListeners } from './thunks';
+import { providerDisconnected } from '../provider';
 
-import { 
-	ChainSlice, 
-	ConnectChainPayload 
-} from './chainSlice.types';
+import { ChainSlice, ConnectChainPayload } from './chainSlice.types';
 
 export const initialState: ChainSlice = {
 	name: "",

@@ -1,10 +1,6 @@
-import { 
-	metamask
-} from '.';
+import { metamask } from '.';
 
-import {
-	ProviderRpcError
-} from './metamask.types';
+import { ProviderRpcError } from './metamask.types';
 
 declare var window: any;
 

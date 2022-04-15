@@ -1,17 +1,8 @@
-import { 
-	createSlice, 
-	PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { 
-	connectProvider, 
-	setProviderListeners, 
-	providerDisconnected,
-} from './thunks';
+import { connectProvider, setProviderListeners, providerDisconnected } from './thunks';
 
-import { 
-	ProviderSlice,
-} from './providerSlice.types';
+import { ProviderSlice } from './providerSlice.types';
 
 export const initialState: ProviderSlice = {
 	isEnabled: false,

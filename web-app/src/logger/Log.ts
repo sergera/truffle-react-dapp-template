@@ -1,11 +1,6 @@
-import { 
-	SEVERITIES, 
-	STYLES 
-} from './Log.constants';
+import { SEVERITIES, STYLES } from './Log.constants';
 
-import { 
-	LogArguments 
-} from './Log.types';
+import { LogArguments } from './Log.types';
 
 const getStyles = (severity: string) => {
 	return STYLES[severity].join(";") + ";";

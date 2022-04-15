@@ -1,15 +1,5 @@
-import { 
-	hasMinLength,
-	hasMaxLength,
-	inLengthRange,
-	isAlphabetic, 
-	isNumeric, 
-	isAlphaNumeric,
-	isName,
-	isAlphaNumericName,
-	isLoginId,
-	isEmail
-} from ".";
+import { hasMinLength, hasMaxLength, inLengthRange, isAlphabetic, isNumeric, 
+isAlphaNumeric, isName,	isAlphaNumericName,	isLoginId, isEmail } from ".";
 
 const alphabetic = "abcdefghijlmnopqrstuvxzABCDEFGHIJLMNOPQRSTUVXZ";
 const numeric = "0123456789";

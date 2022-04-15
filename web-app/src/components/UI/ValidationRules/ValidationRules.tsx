@@ -1,6 +1,4 @@
-import { 
-	ValidationRulesProps 
-} from './ValidationRules.types';
+import { ValidationRulesProps } from './ValidationRules.types';
  
 export function ValidationRules({
 	show, 

@@ -1,20 +1,9 @@
 import * as connectionThunks from '../../connection/thunks';
-import { 
-	initialState,
-	connectAccount, 
-	accountSwitched,
-	setAccountListeners 
-} from '.';
-import { 
-	providerDisconnected 
-} from '../provider';
+import { initialState, connectAccount, accountSwitched,	setAccountListeners } from '.';
+import { providerDisconnected } from '../provider';
 
-import { 
-	getNewStore 
-} from '../../../../test';
-import {
-	metamask,
-} from '../../../../blockchain/metamask'
+import { getNewStore } from '../../../../test';
+import { metamask } from '../../../../blockchain/metamask'
 
 /* silence logger */
 jest.mock("../../../../logger");

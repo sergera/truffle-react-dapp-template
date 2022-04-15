@@ -1,31 +1,15 @@
-import { 
-	createAsyncThunk 
-} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { 
-	openModal 
-} from '../../../modal';
+import { metamask } from '../../../../blockchain/metamask';
+import { setWeb3Provider } from '../../../../blockchain/web3';
+import { deleteContracts } from '../../../../blockchain/contracts';
+import { Log } from '../../../../logger';
 
-import { 
-	metamask
-} from '../../../../blockchain/metamask';
-import { 
-	setWeb3Provider 
-} from '../../../../blockchain/web3';
-import { 
-	deleteContracts 
-} from '../../../../blockchain/contracts';
-import {
-	Log
-} from '../../../../logger';
+import { openModal } from '../../../modal';
 
-import {
-	MODAL_TYPES
-} from '../../../modal';
+import { MODAL_TYPES } from '../../../modal';
 
-import { 
-	RootState 
-} from '../../..';
+import { RootState } from '../../..';
 
 export const connectProvider = createAsyncThunk<
 	boolean, // return type

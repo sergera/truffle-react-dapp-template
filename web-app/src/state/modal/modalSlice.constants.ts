@@ -1,6 +1,4 @@
-import {
-	ModalTypesMap
-} from './modalSlice.types';
+import { ModalTypesMap } from './modalSlice.types';
 
 export const MODAL_TYPES: ModalTypesMap = {
 	disabled: "DISABLED",
