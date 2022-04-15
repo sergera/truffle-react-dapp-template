@@ -21,10 +21,7 @@ jest.mock("../../env", () => ({
 let mockGetContractNames = getContractNames as jest.Mock;
 
 /* silence logger */
-jest.mock("../../logger", () => ({
-	__esModule: true,
-	log: jest.fn(),
-}));
+jest.mock("../../logger");
 
 /* declare fake contract values */
 const testContractOneName = "testContractOne";

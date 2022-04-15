@@ -16,6 +16,9 @@ import {
 	metamask,
 } from '../../../../blockchain/metamask'
 
+/* silence logger */
+jest.mock("../../../../logger");
+
 /* declare mock return variables */
 const fakeAddress = "fake address";
 const fakeAccounts = [fakeAddress];

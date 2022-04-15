@@ -23,6 +23,9 @@ import {
 	checkAllContractsAcquired
 } from '../../../blockchain/contracts';
 
+/* silence logger */
+jest.mock("../../../logger");
+
 /* mock functions to be mocked */
 /* mock functions that use window.ethereum so that error isn't thrown on access */
 /* mock all used functions in mocked modules so that error isn't thrown on access */

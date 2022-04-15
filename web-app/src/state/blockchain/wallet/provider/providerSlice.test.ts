@@ -15,6 +15,9 @@ import {
 	MODAL_TYPES
 } from '../../../modal';
 
+/* silence logger */
+jest.mock("../../../../logger");
+
 /* mock non-redux modules that will be spied on for import consistency */
 jest.mock("../../../../blockchain/contracts", () => ({
 	__esModule: true,

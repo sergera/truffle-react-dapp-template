@@ -12,10 +12,7 @@ const fakeChainIdHex = "0x0";
 const fakeChainName = "fake chain name";
 
 /* silence logger */
-jest.mock("../../logger", () => ({
-	__esModule: true,
-	log: jest.fn(),
-}));
+jest.mock("../../logger");
 
 /* mock metamask injected provider */
 const fakeProvider = {

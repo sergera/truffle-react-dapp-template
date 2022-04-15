@@ -25,10 +25,7 @@ import {
 } from '../../../modal';
 
 /* silence logger */
-jest.mock("../../../../logger", () => ({
-	__esModule: true,
-	log: jest.fn(),
-}));
+jest.mock("../../../../logger");
 
 /* mock non-redux modules that will be spied on for import consistency */
 jest.mock("../../../../blockchain/contracts", () => ({
