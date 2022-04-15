@@ -8,6 +8,7 @@ export function Error() {
 			<img
 				src={`${publicUrl}/error/fire.png`}
 				className="error-page___img"
+				alt="fire"
 			/>
 			<div className="error-page__text">
 				<h1>{"Oops"}</h1>

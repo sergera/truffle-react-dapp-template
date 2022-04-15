@@ -16,21 +16,25 @@ export function Contacts() {
 						src={`${publicUrl}/social/github_white_150x150.png`}
 						onClick={() => newTab(contacts.github)}
 						className="contacts__icon"
+						alt="link to author's github"
 					/>
 					<img
 						src={`${publicUrl}/social/linkedin_white_150x150.png`}
 						onClick={() => newTab(contacts.linkedin)}
 						className="contacts__icon"
+						alt="link to author's linkedin"
 					/>
 					<img
 						src={`${publicUrl}/social/instagram_white_150x150.png`}
 						onClick={() => newTab(contacts.instagram)}
 						className="contacts__icon"
+						alt="link to author's instagram"
 					/>
 					<img
 						src={`${publicUrl}/social/twitter_white_150x150.png`}
 						onClick={() => newTab(contacts.twitter)}
 						className="contacts__icon"
+						alt="link to author's twitter"
 					/>
 				</div>
 			</div>
@@ -46,6 +50,7 @@ export function Contacts() {
 						<img
 								src={`${publicUrl}/social/email_white_150x150.png`}
 								className="contacts__icon"
+								alt="e-mail author with default e-mail application"
 						/>
 					</a>
 				</div>

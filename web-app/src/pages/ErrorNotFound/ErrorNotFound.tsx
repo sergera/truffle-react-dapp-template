@@ -8,6 +8,7 @@ export function ErrorNotFound() {
 			<img
 				src={`${publicUrl}/error/gandalf.png`}
 				className="error-page-404___img"
+				alt="gandalf"
 			/>
 			<div className="error-page-404__text">
 				<h1>{"404"}</h1>

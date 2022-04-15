@@ -11,6 +11,7 @@ export function Header() {
 			<img 						
 					src={`${publicUrl}/logo/logo_white.png`}
 					className="header__logo"
+					alt="logo"
 			/>
 			<p className="header__title">by Sergio Joselli</p>
 			<ConnectMetamask />
