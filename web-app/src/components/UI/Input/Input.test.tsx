@@ -27,6 +27,6 @@ test('gives value to callback', () => {
 	render(<TestComponent/>);
 	
 	const testText = "testing component now";
-	userEvent.type(screen.getByRole(/input/i), testText);
+	userEvent.type(screen.getByRole(/text/i), testText);
 	expect(screen.getByDisplayValue(testText)).toHaveAttribute("name", "test component");
 });

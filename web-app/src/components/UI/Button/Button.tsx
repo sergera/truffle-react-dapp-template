@@ -6,10 +6,9 @@ export function Button({callback, name, styleClass=""}: ButtonProps) {
 		<button 
 			onClick={callback} 
 			className={"button " + styleClass} 
-			role={"button"}
 			name={name}
 		>
-		{name}
+			{name}
 		</button>
   );
 };

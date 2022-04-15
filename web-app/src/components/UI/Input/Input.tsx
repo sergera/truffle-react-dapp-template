@@ -48,7 +48,6 @@ export function Input({
 				type="text"
 				onChange={getValue}
 				onBlur={decideShowRules}
-				role={"input"}
 				name={name}
 				form={formId}
 				value={value}
