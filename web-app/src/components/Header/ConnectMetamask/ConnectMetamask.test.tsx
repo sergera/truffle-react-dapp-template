@@ -11,7 +11,7 @@ const mockSelectChain = jest.fn();
 const propsAllOk = {
 	connect: mockConnect,
 	selectChain: mockSelectChain,
-	connectionStatusOk: true,
+	killswitch: false,
 	chainName: "fake chain name",
 	account: "fake account address",
 	providerEnabled: true,
@@ -25,7 +25,7 @@ const propsAllOk = {
 const propsAllNotOk = {
 	connect: mockConnect,
 	selectChain: mockSelectChain,
-	connectionStatusOk: false,
+	killswitch: true,
 	chainName: "",
 	account: "",
 	providerEnabled: false,
@@ -50,10 +50,10 @@ test("should call connect on button click", () => {;
 });
 
 describe("should show connect button", () => {
-	test("if connection status not ok", () => {
+	test("if killswitch", () => {
 		const props = {
 			...propsAllOk,
-			connectionStatusOk: false,
+			killswitch: true,
 		};
 
 		render(<ConnectMetamask {...props}/>);
@@ -65,10 +65,10 @@ describe("should show connect button", () => {
 });
 
 describe("should show wrong chain button", () => {
-	test("if everything but connection status and chain permitted ok", () => {
+	test("if everything but killswitch and chain permitted ok", () => {
 		const props = {
 			...propsAllOk,
-			connectionStatusOk: false,
+			killswitch: true,
 			chainPermitted: false,
 		};
 
@@ -81,12 +81,12 @@ describe("should show wrong chain button", () => {
 })
 
 describe("should show connected", () => {
-	test("if connection status ok", () => {
+	test("if not killswitch", () => {
 		const props = {
 			...propsAllNotOk,
 			chainName: "only connection status chain name",
 			account: "only connection status account",
-			connectionStatusOk: true,
+			killswitch: false,
 		};
 
 		render(<ConnectMetamask {...props}/>);

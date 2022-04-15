@@ -1,7 +1,7 @@
 export interface ConnectMetamaskProps {
 	connect: Function;
 	selectChain: Function;
-	connectionStatusOk: boolean;
+	killswitch: boolean;
 	chainName: string;
 	account: string;
 	providerEnabled: boolean;

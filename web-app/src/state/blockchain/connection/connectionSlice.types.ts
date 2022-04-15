@@ -1,3 +1,3 @@
 export interface ConnectionSlice {
-	statusOk: boolean;
+	killswitch: boolean;
 };

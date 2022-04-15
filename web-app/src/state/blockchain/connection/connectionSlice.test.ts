@@ -53,7 +53,7 @@ test("should set initial state", () => {
 });
 
 describe("checkConnection", () => {
-	test("should set statusOk true if all blockchain related state is ok", async () => {
+	test("should set killswitch false if all blockchain related state is ok", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -70,10 +70,10 @@ describe("checkConnection", () => {
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(true);
+		expect(store.getState().connection.killswitch).toEqual(false);
 	});
 
-	test("should set statusOk false if metamask not enabled", async () => {
+	test("should set killswitch true if metamask not enabled", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -90,10 +90,10 @@ describe("checkConnection", () => {
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if provider listeners not set", async () => {
+	test("should set killswitch true if provider listeners not set", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -111,10 +111,10 @@ describe("checkConnection", () => {
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if chain not connected", async () => {
+	test("should set killswitch true if chain not connected", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -132,10 +132,10 @@ describe("checkConnection", () => {
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if chain not permitted", async () => {
+	test("should set killswitch true if chain not permitted", async () => {
 		mockIsChainSupported.mockImplementation(() => false);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -152,10 +152,10 @@ describe("checkConnection", () => {
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if chain listeners not set", async () => {
+	test("should set killswitch true if chain listeners not set", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -173,10 +173,10 @@ describe("checkConnection", () => {
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if account not retrieved", async () => {
+	test("should set killswitch true if account not retrieved", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -193,10 +193,10 @@ describe("checkConnection", () => {
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if account listeners not set", async () => {
+	test("should set killswitch true if account listeners not set", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -214,10 +214,10 @@ describe("checkConnection", () => {
 
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 
-	test("should set statusOk false if contracts not acquired", async () => {
+	test("should set killswitch true if contracts not acquired", async () => {
 		mockIsChainSupported.mockImplementation(() => true);
 		mockGetChainName.mockImplementation(() => fakeChainName);
 	
@@ -234,7 +234,7 @@ describe("checkConnection", () => {
 	
 		await store.dispatch(connectWallet());
 		await store.dispatch(checkConnection());
-		expect(store.getState().connection.statusOk).toEqual(false);
+		expect(store.getState().connection.killswitch).toEqual(true);
 	});
 });
 
@@ -256,7 +256,7 @@ test("should reset state if provider disconnected", async () => {
 	await store.dispatch(connectWallet());
 	await store.dispatch(checkConnection());
 
-	expect(store.getState().connection.statusOk).toEqual(true);
+	expect(store.getState().connection.killswitch).toEqual(false);
 
 	await store.dispatch(providerDisconnected());
 	expect(store.getState().connection).toEqual(initialState);

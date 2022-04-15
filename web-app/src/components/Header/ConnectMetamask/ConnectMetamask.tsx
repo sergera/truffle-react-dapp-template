@@ -15,7 +15,7 @@ import { ConnectMetamaskProps } from './ConnectMetamask.types';
 export function ConnectMetamask({
 	connect,
 	selectChain,
-	connectionStatusOk, 
+	killswitch, 
 	chainName, 
 	account,
 	/* props to check if only chain not permitted */
@@ -35,7 +35,7 @@ export function ConnectMetamask({
 		selectChain();
 	}
 
-	if(connectionStatusOk) {
+	if(!killswitch) {
 		// if correct chain connected and account retrieved
 		return (
 			<div className="connect-metamask connect-metamask--info">
@@ -76,7 +76,7 @@ export function ConnectMetamask({
 
 const mapStateToProps = (state: RootState) => {
 	return {
-		connectionStatusOk: state.connection.statusOk,
+		killswitch: state.connection.killswitch,
 		chainName: state.chain.name,
 		account: state.account.address,
 		/* props to check if only chain not permitted */

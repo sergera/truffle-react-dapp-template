@@ -6,7 +6,7 @@ import { providerDisconnected } from '../wallet/provider';
 import { ConnectionSlice } from './connectionSlice.types';
 
 export const initialState: ConnectionSlice = {
-	statusOk: false,
+	killswitch: true,
 }
 
 const connectionSlice = createSlice({
@@ -15,14 +15,14 @@ const connectionSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(checkConnection.fulfilled, (state, action: PayloadAction<boolean>) => {
-			let status = action.payload;
-      state.statusOk = status;
+			let statusOk = action.payload;
+      state.killswitch = !statusOk;
     });
 		builder.addCase(checkConnection.rejected, (state) => {
-      state.statusOk = false;
+      state.killswitch = true;
     });
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
-			state.statusOk = false;
+			state.killswitch = true;
     });
   }
 });
