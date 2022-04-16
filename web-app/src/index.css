@@ -108,6 +108,14 @@
 	--error-notification-btn-text: var(--error-notification);
 }
 
+/* make width and height include padding and border */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
 	padding: 0;
@@ -117,7 +125,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
-  max-width: 100%;
+  max-width: 100vw;
 	background-color: var(--background);
 	color: var(--background-text);
 }
