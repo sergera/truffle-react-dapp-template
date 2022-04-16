@@ -53,7 +53,7 @@ describe("providerDisconnected", () => {
 		expect(deleteContractsSpy).toBeCalled();
 		expect(store.getState().modal.type).toEqual(MODAL_TYPES.disconnected);
 		expect(store.getState().provider.isEnabled).toEqual(false);
-		expect(store.getState().provider.listenersSet).toEqual(false);
+		expect(store.getState().provider.listenersAreSet).toEqual(false);
 	});
 });
 
@@ -63,6 +63,6 @@ describe("setProviderListeners", () => {
 		metamask.setDisconnectCallback = () => null;
 
 		await store.dispatch(setProviderListeners());
-		expect(store.getState().provider.listenersSet).toEqual(true);
+		expect(store.getState().provider.listenersAreSet).toEqual(true);
 	});
 });

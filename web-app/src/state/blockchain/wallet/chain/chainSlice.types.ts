@@ -3,12 +3,12 @@ export interface ChainSlice {
 	id: string;
 	isConnected: boolean;
 	isPermitted: boolean;
-	listenersSet: boolean;
+	listenersAreSet: boolean;
 };
 
 export interface ConnectChainPayload {
 	name: string;
 	id: string;
-	connected: boolean;
-	supported: boolean;
+	isConnected: boolean;
+	isSupported: boolean;
 };

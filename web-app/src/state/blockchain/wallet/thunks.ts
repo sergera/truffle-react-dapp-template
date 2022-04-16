@@ -22,9 +22,9 @@ export const connectWallet = createAsyncThunk<
 		providerOk && await dispatch(connectChain());
 		providerOk && await dispatch(connectAccount());
 
-		getState().provider.listenersSet || await dispatch(setProviderListeners());
-		getState().chain.listenersSet || await dispatch(setChainListeners());
-		getState().account.listenersSet || await dispatch(setAccountListeners());
+		getState().provider.listenersAreSet || await dispatch(setProviderListeners());
+		getState().chain.listenersAreSet || await dispatch(setChainListeners());
+		getState().account.listenersAreSet || await dispatch(setAccountListeners());
 
 		await dispatch(checkConnection());
 	}

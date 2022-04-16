@@ -168,7 +168,7 @@ describe("setChainListeners", () => {
 		metamask.setChainSwitchCallback = () => null;
 
 		await store.dispatch(setChainListeners());
-		expect(store.getState().chain.listenersSet).toEqual(true);
+		expect(store.getState().chain.listenersAreSet).toEqual(true);
 	});
 });
 

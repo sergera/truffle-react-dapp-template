@@ -27,11 +27,11 @@ export const connectChain = createAsyncThunk<
 		const chainName = getChainName(chainIdInt);
 		const chainIdString = chainIdInt.toString();
 
-		const chainConnected = metamask.isConnected();
-		chainConnected ||	dispatch(openModal(MODAL_TYPES.notConnected));
+		const chainIsConnected = metamask.isConnected();
+		chainIsConnected ||	dispatch(openModal(MODAL_TYPES.notConnected));
 
-		const chainSupported = isChainSupported(chainIdInt);
-		if(chainSupported) {
+		const chainIsSupported = isChainSupported(chainIdInt);
+		if(chainIsSupported) {
 			await setContracts(chainIdString);
 			const contractsAcquired = checkAllContractsAcquired();
 			await dispatch(setContractAcquired(contractsAcquired));
@@ -40,8 +40,8 @@ export const connectChain = createAsyncThunk<
 		return {
 			name: chainName,
 			id: chainIdString,
-			connected: chainConnected,
-			supported: chainSupported,
+			isConnected: chainIsConnected,
+			isSupported: chainIsSupported,
 		};
 	}
 );

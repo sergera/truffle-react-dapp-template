@@ -16,8 +16,8 @@ test("should set initial state", () => {
 describe("setContractAcquired", () => {
 	test("should set acquired boolean", () => {
 		store.dispatch(setContractAcquired(true));
-		expect(store.getState().contract.acquired).toEqual(true);
+		expect(store.getState().contract.isAcquired).toEqual(true);
 		store.dispatch(setContractAcquired(false));
-		expect(store.getState().contract.acquired).toEqual(false);
+		expect(store.getState().contract.isAcquired).toEqual(false);
 	});
 });

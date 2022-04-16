@@ -19,12 +19,12 @@ export function ConnectMetamask({
 	chainName, 
 	account,
 	/* props to check if only chain not permitted */
-	providerEnabled,
-	providerListenersSet,
-	chainConnected,
-	chainPermitted,
-	chainListenersSet,
-	accountListenersSet,
+	providerIsEnabled,
+	providerListenersAreSet,
+	chainIsConnected,
+	chainIsPermitted,
+	chainListenersAreSet,
+	accountListenersAreSet,
 }: ConnectMetamaskProps) {
 
 	const connectToBlockchain = () => {
@@ -45,12 +45,12 @@ export function ConnectMetamask({
 		);
 	} else {
 		const everythingButChainPermittedOk = (
-			providerEnabled && providerListenersSet &&
-			chainConnected && !!chainName && chainListenersSet &&
-			!!account && accountListenersSet
+			providerIsEnabled && providerListenersAreSet &&
+			chainIsConnected && !!chainName && chainListenersAreSet &&
+			!!account && accountListenersAreSet
 		);
 
-		if(everythingButChainPermittedOk && !chainPermitted) {
+		if(everythingButChainPermittedOk && !chainIsPermitted) {
 			return (
 				<div className="connect-metamask">
 					<Button 
@@ -80,12 +80,12 @@ const mapStateToProps = (state: RootState) => {
 		chainName: state.chain.name,
 		account: state.account.address,
 		/* props to check if only chain not permitted */
-		providerEnabled: state.provider.isEnabled,
-		providerListenersSet: state.provider.listenersSet,
-		chainConnected: state.chain.isConnected,
-		chainPermitted: state.chain.isPermitted,
-		chainListenersSet: state.chain.listenersSet,
-		accountListenersSet: state.account.listenersSet,
+		providerIsEnabled: state.provider.isEnabled,
+		providerListenersAreSet: state.provider.listenersAreSet,
+		chainIsConnected: state.chain.isConnected,
+		chainIsPermitted: state.chain.isPermitted,
+		chainListenersAreSet: state.chain.listenersAreSet,
+		accountListenersAreSet: state.account.listenersAreSet,
 	};
 };
 

@@ -10,7 +10,7 @@ export const initialState: ChainSlice = {
 	id: "",
 	isConnected: false,
 	isPermitted: false,
-	listenersSet: false,
+	listenersAreSet: false,
 };
 
 const chainSlice = createSlice({
@@ -19,11 +19,11 @@ const chainSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(connectChain.fulfilled, (state, action: PayloadAction<ConnectChainPayload>) => {
-			let { name, id, connected, supported } = action.payload;
+			let { name, id, isConnected, isSupported } = action.payload;
 			state.name = name;
 			state.id = id;
-			state.isConnected = connected;
-			state.isPermitted = supported;
+			state.isConnected = isConnected;
+			state.isPermitted = isSupported;
 		});
 		builder.addCase(connectChain.rejected, (state) => {
 			state.name = "";
@@ -32,14 +32,14 @@ const chainSlice = createSlice({
 			state.isPermitted = false;
 		});
 		builder.addCase(setChainListeners.fulfilled, (state) => {
-			state.listenersSet = true;
+			state.listenersAreSet = true;
     });
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
 			state.name = "";
 			state.id = "";
 			state.isConnected = false;
 			state.isPermitted = false;
-			state.listenersSet = false;
+			state.listenersAreSet = false;
     });
   }
 });

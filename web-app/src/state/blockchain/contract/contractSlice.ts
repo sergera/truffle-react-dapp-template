@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ContractSlice } from './contractSlice.types';
 
 export const initialState: ContractSlice = {
-	acquired: false,
+	isAcquired: false,
 };
 
 const contractSlice = createSlice({
@@ -11,7 +11,7 @@ const contractSlice = createSlice({
 	initialState,
 	reducers: {
 		setContractAcquired(state, action:PayloadAction<boolean>) {
-			state.acquired = action.payload;
+			state.isAcquired = action.payload;
 		},
 	},
 });

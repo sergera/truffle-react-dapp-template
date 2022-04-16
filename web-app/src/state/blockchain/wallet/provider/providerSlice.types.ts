@@ -1,4 +1,4 @@
 export interface ProviderSlice {
 	isEnabled: boolean;
-	listenersSet: boolean;
+	listenersAreSet: boolean;
 };

@@ -7,7 +7,7 @@ import { AccountSlice } from './accountSlice.types';
 
 export const initialState: AccountSlice = {
 	address: "",
-	listenersSet: false,
+	listenersAreSet: false,
 }
 
 const accountSlice = createSlice({
@@ -23,11 +23,11 @@ const accountSlice = createSlice({
       state.address = "";
     });
 		builder.addCase(setAccountListeners.fulfilled, (state) => {
-			state.listenersSet = true;
+			state.listenersAreSet = true;
     });
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
 			state.address = "";
-			state.listenersSet = false;
+			state.listenersAreSet = false;
     });
   }
 });

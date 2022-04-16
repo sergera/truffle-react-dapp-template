@@ -14,12 +14,12 @@ const propsAllOk = {
 	killswitch: false,
 	chainName: "fake chain name",
 	account: "fake account address",
-	providerEnabled: true,
-	providerListenersSet: true,
-	chainConnected: true,
-	chainPermitted: true,
-	chainListenersSet: true,
-	accountListenersSet: true,
+	providerIsEnabled: true,
+	providerListenersAreSet: true,
+	chainIsConnected: true,
+	chainIsPermitted: true,
+	chainListenersAreSet: true,
+	accountListenersAreSet: true,
 };
 
 const propsAllNotOk = {
@@ -28,12 +28,12 @@ const propsAllNotOk = {
 	killswitch: true,
 	chainName: "",
 	account: "",
-	providerEnabled: false,
-	providerListenersSet: false,
-	chainConnected: false,
-	chainPermitted: false,
-	chainListenersSet: false,
-	accountListenersSet: false,
+	providerIsEnabled: false,
+	providerListenersAreSet: false,
+	chainIsConnected: false,
+	chainIsPermitted: false,
+	chainListenersAreSet: false,
+	accountListenersAreSet: false,
 };
 
 beforeEach(() => {			
@@ -69,7 +69,7 @@ describe("should show wrong chain button", () => {
 		const props = {
 			...propsAllOk,
 			killswitch: true,
-			chainPermitted: false,
+			chainIsPermitted: false,
 		};
 
 		render(<ConnectMetamask {...props}/>);

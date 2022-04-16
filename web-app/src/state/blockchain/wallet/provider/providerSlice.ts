@@ -6,7 +6,7 @@ import { ProviderSlice } from './providerSlice.types';
 
 export const initialState: ProviderSlice = {
 	isEnabled: false,
-	listenersSet: false,
+	listenersAreSet: false,
 };
 
 const providerSlice = createSlice({
@@ -23,11 +23,11 @@ const providerSlice = createSlice({
 			state.isEnabled = false;
     });
 		builder.addCase(setProviderListeners.fulfilled, (state) => {
-			state.listenersSet = true;
+			state.listenersAreSet = true;
     });
 		builder.addCase(providerDisconnected.fulfilled, (state) => {
 			state.isEnabled = false;
-			state.listenersSet = false;
+			state.listenersAreSet = false;
     });
   }
 });

@@ -52,7 +52,7 @@ describe("setAccountListeners", () => {
 		metamask.setAccountSwitchCallback = () => null;
 
 		await store.dispatch(setAccountListeners());
-		expect(store.getState().account.listenersSet).toEqual(true);
+		expect(store.getState().account.listenersAreSet).toEqual(true);
 	});
 });
 

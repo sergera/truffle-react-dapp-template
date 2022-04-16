@@ -15,7 +15,7 @@ export const checkConnection = createAsyncThunk<
 
 		const providerOk = ( 
 			state.provider.isEnabled &&
-			state.provider.listenersSet
+			state.provider.listenersAreSet
 		);
 
 		const chainOk = (
@@ -25,7 +25,7 @@ export const checkConnection = createAsyncThunk<
 			state.chain.name !== null &&
 			typeof state.chain.name === typeof "" &&
 			state.chain.name.length > 0 &&
-			state.chain.listenersSet
+			state.chain.listenersAreSet
 		);
 
 		const accountOk = (
@@ -33,11 +33,11 @@ export const checkConnection = createAsyncThunk<
 			state.account.address !== null && 
 			typeof state.account.address === typeof "" &&
 			state.account.address.length > 0 &&
-			state.account.listenersSet
+			state.account.listenersAreSet
 		);
 
 		const contractOk = (
-			state.contract.acquired
+			state.contract.isAcquired
 		);
 
 		return providerOk && chainOk && accountOk && contractOk;

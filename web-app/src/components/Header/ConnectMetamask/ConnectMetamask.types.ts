@@ -4,10 +4,10 @@ export interface ConnectMetamaskProps {
 	killswitch: boolean;
 	chainName: string;
 	account: string;
-	providerEnabled: boolean;
-	providerListenersSet: boolean;
-	chainConnected: boolean;
-	chainPermitted: boolean;
-	chainListenersSet: boolean;
-	accountListenersSet: boolean;
+	providerIsEnabled: boolean;
+	providerListenersAreSet: boolean;
+	chainIsConnected: boolean;
+	chainIsPermitted: boolean;
+	chainListenersAreSet: boolean;
+	accountListenersAreSet: boolean;
 };

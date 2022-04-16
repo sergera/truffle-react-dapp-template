@@ -1,3 +1,3 @@
 export interface ContractSlice {
-	acquired: boolean;
+	isAcquired: boolean;
 };
