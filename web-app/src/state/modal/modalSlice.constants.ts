@@ -6,4 +6,5 @@ export const MODAL_TYPES: ModalTypesMap = {
 	disconnected: "DISCONNECTED",
 	selectChain: "SELECT_CHAIN",
 	chainNotAdded: "CHAIN_NOT_ADDED",
+	pleaseConnect: "PLEASE_CONNECT",
 };

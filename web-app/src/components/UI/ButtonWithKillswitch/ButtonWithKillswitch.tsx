@@ -2,11 +2,16 @@ import { connect } from 'react-redux';
 
 import { Button } from '../Button/Button';
 
-import { RootState } from '../../../state';
+import { openModal } from '../../../state/modal'
+
+import { MODAL_TYPES } from '../../../state/modal';
+
+import { RootState, Dispatch } from '../../../state';
 import { ButtonWithKillswitchProps } from './ButtonWithKillswitch.types';
 
 export function ButtonWithKillswitch({
 	killswitch,
+	pleaseConnect,
 	handleClick, 
 	name, 
 	styleClass=""
@@ -15,7 +20,7 @@ export function ButtonWithKillswitch({
 	if(killswitch) {
 		return (
 			<Button 
-				handleClick={()=>{}}
+				handleClick={() => pleaseConnect()}
 				name={name}
 				styleClass={styleClass}
 			/>
@@ -37,6 +42,13 @@ const mapStateToProps = (state: RootState) => {
 	};
 };
 
+const mapDispatchToProps = (dispatch: Dispatch) => {
+	return {
+    pleaseConnect: () => dispatch(openModal(MODAL_TYPES.pleaseConnect)),
+  };
+};
+
 export const ConnectedButtonWithKillswitch = connect(
-	mapStateToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(ButtonWithKillswitch);

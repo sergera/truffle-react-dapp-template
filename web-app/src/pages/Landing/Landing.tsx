@@ -80,6 +80,10 @@ export function Landing() {
 		store.dispatch(openModal(MODAL_TYPES.chainNotAdded));
 	}
 
+	const modalPleaseConnect = () => {
+		store.dispatch(openModal(MODAL_TYPES.pleaseConnect));
+	}
+
 	const nothing = () => {};
 
   return (
@@ -160,6 +164,11 @@ export function Landing() {
 					styleClass="btn-background-outline" 
 					handleClick={modalChainNotAdded} 
 					name={"Modal Chain Not Added"} 
+				/>	
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={modalPleaseConnect} 
+					name={"Modal Please Connect"} 
 				/>	
 				
 				<h1> Button With Killswitch</h1>
