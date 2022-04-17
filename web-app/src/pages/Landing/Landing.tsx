@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Button } from '../../components/UI/Button';
+import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
 import { Input } from '../../components/UI/Input';
 import { InputWithValidationRules } from "../../components/UI/InputWithValidationRules";
 
@@ -161,6 +162,12 @@ export function Landing() {
 					name={"Modal Chain Not Added"} 
 				/>	
 				
+				<h1> Button With Killswitch</h1>
+				<ButtonWithKillswitch 
+					styleClass="btn-background-outline" 
+					handleClick={errorNotification} 
+					name={"Error Notification"} 
+				/>			
 				
 				<h1> Buttons </h1>
 				<Button 
