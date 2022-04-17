@@ -12,7 +12,7 @@ const supportedChains = getSupportedChains();
 const chainsArray = supportedChains.map((chainName) => {
 	return {
 		name: chainName,
-		callback: async () => await store.dispatch(
+		handleSelect: async () => await store.dispatch(
 			switchChain(getChainIdHex(chainName))
 		),
 	}
@@ -25,8 +25,8 @@ export function ModalSelectChain({
 	const title = "Chain Not Supported";
 	const content = "Current connected chain is not supported, please connect to a supported chain";
 
-	const selectItem = (callback: Function) => {
-		callback();
+	const selectItem = (handleSelect: Function) => {
+		handleSelect();
 		close();
 	};
 
@@ -41,7 +41,7 @@ export function ModalSelectChain({
 							<Button 
 								styleClass="btn-foreground-outline" 
 								name={chainItem.name} 
-								handleClick={() => selectItem(chainItem.callback)} 
+								handleClick={() => selectItem(chainItem.handleSelect)} 
 								key={chainItem.name} 
 							/>				
 						</div>
