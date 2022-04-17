@@ -8,10 +8,6 @@ import { ErrorNotificationProps } from './ErrorNotification.types';
 
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 
-	function handleClose(){
-		close();
-	}
-
  return (
 		<>
 		{message && 
@@ -21,7 +17,11 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 			>
 				<h1>{"Error:"}</h1>
 				<p className="error-notification__message">{message}</p>
-				<Button styleClass="btn-error-notification" name={"Close"} handleClick={handleClose} />
+				<Button 
+					styleClass="btn-error-notification" 
+					name={"Close"} 
+					handleClick={() => close()} 
+				/>
 			</div>
 		}
 		</>

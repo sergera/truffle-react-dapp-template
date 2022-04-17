@@ -11,10 +11,6 @@ export function ModalDisabled({
 	const content2 = "Please make sure to have only MetaMask enabled and try again"
 	const content3 = "If you do not have metamask installed, please refer to their website"
 
-	const closeModal = () => {
-		close();
-	};
-
   return (
     <div className="modal">
 			<div className="modal__content">
@@ -34,7 +30,7 @@ export function ModalDisabled({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				handleClick={closeModal}
+				handleClick={() => close()}
 			/>
     </div>
   );

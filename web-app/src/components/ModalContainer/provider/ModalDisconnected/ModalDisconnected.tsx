@@ -8,11 +8,7 @@ export function ModalDisconnected({
 
 	const title = "Provider Disconnected";
 	const content = "Your provider has disconnected from the blockchain, please try again";
-
-	const closeModal = () => {
-		close();
-	};
-
+	
   return (
 		<div className="modal">
 			<div className="modal__content">
@@ -22,7 +18,7 @@ export function ModalDisconnected({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				handleClick={closeModal}
+				handleClick={() => close()}
 			/>
 		</div>
   );

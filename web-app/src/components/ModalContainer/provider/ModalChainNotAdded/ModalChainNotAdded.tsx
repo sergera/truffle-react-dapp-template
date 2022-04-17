@@ -9,10 +9,6 @@ export function ModalChainNotAdded({
 	const title = "Chain Not Added";
 	const content = "The selected chain is not added to your wallet provider, please add the chain";
 
-	const closeModal = () => {
-		close();
-	};
-
   return (
 		<div className="modal">
 			<div className="modal__content">
@@ -22,7 +18,7 @@ export function ModalChainNotAdded({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				handleClick={closeModal}
+				handleClick={() => close()}
 			/>
 		</div>
   );

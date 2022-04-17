@@ -9,10 +9,6 @@ export function ModalNotConnected({
 	const title = "Not Connected";
 	const content = "Your provider is not connected to the blockchain, please try again";
 
-	const closeModal = () => {
-		close();
-	};
-
   return (
 		<div className="modal">
 			<div className="modal__content">
@@ -22,7 +18,7 @@ export function ModalNotConnected({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				handleClick={closeModal}
+				handleClick={() => close()}
 			/>
 		</div>
   );
