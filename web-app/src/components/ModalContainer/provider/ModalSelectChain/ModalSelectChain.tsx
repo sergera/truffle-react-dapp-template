@@ -41,7 +41,7 @@ export function ModalSelectChain({
 							<Button 
 								styleClass="btn-foreground-outline" 
 								name={chainItem.name} 
-								callback={() => selectItem(chainItem.callback)} 
+								handleClick={() => selectItem(chainItem.callback)} 
 								key={chainItem.name} 
 							/>				
 						</div>

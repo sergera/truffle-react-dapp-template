@@ -34,7 +34,7 @@ export function ModalDisabled({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				callback={closeModal}
+				handleClick={closeModal}
 			/>
     </div>
   );

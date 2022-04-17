@@ -1,10 +1,10 @@
 import { ButtonProps } from './Button.types';
 
-export function Button({callback, name, styleClass=""}: ButtonProps) {
+export function Button({handleClick, name, styleClass=""}: ButtonProps) {
 
   return (
 		<button 
-			onClick={callback} 
+			onClick={handleClick} 
 			className={"button " + styleClass} 
 			name={name}
 		>

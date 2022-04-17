@@ -22,7 +22,7 @@ export function ModalDisconnected({
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
-				callback={closeModal}
+				handleClick={closeModal}
 			/>
 		</div>
   );

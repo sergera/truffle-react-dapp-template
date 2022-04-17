@@ -55,7 +55,7 @@ export function ConnectMetamask({
 				<div className="connect-metamask">
 					<Button 
 						styleClass="btn-lg btn-warning-outline" 
-						callback={openSelectChain} 
+						handleClick={openSelectChain} 
 						name={"Wrong Chain"} 
 					/>
 				</div>
@@ -65,7 +65,7 @@ export function ConnectMetamask({
 				<div className="connect-metamask">
 					<Button 
 						styleClass="btn-lg btn-foreground-outline" 
-						callback={connectToBlockchain} 
+						handleClick={connectToBlockchain} 
 						name={"Connect MetaMask"} 
 					/>
 				</div>

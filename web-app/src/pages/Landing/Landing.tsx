@@ -86,7 +86,7 @@ export function Landing() {
 				<h1> Error Notification </h1>
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={errorNotification} 
+					handleClick={errorNotification} 
 					name={"Error Notification"} 
 				/>
 
@@ -137,27 +137,27 @@ export function Landing() {
 				<h1> Modals </h1>
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalDisabled} 
+					handleClick={modalDisabled} 
 					name={"Modal Disabled"} 
 				/>	
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalNotConnected} 
+					handleClick={modalNotConnected} 
 					name={"Modal Not Connected"} 
 				/>			
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalDisconnected} 
+					handleClick={modalDisconnected} 
 					name={"Modal Disconnected"} 
 				/>					
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalSelectChain} 
+					handleClick={modalSelectChain} 
 					name={"Modal Select Chain"} 
 				/>			
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={modalChainNotAdded} 
+					handleClick={modalChainNotAdded} 
 					name={"Modal Chain Not Added"} 
 				/>	
 				
@@ -165,82 +165,82 @@ export function Landing() {
 				<h1> Buttons </h1>
 				<Button 
 					styleClass="btn-primary-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Primary Filled"} 
 				/>
 				<Button 
 					styleClass="btn-primary-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Primary Outline"} 
 				/>
 				<Button 
 					styleClass="btn-secondary-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Secondary Filled"} 
 				/>
 				<Button 
 					styleClass="btn-secondary-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Secondary Outline"} 
 				/>
 				<Button 
 					styleClass="btn-warning-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Warning Filled"} 
 				/>
 				<Button 
 					styleClass="btn-warning-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Warning Outline"} 
 				/>
 				<Button 
 					styleClass="btn-special-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Special Filled"} 
 				/>
 				<Button 
 					styleClass="btn-special-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Special Outline"} 
 				/>
 				<Button 
 					styleClass="btn-white-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button White Filled"} 
 				/>
 				<Button 
 					styleClass="btn-white-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button White Outline"} 
 				/>
 				<Button 
 					styleClass="btn-black-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Black Filled"} 
 				/>
 				<Button 
 					styleClass="btn-black-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Black Outline"} 
 				/>
 				<Button 
 					styleClass="btn-background-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Background Filled"} 
 				/>
 				<Button 
 					styleClass="btn-background-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Background Outline"} 
 				/>
 				<Button 
 					styleClass="btn-foreground-filled" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Foreground Filled"} 
 				/>
 				<Button 
 					styleClass="btn-foreground-outline" 
-					callback={nothing} 
+					handleClick={nothing} 
 					name={"Button Foreground Outline"} 
 				/>
     </div>
