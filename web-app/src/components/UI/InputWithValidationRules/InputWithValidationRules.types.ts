@@ -1,9 +1,9 @@
-export interface InputProps {
+export interface InputWithValidationRulesProps {
 	handleChange: Function;
 	value: string;
 	name: string;
-	handleBlur?: Function;
-	isValid?: boolean;
+	isValid: boolean;
+	rules: string[];
 	formId?: string;
 	placeholder?: string;
 	styleClass?: string;

@@ -4,29 +4,53 @@ import userEvent from '@testing-library/user-event';
 
 import { Input } from '.';
 
-test('gives value to callback', () => {
-	const TestComponent = () => {
-		let [testText, setTestText] = useState("");
+const changeHandler = jest.fn();
+const blurHandler = jest.fn();
 
-		let testCallback = (value: string) => {
-			setTestText(value);
-		}
+const TestComponent = () => {
+	let [onChangeTestText, setOnChangeTestText] = useState("");
 
-		return (
-			<Input 
-				callback={testCallback} 
-				value={testText} 
-				name="test component"
-				placeholder="test input"
-				isValid={true}
-				rules={["validation rules array"]}
-			/>
-		);
+	let testOnChangeCallback = (value: string) => {
+		setOnChangeTestText(value);
+		changeHandler(value);
 	}
 
-	render(<TestComponent/>);
+	let testOnBlurCallback = (value: string) => {
+		blurHandler(value);
+	}
+
+	return (
+		<Input 
+			handleChange={testOnChangeCallback} 
+			handleBlur={testOnBlurCallback}
+			value={onChangeTestText} 
+			name="test component"
+			placeholder="test input"
+		/>
+	);
+};
+
+describe("gives value to callback", () => {
+	test("on change", () => {
+		render(		
+			<TestComponent />
+		);
 	
-	const testText = "testing component now";
-	userEvent.type(screen.getByRole(/text/i), testText);
-	expect(screen.getByDisplayValue(testText)).toHaveAttribute("name", "test component");
-});
+		const testText = "testing component now";
+		userEvent.type(screen.getByRole(/text/i), testText);
+		expect(screen.getByDisplayValue(testText)).toHaveAttribute("name", "test component");
+		expect(blurHandler).not.toHaveBeenCalled();
+		expect(changeHandler).toHaveBeenLastCalledWith(testText);
+	});
+
+	test("on blur", () => {
+		render(<TestComponent/>);
+
+		const testText = "testing component now";
+		userEvent.type(screen.getByRole(/text/i), testText);
+		expect(blurHandler).not.toHaveBeenCalled();
+		userEvent.tab();
+		expect(blurHandler).toHaveBeenCalledTimes(1);
+		expect(blurHandler).toHaveBeenCalledWith(testText);
+	});
+})

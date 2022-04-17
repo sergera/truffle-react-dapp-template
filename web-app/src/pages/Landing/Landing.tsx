@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { Button } from '../../components/UI/Button';
 import { Input } from '../../components/UI/Input';
+import { InputWithValidationRules } from "../../components/UI/InputWithValidationRules";
 
 import { isName, isLoginId, isEmail, inLengthRange } from '../../validation/string';
 
@@ -13,6 +14,7 @@ import { MODAL_TYPES } from '../../state/modal';
 
 export function Landing() {
 
+	let [simpleInputValue, setSimpleInputValue] = useState("");
 	let [nameInputValue, setNameInputValue] = useState("");
 	let [userNameInputValue, setUserNameInputValue] = useState("");
 	let [emailInputValue, setEmailInputValue] = useState("");
@@ -20,6 +22,10 @@ export function Landing() {
 	let [isValidName, setIsValidName] = useState(true);
 	let [isValidUserName, setIsValidUserName] = useState(true);
 	let [isValidEmail, setIsValidEmail] = useState(true);
+
+	let getSimpleInputValue = (value: string) => {
+		setSimpleInputValue(value);
+	}
 
 	let getNameValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
@@ -86,7 +92,15 @@ export function Landing() {
 
 				<h1> Input </h1>
 				<Input 
-					callback={getNameValue}
+					handleChange={getSimpleInputValue}
+					value={simpleInputValue}
+					name="simple input"
+					placeholder="insert text here"
+				/>
+
+				<h1> Input With Validation Rules </h1>
+				<InputWithValidationRules 
+					handleChange={getNameValue}
 					value={nameInputValue}
 					name="name input"
 					placeholder="insert name here"
@@ -96,8 +110,8 @@ export function Landing() {
 						"non-consecutive spaces in between"]
 					}
 				/>
-				<Input 
-					callback={getUserNameValue}
+				<InputWithValidationRules 
+					handleChange={getUserNameValue}
 					value={userNameInputValue}
 					name="username input"
 					placeholder="insert username here"
@@ -107,8 +121,8 @@ export function Landing() {
 						"non-consecutive dots, hifens and underscores in between"]
 					}
 				/>
-				<Input 
-					callback={getEmailValue}
+				<InputWithValidationRules 
+					handleChange={getEmailValue}
 					value={emailInputValue}
 					name="email input"
 					placeholder="insert username here"

@@ -1,0 +1,5 @@
+.input-with-validation-rules {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}

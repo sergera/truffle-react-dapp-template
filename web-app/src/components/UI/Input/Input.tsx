@@ -1,33 +1,24 @@
-import { useState } from "react";
-
-import { ValidationRules } from "../ValidationRules";
-
 import { InputProps } from './Input.types';
 
 export function Input({
-	callback, 
-	value, 
-	formId, 
-	name, 
-	placeholder, 
-	isValid,
-	rules,
+	name,
+	value,
+	handleChange, 
+	handleBlur=()=>{},
+	isValid=true,
+	formId="", 
+	placeholder="",
 	styleClass=""
 }: InputProps) {
 
-	let [showRules, setShowRules] = useState(false);
-
-	const decideShowRules = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if(isValid) {
-			setShowRules(false);
-		} else {
-			setShowRules(true);
-		}
+	const getValueOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value;
+		handleChange(value);
 	};
 
-	const getValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const getValueOnBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
-		callback(value);
+		handleBlur(value);
 	};
 
 	if(!isValid) styleClass = styleClass + " input--invalid";
@@ -40,17 +31,13 @@ export function Input({
 			</label>
 			<input 
 				type="text"
-				onChange={getValue}
-				onBlur={decideShowRules}
+				onChange={getValueOnChange}
+				onBlur={getValueOnBlur}
 				name={name}
 				form={formId}
 				value={value}
 				className={"input " + styleClass} 
 				placeholder={placeholder}
-			/>
-			<ValidationRules
-				show={showRules}
-				rules={rules}
 			/>
 		</div>
 		</>
