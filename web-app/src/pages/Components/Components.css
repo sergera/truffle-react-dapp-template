@@ -1,0 +1,7 @@
+.components {
+	padding: 1rem;
+}
+
+.components > * {
+	margin-bottom: 1rem;
+}

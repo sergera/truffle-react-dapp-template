@@ -1,4 +1,6 @@
 @import './pages/Landing/Landing.css';
+@import './pages/Components/Components.css';
+@import './pages/Notes/Notes.css';
 @import './pages/ErrorNotFound/ErrorNotFound.css';
 @import './pages/Error/Error.css';
 

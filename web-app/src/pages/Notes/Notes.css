@@ -1,0 +1,7 @@
+.contract-interaction {
+	padding: 1rem;
+}
+
+.contract-interaction > * {
+	margin-bottom: 1rem;
+}
