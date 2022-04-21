@@ -37,12 +37,11 @@ export function ModalSelectChain({
 			<div className="modal-select-chain__options">
 				{chainsArray.map((chainItem) => {
 					return (
-						<div className="modal-select-chain__item"> 
+						<div className="modal-select-chain__item" key={chainItem.name} > 
 							<Button 
 								styleClass="btn-foreground-outline" 
 								name={chainItem.name} 
-								handleClick={() => selectItem(chainItem.handleSelect)} 
-								key={chainItem.name} 
+								handleClick={() => selectItem(chainItem.handleSelect)}
 							/>				
 						</div>
 					);
