@@ -13,6 +13,14 @@ contract Notes {
 		_symbol = "NOTES";
 	}
 
+	function name() public view virtual returns (string memory) {
+			return _name;
+	}
+
+	function symbol() public view virtual returns (string memory) {
+			return _symbol;
+	}
+
 	struct Note {
 		string title;
 		string content;
