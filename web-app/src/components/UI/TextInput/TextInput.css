@@ -1,11 +1,11 @@
-.input__wrapper {
+.text-input__wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
 }
 
-.input {
+.text-input {
 	width: 100%;
 	border-radius: 6px;
 	border: 1px solid var(--input-border);
@@ -13,12 +13,12 @@
 	color: var(--input-text);
 }
 
-.input__label {
+.text-input__label {
 	display: block;
 	margin-bottom: 0.5rem;
 	color: var(--input-text);
 }
 
-.input--invalid {
+.text-input--invalid {
 	border: 1px solid var(--input-invalid);
 }

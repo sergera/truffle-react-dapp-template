@@ -1,4 +1,4 @@
-export interface InputProps {
+export interface TextInputProps {
 	handleChange: Function;
 	value: string;
 	name: string;

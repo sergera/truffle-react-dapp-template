@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
-import { Input } from '../../components/UI/Input';
+import { TextInput } from '../../components/UI/TextInput';
 
 import { simpleCall, txCall, estimateGas } from '../../blockchain/contracts';
 import { getErrorMessage } from "../../error";
@@ -106,13 +106,13 @@ export function Notes() {
   return (
     <div className="contract-interaction">
 				<h1> Test Contract </h1>
-				<Input 
+				<TextInput 
 					handleChange={getNoteTitleInputValue}
 					value={noteTitleInputValue}
 					name="note title"
 					placeholder="insert note here"
 				/>
-				<Input 
+				<TextInput 
 					handleChange={getNoteContentInputValue}
 					value={noteContentInputValue}
 					name="note content"

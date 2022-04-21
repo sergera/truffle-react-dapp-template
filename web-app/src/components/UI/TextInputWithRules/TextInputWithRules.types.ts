@@ -1,4 +1,4 @@
-export interface InputWithValidationRulesProps {
+export interface TextInputWithRulesProps {
 	handleChange: Function;
 	value: string;
 	name: string;

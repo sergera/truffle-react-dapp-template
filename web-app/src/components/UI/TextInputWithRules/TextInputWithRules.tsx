@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { Input } from "../Input/Input";
+import { TextInput } from "../TextInput/TextInput";
 import { ValidationRules } from "../ValidationRules";
 
-import { InputWithValidationRulesProps } from './InputWithValidationRules.types';
+import { TextInputWithRulesProps } from './TextInputWithRules.types';
 
-export function InputWithValidationRules({
+export function TextInputWithRules({
 	handleChange, 
 	value, 
 	formId, 
@@ -14,7 +14,7 @@ export function InputWithValidationRules({
 	isValid,
 	rules,
 	styleClass=""
-}: InputWithValidationRulesProps) {
+}: TextInputWithRulesProps) {
 
 	let [showRules, setShowRules] = useState(false);
 
@@ -28,15 +28,15 @@ export function InputWithValidationRules({
 	
   return (
 		<>
-		<div className="input-with-validation-rules">
-			<Input 
+		<div className="text-input-with-rules">
+			<TextInput 
 				handleChange={handleChange}
 				handleBlur={decideShowRules}
 				isValid={isValid}
 				name={name}
 				formId={formId}
 				value={value}
-				styleClass={"input " + styleClass} 
+				styleClass={"text-input " + styleClass} 
 				placeholder={placeholder}
 			/>
 			<ValidationRules

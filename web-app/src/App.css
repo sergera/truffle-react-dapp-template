@@ -20,9 +20,9 @@
 @import './components/ErrorNotification/ErrorNotification.css';
 
 @import './components/UI/Button/Button.css';
-@import './components/UI/Input/Input.css';
+@import './components/UI/TextInput/TextInput.css';
 @import './components/UI/ValidationRules/ValidationRules.css';
-@import './components/UI/InputWithValidationRules/InputWithValidationRules.css';
+@import './components/UI/TextInputWithRules/TextInputWithRules.css';
 
 .app {
 	display:flex;

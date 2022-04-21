@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Button } from '../../components/UI/Button';
 import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
-import { Input } from '../../components/UI/Input';
-import { InputWithValidationRules } from '../../components/UI/InputWithValidationRules';
+import { TextInput } from '../../components/UI/TextInput';
+import { TextInputWithRules } from '../../components/UI/TextInputWithRules';
 
 import { isName, isLoginId, isEmail, inLengthRange } from '../../validation/string';
 
@@ -97,7 +97,7 @@ export function Components() {
 				/>
 
 				<h1> Input </h1>
-				<Input 
+				<TextInput 
 					handleChange={getSimpleInputValue}
 					value={simpleInputValue}
 					name="simple input"
@@ -105,7 +105,7 @@ export function Components() {
 				/>
 
 				<h1> Input With Validation Rules </h1>
-				<InputWithValidationRules 
+				<TextInputWithRules 
 					handleChange={getNameValue}
 					value={nameInputValue}
 					name="name input"
@@ -116,7 +116,7 @@ export function Components() {
 						"non-consecutive spaces in between"]
 					}
 				/>
-				<InputWithValidationRules 
+				<TextInputWithRules 
 					handleChange={getUserNameValue}
 					value={userNameInputValue}
 					name="username input"
@@ -127,7 +127,7 @@ export function Components() {
 						"non-consecutive dots, hifens and underscores in between"]
 					}
 				/>
-				<InputWithValidationRules 
+				<TextInputWithRules 
 					handleChange={getEmailValue}
 					value={emailInputValue}
 					name="email input"

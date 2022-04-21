@@ -1,6 +1,6 @@
-import { InputProps } from './Input.types';
+import { TextInputProps } from './TextInput.types';
 
-export function Input({
+export function TextInput({
 	name,
 	value,
 	handleChange, 
@@ -9,7 +9,7 @@ export function Input({
 	formId="", 
 	placeholder="",
 	styleClass=""
-}: InputProps) {
+}: TextInputProps) {
 
 	const getValueOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
@@ -25,8 +25,8 @@ export function Input({
 
   return (
 		<>
-		<div className="input__wrapper">
-			<label className="input__label">
+		<div className="text-input__wrapper">
+			<label className="text-input__label">
 				{name}
 			</label>
 			<input 
@@ -36,7 +36,7 @@ export function Input({
 				name={name}
 				form={formId}
 				value={value}
-				className={"input " + styleClass} 
+				className={"text-input " + styleClass} 
 				placeholder={placeholder}
 			/>
 		</div>

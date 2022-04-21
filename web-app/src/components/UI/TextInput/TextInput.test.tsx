@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Input } from '.';
+import { TextInput } from '.';
 
 const changeHandler = jest.fn();
 const blurHandler = jest.fn();
@@ -20,7 +20,7 @@ const TestComponent = () => {
 	}
 
 	return (
-		<Input 
+		<TextInput 
 			handleChange={testOnChangeCallback} 
 			handleBlur={testOnBlurCallback}
 			value={onChangeTestText} 
