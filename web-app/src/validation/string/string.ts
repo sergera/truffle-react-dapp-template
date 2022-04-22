@@ -80,3 +80,21 @@ export function isEmail(str: string) {
 	const regex = /^(?=([A-Za-z0-9]+))\1(?=(([.\-_]?[A-Za-z0-9]+)+)?)\2@(?=(([A-Za-z]+\.)+))\4(?=([A-Za-z]+))\6$/gu;
 	return regex.test(str);
 };
+
+export function isEther(str: string) {
+	/* max 78 whole digits (aprox. max of 256 unsigned int) just to make sure there is a ceiling */
+	/* no leading zeros in the whole portion */
+	/* max 18 decimal digits of precision */
+	/* no trailing zeros in the fractional portion */
+	/* max one comma or point (decimal separator), and only after a 0 as first digit */
+	/* no signs allowed */
+	const regex = /^(?=([1-9][0-9]{0,77}))\1(?=([.,][0-9]{0,17}[1-9])?)\2$/gu;
+	return regex.test(str);
+};
+
+export function isWei(str: string) {
+	/* max 78 whole digits (aprox. max of 256 unsigned int) just to make sure there is a ceiling */
+	/* no leading zeros */
+	const regex = /^(?=([1-9][0-9]{0,77}))\1$/gu;
+	return regex.test(str);
+};

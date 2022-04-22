@@ -5,7 +5,8 @@ import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../com
 import { TextInput } from '../../components/UI/TextInput';
 import { TextInputWithRules } from '../../components/UI/TextInputWithRules';
 
-import { isName, isLoginId, isEmail, inLengthRange } from '../../validation/string';
+import { isName, isLoginId, isEmail, inLengthRange, isEther, isWei } from '../../validation/string';
+import { ethToWei, weiToEth } from '../../format/eth/unit';
 
 import { store } from '../../state';
 import { openErrorNotification } from '../../state/errorNotification';
@@ -20,10 +21,14 @@ export function Components() {
 	let [nameInputValue, setNameInputValue] = useState("");
 	let [userNameInputValue, setUserNameInputValue] = useState("");
 	let [emailInputValue, setEmailInputValue] = useState("");
+	let [etherInputValue, setEtherInputValue] = useState("0");
+	let [weiInputValue, setWeiInputValue] = useState("0");
 
 	let [isValidName, setIsValidName] = useState(true);
 	let [isValidUserName, setIsValidUserName] = useState(true);
 	let [isValidEmail, setIsValidEmail] = useState(true);
+	let [isValidEther, setIsValidEther] = useState(true);
+	let [isValidWei, setIsValidWei] = useState(true);
 
 	let getSimpleInputValue = (value: string) => {
 		setSimpleInputValue(value);
@@ -51,6 +56,16 @@ export function Components() {
 		const isValid = lengthOk && formatOk;
 		setIsValidEmail(isValid);
 		setEmailInputValue(value);
+	}
+
+	let getEtherValue = (value: string) => {
+		setIsValidEther(isEther(value));
+		setEtherInputValue(value.replace(",","."));
+	}
+
+	let getWeiValue = (value: string) => {
+		setIsValidWei(isWei(value));
+		setWeiInputValue(value);
 	}
 
 	const errorNotification = () => {
@@ -139,6 +154,33 @@ export function Components() {
 						"complete with '@' and domain"]
 					}
 				/>
+				<TextInputWithRules 
+					handleChange={getEtherValue}
+					value={etherInputValue}
+					name="ether input"
+					placeholder="insert ether amount here"
+					isValid={isValidEther}
+					rules={
+						["max 78 whole digits starting with a non-zero number",
+						"one . or , as decimal separator",
+						"max 18 decimal digits ending with a non-zero number"]
+					}
+				/>
+				<p>Amount in wei: {isValidEther && ethToWei(etherInputValue)}</p>
+
+				<TextInputWithRules 
+					handleChange={getWeiValue}
+					value={weiInputValue}
+					name="wei input"
+					placeholder="insert wei amount here"
+					isValid={isValidWei}
+					rules={
+						["max 78 whole digits",
+						"no leading zeros"]
+					}
+				/>
+				<p>Amount in eth: {isValidWei && weiToEth(weiInputValue)}</p>
+
 
 				<h1> Modals </h1>
 				<Button 
