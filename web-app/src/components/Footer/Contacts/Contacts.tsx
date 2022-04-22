@@ -1,5 +1,4 @@
 import { getPublicUrl } from "../../../env";
-import { newTab } from "../../../browser/open";
 
 import { contacts } from "./Contacts.constants";
 
@@ -12,30 +11,54 @@ export function Contacts() {
 			<div className="contacts__social">
 				<p className="contacts__text">Get to know me:</p>
 				<div className="contacts__icons">
-					<img
-						src={`${publicUrl}/social/github_white_150x150.png`}
-						onClick={() => newTab(contacts.github)}
-						className="contacts__icon"
-						alt="link to author's github"
-					/>
-					<img
-						src={`${publicUrl}/social/linkedin_white_150x150.png`}
-						onClick={() => newTab(contacts.linkedin)}
-						className="contacts__icon"
-						alt="link to author's linkedin"
-					/>
-					<img
-						src={`${publicUrl}/social/instagram_white_150x150.png`}
-						onClick={() => newTab(contacts.instagram)}
-						className="contacts__icon"
-						alt="link to author's instagram"
-					/>
-					<img
-						src={`${publicUrl}/social/twitter_white_150x150.png`}
-						onClick={() => newTab(contacts.twitter)}
-						className="contacts__icon"
-						alt="link to author's twitter"
-					/>
+					<a 
+						href={`${contacts.github}`} 
+						target="_blank" 
+						rel="noopener noreferrer"  
+						className="contacts__email-anchor"
+					>
+						<img
+							src={`${publicUrl}/social/github_white_150x150.png`}
+							className="contacts__icon"
+							alt="link to author's github"
+						/>
+					</a>
+					<a 
+						href={`${contacts.linkedin}`} 
+						target="_blank" 
+						rel="noopener noreferrer"  
+						className="contacts__email-anchor"
+					>
+						<img
+							src={`${publicUrl}/social/linkedin_white_150x150.png`}
+							className="contacts__icon"
+							alt="link to author's linkedin"
+						/>
+					</a>
+					<a 
+						href={`${contacts.instagram}`} 
+						target="_blank" 
+						rel="noopener noreferrer"  
+						className="contacts__email-anchor"
+					>
+						<img
+							src={`${publicUrl}/social/instagram_white_150x150.png`}
+							className="contacts__icon"
+							alt="link to author's instagram"
+						/>
+					</a>
+					<a 
+						href={`${contacts.twitter}`} 
+						target="_blank" 
+						rel="noopener noreferrer"  
+						className="contacts__email-anchor"
+					>
+						<img
+							src={`${publicUrl}/social/twitter_white_150x150.png`}
+							className="contacts__icon"
+							alt="link to author's twitter"
+						/>
+					</a>
 				</div>
 			</div>
 			<div className="contacts__social">

@@ -30,3 +30,8 @@
 .modal__text {
 	margin-bottom: 2rem;
 }
+
+.modal__anchor--text {
+	margin-bottom: 2rem;
+	display: inline-block;
+}

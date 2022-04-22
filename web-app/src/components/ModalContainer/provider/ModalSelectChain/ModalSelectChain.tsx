@@ -35,13 +35,15 @@ export function ModalSelectChain({
 			<h1 className="modal-select-chain__text">{title}</h1>
 			<p className="modal-select-chain__text">{content}</p>
 			<div className="modal-select-chain__options">
-				{chainsArray.map((chainItem) => {
+				{chainsArray.map((chainItem, index) => {
+					let focusOnRender = index === 0 ? true : false;
 					return (
 						<div className="modal-select-chain__item" key={chainItem.name} > 
 							<Button 
 								styleClass="btn-foreground-outline" 
 								name={chainItem.name} 
 								handleClick={() => selectItem(chainItem.handleSelect)}
+								shouldFocusOnRender={focusOnRender}
 							/>				
 						</div>
 					);

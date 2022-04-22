@@ -30,3 +30,9 @@
 	height: 100vh;
 	width: 100%;
 }
+
+/* make outline for any element on focus */
+*:focus {
+	outline-offset: 0.2rem;
+	outline: 1px solid var(--background-text) !important;
+}

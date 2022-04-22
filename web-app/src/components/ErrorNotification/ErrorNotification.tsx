@@ -1,3 +1,5 @@
+import React, { useEffect } from 'react';
+
 import { connect } from 'react-redux';
 
 import { Button } from '../UI/Button';
@@ -6,7 +8,23 @@ import { RootState, Dispatch } from '../../state';
 import { closeErrorNotification } from '../../state/errorNotification';
 import { ErrorNotificationProps } from './ErrorNotification.types';
 
+import { KEY_MAP } from '../../constants';
+
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
+
+	useEffect(() => {
+    function keyListener(e: React.KeyboardEvent) {
+      if (e.key === KEY_MAP.escape) {
+        close();
+      }
+    }
+
+		document.addEventListener<any>("keydown", keyListener);
+
+		return function cleanUp() {
+			document.removeEventListener<any>("keydown", keyListener);
+		}
+	}, [close]);
 
  return (
 		<>
@@ -20,7 +38,8 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 				<Button 
 					styleClass="btn-error-notification" 
 					name={"Close"} 
-					handleClick={() => close()} 
+					handleClick={() => close()}
+					shouldFocusOnRender={true}
 				/>
 			</div>
 		}
@@ -40,4 +59,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export const ConnectedErrorNotification = connect(mapStateToProps,mapDispatchToProps)(ErrorNotification);
+export const ConnectedErrorNotification = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(ErrorNotification);

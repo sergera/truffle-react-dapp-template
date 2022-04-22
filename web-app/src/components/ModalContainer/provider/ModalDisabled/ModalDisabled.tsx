@@ -24,13 +24,16 @@ export function ModalDisabled({
 						rel="noopener noreferrer"  
 						className="modal__anchor"
 				>
-					<p className="modal__text">{"metamask.io"}</p>	
+					<p className="modal__anchor--text">
+						{"metamask.io"}
+					</p>	
 				</a>
 			</div>
 			<Button 
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
 				handleClick={() => close()}
+				shouldFocusOnRender={true}
 			/>
     </div>
   );

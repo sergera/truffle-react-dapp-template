@@ -3,6 +3,8 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .contacts__social {
@@ -14,6 +16,7 @@
 
 .contacts__text {
 	align-self: start;
+	margin-bottom: 0.5rem;
 }
 
 .contacts__icons {

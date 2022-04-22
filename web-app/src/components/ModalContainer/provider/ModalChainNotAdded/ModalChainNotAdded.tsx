@@ -19,6 +19,7 @@ export function ModalChainNotAdded({
 				styleClass="btn-foreground-outline" 
 				name={"ok"} 
 				handleClick={() => close()}
+				shouldFocusOnRender={true}
 			/>
 		</div>
   );
