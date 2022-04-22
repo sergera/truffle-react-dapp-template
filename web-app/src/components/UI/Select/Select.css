@@ -1,0 +1,20 @@
+.select__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.select__label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--input-text);
+}
+
+.select {
+	width: 100%;
+	border-radius: 6px;
+	border: 1px solid var(--input-border);
+	background: var(--input-background);
+	color: var(--input-text);
+}

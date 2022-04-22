@@ -1,0 +1,19 @@
+.radio-input__wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.radio-input__label {
+	margin-bottom: 0.5rem;
+	color: var(--input-text);
+}
+
+.radio-input-option__label {
+	color: var(--input-text);
+}
+
+.radio-input {
+	margin-right: 1rem;
+	margin-bottom: 0.2rem;
+}

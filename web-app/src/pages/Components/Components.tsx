@@ -4,6 +4,9 @@ import { Button } from '../../components/UI/Button';
 import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
 import { TextInput } from '../../components/UI/TextInput';
 import { TextInputWithRules } from '../../components/UI/TextInputWithRules';
+import { RadioInput, RadioInputOption } from "../../components/UI/RadioInput";
+import { CheckboxInput, CheckboxInputOption } from "../../components/UI/CheckboxInput";
+import { Select, SelectOption } from "../../components/UI/Select";
 
 import { isName, isLoginId, isEmail, inLengthRange, isEther, isWei } from '../../validation/string';
 import { ethToWei, weiToEth } from '../../format/eth/unit';
@@ -16,13 +19,15 @@ import { MODAL_TYPES } from '../../state/modal';
 
 export function Components() {
 
-	/* components */
 	let [simpleInputValue, setSimpleInputValue] = useState("");
 	let [nameInputValue, setNameInputValue] = useState("");
 	let [userNameInputValue, setUserNameInputValue] = useState("");
 	let [emailInputValue, setEmailInputValue] = useState("");
 	let [etherInputValue, setEtherInputValue] = useState("0");
 	let [weiInputValue, setWeiInputValue] = useState("0");
+	let [radioInputOption, setRadioInputOption] = useState({});
+	let [checkboxInputOptions, setCheckboxInputOptions] = useState({});
+	let [selectOption, setSelectOption] = useState({});
 
 	let [isValidName, setIsValidName] = useState(true);
 	let [isValidUserName, setIsValidUserName] = useState(true);
@@ -68,6 +73,18 @@ export function Components() {
 		setWeiInputValue(value);
 	}
 
+	let getRadioInputOption = (option: RadioInputOption) => {
+		setRadioInputOption(option);
+	}
+
+	let getCheckboxInputOptions = (options: CheckboxInputOption[]) => {
+		setCheckboxInputOptions(options);
+	}
+
+	let getSelectOption = (option: SelectOption) => {
+		setSelectOption(option);
+	}
+
 	const errorNotification = () => {
 		store.dispatch(openErrorNotification(
 			`Error Notification this is a really long error 
@@ -104,14 +121,20 @@ export function Components() {
 
   return (
     <div className="components">
-				<h1> Error Notification </h1>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={errorNotification} 
-					name={"Error Notification"} 
+				<h1> Select </h1>
+				<Select 
+					label="select"
+					handleChange={getSelectOption}
+					options={[
+						{label: "value 1", data: {one: "1"}},
+						{label: "value 2", data: {two: "2"}},
+						{label: "value 3", data: {three: "3"}},
+					]}
+					placeholder={"--select an option"}
 				/>
+				<p>Selected option: {JSON.stringify(selectOption)}</p>
 
-				<h1> Input </h1>
+				<h1> Text Input </h1>
 				<TextInput 
 					handleChange={getSimpleInputValue}
 					value={simpleInputValue}
@@ -119,7 +142,7 @@ export function Components() {
 					placeholder="insert text here"
 				/>
 
-				<h1> Input With Validation Rules </h1>
+				<h1> Text Input With Rules </h1>
 				<TextInputWithRules 
 					handleChange={getNameValue}
 					value={nameInputValue}
@@ -181,6 +204,36 @@ export function Components() {
 				/>
 				<p>Amount in eth: {isValidWei && weiToEth(weiInputValue)}</p>
 
+				<h1> Radio Input </h1>
+				<RadioInput 
+					label="radio input"
+					handleChange={getRadioInputOption}
+					options={[
+						{label: "value 1", data: {one: "1"}},
+						{label: "value 2", data: {two: "2"}},
+						{label: "value 3", data: {three: "3"}},
+					]}
+				/>
+				<p>Selected option: {JSON.stringify(radioInputOption)}</p>
+
+				<h1> Checkbox Input </h1>
+				<CheckboxInput 
+					label="checkbox input"
+					handleChange={getCheckboxInputOptions}
+					options={[
+						{label: "value 1", data: {one: "1"}},
+						{label: "value 2", data: {two: "2"}},
+						{label: "value 3", data: {three: "3"}},
+					]}
+				/>
+				<p>Selected options: {JSON.stringify(checkboxInputOptions)}</p>
+
+				<h1> Error Notification </h1>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={errorNotification} 
+					name={"Error Notification"} 
+				/>
 
 				<h1> Modals </h1>
 				<Button 

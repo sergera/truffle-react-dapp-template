@@ -1,0 +1,19 @@
+.checkbox-input__wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.checkbox-input__label {
+	margin-bottom: 0.5rem;
+	color: var(--input-text);
+}
+
+.checkbox-input-option__label {
+	color: var(--input-text);
+}
+
+.checkbox-input {
+	margin-right: 1rem;
+	margin-bottom: 0.2rem;
+}

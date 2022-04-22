@@ -23,6 +23,9 @@
 @import './components/UI/TextInput/TextInput.css';
 @import './components/UI/ValidationRules/ValidationRules.css';
 @import './components/UI/TextInputWithRules/TextInputWithRules.css';
+@import './components/UI/RadioInput/RadioInput.css';
+@import './components/UI/CheckboxInput/CheckboxInput.css';
+@import './components/UI/Select/Select.css';
 
 .app {
 	display:flex;
