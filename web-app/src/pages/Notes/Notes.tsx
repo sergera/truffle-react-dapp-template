@@ -70,7 +70,7 @@ export function Notes() {
 				setHasReceipt(true);
 				setActualGas(receipt.gasUsed);
 				Log.info({
-					description: "Receipt Acquired",
+					description: "Receipt acquired",
 					msg: JSON.stringify(receipt)
 				})
 			},
@@ -82,7 +82,7 @@ export function Notes() {
 			}
 		})
 		Log.info({
-			description: "Made Transaction Call",
+			description: "Made transaction call",
 			msg: JSON.stringify(response)
 		})
 	}
@@ -97,7 +97,7 @@ export function Notes() {
 			}
 		})
 		Log.info({
-			description: "Made Simple Call",
+			description: "Made simple call",
 			msg: JSON.stringify(notes)
 		})
 		setNotes(notes);
