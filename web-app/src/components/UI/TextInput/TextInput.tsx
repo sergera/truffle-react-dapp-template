@@ -21,7 +21,7 @@ export function TextInput({
 		handleBlur(value);
 	};
 
-	if(!isValid) styleClass = styleClass + " input--invalid";
+	if(!isValid) styleClass = styleClass + " text-input--invalid";
 
   return (
 		<>
