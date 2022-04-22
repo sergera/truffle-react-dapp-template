@@ -7,6 +7,8 @@ import { store } from './state';
 import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
+import './polyfills/eventListener';
+
 import './normalize.css';
 import './index.css';
 
