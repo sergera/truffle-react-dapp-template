@@ -14,6 +14,7 @@ export function Landing() {
 				<li>Integration with MetaMask provider from the start</li>
 				<li>Killswitch state for building blockchain-safe components</li>
 				<li>Tested store and components with jest</li>
+				<li>Keyboard accessiblity</li>
 				<li>Modals and error notifications for user feedback</li>
 				<li>Completely responsive interface</li>
 				<li>Logging with severity levels</li>
