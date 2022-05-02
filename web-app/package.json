@@ -1,6 +1,5 @@
 {
   "name": "web-app",
-  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
