@@ -30,6 +30,7 @@ export async function setContracts(chainId: string): Promise<void> {
 	try {
 		contracts = await fetchContracts(chainId);
 	} catch(err) {
+		// TODO: find a way to treat generic errors specifically (that doesn't involve throwing)
 		deleteContracts();
 	}
 };
@@ -55,9 +56,11 @@ async function fetchContractWithNameInChain(name: string, chainId: string): Prom
 };
 
 async function fetchContractArtifact (name: string): Promise<LooseObject> {
+	// TODO: make separate module for fetching files
 	try {
 		return await import(`../../../../build/contracts/${name}.json`);
 	} catch(err) {
+		// TODO: find a way to treat generic errors specifically (that doesn't involve throwing)
 		Log.error({msg: getErrorMessage(err), description: "Contract artifact doesn't exist"});
 		throw err;
 	}
@@ -67,6 +70,7 @@ function fetchContractAddressInChain (artifact: LooseObject, chainId: string): s
 	try {
 		return artifact.networks[chainId].address;
 	} catch(err) {
+		// TODO: find a way to treat generic errors specifically (that doesn't involve throwing)
 		Log.error({msg: getErrorMessage(err), description: "Contract doesn't exist on this chain"});
 		throw err;
 	}
@@ -77,6 +81,7 @@ function instanceContract(contractAbi: AbiItem, contractAddress: string): Contra
 	try {
 		return new web3.eth.Contract(contractAbi, contractAddress);
 	} catch(err) {
+		// TODO: find a way to treat generic errors specifically (that doesn't involve throwing)
 		Log.error({msg: getErrorMessage(err), description: "Contract ABI incorrect"});
 		throw err;
 	}
