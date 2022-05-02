@@ -8,7 +8,7 @@ import { MODAL_COMPONENTS } from './ModalContainer.constants';
 import { RootState, Dispatch } from '../../state';
 import { ModalContainerProps } from './ModalContainer.types';
 
-import { KEY_MAP } from '../../constants';
+import { KEYS } from '../../constants';
 
 export function ModalContainer({
 	type, 
@@ -17,7 +17,7 @@ export function ModalContainer({
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
-      if (e.key === KEY_MAP.escape) {
+      if (e.key === KEYS.escape) {
         close();
       }
     }

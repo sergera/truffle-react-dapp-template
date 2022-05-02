@@ -8,13 +8,13 @@ import { RootState, Dispatch } from '../../state';
 import { closeErrorNotification } from '../../state/errorNotification';
 import { ErrorNotificationProps } from './ErrorNotification.types';
 
-import { KEY_MAP } from '../../constants';
+import { KEYS } from '../../constants';
 
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
-      if (e.key === KEY_MAP.escape) {
+      if (e.key === KEYS.escape) {
         close();
       }
     }

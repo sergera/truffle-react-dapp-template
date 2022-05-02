@@ -5,7 +5,7 @@
  * 
  */
 
-export const KEY_MAP = {
+export const KEYS = {
 	/* special values */
 	unidentified: "Unidentified",
 	/* modifier keys */

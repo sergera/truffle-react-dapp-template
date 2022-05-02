@@ -1,2 +1,2 @@
-export * from './KeyMap';
+export * from './Keys';
 export * from './ModalTypes';
