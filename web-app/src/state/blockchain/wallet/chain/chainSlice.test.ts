@@ -7,7 +7,7 @@ import * as contracts from '../../../../blockchain/contracts';
 import { getNewStore } from '../../../../test';
 import { isChainSupported, getChainName } from '../../../../blockchain/chains';
 
-import { MODAL_TYPES } from '../../../modal';
+import { MODAL_TYPES } from '../../../../constants';
 
 /* silence logger */
 jest.mock("../../../../logger");

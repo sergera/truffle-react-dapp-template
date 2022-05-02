@@ -1,6 +1,4 @@
-import { ModalTypesMap } from './modalSlice.types';
-
-export const MODAL_TYPES: ModalTypesMap = {
+export const MODAL_TYPES = {
 	disabled: "DISABLED",
 	notConnected: "NOT_CONNECTED",
 	disconnected: "DISCONNECTED",

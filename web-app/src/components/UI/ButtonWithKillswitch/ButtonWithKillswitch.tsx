@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 
 import { openModal } from '../../../state/modal'
 
-import { MODAL_TYPES } from '../../../state/modal';
+import { MODAL_TYPES } from '../../../constants';
 
 import { RootState, Dispatch } from '../../../state';
 import { ButtonWithKillswitchProps } from './ButtonWithKillswitch.types';

@@ -8,7 +8,7 @@ import { metamask } from '../../../../blockchain/metamask';
 import { isChainSupported, getChainName } from '../../../../blockchain/chains';
 import { setContracts, deleteContracts,	checkAllContractsAcquired } from '../../../../blockchain/contracts';
 
-import { MODAL_TYPES } from '../../../modal';
+import { MODAL_TYPES } from '../../../../constants';
 
 import { RootState } from '../../..';
 import { ConnectChainPayload } from './chainSlice.types';

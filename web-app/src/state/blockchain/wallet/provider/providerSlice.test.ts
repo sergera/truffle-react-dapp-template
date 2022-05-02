@@ -4,7 +4,7 @@ import { metamask } from '../../../../blockchain/metamask';
 import * as contracts from '../../../../blockchain/contracts';
 import { getNewStore } from '../../../../test';
 
-import { MODAL_TYPES } from '../../../modal';
+import { MODAL_TYPES } from '../../../../constants';
 
 /* silence logger */
 jest.mock("../../../../logger");

@@ -15,7 +15,7 @@ import { store } from '../../state';
 import { openErrorNotification } from '../../state/errorNotification';
 import { openModal } from "../../state/modal";
 
-import { MODAL_TYPES } from '../../state/modal';
+import { MODAL_TYPES } from '../../constants';
 
 export function Components() {
 

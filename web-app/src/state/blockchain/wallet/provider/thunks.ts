@@ -7,7 +7,7 @@ import { Log } from '../../../../logger';
 
 import { openModal } from '../../../modal';
 
-import { MODAL_TYPES } from '../../../modal';
+import { MODAL_TYPES } from '../../../../constants';
 
 import { RootState } from '../../..';
 

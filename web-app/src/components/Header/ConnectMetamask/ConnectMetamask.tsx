@@ -7,7 +7,7 @@ import { minify, toCheckSum } from '../../../format/eth/address';
 import { connectWallet } from '../../../state/blockchain/wallet';
 import { openModal } from '../../../state/modal'
 
-import { MODAL_TYPES } from '../../../state/modal';
+import { MODAL_TYPES } from '../../../constants';
 
 import { RootState, Dispatch } from '../../../state';
 import { ConnectMetamaskProps } from './ConnectMetamask.types';
