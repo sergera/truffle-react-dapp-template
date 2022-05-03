@@ -15,7 +15,7 @@ export function ValidationRules({
 					return (
 						<li
 							className="validation-rules__list-item"
-							id={String(index)}
+							key={String(index)}
 						>
 							{rule}					
 						</li>
