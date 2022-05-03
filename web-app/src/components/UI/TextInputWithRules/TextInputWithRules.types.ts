@@ -4,6 +4,7 @@ export interface TextInputWithRulesProps {
 	name: string;
 	isValid: boolean;
 	rules: string[];
+	isRequired?: boolean;
 	formId?: string;
 	placeholder?: string;
 	styleClass?: string;

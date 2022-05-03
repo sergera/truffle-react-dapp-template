@@ -22,3 +22,8 @@
 .text-input--invalid {
 	border: 1px solid var(--input-invalid);
 }
+
+.text-input__required {
+	display: block;
+	color: var(--input-text);
+}

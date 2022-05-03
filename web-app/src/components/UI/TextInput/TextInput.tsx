@@ -6,6 +6,7 @@ export function TextInput({
 	handleChange, 
 	handleBlur=()=>{},
 	isValid=true,
+	isRequired=false,
 	formId="", 
 	placeholder="",
 	styleClass=""
@@ -39,6 +40,13 @@ export function TextInput({
 				className={"text-input " + styleClass} 
 				placeholder={placeholder}
 			/>
+			{isRequired && 
+				<small
+					className="text-input__required"
+				>
+					*required
+				</small>
+			}
 		</div>
 		</>
   );

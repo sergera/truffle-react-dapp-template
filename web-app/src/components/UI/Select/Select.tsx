@@ -8,6 +8,7 @@ export function Select({
 	options,
 	handleChange, 
 	handleBlur=()=>{},
+	isRequired=false,
 	formId="", 
 	placeholder="",
 	styleClass=""
@@ -50,6 +51,13 @@ export function Select({
 					);
 				})}
 			</select>
+			{isRequired && 
+				<small
+					className="text-input__required"
+				>
+					*required
+				</small>
+			}
 		</div>
   );
 };

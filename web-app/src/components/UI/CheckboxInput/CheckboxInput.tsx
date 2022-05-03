@@ -8,6 +8,7 @@ export function CheckboxInput({
 	label,
 	options,
 	handleChange, 
+	isRequired=false,
 	formId="", 
 	styleClass=""
 }: CheckboxInputProps) {
@@ -53,6 +54,13 @@ export function CheckboxInput({
 						</label>
 					);
 				})}
+			{isRequired && 
+				<small
+					className="text-input__required"
+				>
+					*required
+				</small>
+			}
 		</div>
 		</>
   );

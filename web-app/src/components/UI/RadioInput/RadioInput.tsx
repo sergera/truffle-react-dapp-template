@@ -6,6 +6,7 @@ export function RadioInput({
 	label,
 	options,
 	handleChange, 
+	isRequired=false,
 	formId="", 
 	styleClass=""
 }: RadioInputProps) {
@@ -36,6 +37,13 @@ export function RadioInput({
 						</label>
 					);
 				})}
+			{isRequired && 
+				<small
+					className="text-input__required"
+				>
+					*required
+				</small>
+			}
 		</div>
   );
 };

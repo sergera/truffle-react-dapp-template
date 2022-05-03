@@ -4,6 +4,7 @@ export interface TextInputProps {
 	name: string;
 	handleBlur?: Function;
 	isValid?: boolean;
+	isRequired?: boolean;
 	formId?: string;
 	placeholder?: string;
 	styleClass?: string;

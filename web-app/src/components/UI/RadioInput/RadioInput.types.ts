@@ -9,6 +9,7 @@ export interface RadioInputProps {
 	label: string;
 	options: RadioInputOption[];
 	handleChange: Function;
+	isRequired?: boolean;
 	formId?: string;
 	styleClass?: string;
 };

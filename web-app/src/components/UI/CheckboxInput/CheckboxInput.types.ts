@@ -9,6 +9,7 @@ export interface CheckboxInputProps {
 	label: string;
 	options: CheckboxInputOption[];
 	handleChange: Function;
+	isRequired?: boolean;
 	formId?: string;
 	styleClass?: string;
 };

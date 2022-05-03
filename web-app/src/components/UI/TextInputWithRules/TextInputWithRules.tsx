@@ -13,6 +13,7 @@ export function TextInputWithRules({
 	placeholder, 
 	isValid,
 	rules,
+	isRequired=false,
 	styleClass=""
 }: TextInputWithRulesProps) {
 
@@ -38,6 +39,7 @@ export function TextInputWithRules({
 				value={value}
 				styleClass={"text-input " + styleClass} 
 				placeholder={placeholder}
+				isRequired={isRequired}
 			/>
 			<ValidationRules
 				show={showRules}

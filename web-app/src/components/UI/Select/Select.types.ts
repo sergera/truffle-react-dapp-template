@@ -10,6 +10,7 @@ export interface SelectProps {
 	options: SelectOption[];
 	handleChange: Function;
 	handleBlur?: Function;
+	isRequired?: boolean;
 	formId?: string;
 	placeholder?: string;
 	styleClass?: string;
