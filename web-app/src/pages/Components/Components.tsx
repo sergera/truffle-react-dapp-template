@@ -117,6 +117,10 @@ export function Components() {
 		store.dispatch(openModal(MODAL_TYPES.pleaseConnect));
 	}
 
+	const modalIncompleteForm = () => {
+		store.dispatch(openModal(MODAL_TYPES.incompleteForm));
+	}
+
 	const nothing = () => {};
 
   return (
@@ -265,6 +269,11 @@ export function Components() {
 					styleClass="btn-background-outline" 
 					handleClick={modalPleaseConnect} 
 					name={"Modal Please Connect"} 
+				/>	
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={modalIncompleteForm} 
+					name={"Modal Incomplete Form"} 
 				/>	
 				
 				<h1> Button With Killswitch</h1>

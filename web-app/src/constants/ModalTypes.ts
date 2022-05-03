@@ -5,4 +5,5 @@ export const MODAL_TYPES = {
 	selectChain: "SELECT_CHAIN",
 	chainNotAdded: "CHAIN_NOT_ADDED",
 	pleaseConnect: "PLEASE_CONNECT",
+	incompleteForm: "INCOMPLETE_FORM",
 };

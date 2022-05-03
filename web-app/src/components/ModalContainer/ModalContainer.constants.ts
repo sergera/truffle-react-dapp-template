@@ -4,6 +4,7 @@ import { ModalDisconnected } from './provider/ModalDisconnected';
 import { ModalSelectChain } from './provider/ModalSelectChain';
 import { ModalChainNotAdded } from './provider/ModalChainNotAdded';
 import { ModalPleaseConnect } from './provider/ModalPleaseConnect/ModalPleaseConnect';
+import { ModalIncompleteForm } from './form/ModalIncompleteForm';
 
 import { ModalComponentsMap } from './ModalContainer.types';
 
@@ -14,4 +15,5 @@ export const MODAL_COMPONENTS: ModalComponentsMap = {
 	"SELECT_CHAIN": ModalSelectChain,
 	"CHAIN_NOT_ADDED": ModalChainNotAdded,
 	"PLEASE_CONNECT": ModalPleaseConnect,
+	"INCOMPLETE_FORM": ModalIncompleteForm,
 };
