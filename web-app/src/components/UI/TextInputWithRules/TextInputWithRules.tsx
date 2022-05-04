@@ -13,6 +13,7 @@ export function TextInputWithRules({
 	placeholder, 
 	isValid,
 	rules,
+	handleBlur=()=>{},
 	isRequired=false,
 	styleClass=""
 }: TextInputWithRulesProps) {
@@ -26,13 +27,18 @@ export function TextInputWithRules({
 			setShowRules(true);
 		}
 	};
+
+	const blurHandler = (value: string) => {
+		handleBlur(value);
+		decideShowRules(value);
+	};
 	
   return (
 		<>
 		<div className="text-input-with-rules">
 			<TextInput 
 				handleChange={handleChange}
-				handleBlur={decideShowRules}
+				handleBlur={blurHandler}
 				isValid={isValid}
 				name={name}
 				formId={formId}
