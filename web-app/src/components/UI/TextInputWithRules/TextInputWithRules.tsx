@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { TextInput } from "../TextInput/TextInput";
 import { ValidationRules } from "../ValidationRules";
@@ -20,25 +20,20 @@ export function TextInputWithRules({
 
 	let [showRules, setShowRules] = useState(false);
 
-	const decideShowRules = (value: string) => {
+	useEffect(() => {
 		if(isValid) {
 			setShowRules(false);
 		} else {
 			setShowRules(true);
 		}
-	};
-
-	const blurHandler = (value: string) => {
-		handleBlur(value);
-		decideShowRules(value);
-	};
+	}, [isValid]);
 	
   return (
 		<>
 		<div className="text-input-with-rules">
 			<TextInput 
 				handleChange={handleChange}
-				handleBlur={blurHandler}
+				handleBlur={handleBlur}
 				isValid={isValid}
 				name={name}
 				formId={formId}
