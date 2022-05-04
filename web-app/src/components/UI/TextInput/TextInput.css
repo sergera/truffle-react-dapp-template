@@ -27,3 +27,25 @@
 	display: block;
 	color: var(--input-text);
 }
+
+.text-input-1of2 {
+	width: 50%;
+}
+
+.text-input-1of4 {
+	width: 25%;
+}
+
+.text-input-1of8 {
+	width: 12.5%;
+}
+
+.text-input-1of16 {
+	width: 6.25%;
+}
+
+/* limit minimum size */
+
+.text-input {
+	min-width: 60px;
+}
