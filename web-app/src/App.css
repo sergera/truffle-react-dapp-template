@@ -18,7 +18,11 @@
 @import './components/ModalContainer/provider/ModalSelectChain/ModalSelectChain.css';
 @import './components/ModalContainer/provider/ModalPleaseConnect/ModalPleaseConnect.css';
 @import './components/ModalContainer/form/ModalIncompleteForm/ModalIncompleteForm.css';
-@import './components/ErrorNotification/ErrorNotification.css';
+@import './components/NotificationContainer/NotificationContainer.css';
+@import './components/NotificationContainer/SuccessNotification/SuccessNotification.css';
+@import './components/NotificationContainer/InfoNotification/InfoNotification.css';
+@import './components/NotificationContainer/WarningNotification/WarningNotification.css';
+@import './components/NotificationContainer/ErrorNotification/ErrorNotification.css';
 
 @import './components/UI/Button/Button.css';
 @import './components/UI/TextInput/TextInput.css';

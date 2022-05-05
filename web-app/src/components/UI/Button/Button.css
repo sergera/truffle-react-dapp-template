@@ -291,6 +291,48 @@
 
 /* by ad hoc use case */
 
+.btn-success-notification {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--success-notification-btn);
+	color: var(--success-notification-btn);
+}
+
+@media (hover: hover) {
+	.btn-success-notification:hover {
+		background-color: var(--success-notification-btn);
+		border: 1px solid rgba(0,0,0,0);
+		color: var(--success-notification-btn-text);
+	}
+}
+
+.btn-info-notification {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--info-notification-btn);
+	color: var(--info-notification-btn);
+}
+
+@media (hover: hover) {
+	.btn-info-notification:hover {
+		background-color: var(--info-notification-btn);
+		border: 1px solid rgba(0,0,0,0);
+		color: var(--info-notification-btn-text);
+	}
+}
+
+.btn-warning-notification {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid var(--warning-notification-btn);
+	color: var(--warning-notification-btn);
+}
+
+@media (hover: hover) {
+	.btn-warning-notification:hover {
+		background-color: var(--warning-notification-btn);
+		border: 1px solid rgba(0,0,0,0);
+		color: var(--warning-notification-btn-text);
+	}
+}
+
 .btn-error-notification {
 	background-color: rgba(0,0,0,0);
 	border: 1px solid var(--error-notification-btn);

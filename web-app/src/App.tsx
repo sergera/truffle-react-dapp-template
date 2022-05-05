@@ -10,7 +10,7 @@ import { Nav } from './components/Nav';
 import { Footer } from "./components/Footer";
 
 import { ConnectedModalContainer as ModalContainer } from './components/ModalContainer';
-import { ConnectedErrorNotification as ErrorNotification } from './components/ErrorNotification';
+import { ConnectedNotificationContainer as NotificationContainer } from './components/NotificationContainer';
 
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
@@ -21,9 +21,9 @@ export function App() {
   return (
 		<div className="app">
 			<ModalContainer />
+			<NotificationContainer />
 			<Header />
 			<Nav />
-			<ErrorNotification />
 			<ErrorBoundary> 
 				<Routes>
 						<Route path="/" element={<Landing />} />

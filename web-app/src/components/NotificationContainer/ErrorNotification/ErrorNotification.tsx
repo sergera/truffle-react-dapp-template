@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-
 import { connect } from 'react-redux';
 
-import { Button } from '../UI/Button';
+import { Button } from '../../UI/Button';
 
-import { RootState, Dispatch } from '../../state';
-import { closeErrorNotification } from '../../state/errorNotification';
+import { closeErrorNotification } from '../../../state/notification';
+
+import { KEYS } from '../../../constants';
+
+import { Dispatch } from '../../../state';
 import { ErrorNotificationProps } from './ErrorNotification.types';
-
-import { KEYS } from '../../constants';
 
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 
@@ -17,7 +17,7 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
       if (e.key === KEYS.escape) {
         close();
       }
-    }
+    };
 
 		document.addEventListener<any>("keydown", keyListener);
 
@@ -31,10 +31,10 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 		{message && 
 			<div 
 				id="error-notification"
-				className="error-notification"
+				className="notification error-notification"
 			>
-				<h1>{"Error:"}</h1>
-				<p className="error-notification__message">{message}</p>
+				<h1>{"Error"}</h1>
+				<p className="notification__message">{message}</p>
 				<Button 
 					styleClass="btn-error-notification" 
 					name={"Close"} 
@@ -47,12 +47,6 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 	);
 };
 
-const mapStateToProps = (state: RootState) => {
-	return {
-		message: state.errorNotification.message,
-	};
-};
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     close: () => dispatch(closeErrorNotification()),
@@ -60,6 +54,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 };
 
 export const ConnectedErrorNotification = connect(
-	mapStateToProps,
-	mapDispatchToProps
+	null,
+	mapDispatchToProps,
 )(ErrorNotification);

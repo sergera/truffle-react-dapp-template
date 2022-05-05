@@ -1,0 +1,4 @@
+.warning-notification {
+	background-color: var(--warning-notification);
+	color: var(--warning-notification-text);
+}

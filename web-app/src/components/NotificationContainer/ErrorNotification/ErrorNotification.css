@@ -1,0 +1,4 @@
+.error-notification {
+	background-color: var(--error-notification);
+	color: var(--error-notification-text);
+}

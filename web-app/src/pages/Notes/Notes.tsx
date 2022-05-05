@@ -8,7 +8,7 @@ import { getErrorMessage } from "../../error";
 import { Log } from "../../logger";
 
 import { store } from '../../state';
-import { openErrorNotification } from '../../state/errorNotification';
+import { openErrorNotification } from '../../state/notification';
 import { LooseObject } from "../../types";
 
 export function Notes() {

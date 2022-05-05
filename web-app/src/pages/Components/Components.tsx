@@ -12,7 +12,7 @@ import { isName, isLoginId, isEmail, inLengthRange, isEther, isWei } from '../..
 import { ethToWei, weiToEth } from '../../format/eth/unit';
 
 import { store } from '../../state';
-import { openErrorNotification } from '../../state/errorNotification';
+import { openSuccessNotification, openInfoNotification, openWarningNotification, openErrorNotification } from '../../state/notification';
 import { openModal } from "../../state/modal";
 
 import { MODAL_TYPES } from '../../constants';
@@ -37,7 +37,7 @@ export function Components() {
 
 	let getSimpleInputValue = (value: string) => {
 		setSimpleInputValue(value);
-	}
+	};
 
 	let getNameValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
@@ -45,7 +45,7 @@ export function Components() {
 		const isValid = lengthOk && formatOk;
 		setIsValidName(isValid);
 		setNameInputValue(value);
-	}
+	};
 
 	let getUserNameValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
@@ -53,7 +53,7 @@ export function Components() {
 		const isValid = lengthOk && formatOk;
 		setIsValidUserName(isValid);
 		setUserNameInputValue(value);
-	}
+	};
 
 	let getEmailValue = (value: string) => {
 		const lengthOk = inLengthRange(value,8,30);
@@ -61,29 +61,53 @@ export function Components() {
 		const isValid = lengthOk && formatOk;
 		setIsValidEmail(isValid);
 		setEmailInputValue(value);
-	}
+	};
 
 	let getEtherValue = (value: string) => {
 		setIsValidEther(isEther(value));
 		setEtherInputValue(value.replace(",","."));
-	}
+	};
 
 	let getWeiValue = (value: string) => {
 		setIsValidWei(isWei(value));
 		setWeiInputValue(value);
-	}
+	};
 
 	let getRadioInputOption = (option: RadioInputOption) => {
 		setRadioInputOption(option);
-	}
+	};
 
 	let getCheckboxInputOptions = (options: CheckboxInputOption[]) => {
 		setCheckboxInputOptions(options);
-	}
+	};
 
 	let getSelectOption = (option: SelectOption) => {
 		setSelectOption(option);
-	}
+	};
+
+	const successNotification = () => {
+		store.dispatch(openSuccessNotification(
+			`Success Notification this is a really long success 
+			notification that is used in case something goes 
+			amazingly right which it normally does in most cases`
+		));
+	};
+
+	const infoNotification = () => {
+		store.dispatch(openInfoNotification(
+			`Info Notification this is a really long info 
+			notification that is used in case something happens 
+			that the user must know by reading text which is a rare occasion`
+		));
+	};
+
+	const warningNotification = () => {
+		store.dispatch(openWarningNotification(
+			`Warning Notification this is a really long warning 
+			notification that is used in case something goes 
+			a little wrong which it normally does in most cases`
+		));
+	};
 
 	const errorNotification = () => {
 		store.dispatch(openErrorNotification(
@@ -232,7 +256,22 @@ export function Components() {
 				/>
 				<p>Selected options: {JSON.stringify(checkboxInputOptions)}</p>
 
-				<h1> Error Notification </h1>
+				<h1> Notifications </h1>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={successNotification} 
+					name={"Success Notification"} 
+				/>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={infoNotification} 
+					name={"Info Notification"} 
+				/>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={warningNotification} 
+					name={"Warning Notification"} 
+				/>
 				<Button 
 					styleClass="btn-background-outline" 
 					handleClick={errorNotification} 

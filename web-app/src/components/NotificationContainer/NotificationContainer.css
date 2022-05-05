@@ -1,4 +1,4 @@
-.error-notification {
+.notification {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -10,11 +10,9 @@
 	padding-right: 2rem;
 	border-top-left-radius: 8px;
 	border-bottom-left-radius: 8px;
-	background-color: var(--error-notification);
-	color: var(--error-notification-text);
 }
 
-.error-notification__message {
+.notification__message {
 	max-width: 20vw;
 	margin-bottom: 2rem;
 }
@@ -22,7 +20,7 @@
 /* limit minimum size */
 
 @media (max-width: 420px) {
-	.error-notification__message {
+	.notification__message {
 		min-width: 100px;
 	}
 }
@@ -30,7 +28,7 @@
 /* animate entrance */
 
 @media (prefers-reduced-motion: no-preference) {
-  .error-notification {
+  .notification {
 		animation-name: slide-from-right;
 		animation-timing-function: ease-in;
 		animation-duration: 0.3s;

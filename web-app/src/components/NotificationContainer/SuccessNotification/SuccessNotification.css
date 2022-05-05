@@ -1,0 +1,4 @@
+.success-notification {
+	background-color: var(--success-notification);
+	color: var(--success-notification-text);
+}

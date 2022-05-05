@@ -101,7 +101,22 @@
 	/* validation rules */
 	--validation-rules-text: var(--light-red);
 
-	/* error notification */
+	/* notifications */
+	--success-notification: var(--light-green);
+	--success-notification-text: var(--black);
+	--success-notification-btn: var(--black);
+	--success-notification-btn-text: var(--success-notification);
+
+	--info-notification: var(--light-blue);
+	--info-notification-text: var(--white);
+	--info-notification-btn: var(--black);
+	--info-notification-btn-text: var(--info-notification);
+
+	--warning-notification: var(--light-gold);
+	--warning-notification-text: var(--black);
+	--warning-notification-btn: var(--black);
+	--warning-notification-btn-text: var(--warning-notification);
+
 	--error-notification: var(--light-red);
 	--error-notification-text: var(--white);
 	--error-notification-btn: var(--black);
