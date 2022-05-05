@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { useAfterRender } from '../../hooks';
-
 import { NOTIFICATION_COMPONENTS } from './NotificationContainer.constants';
 import { NOTIFICATION_TYPES } from '../../constants';
 
@@ -21,12 +19,9 @@ export function NotificationContainer({notifications}: NotificationContainerProp
 			let newNotification = errorInNotifications ? errorInNotifications : notifications[0];
 			setCurrentNotification(newNotification);
 		}
-	}, [notifications]);
-
-	useAfterRender(() => {
 		/* update old notifications length after render without triggering a render */
 		oldNotificationsLength.current = notifications.length;
-	});
+	}, [notifications]);
 
 	let SpecificNotification: ConnectedNotification;
 	if(notifications.length < oldNotificationsLength.current) {
