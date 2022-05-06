@@ -1,6 +1,5 @@
 {
   "name": "react-truffle-dapp-template",
-  "version": "1.0.1",
   "description": "",
   "main": "/web-app/src/index.js",
   "directories": {
