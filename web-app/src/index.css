@@ -108,7 +108,7 @@
 	--success-notification-btn-text: var(--success-notification);
 
 	--info-notification: var(--light-blue);
-	--info-notification-text: var(--white);
+	--info-notification-text: var(--black);
 	--info-notification-btn: var(--black);
 	--info-notification-btn-text: var(--info-notification);
 
@@ -118,7 +118,7 @@
 	--warning-notification-btn-text: var(--warning-notification);
 
 	--error-notification: var(--light-red);
-	--error-notification-text: var(--white);
+	--error-notification-text: var(--black);
 	--error-notification-btn: var(--black);
 	--error-notification-btn-text: var(--error-notification);
 }

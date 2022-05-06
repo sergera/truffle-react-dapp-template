@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { SuccessNotification } from '.';
 
@@ -7,20 +8,23 @@ const mockClose = jest.fn();
 // stop typescript from trying to predict injected document
 declare var document: any;
 
-test("should not render if message is empty", () => {
-	const emptyMessage = "";
-	const props = {message: emptyMessage, close: mockClose};
-	render(<SuccessNotification {...props} />);
-
-	const rendered = document.getElementById("success-notification");
-	expect(rendered).toBe(null);
-});
-
-test("should render if message is non empty", () => {
+test("should render message", () => {
 	const nonEmptyMessage = "test messsage";
 	const props = {message: nonEmptyMessage, close: mockClose};
 	render(<SuccessNotification {...props} />);
 
+	const renderedMessage = document.getElementsByClassName("notification__message")[0];
+	expect(renderedMessage.innerHTML).toBe(nonEmptyMessage);
+});
+
+test("should call close on button click", () => {
+	const nonEmptyMessage = "test messsage";
+	const props = {message: nonEmptyMessage, close: mockClose};
+	render(<SuccessNotification {...props} />);
 	const rendered = document.getElementById("success-notification");
 	expect(rendered).not.toBe(null);
+
+	const closeButton = document.getElementsByClassName("button")[0];
+	userEvent.click(closeButton);
+	expect(mockClose).toBeCalledTimes(1);
 });

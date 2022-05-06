@@ -12,16 +12,23 @@
 	border-bottom-left-radius: 8px;
 }
 
+.notification__title {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
 .notification__message {
-	max-width: 20vw;
+	margin-top: 1.2rem;
 	margin-bottom: 2rem;
+	max-width: 20vw;
+	min-width: 100px;
 }
 
 /* limit minimum size */
 
 @media (max-width: 420px) {
-	.notification__message {
-		min-width: 100px;
+	.notification__title {
+		font-size: 20px;
 	}
 }
 
@@ -29,20 +36,22 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .notification {
-		animation-name: slide-from-right;
-		animation-timing-function: ease-in;
-		animation-duration: 0.3s;
+		animation-name: notification-in;
+		animation-timing-function: ease-out;
+		animation-duration: 0.5s;
 		animation-delay: 0s;
 		animation-iteration-count: 1;
 		animation-fill-mode: none;
   }
 }
 
-@keyframes slide-from-right {
+@keyframes notification-in {
 	from   {
-		transform: translate(50vw,0);
+		transform: translate(100%,0);
+		opacity: 0;
 	}
 	to  {
-			transform: translate(0,0);
+		transform: translate(0,0);
+		opacity: 1;
 	}
 }

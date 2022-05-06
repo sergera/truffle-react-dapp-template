@@ -27,23 +27,19 @@ export const SuccessNotification = ({message, close}: SuccessNotificationProps) 
 	}, [close]);
 
  return (
-		<>
-		{message && 
-			<div 
-				id="success-notification"
-				className="notification success-notification"
-			>
-				<h1>{"Success"}</h1>
-				<p className="notification__message">{message}</p>
-				<Button 
-					styleClass="btn-success-notification" 
-					name={"Close"} 
-					handleClick={() => close()}
-					shouldFocusOnRender={true}
-				/>
-			</div>
-		}
-		</>
+		<div 
+			id="success-notification"
+			className="notification success-notification"
+		>
+			<p className="notification__title">{"Success"}</p>
+			<p className="notification__message">{message}</p>
+			<Button 
+				styleClass="btn-success-notification" 
+				name={"Close"} 
+				handleClick={() => close()}
+				shouldFocusOnRender={true}
+			/>
+		</div>
 	);
 };
 

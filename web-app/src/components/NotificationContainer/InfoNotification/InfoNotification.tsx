@@ -27,23 +27,19 @@ export const InfoNotification = ({message, close}: InfoNotificationProps) => {
 	}, [close]);
 
  return (
-		<>
-		{message && 
-			<div 
-				id="info-notification"
-				className="notification info-notification"
-			>
-				<h1>{"FYI"}</h1>
-				<p className="notification__message">{message}</p>
-				<Button 
-					styleClass="btn-info-notification" 
-					name={"Close"} 
-					handleClick={() => close()}
-					shouldFocusOnRender={true}
-				/>
-			</div>
-		}
-		</>
+		<div 
+			id="info-notification"
+			className="notification info-notification"
+		>
+			<p className="notification__title">{"FYI"}</p>
+			<p className="notification__message">{message}</p>
+			<Button 
+				styleClass="btn-info-notification" 
+				name={"Close"} 
+				handleClick={() => close()}
+				shouldFocusOnRender={true}
+			/>
+		</div>
 	);
 };
 

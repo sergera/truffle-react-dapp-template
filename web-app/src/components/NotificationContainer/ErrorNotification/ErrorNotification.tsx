@@ -27,23 +27,19 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 	}, [close]);
 
  return (
-		<>
-		{message && 
-			<div 
-				id="error-notification"
-				className="notification error-notification"
-			>
-				<h1>{"Error"}</h1>
-				<p className="notification__message">{message}</p>
-				<Button 
-					styleClass="btn-error-notification" 
-					name={"Close"} 
-					handleClick={() => close()}
-					shouldFocusOnRender={true}
-				/>
-			</div>
-		}
-		</>
+		<div 
+			id="error-notification"
+			className="notification error-notification"
+		>
+			<p className="notification__title">{"Error"}</p>
+			<p className="notification__message">{message}</p>
+			<Button 
+				styleClass="btn-error-notification" 
+				name={"Close"} 
+				handleClick={() => close()}
+				shouldFocusOnRender={true}
+			/>
+		</div>
 	);
 };
 

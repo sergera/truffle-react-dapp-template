@@ -27,23 +27,19 @@ export const WarningNotification = ({message, close}: SuccessNotificationProps) 
 	}, [close]);
 
  return (
-		<>
-		{message && 
-			<div 
-				id="warning-notification"
-				className="notification warning-notification"
-			>
-				<h1>{"Warning"}</h1>
-				<p className="notification__message">{message}</p>
-				<Button 
-					styleClass="btn-warning-notification" 
-					name={"Close"} 
-					handleClick={() => close()}
-					shouldFocusOnRender={true}
-				/>
-			</div>
-		}
-		</>
+		<div 
+			id="warning-notification"
+			className="notification warning-notification"
+		>
+			<p className="notification__title">{"Warning"}</p>
+			<p className="notification__message">{message}</p>
+			<Button 
+				styleClass="btn-warning-notification" 
+				name={"Close"} 
+				handleClick={() => close()}
+				shouldFocusOnRender={true}
+			/>
+		</div>
 	);
 };
 

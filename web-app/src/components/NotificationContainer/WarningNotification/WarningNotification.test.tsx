@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { InfoNotification } from '.';
+import { WarningNotification } from '.';
 
 const mockClose = jest.fn();
 
@@ -11,7 +11,7 @@ declare var document: any;
 test("should render message", () => {
 	const nonEmptyMessage = "test messsage";
 	const props = {message: nonEmptyMessage, close: mockClose};
-	render(<InfoNotification {...props} />);
+	render(<WarningNotification {...props} />);
 
 	const renderedMessage = document.getElementsByClassName("notification__message")[0];
 	expect(renderedMessage.innerHTML).toBe(nonEmptyMessage);
@@ -20,8 +20,8 @@ test("should render message", () => {
 test("should call close on button click", () => {
 	const nonEmptyMessage = "test messsage";
 	const props = {message: nonEmptyMessage, close: mockClose};
-	render(<InfoNotification {...props} />);
-	const rendered = document.getElementById("info-notification");
+	render(<WarningNotification {...props} />);
+	const rendered = document.getElementById("warning-notification");
 	expect(rendered).not.toBe(null);
 
 	const closeButton = document.getElementsByClassName("button")[0];
