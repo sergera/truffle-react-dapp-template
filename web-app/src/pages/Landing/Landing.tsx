@@ -15,7 +15,9 @@ export function Landing() {
 				<li>Killswitch state for building blockchain-safe components</li>
 				<li>Tested store and components with jest</li>
 				<li>Keyboard accessiblity</li>
-				<li>Modals and error notifications for user feedback</li>
+				<li>Modals</li>
+				<li>Notifications</li>
+				<li>Toasts</li>
 				<li>Completely responsive interface</li>
 				<li>Logging with severity levels</li>
 				<li>Validation and formatting helpers</li>
