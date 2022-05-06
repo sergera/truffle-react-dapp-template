@@ -23,6 +23,11 @@
 @import './components/NotificationContainer/InfoNotification/InfoNotification.css';
 @import './components/NotificationContainer/WarningNotification/WarningNotification.css';
 @import './components/NotificationContainer/ErrorNotification/ErrorNotification.css';
+@import './components/ToastContainer/ToastContainer.css';
+@import './components/ToastContainer/SuccessToast/SuccessToast.css';
+@import './components/ToastContainer/InfoToast/InfoToast.css';
+@import './components/ToastContainer/WarningToast/WarningToast.css';
+@import './components/ToastContainer/ErrorToast/ErrorToast.css';
 
 @import './components/UI/Button/Button.css';
 @import './components/UI/TextInput/TextInput.css';

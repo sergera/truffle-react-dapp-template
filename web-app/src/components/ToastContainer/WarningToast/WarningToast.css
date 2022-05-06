@@ -1,0 +1,4 @@
+.warning-toast {
+	background-color: var(--warning-toast);
+	color: var(--warning-toast-text);
+}

@@ -11,6 +11,7 @@ import { Footer } from "./components/Footer";
 
 import { ConnectedModalContainer as ModalContainer } from './components/ModalContainer';
 import { ConnectedNotificationContainer as NotificationContainer } from './components/NotificationContainer';
+import { ConnectedToastContainer as ToastContainer } from './components/ToastContainer';
 
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
@@ -22,6 +23,7 @@ export function App() {
 		<div className="app">
 			<ModalContainer />
 			<NotificationContainer />
+			<ToastContainer />
 			<Header />
 			<Nav />
 			<ErrorBoundary> 

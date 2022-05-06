@@ -1,0 +1,4 @@
+.error-toast {
+	background-color: var(--error-toast);
+	color: var(--error-toast-text);
+}

@@ -1,0 +1,4 @@
+.success-toast {
+	background-color: var(--success-toast);
+	color: var(--success-toast-text);
+}

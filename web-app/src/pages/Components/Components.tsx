@@ -13,6 +13,7 @@ import { ethToWei, weiToEth } from '../../format/eth/unit';
 
 import { store } from '../../state';
 import { openSuccessNotification, openInfoNotification, openWarningNotification, openErrorNotification } from '../../state/notification';
+import { openSuccessToast, openInfoToast, openWarningToast, openErrorToast } from '../../state/toast';
 import { openModal } from "../../state/modal";
 
 import { MODAL_TYPES } from '../../constants';
@@ -115,6 +116,22 @@ export function Components() {
 			notification that is used in case something goes 
 			terribly wrong which it normally does in most cases`
 		));
+	};
+
+	const successToast = () => {
+		store.dispatch(openSuccessToast());
+	};
+
+	const infoToast = () => {
+		store.dispatch(openInfoToast("Check out this info!"));
+	};
+
+	const warningToast = () => {
+		store.dispatch(openWarningToast("Check out this warning!"));
+	};	
+
+	const errorToast = () => {
+		store.dispatch(openErrorToast());
 	};
 
 	const modalDisabled = () => {
@@ -276,6 +293,28 @@ export function Components() {
 					styleClass="btn-background-outline" 
 					handleClick={errorNotification} 
 					name={"Error Notification"} 
+				/>
+
+				<h1>Toasts</h1>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={successToast} 
+					name={"Success Toast"} 
+				/>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={infoToast} 
+					name={"Info Toast"} 
+				/>
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={warningToast} 
+					name={"Warning Toast"} 
+				/>								
+				<Button 
+					styleClass="btn-background-outline" 
+					handleClick={errorToast} 
+					name={"Error Toast"} 
 				/>
 
 				<h1> Modals </h1>

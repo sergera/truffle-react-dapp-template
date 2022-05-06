@@ -8,6 +8,7 @@ import { chainReducer } from './blockchain/wallet/chain';
 import { accountReducer } from './blockchain/wallet/account';
 import { modalReducer } from './modal';
 import { notificationReducer } from './notification';
+import { toastReducer } from './toast';
 
 export const combinedReducer = combineReducers({
 	connection: connectionReducer,
@@ -17,6 +18,7 @@ export const combinedReducer = combineReducers({
 	account: accountReducer,
 	modal: modalReducer,
 	notification: notificationReducer,
+	toast: toastReducer,
 });
 
 export const store = configureStore({

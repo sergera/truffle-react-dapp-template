@@ -121,6 +121,19 @@
 	--error-notification-text: var(--black);
 	--error-notification-btn: var(--black);
 	--error-notification-btn-text: var(--error-notification);
+
+	/* toasts */
+	--success-toast: var(--light-green);
+	--success-toast-text: var(--black);
+
+	--info-toast: var(--light-blue);
+	--info-toast-text: var(--black);
+
+	--warning-toast: var(--light-gold);
+	--warning-toast-text: var(--black);
+
+	--error-toast: var(--light-red);
+	--error-toast-text: var(--black);
 }
 
 /* make width and height include padding and border */
