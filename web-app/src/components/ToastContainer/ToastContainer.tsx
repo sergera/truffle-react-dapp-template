@@ -7,6 +7,8 @@ import { RootState } from '../../state';
 import { ToastItem } from '../../state/toast/toastSlice.types';
 import { ToastContainerProps, ConnectedToast } from './ToastContainer.types';
 
+//TODO: Unify all toasts into one component
+
 export function ToastContainer({toasts}: ToastContainerProps) {
 
 	let [currentToast, setCurrentToast] = useState<ToastItem>({type: "", message: ""});

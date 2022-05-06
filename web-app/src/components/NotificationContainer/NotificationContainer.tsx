@@ -8,6 +8,8 @@ import { RootState } from '../../state';
 import { NotificationItem } from '../../state/notification/notificationSlice.types';
 import { NotificationContainerProps, ConnectedNotification } from './NotificationContainer.types';
 
+//TODO: Unify all notifications into one component
+
 export function NotificationContainer({notifications}: NotificationContainerProps) {
 
 	let [currentNotification, setCurrentNotification] = useState<NotificationItem>({type: "", message: ""});
