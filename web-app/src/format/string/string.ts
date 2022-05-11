@@ -3,6 +3,8 @@
  * 
  */
 
+ import { utils } from "../../blockchain/web3";
+
 export function toCapitalizedName(name: string) {
 	const lowerTrimmed = toLowerTrim(name);
 	const nameArray = lowerTrimmed.split(" ");
@@ -17,4 +19,12 @@ export function toCapitalizedName(name: string) {
 
 export function toLowerTrim(str: string) {
 	return str.trim().toLowerCase();
+};
+
+export function stringToAsciiHex(str: string) {
+	return utils.asciiToHex(str);
+};
+
+export function asciiHexToString(hex: string) {
+	return utils.hexToAscii(hex);
 };
