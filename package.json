@@ -8,7 +8,8 @@
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.6",
     "dotenv": "^16.0.0",
-    "openzeppelin-solidity": "^4.5.0"
+    "openzeppelin-solidity": "^4.5.0",
+    "truffle-plugin-verify": "^0.5.25"
   },
   "devDependencies": {},
   "scripts": {

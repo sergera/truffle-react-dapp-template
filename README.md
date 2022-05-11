@@ -15,6 +15,8 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 
 <p>register at <a href="https://infura.io/">Infura</a></p>
 
+<p>register at <a href="https://etherscan.io/">Etherscan</a></p>
+
 ## Installation
 
 <p>cd to root directory</p>
@@ -35,6 +37,10 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 ###### INFURA_KEY:
 
 <p>key provided by Infura RPC provider</p>
+
+###### ETHERSCAN_KEY:
+
+<p>key provided by Etherscan for contract code verification</p>
 
 ### web-app directory ".env"
 
@@ -76,6 +82,12 @@ truffle test</p>
 
 <p>truffle test --network $NETWORK_NAME<br>
 where "NETWORK_NAME" is declared in truffle-config.js</p>
+
+### Verify Contracts
+
+<p>truffle run verify $CONTRACT_NAME --network $NETWORK_NAME<br>
+where "CONTRACT_NAME" is the name of your solidity contract file in /contracts/<br>
+and "NETWORK_NAME" is declared in truffle-config.js</p>
 
 ## Web App Commands
 
