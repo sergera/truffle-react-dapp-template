@@ -1,7 +1,14 @@
-.contract-interaction {
+.notes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.notes__content {
 	padding: 1rem;
 }
 
-.contract-interaction > * {
+.notes__content > * {
 	margin-bottom: 1rem;
 }

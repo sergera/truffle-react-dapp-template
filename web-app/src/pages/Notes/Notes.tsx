@@ -104,8 +104,9 @@ export function Notes() {
 	}
 
   return (
-    <div className="contract-interaction">
-				<h1> Test Contract </h1>
+    <div className="notes">
+			<div className="notes__content">
+				<h1> Notes Contract </h1>
 				<TextInput 
 					handleChange={getNoteTitleInputValue}
 					value={noteTitleInputValue}
@@ -145,6 +146,7 @@ export function Notes() {
 						</div>
 					);
 				})}
+			</div>
     </div>
   );
 };

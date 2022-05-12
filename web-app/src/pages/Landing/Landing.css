@@ -1,7 +1,14 @@
 .landing {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.landing__content {
 	padding: 1rem;
 }
 
-.landing > * {
+.landing__content > * {
 	margin-bottom: 2rem;
 }

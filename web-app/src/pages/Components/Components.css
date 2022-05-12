@@ -1,7 +1,14 @@
 .components {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.components__content {
 	padding: 1rem;
 }
 
-.components > * {
+.components__content > * {
 	margin-bottom: 1rem;
 }

@@ -166,6 +166,7 @@ export function Components() {
 
   return (
     <div className="components">
+			<div className="components__content">
 				<h1> Select </h1>
 				<Select 
 					label="select"
@@ -442,6 +443,7 @@ export function Components() {
 					handleClick={nothing} 
 					name={"Button Foreground Outline"} 
 				/>
+			</div>
     </div>
   );
 };
