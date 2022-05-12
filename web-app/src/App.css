@@ -46,6 +46,12 @@
 
 /* make outline for any element on focus */
 *:focus {
-	outline-offset: 0.2rem;
-	outline: 1px solid var(--background-text) !important;
+	outline: 0.3rem solid var(--background-text) !important;
+}
+
+/* limit minimum outline width */
+@media (max-width: 420px) {
+	*:focus {
+		outline: 2px solid var(--background-text) !important;
+	}
 }
