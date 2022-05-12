@@ -9,6 +9,8 @@ import { App } from './App';
 
 import './polyfills/eventListener';
 
+import './scripts/lastFocusedElement';
+
 import './normalize.css';
 import './index.css';
 

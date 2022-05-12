@@ -10,6 +10,8 @@ import { KEYS } from '../../../constants';
 import { Dispatch } from '../../../state';
 import { InfoNotificationProps } from './InfoNotification.types';
 
+import { focusLastElement } from '../../../scripts/lastFocusedElement';
+
 export const InfoNotification = ({message, close}: InfoNotificationProps) => {
 
 	useEffect(() => {
@@ -26,7 +28,12 @@ export const InfoNotification = ({message, close}: InfoNotificationProps) => {
 		}
 	}, [close]);
 
- return (
+	let closeAndFocusLastElement = () => {
+		close();
+		focusLastElement();
+	};
+
+ 	return (
 		<div 
 			id="info-notification"
 			className="notification info-notification"
@@ -36,7 +43,7 @@ export const InfoNotification = ({message, close}: InfoNotificationProps) => {
 			<Button 
 				styleClass="btn-info-notification" 
 				name={"Close"} 
-				handleClick={() => close()}
+				handleClick={closeAndFocusLastElement}
 				shouldFocusOnRender={true}
 			/>
 		</div>

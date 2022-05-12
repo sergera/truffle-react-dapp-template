@@ -10,6 +10,8 @@ import { KEYS } from '../../../constants';
 import { Dispatch } from '../../../state';
 import { SuccessNotificationProps } from './SuccessNotification.types';
 
+import { focusLastElement } from '../../../scripts/lastFocusedElement';
+
 export const SuccessNotification = ({message, close}: SuccessNotificationProps) => {
 
 	useEffect(() => {
@@ -26,7 +28,12 @@ export const SuccessNotification = ({message, close}: SuccessNotificationProps) 
 		}
 	}, [close]);
 
- return (
+	let closeAndFocusLastElement = () => {
+		close();
+		focusLastElement();
+	};
+
+ 	return (
 		<div 
 			id="success-notification"
 			className="notification success-notification"
@@ -36,7 +43,7 @@ export const SuccessNotification = ({message, close}: SuccessNotificationProps) 
 			<Button 
 				styleClass="btn-success-notification" 
 				name={"Close"} 
-				handleClick={() => close()}
+				handleClick={closeAndFocusLastElement}
 				shouldFocusOnRender={true}
 			/>
 		</div>

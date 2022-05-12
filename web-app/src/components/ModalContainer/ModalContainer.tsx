@@ -10,11 +10,13 @@ import { ModalContainerProps } from './ModalContainer.types';
 
 import { KEYS } from '../../constants';
 
+import { focusLastElement } from '../../scripts/lastFocusedElement';
+
 export function ModalContainer({
 	type, 
 	close,
 }:ModalContainerProps) {
-
+ 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
       if (e.key === KEYS.escape) {
@@ -29,6 +31,11 @@ export function ModalContainer({
 		}
 	}, [close]);
 
+	let closeAndFocusLastElement = () => {
+		close();
+		focusLastElement();
+	};
+
 	const modalExists = type in MODAL_COMPONENTS;
 	const SpecificModal = MODAL_COMPONENTS[type];
 	return (
@@ -38,7 +45,7 @@ export function ModalContainer({
 				id="modal-container"
 				className="modal-container"
 			>
-				<SpecificModal close={close} />
+				<SpecificModal close={closeAndFocusLastElement} />
 			</div>
 		}
 		</>

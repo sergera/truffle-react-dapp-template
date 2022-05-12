@@ -10,6 +10,8 @@ import { KEYS } from '../../../constants';
 import { Dispatch } from '../../../state';
 import { ErrorNotificationProps } from './ErrorNotification.types';
 
+import { focusLastElement } from '../../../scripts/lastFocusedElement';
+
 export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 
 	useEffect(() => {
@@ -26,7 +28,12 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 		}
 	}, [close]);
 
- return (
+	let closeAndFocusLastElement = () => {
+		close();
+		focusLastElement();
+	};
+
+ 	return (
 		<div 
 			id="error-notification"
 			className="notification error-notification"
@@ -36,7 +43,7 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 			<Button 
 				styleClass="btn-error-notification" 
 				name={"Close"} 
-				handleClick={() => close()}
+				handleClick={closeAndFocusLastElement}
 				shouldFocusOnRender={true}
 			/>
 		</div>
