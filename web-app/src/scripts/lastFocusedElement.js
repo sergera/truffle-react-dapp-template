@@ -5,5 +5,5 @@ document.addEventListener('blur', function(e) {
 }, true);
 
 export function focusLastElement() {
-	lastFocusedElement && lastFocusedElement.focus();
+	document.body.contains(lastFocusedElement) && lastFocusedElement.focus();
 };
