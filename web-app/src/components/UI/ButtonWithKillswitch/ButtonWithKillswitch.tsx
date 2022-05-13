@@ -12,9 +12,10 @@ import { ButtonWithKillswitchProps } from './ButtonWithKillswitch.types';
 export function ButtonWithKillswitch({
 	killswitch,
 	pleaseConnect,
-	handleClick, 
-	name, 
-	styleClass=""
+	handleClick,
+	name,
+	id="",
+	styleClass="",
 }: ButtonWithKillswitchProps) {
 
 	if(killswitch) {
@@ -22,15 +23,17 @@ export function ButtonWithKillswitch({
 			<Button 
 				handleClick={() => pleaseConnect()}
 				name={name}
+				id={id}
 				styleClass={styleClass}
 			/>
 		);
 	} else {
 		return (
 			<Button 
-				handleClick={handleClick} 
-				name={name} 
-				styleClass={styleClass} 
+				handleClick={handleClick}
+				name={name}
+				id={id}
+				styleClass={styleClass}
 			/>	
 		);
 	}

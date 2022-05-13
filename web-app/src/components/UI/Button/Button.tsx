@@ -4,8 +4,9 @@ import { ButtonProps } from './Button.types';
 
 export function Button({
 	handleClick, 
-	name, 
-	shouldFocusOnRender=false, 
+	name,
+	shouldFocusOnRender=false,
+	id="",
 	styleClass="",
 }: ButtonProps) {
 
@@ -22,9 +23,10 @@ export function Button({
   return (
 		<button 
 			ref={buttonRef}
-			onClick={handleClick} 
-			className={"button " + styleClass} 
+			onClick={handleClick}
+			id={id}
 			name={name}
+			className={"button " + styleClass}
 		>
 			{name}
 		</button>

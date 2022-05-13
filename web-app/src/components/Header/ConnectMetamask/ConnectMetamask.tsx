@@ -41,37 +41,38 @@ export function ConnectMetamask({
 			<div className="connect-metamask connect-metamask--info">
 				<p>{minify(toCheckSum(account))}</p>
 				<p>{chainName}</p>
-			</div>			
+			</div>
 		);
-	} else {
-		const everythingButChainPermittedOk = (
-			providerIsEnabled && providerListenersAreSet &&
-			chainIsConnected && !!chainName && chainListenersAreSet &&
-			!!account && accountListenersAreSet
-		);
-
-		if(everythingButChainPermittedOk && !chainIsPermitted) {
-			return (
-				<div className="connect-metamask">
-					<Button 
-						styleClass="btn-lg btn-warning-outline" 
-						handleClick={openSelectChain} 
-						name={"Wrong Chain"} 
-					/>
-				</div>
-			);
-		} else {
-			return (
-				<div className="connect-metamask">
-					<Button 
-						styleClass="btn-lg btn-foreground-outline" 
-						handleClick={connectToBlockchain} 
-						name={"Connect MetaMask"} 
-					/>
-				</div>
-			);
-		}
 	}
+	
+	const everythingButChainPermittedOk = (
+		providerIsEnabled && providerListenersAreSet &&
+		chainIsConnected && !!chainName && chainListenersAreSet &&
+		!!account && accountListenersAreSet
+	);
+
+	if(everythingButChainPermittedOk && !chainIsPermitted) {
+		return (
+			<div className="connect-metamask">
+				<Button
+					styleClass="btn-lg btn-warning-outline"
+					handleClick={openSelectChain}
+					name={"Wrong Chain"}
+				/>
+			</div>
+		);
+	}
+
+	return (
+		<div className="connect-metamask">
+			<Button
+				styleClass="btn-lg btn-foreground-outline"
+				handleClick={connectToBlockchain}
+				name={"Connect MetaMask"}
+				id={"connect-to-blockchain"}
+			/>
+		</div>
+	);
 };
 
 const mapStateToProps = (state: RootState) => {

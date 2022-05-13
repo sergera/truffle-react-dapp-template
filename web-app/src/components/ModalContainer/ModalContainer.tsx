@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { closeModal } from '../../state/modal';
 
 import { MODAL_COMPONENTS } from './ModalContainer.constants';
+import { MODAL_TYPES } from '../../constants';
 
 import { RootState, Dispatch } from '../../state';
 import { ModalContainerProps } from './ModalContainer.types';
@@ -31,9 +32,22 @@ export function ModalContainer({
 		}
 	}, [close]);
 
-	let closeAndFocusLastElement = () => {
-		close();
-		focusLastElement();
+	let actionAfterCloseDecorator = (action: Function) => {
+		return () => {
+			close();
+			action();
+		};
+	};
+
+	let chooseAfterCloseFocus = (modalType: string) => {
+		if(modalType === MODAL_TYPES.pleaseConnect) {
+			return () => {
+				let connectButton = document.getElementById("connect-to-blockchain");
+				if(connectButton) connectButton.focus();
+			};
+		}
+
+		return focusLastElement;
 	};
 
 	const modalExists = type in MODAL_COMPONENTS;
@@ -53,7 +67,7 @@ export function ModalContainer({
 				className="modal-container"
 				style={{ top: `${window.scrollY}px` }}				
 			>
-				<SpecificModal close={closeAndFocusLastElement} />
+				<SpecificModal close={actionAfterCloseDecorator(chooseAfterCloseFocus(type))} />
 			</div>
 		}
 		</>
