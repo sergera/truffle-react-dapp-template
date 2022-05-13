@@ -38,12 +38,20 @@ export function ModalContainer({
 
 	const modalExists = type in MODAL_COMPONENTS;
 	const SpecificModal = MODAL_COMPONENTS[type];
+
+	if(modalExists) {
+		document.body.style.overflow = "hidden";
+	} else {
+		document.body.style.overflow = "scroll";
+	}
+
 	return (
 		<> 
 		{modalExists &&
 			<div 
 				id="modal-container"
 				className="modal-container"
+				style={{ top: `${window.scrollY}px` }}				
 			>
 				<SpecificModal close={closeAndFocusLastElement} />
 			</div>
