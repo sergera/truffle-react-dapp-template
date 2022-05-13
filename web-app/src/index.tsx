@@ -9,7 +9,7 @@ import { App } from './App';
 
 import './polyfills/eventListener';
 
-import './scripts/centerScrollOnFocus';
+import './scripts/scrollFocusIntoView';
 import './scripts/lastFocusedElement';
 
 import './normalize.css';
