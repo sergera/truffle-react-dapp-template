@@ -10,7 +10,7 @@ const contractSlice = createSlice({
 	name: "blockchain/contract",
 	initialState,
 	reducers: {
-		setContractAcquired(state, action:PayloadAction<boolean>) {
+		setContractAcquired(state:ContractSlice, action:PayloadAction<boolean>) {
 			state.isAcquired = action.payload;
 		},
 	},

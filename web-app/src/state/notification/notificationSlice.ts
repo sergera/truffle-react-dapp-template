@@ -12,42 +12,42 @@ const notificationSlice = createSlice({
 	name: "notification",
 	initialState,
 	reducers: {
-		openSuccessNotification(state, action:PayloadAction<string>) {
+		openSuccessNotification(state:NotificationSlice, action:PayloadAction<string>) {
 			let newNotifications = [...state.queue];
-			newNotifications.push({ type: NOTIFICATION_TYPES.success, message: action.payload});
+			newNotifications.push({ type: NOTIFICATION_TYPES.success, message: action.payload });
 			state.queue = newNotifications;
 		},
-		closeSuccessNotification(state) {
+		closeSuccessNotification(state:NotificationSlice) {
 			let notificationToClose = state.queue.findIndex((notification) => notification.type === NOTIFICATION_TYPES.success);
 			let newNotifications = state.queue.filter((_,index) => index !== notificationToClose);
 			state.queue = newNotifications;
 		},
-		openInfoNotification(state, action:PayloadAction<string>) {
+		openInfoNotification(state:NotificationSlice, action:PayloadAction<string>) {
 			let newNotifications = [...state.queue];
-			newNotifications.push({ type: NOTIFICATION_TYPES.info, message: action.payload});
+			newNotifications.push({ type: NOTIFICATION_TYPES.info, message: action.payload });
 			state.queue = newNotifications;
 		},
-		closeInfoNotification(state) {
+		closeInfoNotification(state:NotificationSlice) {
 			let notificationToClose = state.queue.findIndex((notification) => notification.type === NOTIFICATION_TYPES.info);
 			let newNotifications = state.queue.filter((_,index) => index !== notificationToClose);
 			state.queue = newNotifications;
 		},
-		openWarningNotification(state, action:PayloadAction<string>) {
+		openWarningNotification(state:NotificationSlice, action:PayloadAction<string>) {
 			let newNotifications = [...state.queue];
-			newNotifications.push({ type: NOTIFICATION_TYPES.warning, message: action.payload});
+			newNotifications.push({ type: NOTIFICATION_TYPES.warning, message: action.payload });
 			state.queue = newNotifications;
 		},
-		closeWarningNotification(state) {
+		closeWarningNotification(state:NotificationSlice) {
 			let notificationToClose = state.queue.findIndex((notification) => notification.type === NOTIFICATION_TYPES.warning);
 			let newNotifications = state.queue.filter((_,index) => index !== notificationToClose);
 			state.queue = newNotifications;
 		},
-		openErrorNotification(state, action:PayloadAction<string>) {
+		openErrorNotification(state:NotificationSlice, action:PayloadAction<string>) {
 			let newNotifications = [...state.queue];
-			newNotifications.push({ type: NOTIFICATION_TYPES.error, message: action.payload});
+			newNotifications.push({ type: NOTIFICATION_TYPES.error, message: action.payload });
 			state.queue = newNotifications;
 		},
-		closeErrorNotification(state) {
+		closeErrorNotification(state:NotificationSlice) {
 			let notificationToClose = state.queue.findIndex((notification) => notification.type === NOTIFICATION_TYPES.error);
 			let newNotifications = state.queue.filter((_,index) => index !== notificationToClose);
 			state.queue = newNotifications;
