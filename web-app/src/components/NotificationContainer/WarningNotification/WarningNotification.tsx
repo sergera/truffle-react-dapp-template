@@ -8,11 +8,15 @@ import { closeWarningNotification } from '../../../state/notification';
 import { KEYS } from '../../../constants';
 
 import { Dispatch } from '../../../state';
-import { SuccessNotificationProps } from './WarningNotification.types';
+import { WarningNotificationProps } from './WarningNotification.types';
 
 import { focusLastElement } from '../../../scripts/lastFocusedElement';
 
-export const WarningNotification = ({message, close}: SuccessNotificationProps) => {
+export const WarningNotification = ({
+	message, 
+	close, 
+	shouldChangeFocusOnClose
+}: WarningNotificationProps) => {
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
@@ -30,7 +34,7 @@ export const WarningNotification = ({message, close}: SuccessNotificationProps) 
 
 	let closeAndFocusLastElement = () => {
 		close();
-		focusLastElement();
+		shouldChangeFocusOnClose && focusLastElement();
 	};
 
  	return (

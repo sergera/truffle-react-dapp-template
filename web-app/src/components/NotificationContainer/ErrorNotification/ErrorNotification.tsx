@@ -12,7 +12,11 @@ import { ErrorNotificationProps } from './ErrorNotification.types';
 
 import { focusLastElement } from '../../../scripts/lastFocusedElement';
 
-export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
+export const ErrorNotification = ({
+	message, 
+	close, 
+	shouldChangeFocusOnClose
+}: ErrorNotificationProps) => {
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
@@ -30,7 +34,7 @@ export const ErrorNotification = ({message, close}: ErrorNotificationProps) => {
 
 	let closeAndFocusLastElement = () => {
 		close();
-		focusLastElement();
+		shouldChangeFocusOnClose && focusLastElement();
 	};
 
  	return (

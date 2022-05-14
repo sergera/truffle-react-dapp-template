@@ -12,7 +12,11 @@ import { SuccessNotificationProps } from './SuccessNotification.types';
 
 import { focusLastElement } from '../../../scripts/lastFocusedElement';
 
-export const SuccessNotification = ({message, close}: SuccessNotificationProps) => {
+export const SuccessNotification = ({
+	message, 
+	close, 
+	shouldChangeFocusOnClose
+}: SuccessNotificationProps) => {
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
@@ -30,7 +34,7 @@ export const SuccessNotification = ({message, close}: SuccessNotificationProps) 
 
 	let closeAndFocusLastElement = () => {
 		close();
-		focusLastElement();
+		shouldChangeFocusOnClose && focusLastElement();
 	};
 
  	return (

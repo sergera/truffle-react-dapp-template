@@ -12,7 +12,11 @@ import { InfoNotificationProps } from './InfoNotification.types';
 
 import { focusLastElement } from '../../../scripts/lastFocusedElement';
 
-export const InfoNotification = ({message, close}: InfoNotificationProps) => {
+export const InfoNotification = ({
+	message, 
+	close, 
+	shouldChangeFocusOnClose
+}: InfoNotificationProps) => {
 
 	useEffect(() => {
     function keyListener(e: React.KeyboardEvent) {
@@ -30,7 +34,7 @@ export const InfoNotification = ({message, close}: InfoNotificationProps) => {
 
 	let closeAndFocusLastElement = () => {
 		close();
-		focusLastElement();
+		shouldChangeFocusOnClose && focusLastElement();
 	};
 
  	return (

@@ -9,6 +9,7 @@ export interface NotificationContainerProps {
 
 export interface NotificationExplicitProps {
 	message: string;
+	shouldChangeFocusOnClose: boolean;
 };
 
 export type ConnectedNotification = ConnectedComponent<ReactFunctionalComponent,NotificationExplicitProps>;

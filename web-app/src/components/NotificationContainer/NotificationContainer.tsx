@@ -36,7 +36,10 @@ export function NotificationContainer({notifications}: NotificationContainerProp
 	return (
 		<>
 		{notifications.length > 0 && SpecificNotification &&  
-			<SpecificNotification message={currentNotification.message} />
+			<SpecificNotification 
+				message={currentNotification.message}
+				shouldChangeFocusOnClose={notifications.length === 1}
+			/>
 		}
 		</>
 	);
