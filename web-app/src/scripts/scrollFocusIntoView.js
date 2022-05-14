@@ -1,5 +1,16 @@
+import isKeyboardNavigation from './isKeyboardNavigation';
+
 const ELEMENT_MIN_PERCENTILE_DISTANCE_FROM_EDGE = .20;
 const DISTANCE_OVERHEAD = .05;
+
+function isFixedOrHasFixedParent(element) {
+	while(element instanceof HTMLElement) {
+		if(element === document.body) return false;
+		if(getComputedStyle(element).position === "fixed") return true;
+		element = element.offsetParent;
+	}
+	return false;
+};
 
 function distanceFromTop(element) {
 	var yPosition = 0;
@@ -23,5 +34,5 @@ function scrollIntoView(element) {
 };
 
 document.addEventListener('focus', function(e) {
-	scrollIntoView(e.target);
+	if(isKeyboardNavigation() && !isFixedOrHasFixedParent(e.target)) scrollIntoView(e.target);
 }, true);
