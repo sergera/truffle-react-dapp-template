@@ -10,6 +10,7 @@ import { App } from './App';
 import './polyfills/eventListener';
 import './polyfills/date';
 
+import './scripts/isKeyboardNavigation';
 import './scripts/scrollFocusIntoView';
 import './scripts/lastFocusedElement';
 
