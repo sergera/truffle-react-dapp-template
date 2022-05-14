@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { App } from './App';
 
 import './polyfills/eventListener';
+import './polyfills/date';
 
 import './scripts/scrollFocusIntoView';
 import './scripts/lastFocusedElement';
