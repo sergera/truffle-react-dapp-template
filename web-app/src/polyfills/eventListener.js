@@ -13,7 +13,9 @@ if (!Element.prototype.addEventListener) {
     if (!oEvent) { oEvent = window.event; }
     for (var iLstId = 0, iElId = 0, oEvtListeners = oListeners[oEvent.type]; iElId < oEvtListeners.aEls.length; iElId++) {
       if (oEvtListeners.aEls[iElId] === this) {
-        for (iLstId; iLstId < oEvtListeners.aEvts[iElId].length; iLstId++) { oEvtListeners.aEvts[iElId][iLstId].call(this, oEvent); }
+        for (iLstId; iLstId < oEvtListeners.aEvts[iElId].length; iLstId++) { 
+					oEvtListeners.aEvts[iElId][iLstId].call(this, oEvent); 
+				}
         break;
       }
     }
