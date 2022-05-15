@@ -65,7 +65,6 @@ export function ModalContainer({
 			<div 
 				id="modal-container"
 				className="modal-container"
-				style={{ top: `${window.scrollY}px` }}				
 			>
 				<SpecificModal close={actionAfterCloseDecorator(chooseAfterCloseFocus(type))} />
 			</div>
