@@ -1,4 +1,4 @@
-# Welcome to the Truffle-React dApp Template
+# Truffle-React dApp Template
 
 <p>this is intended to be a shortcut for a responsive dApp interface<br>
 in order to enable more focus on what really matters: Smart Contracts and the EVM</p>
@@ -19,10 +19,10 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 
 ## Installation
 
-<p>cd to root directory</p>
-<p>npm i</p>
-<p>cd web-app</p>
-<p>npm i</p>
+<pre><code>cd to project root</pre></code>
+<pre><code>npm i</code></pre>
+<pre><code>cd web-app</pre></code>
+<pre><code>npm i</pre></code>
 
 ## Environment Variables
 
@@ -47,18 +47,18 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 ###### REACT_APP_SUPPORTED_CHAINS:
 
 <p>Ethereum lower-cased chain names separated by commas</p>
-<p>These are the chains in which the app contracts are deployed<br>
-e.g. "mainnet,rinkeby"</p>
-<p>If only one chain is supported there should be no comma<br>
-e.g. "mainnet"</p>
+<p>These are the chains in which the app contracts are deployed, e.g.</p>
+<pre><code>REACT_APP_SUPPORTED_CHAINS="mainnet,rinkeby"</pre></code>
+<p>If only one chain is supported there should be no comma, e.g.</p>
+<pre><code>REACT_APP_SUPPORTED_CHAINS="mainnet"</pre></code>
 
 ###### REACT_APP_CONTRACTS:
 
 <p>Contract file names separated by commas</p>
-<p>These should be cased exactly like the ".sol" file name<br>
-e.g. "MyNFT,Market"</p>
-<p>If only one contract exists there should be no comma<br>
-e.g. "MyNFT"</p>
+<p>These should be cased exactly like the ".sol" file name, e.g.</p> 
+<pre><code>REACT_APP_CONTRACTS="MyNFT,Market"</pre></code>
+<p>If only one contract exists there should be no comma, e.g.</p>
+<pre><code>REACT_APP_CONTRACTS="MyNFT"</pre></code>
 
 ###### REACT_APP_BACKEND:
 
@@ -70,37 +70,37 @@ e.g. "MyNFT"</p>
 
 ### Compile and Deploy Contracts
 
-<p>truffle migrate --reset --network $NETWORK_NAME<br>
-where "NETWORK_NAME" is declared in truffle-config.js</p>
+<pre><code>truffle migrate --reset --network $NETWORK_NAME</pre></code>
+<p>where "NETWORK_NAME" is declared in truffle-config.js</p>
 
 ### Test Contracts
 
-<p>truffle develop<br>
-truffle test</p>
+<pre><code>truffle develop</pre></code>
+<pre><code>truffle test</pre></code>
 
 ###### or
 
-<p>truffle test --network $NETWORK_NAME<br>
-where "NETWORK_NAME" is declared in truffle-config.js</p>
+<pre><code>truffle test --network $NETWORK_NAME</pre></code>
+<p>where "NETWORK_NAME" is declared in truffle-config.js</p>
 
 ### Verify Contracts
 
-<p>truffle run verify $CONTRACT_NAME --network $NETWORK_NAME<br>
-where "CONTRACT_NAME" is the name of your solidity contract file in /contracts/<br>
+<pre><code>truffle run verify $CONTRACT_NAME --network $NETWORK_NAME</pre></code>
+<p>where "CONTRACT_NAME" is the name of your solidity contract file in /contracts/<br>
 and "NETWORK_NAME" is declared in truffle-config.js</p>
 
 ## Web App Commands
 
-<p>cd web-app</p>
+<pre><code>cd web-app</pre></code>
 
 ### Run in Dev Mode
 
-<p>npm start</p>
+<pre><code>npm start</pre></code>
 
 ### Test
 
-<p>npm test</p>
+<pre><code>npm test</pre></code>
 
 ### Build
 
-<p>npm run build</p>
+<pre><code>npm run build</pre></code>
