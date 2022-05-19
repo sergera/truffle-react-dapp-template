@@ -12,6 +12,7 @@ import { ModalContainerProps } from './ModalContainer.types';
 import { KEYS } from '../../constants';
 
 import { focusLastElement } from '../../scripts/lastFocusedElement';
+import { scrollIntoView } from '../../scripts/scrollFocusIntoView';
 
 export function ModalContainer({
 	type, 
@@ -43,7 +44,10 @@ export function ModalContainer({
 		if(modalType === MODAL_TYPES.pleaseConnect) {
 			return () => {
 				let connectButton = document.getElementById("connect-to-blockchain");
-				if(connectButton) connectButton.focus();
+				if(connectButton) {
+					connectButton.focus();
+					scrollIntoView(connectButton);
+				}
 			};
 		}
 

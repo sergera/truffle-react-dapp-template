@@ -21,7 +21,7 @@ function distanceFromTop(element) {
 	return yPosition;
 };
 
-function scrollIntoView(element) {
+export function scrollIntoView(element) {
 	const bottomOfScreen = window.scrollY + window.innerHeight;
 	const percentileDistanceFromBottom = ((bottomOfScreen - distanceFromTop(element)) / window.innerHeight).toFixed(2);
 	if(percentileDistanceFromBottom < ELEMENT_MIN_PERCENTILE_DISTANCE_FROM_EDGE) {
