@@ -1,25 +1,23 @@
 import React from 'react';
 import { SelectProps } from './Select.types';
 
-// TODO: make this into a controlled component
-
 export function Select({
 	label,
+	selected,
 	options,
 	handleChange, 
 	handleBlur=()=>{},
 	isRequired=false,
 	formId="", 
-	placeholder="",
 	styleClass=""
 }: SelectProps) {
 
 	const getValueOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		handleChange(options.find((option) => option.label === e.target.value) || {});
+		handleChange(options.find((option) => option.label === e.target.value));
 	}
 
 	const getValueOnBlur = (e:  React.ChangeEvent<HTMLSelectElement>) => {
-		handleBlur(options.find((option) => option.label === e.target.value) || {});
+		handleBlur(options.find((option) => option.label === e.target.value));
 	};
 
   return (
@@ -28,18 +26,13 @@ export function Select({
 				{label}
 			</label>
 			<select 
+				value={selected.label}
 				onChange={(e) => getValueOnChange(e)}
 				onBlur={(e) => getValueOnBlur(e)}
 				name={label}
 				form={formId}
 				className={"select " + styleClass} 
 			>
-				{placeholder &&
-				<option
-					className={"select__option"}
-				>
-					{placeholder}
-				</option>}
 				{options.map((option) => {
 					return (
 						<option 

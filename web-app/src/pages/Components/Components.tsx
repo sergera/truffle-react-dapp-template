@@ -18,6 +18,12 @@ import { openModal } from "../../state/modal";
 
 import { MODAL_TYPES } from '../../constants';
 
+const SELECT_OPTIONS = {
+	one: {label: "value 1", data: {one: "1"}},
+	two: {label: "value 2", data: {two: "2"}},
+	three: {label: "value 3", data: {three: "3"}},
+};
+
 export function Components() {
 
 	let [simpleInputValue, setSimpleInputValue] = useState("");
@@ -28,7 +34,7 @@ export function Components() {
 	let [weiInputValue, setWeiInputValue] = useState("0");
 	let [radioInputOption, setRadioInputOption] = useState({});
 	let [checkboxInputOptions, setCheckboxInputOptions] = useState({});
-	let [selectOption, setSelectOption] = useState({});
+	let [selectOption, setSelectOption] = useState<SelectOption>(SELECT_OPTIONS.one);
 
 	let [isValidName, setIsValidName] = useState(true);
 	let [isValidUserName, setIsValidUserName] = useState(true);
@@ -171,12 +177,12 @@ export function Components() {
 				<Select 
 					label="select"
 					handleChange={getSelectOption}
+					selected={selectOption}
 					options={[
-						{label: "value 1", data: {one: "1"}},
-						{label: "value 2", data: {two: "2"}},
-						{label: "value 3", data: {three: "3"}},
+						SELECT_OPTIONS.one,
+						SELECT_OPTIONS.two,
+						SELECT_OPTIONS.three,
 					]}
-					placeholder={"--select an option"}
 				/>
 				<p>Selected option: {JSON.stringify(selectOption)}</p>
 

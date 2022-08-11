@@ -7,11 +7,11 @@ export interface SelectOption {
 
 export interface SelectProps {
 	label: string;
+	selected: SelectOption;
 	options: SelectOption[];
 	handleChange: Function;
 	handleBlur?: Function;
 	isRequired?: boolean;
 	formId?: string;
-	placeholder?: string;
 	styleClass?: string;
 };

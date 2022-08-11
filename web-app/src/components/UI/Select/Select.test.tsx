@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { render, fireEvent } from '@testing-library/react';
 
 import { Select, SelectOption } from '.';
@@ -5,17 +7,24 @@ import { Select, SelectOption } from '.';
 const changeHandler = jest.fn();
 const blurHandler = jest.fn();
 
-const option1 = {label: "label 1", data: {one: "1"}};
-const option2 = {label: "label 2", data: {two: "2"}};
-const option3 = {label: "label 3", data: {three: "3"}};
-const options = [option1, option2, option3];
+const SELECT_OPTIONS = {
+	one: {label: "value 1", data: {one: "1"}},
+	two: {label: "value 2", data: {two: "2"}},
+	three: {label: "value 3", data: {three: "3"}},
+};
+
+const OPTIONS = [SELECT_OPTIONS.one, SELECT_OPTIONS.two, SELECT_OPTIONS.three];
 
 const TestComponent = () => {
+	let [selectOption, setSelectOption] = useState<SelectOption>(SELECT_OPTIONS.one);
+	
 	let testOnChangeCallback = (option: SelectOption) => {
+		setSelectOption(option);
 		changeHandler(option);
 	}
 
 	let testOnBlurCallback = (option: SelectOption) => {
+		setSelectOption(option);
 		blurHandler(option);
 	}
 
@@ -23,8 +32,9 @@ const TestComponent = () => {
 		<Select 
 			handleChange={testOnChangeCallback} 
 			handleBlur={testOnBlurCallback}
+			selected={selectOption}
 			label="test component"
-			options={options}
+			options={OPTIONS}
 		/>
 	);
 };
@@ -35,11 +45,11 @@ test("gives value to change handler on change", () => {
 	);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option1.label },
+		target: { value: SELECT_OPTIONS.one.label },
 	});
 
 	expect(blurHandler).not.toHaveBeenCalled();
-	expect(changeHandler).toHaveBeenLastCalledWith(option1);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.one);
 });
 
 test("gives latest value to change handler", () => {
@@ -48,18 +58,18 @@ test("gives latest value to change handler", () => {
 	);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option1.label },
+		target: { value: SELECT_OPTIONS.one.label },
 	});
 
 	expect(blurHandler).not.toHaveBeenCalled();
-	expect(changeHandler).toHaveBeenLastCalledWith(option1);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.one);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option2.label },
+		target: { value: SELECT_OPTIONS.two.label },
 	});
 
 	expect(blurHandler).not.toHaveBeenCalled();
-	expect(changeHandler).toHaveBeenLastCalledWith(option2);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.two);
 });
 
 test("gives value to blur handler on blur", () => {
@@ -68,15 +78,15 @@ test("gives value to blur handler on blur", () => {
 	);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option1.label },
+		target: { value: SELECT_OPTIONS.one.label },
 	});
 
 	expect(blurHandler).not.toHaveBeenCalled();
-	expect(changeHandler).toHaveBeenLastCalledWith(option1);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.one);
 
 	fireEvent.blur(document.getElementsByClassName("select")[0]);
 
-	expect(blurHandler).toHaveBeenCalledWith(option1);
+	expect(blurHandler).toHaveBeenCalledWith(SELECT_OPTIONS.one);
 });
 
 test("gives latest value to blur handler", () => {
@@ -85,24 +95,24 @@ test("gives latest value to blur handler", () => {
 	);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option1.label },
+		target: { value: SELECT_OPTIONS.one.label },
 	});
 
 	expect(blurHandler).not.toHaveBeenCalled();
-	expect(changeHandler).toHaveBeenLastCalledWith(option1);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.one);
 
 	fireEvent.blur(document.getElementsByClassName("select")[0]);
 
-	expect(blurHandler).toHaveBeenCalledWith(option1);
+	expect(blurHandler).toHaveBeenCalledWith(SELECT_OPTIONS.one);
 
 	fireEvent.change(document.getElementsByClassName("select")[0], {
-		target: { value: option2.label },
+		target: { value: SELECT_OPTIONS.two.label },
 	});
 
 	expect(blurHandler).toHaveBeenCalledTimes(1);
-	expect(changeHandler).toHaveBeenLastCalledWith(option2);
+	expect(changeHandler).toHaveBeenLastCalledWith(SELECT_OPTIONS.two);
 
 	fireEvent.blur(document.getElementsByClassName("select")[0]);
 
-	expect(blurHandler).toHaveBeenCalledWith(option2);
+	expect(blurHandler).toHaveBeenCalledWith(SELECT_OPTIONS.two);
 });
