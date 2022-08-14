@@ -22,7 +22,6 @@
 @media (max-width: 420px) {
 	.button {
 		padding: 8px;
-		max-width: 80vw;
 	}
 
 	.btn-lg {
