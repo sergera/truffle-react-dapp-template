@@ -11,7 +11,10 @@ import { ButtonWithKillswitchProps } from './ButtonWithKillswitch.types';
 
 export function ButtonWithKillswitch({
 	killswitch,
+	isConnected,
+	isChainPermitted,
 	pleaseConnect,
+	selectChain,
 	handleClick,
 	name,
 	id="",
@@ -19,6 +22,16 @@ export function ButtonWithKillswitch({
 }: ButtonWithKillswitchProps) {
 
 	if(killswitch) {
+		if(isConnected && !isChainPermitted) {
+			return (
+				<Button 
+					handleClick={() => selectChain()}
+					name={name}
+					id={id}
+					styleClass={styleClass}
+				/>
+			);
+		}
 		return (
 			<Button 
 				handleClick={() => pleaseConnect()}
@@ -26,7 +39,7 @@ export function ButtonWithKillswitch({
 				id={id}
 				styleClass={styleClass}
 			/>
-		);
+		);			
 	} else {
 		return (
 			<Button 
@@ -42,12 +55,15 @@ export function ButtonWithKillswitch({
 const mapStateToProps = (state: RootState) => {
 	return {
 		killswitch: state.connection.killswitch,
+		isConnected: state.chain.isConnected,
+		isChainPermitted: state.chain.isPermitted,
 	};
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-    pleaseConnect: () => dispatch(openModal(MODAL_TYPES.pleaseConnect)),
+		pleaseConnect: () => dispatch(openModal(MODAL_TYPES.pleaseConnect)),
+		selectChain: () => dispatch(openModal(MODAL_TYPES.selectChain)),
   };
 };
 

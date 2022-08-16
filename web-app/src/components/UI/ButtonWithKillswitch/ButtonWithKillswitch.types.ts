@@ -1,6 +1,9 @@
 export interface ButtonWithKillswitchProps {
 	killswitch: boolean;
-	pleaseConnect: Function,
+	isConnected: boolean;
+	isChainPermitted: boolean;
+	pleaseConnect: Function;
+	selectChain: Function;
 	handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	name: string;
 	id?: string;
