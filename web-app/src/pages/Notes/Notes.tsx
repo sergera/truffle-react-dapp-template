@@ -8,7 +8,6 @@ import { getErrorMessage } from "../../error";
 import { Log } from "../../logger";
 
 import { store } from '../../state';
-import { openErrorNotification } from '../../state/notification';
 import { LooseObject } from "../../types";
 
 export function Notes() {
@@ -78,7 +77,7 @@ export function Notes() {
 				setConfirmations(confirmation)
 			},
 			onError: (error: Error) => {
-				store.dispatch(openErrorNotification(getErrorMessage(error)));
+				Log.error({msg: getErrorMessage(error), description: "error creating note"})
 			}
 		})
 		Log.info({
@@ -93,7 +92,7 @@ export function Notes() {
 			method: "notesByOwner",
 			args: [store.getState().account.address],
 			onError: (error: Error) => {
-				store.dispatch(openErrorNotification(getErrorMessage(error)));
+				Log.error({msg: getErrorMessage(error), description: "error getting notes"})
 			}
 		})
 		Log.info({
