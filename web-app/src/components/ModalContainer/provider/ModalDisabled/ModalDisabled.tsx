@@ -20,8 +20,8 @@ export function ModalDisabled({
 				<p className="modal__text">{content3}</p>
 				<a 
 						href={"https://metamask.io/"} 
-						target="_blank" 
-						rel="noopener noreferrer"  
+						target="_self"
+						rel="noopener noreferrer"
 						className="modal__anchor"
 				>
 					<p className="modal__anchor--text">
