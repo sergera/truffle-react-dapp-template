@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const backendURL = process.env.REACT_APP_BACKEND_URL;
+import { getBackendURL } from "../env";
+
+const backendURL = getBackendURL();
 
 export const backend = axios.create({
-	baseURL: backendURL
+	baseURL: backendURL,
+	headers: {'Content-Type': 'application/json'}
 });

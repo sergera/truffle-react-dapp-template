@@ -23,7 +23,7 @@
  * 
  */
 
- export function getPublicUrl() {
+export function getPublicUrl() {
 	return process.env.PUBLIC_URL;
 };
 
@@ -54,4 +54,8 @@ export function getSupportedChains() {
 
 export function getContractNames() {
 	return getEnvList("CONTRACTS",",");
+};
+
+export function getBackendURL() {
+	return getEnv("BACKEND");
 };
