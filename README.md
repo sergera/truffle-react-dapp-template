@@ -34,7 +34,19 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 
 <p>private key to the deployer wallet (in secret recovery phrase format)</p>
 
-###### INFURA_KEY:
+###### RPC_PROVIDER_MAINNET_URL:
+
+<p>mainnet URL provided by Infura RPC provider</p>
+
+###### RPC_PROVIDER_GOERLI_URL:
+
+<p>goerli URL provided by Infura RPC provider</p>
+
+###### RPC_PROVIDER_SEPOLIA_URL:
+
+<p>sepolia URL provided by Infura RPC provider</p>
+
+###### RPC_PROVIDER_KEY:
 
 <p>key provided by Infura RPC provider</p>
 
