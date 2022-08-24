@@ -72,6 +72,14 @@ in order to enable more focus on what really matters: Smart Contracts and the EV
 <p>If only one contract exists there should be no comma, e.g.</p>
 <pre><code>REACT_APP_CONTRACTS="MyNFT"</pre></code>
 
+###### REACT_APP_CONFIRMATION_BLOCKS:
+
+<p>number (integer) of confirmation blocks before the app considers an action confirmed</p>
+
+###### REACT_APP_CONFIRMATION_DELAY_SECONDS:
+
+<p>number (integer) of seconds after confirmation block to allow back-end to act before the app retrieves new information</p>
+
 ###### REACT_APP_BACKEND:
 
 <p>url of backend service (template section to be implemented)</p>

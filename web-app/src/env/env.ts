@@ -59,3 +59,11 @@ export function getContractNames() {
 export function getBackendURL() {
 	return getEnv("BACKEND");
 };
+
+export function getConfirmationBlocks() {
+	return parseInt(getEnv("CONFIRMATION_BLOCKS"));
+};
+
+export function getConfirmationDelaySeconds() {
+	return parseInt(getEnv("CONFIRMATION_DELAY_SECONDS"));
+};

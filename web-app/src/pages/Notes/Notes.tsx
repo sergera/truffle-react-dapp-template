@@ -6,8 +6,11 @@ import { TextInput } from '../../components/UI/TextInput';
 import { simpleCall, txCall, estimateGas } from '../../blockchain/contracts';
 import { getErrorMessage } from "../../error";
 import { Log } from "../../logger";
+import { getConfirmationBlocks, getConfirmationDelaySeconds } from "../../env";
 
 import { store } from '../../state';
+import { openInfoToast, openSuccessToast } from '../../state/toast';
+
 import { LooseObject } from "../../types";
 
 export function Notes() {
@@ -75,6 +78,14 @@ export function Notes() {
 			},
 			onConfirmation: (confirmation: number) => {
 				setConfirmations(confirmation)
+				let confirmationBlocks = getConfirmationBlocks();
+				if(confirmation < confirmationBlocks) {
+					store.dispatch(openInfoToast(`confirmations: ${confirmation}/${confirmationBlocks}`));
+				} else if(confirmation === confirmationBlocks) {
+					setTimeout(() => {
+						store.dispatch(openSuccessToast("note confirmed!"));
+					}, getConfirmationDelaySeconds()*1000);
+				}
 			},
 			onError: (error: Error) => {
 				Log.error({msg: getErrorMessage(error), description: "error creating note"})

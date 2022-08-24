@@ -1,5 +1,7 @@
 import { getContracts } from "./contracts";
 
+import { getConfirmationBlocks } from "../../env";
+
 import { LooseObject } from "../../types";
 import { SimpleCallArgs, TxCallArgs, EstimateGasArgs } from './interact.types';
 
@@ -33,6 +35,10 @@ export async function txCall({
 }: TxCallArgs) {
 	const contractInstance = getContracts()[contract];
 	const contractMethod = contractInstance.methods[method];
+
+	let confirmedBlockHash = "";
+	let actualConfirmations = 0;
+
 	const response = await contractMethod(...args).send(options)
 	.on("sending", () => {
 		onSending();
@@ -47,8 +53,15 @@ export async function txCall({
 		onReceipt(receipt);
 	})
 	.on("confirmation", (confirmation: number, receipt: LooseObject, latestBlockHash: string) => {
-		/* fired for every confimation until the 24th confirmation */
-		onConfirmation(confirmation, receipt, latestBlockHash);
+		/* fired for every confirmation until the 24th confirmation */
+		/* fires at seemingly random intervals through http */
+		if(latestBlockHash !== confirmedBlockHash) {
+			/* if fired, check that the confirmation is actually a new confirmation */
+			/* in the case of using http */
+			confirmedBlockHash = latestBlockHash;
+			onConfirmation(actualConfirmations, receipt, latestBlockHash);	
+			actualConfirmations++;
+		}
 	})
 	.on("error", (error: Error, receipt: LooseObject) => {
 		/* if tx reject by network with a receipt, receipt will be the second argument */
@@ -57,6 +70,7 @@ export async function txCall({
 	.catch((err: Error) => {
 		onError(err);
 	});
+
 	return response;
 };
 
