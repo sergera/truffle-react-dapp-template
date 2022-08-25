@@ -4,6 +4,7 @@ export interface TextInputWithRulesProps {
 	name: string;
 	isValid: boolean;
 	rules: string[];
+	handleFocus?: Function;
 	handleBlur?: Function;
 	isRequired?: boolean;
 	formId?: string;

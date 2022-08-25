@@ -13,6 +13,7 @@ export function TextInputWithRules({
 	placeholder, 
 	isValid,
 	rules,
+	handleFocus=()=>{},
 	handleBlur=()=>{},
 	isRequired=false,
 	styleClass=""
@@ -33,6 +34,7 @@ export function TextInputWithRules({
 		<div className="text-input-with-rules">
 			<TextInput 
 				handleChange={handleChange}
+				handleFocus={handleFocus}
 				handleBlur={handleBlur}
 				isValid={isValid}
 				name={name}

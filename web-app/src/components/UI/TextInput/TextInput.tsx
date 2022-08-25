@@ -3,7 +3,8 @@ import { TextInputProps } from './TextInput.types';
 export function TextInput({
 	name,
 	value,
-	handleChange, 
+	handleChange,
+	handleFocus=()=>{},
 	handleBlur=()=>{},
 	isValid=true,
 	isRequired=false,
@@ -15,6 +16,11 @@ export function TextInput({
 	const getValueOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		handleChange(value);
+	};
+
+	const getValueOnFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value;
+		handleFocus(value);
 	};
 
 	const getValueOnBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +39,7 @@ export function TextInput({
 			<input 
 				type="text"
 				onChange={getValueOnChange}
+				onFocus={getValueOnFocus}
 				onBlur={getValueOnBlur}
 				name={name}
 				form={formId}
