@@ -15,6 +15,8 @@ import { ConnectedToastContainer as ToastContainer } from './components/ToastCon
 
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
+import { ROUTER_PATHS } from "./constants";
+
 import './App.css';
 
 export function App() {
@@ -28,11 +30,11 @@ export function App() {
 			<Nav />
 			<ErrorBoundary> 
 				<Routes>
-						<Route path="/" element={<Landing />} />
-						<Route path="/components" element={<Components />} />
-						<Route path="/notes" element={<Notes />} />
-						<Route path="/404" element={<ErrorNotFound />} />
-						<Route path="*" element={<Navigate to={"/404"} />} />
+						<Route path={ROUTER_PATHS.landing} element={<Landing />} />
+						<Route path={ROUTER_PATHS.components} element={<Components />} />
+						<Route path={ROUTER_PATHS.notes} element={<Notes />} />
+						<Route path={ROUTER_PATHS.notFound} element={<ErrorNotFound />} />
+						<Route path={"*"} element={<Navigate to={ROUTER_PATHS.notFound} />} />
 				</Routes>
 			</ErrorBoundary>
 			<Footer />
