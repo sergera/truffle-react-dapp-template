@@ -1,3 +1,5 @@
+import { LooseObject } from "../../types";
+
 interface CallOptions {
 	from?: string;
 	gasPrice?: string;
@@ -16,7 +18,7 @@ export interface SimpleCallArgs {
 	method: string;
 	args: any[];
 	options?: CallOptions;
-	onError?: Function;
+	onError?(error: Error): void;
 }
 
 export interface TxCallArgs {
@@ -26,10 +28,11 @@ export interface TxCallArgs {
 	options?: SendOptions;
 	onSending?: Function;
 	onSent?: Function;
-	onTransactionHash?: Function;
-	onReceipt?: Function;
-	onConfirmation?: Function;
-	onError?: Function;
+	onTransactionHash?(txHash: string): void;
+	onReceipt?(receipt: LooseObject): void;
+	onConfirmation?(confirmation: number, receipt: LooseObject, latestBlockHash: string): void;
+	onTxError?(error: Error, receipt: LooseObject): void;
+	onError?(error: Error): void;
 }
 
 export interface EstimateGasArgs {

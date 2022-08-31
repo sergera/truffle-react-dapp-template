@@ -1,7 +1,5 @@
 import { getContracts } from "./contracts";
 
-import { getConfirmationBlocks } from "../../env";
-
 import { LooseObject } from "../../types";
 import { SimpleCallArgs, TxCallArgs, EstimateGasArgs } from './interact.types';
 
@@ -18,6 +16,7 @@ export async function simpleCall({
 	.catch((err: Error) => {
 		onError(err);
 	});
+
 	return response;
 };
 
@@ -31,7 +30,8 @@ export async function txCall({
 	onTransactionHash=()=>{},
 	onReceipt=()=>{},
 	onConfirmation=()=>{},
-	onError=()=>{}
+	onTxError=()=>{},
+	onError=()=>{},
 }: TxCallArgs) {
 	const contractInstance = getContracts()[contract];
 	const contractMethod = contractInstance.methods[method];
@@ -63,9 +63,9 @@ export async function txCall({
 			actualConfirmations++;
 		}
 	})
-	.on("error", (error: Error, receipt: LooseObject) => {
+	.on("error", (err: Error, receipt: LooseObject) => {
 		/* if tx reject by network with a receipt, receipt will be the second argument */
-		onError(error, receipt);
+		onTxError(err, receipt);
 	})
 	.catch((err: Error) => {
 		onError(err);

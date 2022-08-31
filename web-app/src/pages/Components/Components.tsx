@@ -168,13 +168,21 @@ export function Components() {
 		store.dispatch(openModal(MODAL_TYPES.incompleteForm));
 	}
 
+	const modalContractCallFailed = () => {
+		store.dispatch(openModal(MODAL_TYPES.contractCallFailed));
+	}
+
+	const modalTxRejected = () => {
+		store.dispatch(openModal(MODAL_TYPES.txRejected));
+	}
+
 	const nothing = () => {};
 
   return (
     <div className="components">
 			<div className="components__content">
 				<h1> Select </h1>
-				<Select 
+				<Select
 					label="select"
 					handleChange={getSelectOption}
 					selected={selectOption}
@@ -187,7 +195,7 @@ export function Components() {
 				<p>Selected option: {JSON.stringify(selectOption)}</p>
 
 				<h1> Text Input </h1>
-				<TextInput 
+				<TextInput
 					handleChange={getSimpleInputValue}
 					value={simpleInputValue}
 					name="simple input"
@@ -195,7 +203,7 @@ export function Components() {
 				/>
 
 				<h1> Text Input With Rules </h1>
-				<TextInputWithRules 
+				<TextInputWithRules
 					handleChange={getNameValue}
 					value={nameInputValue}
 					name="name input"
@@ -206,7 +214,7 @@ export function Components() {
 						"non-consecutive spaces in between"]
 					}
 				/>
-				<TextInputWithRules 
+				<TextInputWithRules
 					handleChange={getUserNameValue}
 					value={userNameInputValue}
 					name="username input"
@@ -217,7 +225,7 @@ export function Components() {
 						"non-consecutive dots, hifens and underscores in between"]
 					}
 				/>
-				<TextInputWithRules 
+				<TextInputWithRules
 					handleChange={getEmailValue}
 					value={emailInputValue}
 					name="email input"
@@ -229,7 +237,7 @@ export function Components() {
 						"complete with '@' and domain"]
 					}
 				/>
-				<TextInputWithRules 
+				<TextInputWithRules
 					handleChange={getEtherValue}
 					value={etherInputValue}
 					name="ether input"
@@ -243,7 +251,7 @@ export function Components() {
 				/>
 				<p>Amount in wei: {isValidEther && ethToWei(etherInputValue)}</p>
 
-				<TextInputWithRules 
+				<TextInputWithRules
 					handleChange={getWeiValue}
 					value={weiInputValue}
 					name="wei input"
@@ -257,7 +265,7 @@ export function Components() {
 				<p>Amount in eth: {isValidWei && weiToEth(weiInputValue)}</p>
 
 				<h1> Radio Input </h1>
-				<RadioInput 
+				<RadioInput
 					label="radio input"
 					handleChange={getRadioInputOption}
 					options={[
@@ -269,7 +277,7 @@ export function Components() {
 				<p>Selected option: {JSON.stringify(radioInputOption)}</p>
 
 				<h1> Checkbox Input </h1>
-				<CheckboxInput 
+				<CheckboxInput
 					label="checkbox input"
 					handleChange={getCheckboxInputOptions}
 					options={[
@@ -281,173 +289,183 @@ export function Components() {
 				<p>Selected options: {JSON.stringify(checkboxInputOptions)}</p>
 
 				<h1> Notifications </h1>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={successNotification} 
-					name={"Success Notification"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={successNotification}
+					name={"Success Notification"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={infoNotification} 
-					name={"Info Notification"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={infoNotification}
+					name={"Info Notification"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={warningNotification} 
-					name={"Warning Notification"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={warningNotification}
+					name={"Warning Notification"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={errorNotification} 
-					name={"Error Notification"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={errorNotification}
+					name={"Error Notification"}
 				/>
 
 				<h1>Toasts</h1>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={successToast} 
-					name={"Success Toast"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={successToast}
+					name={"Success Toast"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={infoToast} 
-					name={"Info Toast"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={infoToast}
+					name={"Info Toast"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={warningToast} 
-					name={"Warning Toast"} 
-				/>								
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={errorToast} 
-					name={"Error Toast"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={warningToast}
+					name={"Warning Toast"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={errorToast}
+					name={"Error Toast"}
 				/>
 
 				<h1> Modals </h1>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalDisabled} 
-					name={"Modal Disabled"} 
-				/>	
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalNotConnected} 
-					name={"Modal Not Connected"} 
-				/>			
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalDisconnected} 
-					name={"Modal Disconnected"} 
-				/>					
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalSelectChain} 
-					name={"Modal Select Chain"} 
-				/>			
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalChainNotAdded} 
-					name={"Modal Chain Not Added"} 
-				/>	
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalPleaseConnect} 
-					name={"Modal Please Connect"} 
-				/>	
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={modalIncompleteForm} 
-					name={"Modal Incomplete Form"} 
-				/>	
-				
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalDisabled}
+					name={"Modal Disabled"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalNotConnected}
+					name={"Modal Not Connected"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalDisconnected}
+					name={"Modal Disconnected"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalSelectChain}
+					name={"Modal Select Chain"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalChainNotAdded}
+					name={"Modal Chain Not Added"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalPleaseConnect}
+					name={"Modal Please Connect"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalIncompleteForm}
+					name={"Modal Incomplete Form"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalContractCallFailed}
+					name={"Modal Contract Call Failed"}
+				/>
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={modalTxRejected}
+					name={"Modal Transaction Rejected"}
+				/>
+
 				<h1> Button With Killswitch</h1>
-				<ButtonWithKillswitch 
-					styleClass="btn-background-outline" 
-					handleClick={errorNotification} 
-					name={"Error Notification"} 
-				/>			
-				
+				<ButtonWithKillswitch
+					styleClass="btn-background-outline"
+					handleClick={errorNotification}
+					name={"Error Notification"}
+				/>
+
 				<h1> Buttons </h1>
-				<Button 
-					styleClass="btn-primary-filled" 
-					handleClick={nothing} 
-					name={"Button Primary Filled"} 
+				<Button
+					styleClass="btn-primary-filled"
+					handleClick={nothing}
+					name={"Button Primary Filled"}
 				/>
-				<Button 
-					styleClass="btn-primary-outline" 
-					handleClick={nothing} 
-					name={"Button Primary Outline"} 
+				<Button
+					styleClass="btn-primary-outline"
+					handleClick={nothing}
+					name={"Button Primary Outline"}
 				/>
-				<Button 
-					styleClass="btn-secondary-filled" 
-					handleClick={nothing} 
-					name={"Button Secondary Filled"} 
+				<Button
+					styleClass="btn-secondary-filled"
+					handleClick={nothing}
+					name={"Button Secondary Filled"}
 				/>
-				<Button 
-					styleClass="btn-secondary-outline" 
-					handleClick={nothing} 
-					name={"Button Secondary Outline"} 
+				<Button
+					styleClass="btn-secondary-outline"
+					handleClick={nothing}
+					name={"Button Secondary Outline"}
 				/>
-				<Button 
-					styleClass="btn-warning-filled" 
-					handleClick={nothing} 
-					name={"Button Warning Filled"} 
+				<Button
+					styleClass="btn-warning-filled"
+					handleClick={nothing}
+					name={"Button Warning Filled"}
 				/>
-				<Button 
-					styleClass="btn-warning-outline" 
-					handleClick={nothing} 
-					name={"Button Warning Outline"} 
+				<Button
+					styleClass="btn-warning-outline"
+					handleClick={nothing}
+					name={"Button Warning Outline"}
 				/>
-				<Button 
-					styleClass="btn-special-filled" 
-					handleClick={nothing} 
-					name={"Button Special Filled"} 
+				<Button
+					styleClass="btn-special-filled"
+					handleClick={nothing}
+					name={"Button Special Filled"}
 				/>
-				<Button 
-					styleClass="btn-special-outline" 
-					handleClick={nothing} 
-					name={"Button Special Outline"} 
+				<Button
+					styleClass="btn-special-outline"
+					handleClick={nothing}
+					name={"Button Special Outline"}
 				/>
-				<Button 
-					styleClass="btn-white-filled" 
-					handleClick={nothing} 
-					name={"Button White Filled"} 
+				<Button
+					styleClass="btn-white-filled"
+					handleClick={nothing}
+					name={"Button White Filled"}
 				/>
-				<Button 
-					styleClass="btn-white-outline" 
-					handleClick={nothing} 
-					name={"Button White Outline"} 
+				<Button
+					styleClass="btn-white-outline"
+					handleClick={nothing}
+					name={"Button White Outline"}
 				/>
-				<Button 
-					styleClass="btn-black-filled" 
-					handleClick={nothing} 
-					name={"Button Black Filled"} 
+				<Button
+					styleClass="btn-black-filled"
+					handleClick={nothing}
+					name={"Button Black Filled"}
 				/>
-				<Button 
-					styleClass="btn-black-outline" 
-					handleClick={nothing} 
-					name={"Button Black Outline"} 
+				<Button
+					styleClass="btn-black-outline"
+					handleClick={nothing}
+					name={"Button Black Outline"}
 				/>
-				<Button 
-					styleClass="btn-background-filled" 
-					handleClick={nothing} 
-					name={"Button Background Filled"} 
+				<Button
+					styleClass="btn-background-filled"
+					handleClick={nothing}
+					name={"Button Background Filled"}
 				/>
-				<Button 
-					styleClass="btn-background-outline" 
-					handleClick={nothing} 
-					name={"Button Background Outline"} 
+				<Button
+					styleClass="btn-background-outline"
+					handleClick={nothing}
+					name={"Button Background Outline"}
 				/>
-				<Button 
-					styleClass="btn-foreground-filled" 
-					handleClick={nothing} 
-					name={"Button Foreground Filled"} 
+				<Button
+					styleClass="btn-foreground-filled"
+					handleClick={nothing}
+					name={"Button Foreground Filled"}
 				/>
-				<Button 
-					styleClass="btn-foreground-outline" 
-					handleClick={nothing} 
-					name={"Button Foreground Outline"} 
+				<Button
+					styleClass="btn-foreground-outline"
+					handleClick={nothing}
+					name={"Button Foreground Outline"}
 				/>
 			</div>
     </div>

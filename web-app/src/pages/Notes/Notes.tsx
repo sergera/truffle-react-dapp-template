@@ -3,15 +3,18 @@ import { useState } from "react";
 import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
 import { TextInput } from '../../components/UI/TextInput';
 
-import { simpleCall, txCall, estimateGas } from '../../blockchain/contracts';
+import { createNote } from "../../blockchain/tokenTransaction";
+import { notesByUser } from "../../blockchain/tokenSimpleCall";
+import { estimateGas } from '../../blockchain/contracts';
 import { getErrorMessage } from "../../error";
 import { Log } from "../../logger";
-import { getConfirmationBlocks, getConfirmationDelaySeconds } from "../../env";
 
 import { store } from '../../state';
 import { openInfoToast, openSuccessToast } from '../../state/toast';
+import { openModal } from "../../state/modal";
 
-import { LooseObject } from "../../types";
+import { CONTRACTS, CONTRACT_FUNCTIONS } from "../../constants";
+import { MODAL_TYPES } from '../../constants';
 
 export function Notes() {
 
@@ -44,31 +47,29 @@ export function Notes() {
 		setConfirmations(0);
 	}
 
-	let createNote = async () => {
+	let create = async () => {
 		resetContractCallParams();
 		const gas = await estimateGas({
-			contract: "Notes",
-			method: "createNote",
+			contract: CONTRACTS.notes,
+			method: CONTRACT_FUNCTIONS[CONTRACTS.notes].tx.create,
 			args: [noteTitleInputValue, noteContentInputValue],
 		})
 		setEstimatedGas(gas);
-		const response = await txCall({
-			contract: "Notes",
-			method: "createNote",
-			args: [noteTitleInputValue, noteContentInputValue],
-			options: {
-				from: store.getState().account.address
-			},
+
+		await createNote({
+			title: noteTitleInputValue,
+			content: noteContentInputValue,
+			owner: store.getState().account.address,
 			onSending: () => {
 				setIsSending(true);
 			},
 			onSent: () => {
 				setIsSent(true);
 			},
-			onTransactionHash: (transactionHash: string) => {
+			onTxHash: (txHash) => {
 				setTransactionHash(transactionHash);
 			},
-			onReceipt: (receipt: LooseObject) => {
+			onReceipt: (receipt) => {
 				setHasReceipt(true);
 				setActualGas(receipt.gasUsed);
 				Log.info({
@@ -76,40 +77,52 @@ export function Notes() {
 					msg: JSON.stringify(receipt)
 				})
 			},
-			onConfirmation: (confirmation: number) => {
-				setConfirmations(confirmation)
-				let confirmationBlocks = getConfirmationBlocks();
-				if(confirmation < confirmationBlocks) {
-					store.dispatch(openInfoToast(`confirmations: ${confirmation}/${confirmationBlocks}`));
-				} else if(confirmation === confirmationBlocks) {
-					setTimeout(() => {
-						store.dispatch(openSuccessToast("note confirmed!"));
-					}, getConfirmationDelaySeconds()*1000);
-				}
+			onFirstConfirmation: (currentConfirmation, maxConfirmations) => {
+				store.dispatch(openInfoToast("transaction mined!"));
+				store.dispatch(openInfoToast(`confirmations: ${currentConfirmation}/${maxConfirmations}`));
 			},
-			onError: (error: Error) => {
-				Log.error({msg: getErrorMessage(error), description: "error creating note"})
+			onIntermediateConfirmation: (currentConfirmation, maxConfirmations) => {
+				store.dispatch(openInfoToast(`confirmations: ${currentConfirmation}/${maxConfirmations}`));
+			},
+			onFinalConfirmation: (currentConfirmation, maxConfirmations) => {
+				store.dispatch(openSuccessToast("note confirmed!"));
+			},
+			onTxError: (msg) => {
+				Log.error({msg: msg, description: "transaction rejected creating note"})
+				store.dispatch(openModal(MODAL_TYPES.txRejected));
+			},
+			onError: (msg) => {
+				Log.error({msg: msg, description: "error creating note"})
+				store.dispatch(openModal(MODAL_TYPES.contractCallFailed));
 			}
-		})
+		});
+
 		Log.info({
 			description: "Made transaction call",
-			msg: JSON.stringify(response)
-		})
+			msg: "Created note in Notes contract!"
+		});
 	}
 
 	let getNotes = async () => {
-		const notes = await simpleCall({
-			contract: "Notes",
-			method: "notesByOwner",
-			args: [store.getState().account.address],
-			onError: (error: Error) => {
-				Log.error({msg: getErrorMessage(error), description: "error getting notes"})
-			}
-		})
+		let couldCallContract = true;
+
+		const notes = await notesByUser({
+			owner: store.getState().account.address
+		}).catch((error) => {
+			couldCallContract = false;
+			Log.error({msg: getErrorMessage(error), description: "error getting notes"})
+			store.dispatch(openModal(MODAL_TYPES.contractCallFailed));			
+		});
+
+		if(!couldCallContract) {
+			return;
+		}
+
 		Log.info({
 			description: "Made simple call",
 			msg: JSON.stringify(notes)
-		})
+		});
+
 		setNotes(notes);
 	}
 
@@ -117,13 +130,13 @@ export function Notes() {
     <div className="notes">
 			<div className="notes__content">
 				<h1> Notes Contract </h1>
-				<TextInput 
+				<TextInput
 					handleChange={getNoteTitleInputValue}
 					value={noteTitleInputValue}
 					name="note title"
 					placeholder="insert note here"
 				/>
-				<TextInput 
+				<TextInput
 					handleChange={getNoteContentInputValue}
 					value={noteContentInputValue}
 					name="note content"
@@ -131,7 +144,7 @@ export function Notes() {
 				/>
 				<ButtonWithKillswitch
 					styleClass="btn-background-outline"
-					handleClick={createNote}
+					handleClick={create}
 					name="Create Note"
 				/>
 				<p>Estimated Gas: {estimatedGas}</p>
