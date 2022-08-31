@@ -1,20 +1,21 @@
 import { RadioInputProps, RadioInputOption } from './RadioInput.types';
 
-// TODO: make this into a controlled component
+export function emptyRadioInputOption():RadioInputOption {
+	return {
+		label: "",
+		data: {},
+	};
+};
 
 export function RadioInput({
 	label,
 	options,
-	handleChange, 
+	value,
+	handleChange,
 	isRequired=false,
 	formId="", 
 	styleClass=""
 }: RadioInputProps) {
-
-	const getValueOnChange = (option: RadioInputOption) => {
-		handleChange(option);
-	}
-
   return (
 		<div className="radio-input__wrapper">
 			<label className="radio-input__label">
@@ -28,8 +29,9 @@ export function RadioInput({
 						>
 							<input 
 								type="radio"
-								onChange={() => getValueOnChange(option)}
+								onChange={() => handleChange(option)}
 								name={label}
+								checked={value.label === option.label}
 								form={formId}
 								className={"radio-input " + styleClass} 
 							/>

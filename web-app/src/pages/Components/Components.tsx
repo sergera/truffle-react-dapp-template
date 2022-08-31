@@ -4,7 +4,7 @@ import { Button } from '../../components/UI/Button';
 import { ConnectedButtonWithKillswitch as ButtonWithKillswitch } from "../../components/UI/ButtonWithKillswitch";
 import { TextInput } from '../../components/UI/TextInput';
 import { TextInputWithRules } from '../../components/UI/TextInputWithRules';
-import { RadioInput, RadioInputOption } from "../../components/UI/RadioInput";
+import { RadioInput, RadioInputOption, emptyRadioInputOption } from "../../components/UI/RadioInput";
 import { CheckboxInput, CheckboxInputOption } from "../../components/UI/CheckboxInput";
 import { Select, SelectOption } from "../../components/UI/Select";
 
@@ -32,7 +32,7 @@ export function Components() {
 	let [emailInputValue, setEmailInputValue] = useState("");
 	let [etherInputValue, setEtherInputValue] = useState("0");
 	let [weiInputValue, setWeiInputValue] = useState("0");
-	let [radioInputOption, setRadioInputOption] = useState({});
+	let [radioInputOption, setRadioInputOption] = useState<RadioInputOption>(emptyRadioInputOption());
 	let [checkboxInputOptions, setCheckboxInputOptions] = useState({});
 	let [selectOption, setSelectOption] = useState<SelectOption>(SELECT_OPTIONS.one);
 
@@ -268,6 +268,7 @@ export function Components() {
 				<RadioInput
 					label="radio input"
 					handleChange={getRadioInputOption}
+					value={radioInputOption}
 					options={[
 						{label: "value 1", data: {one: "1"}},
 						{label: "value 2", data: {two: "2"}},
