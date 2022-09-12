@@ -1,7 +1,7 @@
 export interface TextInputProps {
 	handleChange: Function;
 	value: string;
-	name: string;
+	name?: string;
 	handleFocus?: Function;
 	handleBlur?: Function;
 	isValid?: boolean;

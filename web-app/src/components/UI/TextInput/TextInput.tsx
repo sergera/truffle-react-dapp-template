@@ -1,9 +1,9 @@
 import { TextInputProps } from './TextInput.types';
 
 export function TextInput({
-	name,
 	value,
 	handleChange,
+	name="",
 	handleFocus=()=>{},
 	handleBlur=()=>{},
 	isValid=true,
