@@ -255,25 +255,25 @@ test("inLengthRange", () => {
 
 test("isEther", () => {
 	const eighteenNonZeroNumbers = "123456789112345678";
-	const seventyEightNonZeroNumbers = "123456789112345678911234567891123456789112345678911234567891123456789112345678";
+	const fiftyNineNonZeroNumbers = "12345678911234567891123456789112345678911234567891123456789";
 
 	expect(isEther("0")).toEqual(true);
 	expect(isEther("0.0")).toEqual(true);
 	expect(isEther("0,0")).toEqual(true);
-	expect(isEther(seventyEightNonZeroNumbers)).toEqual(true);
+	expect(isEther(fiftyNineNonZeroNumbers)).toEqual(true);
 	expect(isEther("0."+eighteenNonZeroNumbers)).toEqual(true);
 	expect(isEther("0,"+eighteenNonZeroNumbers)).toEqual(true);
-	expect(isEther(seventyEightNonZeroNumbers+"."+eighteenNonZeroNumbers)).toEqual(true);
-	expect(isEther(seventyEightNonZeroNumbers+","+eighteenNonZeroNumbers)).toEqual(true);
+	expect(isEther(fiftyNineNonZeroNumbers+"."+eighteenNonZeroNumbers)).toEqual(true);
+	expect(isEther(fiftyNineNonZeroNumbers+","+eighteenNonZeroNumbers)).toEqual(true);
 
 	/* wrong format */
 	expect(isEther("0.")).toEqual(false);
 	expect(isEther("0,")).toEqual(false);
-	expect(isEther(seventyEightNonZeroNumbers+".")).toEqual(false);
-	expect(isEther(seventyEightNonZeroNumbers+",")).toEqual(false);
+	expect(isEther(fiftyNineNonZeroNumbers+".")).toEqual(false);
+	expect(isEther(fiftyNineNonZeroNumbers+",")).toEqual(false);
 
 	/* extra digits */
-	expect(isEther(seventyEightNonZeroNumbers+"1")).toEqual(false);
+	expect(isEther(fiftyNineNonZeroNumbers+"1")).toEqual(false);
 	expect(isEther("0."+eighteenNonZeroNumbers+"1")).toEqual(false);
 	expect(isEther("0,"+eighteenNonZeroNumbers+"1")).toEqual(false);
 
@@ -290,23 +290,23 @@ test("isEther", () => {
 });
 
 test("isWei", () => {
-	const seventyEightNonZeroNumbers = "123456789112345678911234567891123456789112345678911234567891123456789112345678"
+	const seventySevenNonZeroNumbers = "12345678911234567891123456789112345678911234567891123456789112345678911234567"
 
 	expect(isWei("0")).toEqual(true);
 	expect(isWei("1")).toEqual(true);
-	expect(isWei(seventyEightNonZeroNumbers)).toEqual(true);
+	expect(isWei(seventySevenNonZeroNumbers)).toEqual(true);
 	
 	/* wrong format */
 	expect(isWei("0.0")).toEqual(false);
 	expect(isWei("0,0")).toEqual(false);
 	expect(isWei("1.0")).toEqual(false);
 	expect(isWei("1,0")).toEqual(false);
-	expect(isWei(seventyEightNonZeroNumbers+".")).toEqual(false);
-	expect(isWei(seventyEightNonZeroNumbers+",")).toEqual(false);
+	expect(isWei(seventySevenNonZeroNumbers+".")).toEqual(false);
+	expect(isWei(seventySevenNonZeroNumbers+",")).toEqual(false);
 
 	/* extra digits */
-	expect(isWei(seventyEightNonZeroNumbers+"1")).toEqual(false);
-	expect(isWei("1"+seventyEightNonZeroNumbers)).toEqual(false);
+	expect(isWei(seventySevenNonZeroNumbers+"1")).toEqual(false);
+	expect(isWei("1"+seventySevenNonZeroNumbers)).toEqual(false);
 	
 	/* leading zeros */
 	expect(isWei("01")).toEqual(false);

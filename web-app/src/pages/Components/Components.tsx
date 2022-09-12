@@ -244,7 +244,7 @@ export function Components() {
 					placeholder="insert ether amount here"
 					isValid={isValidEther}
 					rules={
-						["max 78 whole digits starting with a non-zero number",
+						["max 59 whole digits starting with a non-zero number",
 						"one . or , as decimal separator",
 						"max 18 decimal digits ending with a non-zero number"]
 					}
@@ -258,7 +258,7 @@ export function Components() {
 					placeholder="insert wei amount here"
 					isValid={isValidWei}
 					rules={
-						["max 78 whole digits",
+						["max 77 whole digits",
 						"no leading zeros"]
 					}
 				/>

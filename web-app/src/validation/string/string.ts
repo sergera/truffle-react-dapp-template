@@ -82,19 +82,19 @@ export function isEmail(str: string) {
 };
 
 export function isEther(str: string) {
-	/* max 78 whole digits (aprox. max of 256 unsigned int) just to make sure there is a ceiling */
+	/* max 59 whole digits (aprox. floor of 256 unsigned int Wei as Ether) just to make sure there is a ceiling */
 	/* no leading zeros in the whole portion */
 	/* max 18 decimal digits of precision */
 	/* no trailing zeros in the fractional portion */
 	/* max one comma or point (decimal separator) */
 	/* no signs allowed */
-	const regex = /^(?=([1-9][0-9]{0,77}|0))\1(?=((?:[.,](?:[0-9]{0,17}[1-9]|0))?))\2$/gu;
+	const regex = /^(?=([1-9][0-9]{0,58}|0))\1(?=((?:[.,](?:[0-9]{0,17}[1-9]|0))?))\2$/gu;
 	return regex.test(str);
 };
 
 export function isWei(str: string) {
-	/* max 78 whole digits (aprox. max of 256 unsigned int) just to make sure there is a ceiling */
+	/* max 77 whole digits (aprox. floor of 256 unsigned int) just to make sure there is a ceiling */
 	/* no leading zeros */
-	const regex = /^(?=([1-9][0-9]{0,77}|0))\1$/gu;
+	const regex = /^(?=([1-9][0-9]{0,76}|0))\1$/gu;
 	return regex.test(str);
 };
